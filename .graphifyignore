@@ -1,0 +1,6 @@
+# Stale, unreferenced mirror of inc/ - nothing in the theme's autoloader or
+# CoreFileLoader ever requires from here, and its contents have already
+# diverged from inc/ (different file hashes, extra files). Excluded so
+# graphify doesn't treat it as a second, competing definition of the same
+# classes (e.g. DoctorsBaseController).
+assets/inc/
