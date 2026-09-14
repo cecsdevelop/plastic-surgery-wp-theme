@@ -21,7 +21,7 @@ $current_lang = function_exists('idml_get_current_language') ? idml_get_current_
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<header class="site-header">
+<header class="site-header" data-scroll-threshold="80">
   <div class="site-branding">
     <?php if (has_custom_logo()) : ?>
       <?php the_custom_logo(); ?>
@@ -41,4 +41,15 @@ $current_lang = function_exists('idml_get_current_language') ? idml_get_current_
     ]);
     ?>
   </nav>
+
+  <?php
+  // CTA configurable desde Apariencia → Intelindev Header. Vacío = sin CTA (a
+  // diferencia de Sanasana, este theme no tiene un portal/login fijo al que
+  // apuntar por defecto, así que sin URL configurada simplemente no se imprime).
+  $header_cta_url  = function_exists('intelindev_get_header_setting') ? trim((string) intelindev_get_header_setting('cta_url', '')) : '';
+  $header_cta_text = function_exists('intelindev_get_header_setting') ? trim((string) intelindev_get_header_setting('cta_text', '')) : '';
+  if ($header_cta_url !== '' && preg_match('#^https?://#i', $header_cta_url) && $header_cta_text !== '') :
+  ?>
+    <a href="<?php echo esc_url($header_cta_url); ?>" class="header-cta"><?php echo esc_html($header_cta_text); ?></a>
+  <?php endif; ?>
 </header>
