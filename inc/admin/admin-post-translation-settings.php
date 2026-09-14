@@ -43,7 +43,7 @@ function intelindev_get_post_translated_title(WP_Post $post, $lang = null): stri
 }
 
 add_filter('the_title', function ($title, $post_id = 0) {
-    if (is_admin() || !$post_id || get_post_type($post_id) !== 'post') {
+    if (is_admin() || !$post_id || !in_array(get_post_type($post_id), ['post', 'page'], true)) {
         return $title;
     }
 
@@ -144,6 +144,14 @@ function intelindev_get_post_slug_for_lang(WP_Post $post, string $lang): string
     return $translated !== '' ? $translated : sanitize_title($post->post_name);
 }
 
+/**
+ * Busca entre 'post' y 'page' a la vez (una sola query). Si un Post y una Page
+ * llegaran a compartir el mismo slug traducido para el mismo idioma, gana el que
+ * WP devuelva primero con el orden por defecto (post_date DESC) — no hay
+ * desempate explícito ni validación de unicidad al guardar. Caso raro (dos
+ * tipos de contenido distintos con el mismo slug en el mismo idioma) que se
+ * documenta acá en vez de resolverse, para no sumar alcance no pedido.
+ */
 function intelindev_get_post_id_by_translated_slug(string $slug, string $lang): int
 {
     $slug = sanitize_title($slug);
@@ -155,7 +163,7 @@ function intelindev_get_post_id_by_translated_slug(string $slug, string $lang): 
     }
 
     $ids = get_posts([
-        'post_type'      => 'post',
+        'post_type'      => ['post', 'page'],
         'post_status'    => 'publish',
         'posts_per_page' => 1,
         'fields'         => 'ids',
@@ -175,11 +183,43 @@ add_filter('post_link', function ($url, $post) {
         return $url;
     }
 
+    return intelindev_translated_permalink($url, $post);
+}, 10, 2);
+
+/**
+ * Mismo comportamiento que el filtro 'post_link' de arriba, pero para 'page': WP
+ * dispara un hook distinto para páginas, con una firma distinta — 3 args,
+ * $post_id como int (no WP_Post) y un $sample bool que 'post_link' no tiene
+ * (true cuando el editor de permalinks arma la vista previa; ahí no se debe
+ * reescribir nada o el preview queda confuso).
+ */
+add_filter('page_link', function ($link, $post_id, $sample) {
+    if (is_admin() || $sample) {
+        return $link;
+    }
+
+    $post = get_post($post_id);
+    if (!($post instanceof WP_Post) || $post->post_type !== 'page') {
+        return $link;
+    }
+
+    return intelindev_translated_permalink($link, $post);
+}, 10, 3);
+
+function intelindev_translated_permalink(string $url, WP_Post $post): string
+{
     $lang = idml_get_current_language();
     $default_lang = idml_get_default_language();
 
     if ($lang === '' || $lang === $default_lang) {
         return $url;
+    }
+
+    // La page_on_front no lleva slug en su URL (get_page_link() ya la devuelve
+    // como home_url('/') antes de este filtro) — anexarle el slug nativo o
+    // traducido rompería el link de "inicio" del idioma.
+    if ($post->post_type === 'page' && 'page' === get_option('show_on_front') && (int) get_option('page_on_front') === $post->ID) {
+        return home_url('/' . rawurlencode($lang) . '/');
     }
 
     $slug = intelindev_get_post_slug_for_lang($post, $lang);
@@ -188,7 +228,34 @@ add_filter('post_link', function ($url, $post) {
     }
 
     return home_url('/' . rawurlencode($lang) . '/' . rawurlencode($slug) . '/');
-}, 10, 2);
+}
+
+/**
+ * Cierra el hueco de renderizado: las pestañas guardan el contenido traducido en
+ * meta, pero hasta ahora nada lo imprimía — single.php/page.php llaman al
+ * the_content() nativo, que solo conoce post_content (que en 'post' ni se edita
+ * mas, ver intelindev_remove_default_post_content_editor()). Sin esto, tanto
+ * posts como pages quedan con el body vacío pase lo que pase en las pestañas.
+ * Si nunca se guardó nada en las pestañas, cae al $content nativo para no
+ * romper contenido que ya existía antes de este mecanismo.
+ */
+add_filter('the_content', function ($content) {
+    if (is_admin() || !in_the_loop() || !is_main_query()) {
+        return $content;
+    }
+
+    $post = get_post();
+    if (!($post instanceof WP_Post) || !in_array($post->post_type, ['post', 'page'], true)) {
+        return $content;
+    }
+
+    $blocks = intelindev_get_post_translated_content_blocks($post);
+    if (empty($blocks)) {
+        return $content;
+    }
+
+    return implode("\n\n", $blocks);
+}, 10, 1);
 
 add_action('add_meta_boxes', 'intelindev_add_post_translation_metabox');
 add_action('add_meta_boxes', 'intelindev_remove_default_post_excerpt_metabox', 20);
@@ -197,11 +264,13 @@ add_action('init', 'intelindev_remove_default_post_content_editor');
 function intelindev_remove_default_post_content_editor(): void
 {
     remove_post_type_support('post', 'editor');
+    remove_post_type_support('page', 'editor');
 }
 
 function intelindev_remove_default_post_excerpt_metabox(): void
 {
     remove_meta_box('postexcerpt', 'post', 'normal');
+    remove_meta_box('postexcerpt', 'page', 'normal');
 }
 
 function intelindev_sanitize_translated_rich_text($raw_value): string
@@ -219,9 +288,9 @@ function intelindev_add_post_translation_metabox(): void
 {
     add_meta_box(
         'intelindev_post_translation_content',
-        __('Contenido traducido del post', 'intelindev'),
+        __('Contenido traducido', 'intelindev'),
         'intelindev_render_post_translation_metabox',
-        'post',
+        ['post', 'page'],
         'normal',
         'high'
     );
@@ -369,18 +438,19 @@ function intelindev_render_post_translation_metabox($post): void
     })();
     </script>
 
+    <?php if ($post->post_type === 'post'): ?>
     <p>
         <label for="intelindev_post_is_featured">
             <input type="checkbox" id="intelindev_post_is_featured" name="intelindev_post_is_featured" value="1" <?php checked($is_featured); ?> />
             <strong><?php esc_html_e('Post destacado (aparece en el bloque de destacados del blog)', 'intelindev'); ?></strong>
         </label>
     </p>
-
-    </p>
+    <?php endif; ?>
     <?php
 }
 
 add_action('save_post_post', 'intelindev_save_post_translation_metabox');
+add_action('save_post_page', 'intelindev_save_post_translation_metabox');
 
 function intelindev_save_post_translation_metabox($post_id): void
 {

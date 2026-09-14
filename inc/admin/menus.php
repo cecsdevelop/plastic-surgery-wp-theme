@@ -97,6 +97,16 @@ add_filter('wp_nav_menu_objects', function($items, $args) {
     }
     $current_lang = function_exists('idml_get_current_language') ? idml_get_current_language() : 'es';
     foreach ($items as $item) {
+        // Ítems que apuntan a un Post/Page real ya traen título y URL correctos
+        // desde los filtros 'the_title'/'post_link'/'page_link' (basados en la
+        // traducción por post, no en el JSON de slugs de menú). Sobrescribirlos
+        // acá los rompe: sin header-menu-slugs.json (se eliminó al pasar el
+        // rewrite a idml_resolve_translated_slug()) toda key cae al fallback de
+        // id_get_menu_url(), que devuelve el home del idioma en vez del post.
+        if ($item->type === 'post_type' && in_array($item->object, ['post', 'page'], true)) {
+            continue;
+        }
+
         $slug = sanitize_title($item->title);
         $item->title = function_exists('idml_t') ? idml_t('menu.' . $slug, $current_lang) : $item->title;
 
@@ -215,6 +225,12 @@ add_filter('wp_nav_menu_objects', function($items, $args) {
     $col = $col_map[$args->theme_location] ?? '';
     $current_lang = function_exists('idml_get_current_language') ? idml_get_current_language() : 'es';
     foreach ($items as $item) {
+        // Mismo motivo que en el filtro del menú 'primary' de arriba: no pisar
+        // ítems de Post/Page real, que ya vienen traducidos correctamente.
+        if ($item->type === 'post_type' && in_array($item->object, ['post', 'page'], true)) {
+            continue;
+        }
+
         $slug = sanitize_title($item->title);
         $key = "footer.$col.$slug";
         // Traducir título
@@ -361,10 +377,11 @@ if (!function_exists('id_get_translated_current_url')) {
             return $fallback;
         }
 
-        // Regular posts (CPT 'post') stay on the same post when switching language,
-        // using its translated slug for the target language if one was set (falls
-        // back to the native/es slug otherwise) instead of going to home.
-        if (is_singular('post')) {
+        // Regular posts (CPT 'post') AND top-level Pages stay on the same content
+        // when switching language, using its translated slug for the target
+        // language if one was set (falls back to the native/es slug otherwise)
+        // instead of going to home.
+        if (is_singular(['post', 'page'])) {
             $current_post = get_queried_object();
             if ($current_post instanceof WP_Post) {
                 $post_slug = function_exists('intelindev_get_post_slug_for_lang')

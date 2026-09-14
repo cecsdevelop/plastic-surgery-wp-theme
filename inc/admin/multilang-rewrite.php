@@ -194,7 +194,7 @@ add_filter('pre_get_document_title', function($title) {
  * navegador tambien muestre el título traducido.
  */
 add_filter('pre_get_document_title', function($title) {
-    if (is_admin() || !is_singular('post')) {
+    if (is_admin() || !is_singular(['post', 'page'])) {
         return $title;
     }
 
@@ -276,9 +276,54 @@ add_filter('query_vars', function($vars) {
 });
 
 /**
- * Resuelve idml_post_slug (segmento tras el prefijo de idioma) contra el slug
- * traducido del post (si existe para ese idioma) o, si no, contra el post_name nativo.
+ * Resuelve un slug con prefijo de idioma contra 'post' o 'page': primero contra
+ * el slug traducido (meta por idioma), si no contra el slug nativo. Compartida
+ * entre el filtro 'request' de abajo (camino normal) y el fallback de
+ * template_redirect mas abajo (red de seguridad para cuando las reglas de
+ * rewrite dinámicas todavía no se flushearon — ver el NOTE de este archivo).
+ *
+ * Solo páginas de primer nivel: get_page_by_path() con un slug de un solo
+ * segmento matchea por post_name sin importar jerarquía, asi que una página
+ * hija es alcanzable en /{lang}/{slug-hijo}/ salteando a su padre. Es el mismo
+ * comportamiento que ya tenía el fallback de 'post' (no hay jerarquía ahí), se
+ * documenta acá porque con 'page' sí puede sorprender. Páginas anidadas no
+ * están cubiertas por este mecanismo.
+ *
+ * @return array{id:int,post_type:string}|array{} vacío si no resuelve a nada publicado.
  */
+if (!function_exists('idml_resolve_translated_slug')) {
+    function idml_resolve_translated_slug(string $slug, string $lang): array {
+        $slug = sanitize_title($slug);
+        $lang = sanitize_key($lang);
+        if ($slug === '' || $lang === '') {
+            return [];
+        }
+
+        $resolved_id = 0;
+        if (function_exists('intelindev_get_post_id_by_translated_slug')) {
+            $resolved_id = intelindev_get_post_id_by_translated_slug($slug, $lang);
+        }
+
+        if (!$resolved_id) {
+            $native = get_page_by_path($slug, OBJECT, ['post', 'page']);
+            if ($native instanceof WP_Post && $native->post_status === 'publish') {
+                $resolved_id = (int) $native->ID;
+            }
+        }
+
+        if (!$resolved_id) {
+            return [];
+        }
+
+        $post_type = get_post_type($resolved_id);
+        if (!in_array($post_type, ['post', 'page'], true)) {
+            return [];
+        }
+
+        return ['id' => $resolved_id, 'post_type' => $post_type];
+    }
+}
+
 add_filter('request', function($query_vars) {
     if (empty($query_vars['idml_post_slug'])) {
         return $query_vars;
@@ -296,65 +341,20 @@ add_filter('request', function($query_vars) {
         return $not_found_query;
     }
 
-    $resolved_id = 0;
-
-    if ($lang !== '' && function_exists('intelindev_get_post_id_by_translated_slug')) {
-        $resolved_id = intelindev_get_post_id_by_translated_slug($slug, $lang);
-    }
-
-    if (!$resolved_id) {
-        $native = get_page_by_path($slug, OBJECT, 'post');
-        if ($native instanceof WP_Post && $native->post_status === 'publish') {
-            $resolved_id = (int) $native->ID;
-        }
-    }
-
-    if (!$resolved_id) {
+    $resolved = idml_resolve_translated_slug($slug, $lang);
+    if (empty($resolved)) {
         return $not_found_query;
     }
 
-    return ['p' => $resolved_id, 'post_type' => 'post'];
-});
-
-add_action('init', function() {
-    $json_path = get_template_directory() . '/languages/modules/header-menu-slugs.json';
-    if (!file_exists($json_path)) {
-        return;
+    if ($resolved['post_type'] === 'page') {
+        // 'page_id', NO 'p': WP_Query::parse_query() es un elseif — con 'p' arma
+        // is_single()/is_singular('post') en vez de is_page(), y la plantilla de
+        // página nunca se activa, sin ningún error visible. 'page_id' es la unica
+        // query var que efectivamente resuelve a is_page() = true.
+        return ['page_id' => $resolved['id'], 'post_type' => 'page'];
     }
 
-    $slugs = json_decode((string) file_get_contents($json_path), true);
-    if (!is_array($slugs)) {
-        return;
-    }
-
-    $supported_langs = function_exists('idml_get_supported_languages') ? idml_get_supported_languages() : idml_get_languages();
-    $default_lang = function_exists('idml_get_default_language') ? idml_get_default_language() : 'es';
-
-    foreach ($slugs as $slug_key => $translations) {
-        if (strpos((string) $slug_key, 'menu-slug.') !== 0 || !is_array($translations)) {
-            continue;
-        }
-
-        $base_slug = isset($translations[$default_lang]) ? trim((string) $translations[$default_lang]) : '';
-        if ($base_slug === '' || strpos($base_slug, '#') === 0) {
-            continue;
-        }
-
-        foreach ($translations as $lang => $translated_slug) {
-            $lang = sanitize_key((string) $lang);
-            $translated_slug = trim((string) $translated_slug);
-
-            if ($lang === '' || !in_array($lang, $supported_langs, true) || $lang === $default_lang || $translated_slug === '' || strpos($translated_slug, '#') === 0) {
-                continue;
-            }
-
-            add_rewrite_rule(
-                '^' . preg_quote($lang, '/') . '/' . preg_quote($translated_slug, '/') . '/?$',
-                'index.php?pagename=' . rawurlencode($base_slug),
-                'top'
-            );
-        }
-    }
+    return ['p' => $resolved['id'], 'post_type' => 'post'];
 });
 
 add_filter('query_vars', function($vars) {
@@ -362,152 +362,64 @@ add_filter('query_vars', function($vars) {
     return $vars;
 });
 
+/**
+ * '^{lang}/?$' (arriba) solo aterriza en 'idml_lang_home=en' — no es pagename/p/page_id,
+ * asi que la query principal de WP no resuelve a ningún post. Sin apuntar $wp_query/$post
+ * a mano (mismo patrón que el fallback de abajo para '/{lang}/{slug}/'), have_posts()
+ * da false y front-page.php renderiza con el <main> vacío: no es que la home muestre
+ * el contenido en español, es que no muestra contenido de ningún idioma.
+ */
 add_action('template_redirect', function() {
     $lang = get_query_var('idml_lang_home');
-    if ($lang) {
-        $tpl = get_front_page_template();
+    if (!$lang) {
+        return;
+    }
+
+    if ('page' === get_option('show_on_front')) {
+        $front_id = (int) get_option('page_on_front');
+        $front = $front_id ? get_post($front_id) : null;
+
+        if ($front instanceof WP_Post && $front->post_status === 'publish') {
+            global $wp_query, $post;
+
+            $post = $front;
+            $wp_query->is_404 = false;
+            $wp_query->is_page = true;
+            $wp_query->is_singular = true;
+            $wp_query->is_home = false;
+            $wp_query->posts = [$post];
+            $wp_query->post = $post;
+            $wp_query->post_count = 1;
+            $wp_query->queried_object = $post;
+            $wp_query->queried_object_id = (int) $post->ID;
+
+            status_header(200);
+            setup_postdata($post);
+        }
+    }
+
+    $tpl = get_front_page_template();
+    if ($tpl) {
         include $tpl;
         exit;
     }
 });
 
-add_action('template_redirect', function() {
-    if (is_admin() || !is_404()) {
-        return;
-    }
-
-    $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
-    if ($request_uri === '') {
-        return;
-    }
-
-    $request_path = trim((string) wp_parse_url($request_uri, PHP_URL_PATH), '/');
-    $home_path = trim((string) wp_parse_url(home_url('/'), PHP_URL_PATH), '/');
-
-    if ($home_path !== '') {
-        if ($request_path === $home_path) {
-            $request_path = '';
-        } elseif (strpos($request_path, $home_path . '/') === 0) {
-            $request_path = (string) substr($request_path, strlen($home_path) + 1);
-        }
-    }
-
-    if ($request_path === '') {
-        return;
-    }
-
-    // Exactamente /{lang}/{slug-traducido}/: con segmentos extra la URL pertenece a otra
-    // ruta (un single de CPT bajo ese mismo segmento, una subpagina...) y rescatarla
-    // servia la page indice con 200 en una URL que deberia ser 404 — contenido duplicado
-    // justo del tipo que el resto de este archivo evita.
-    $segments = explode('/', trim($request_path, '/'));
-    if (count($segments) !== 2) {
-        return;
-    }
-
-    $supported_langs = function_exists('idml_get_supported_languages') ? idml_get_supported_languages() : idml_get_languages();
-    $default_lang = function_exists('idml_get_default_language') ? idml_get_default_language() : 'es';
-    $lang = sanitize_key((string) $segments[0]);
-
-    if ($lang === '' || !in_array($lang, $supported_langs, true) || $lang === $default_lang) {
-        return;
-    }
-
-    $translated_slug = sanitize_title((string) $segments[1]);
-    if ($translated_slug === '') {
-        return;
-    }
-
-    $json_path = get_template_directory() . '/languages/modules/header-menu-slugs.json';
-    if (!file_exists($json_path)) {
-        return;
-    }
-
-    $slugs = json_decode((string) file_get_contents($json_path), true);
-    if (!is_array($slugs)) {
-        return;
-    }
-
-    $base_slug = '';
-    foreach ($slugs as $slug_key => $translations) {
-        if (strpos((string) $slug_key, 'menu-slug.') !== 0 || !is_array($translations)) {
-            continue;
-        }
-
-        $candidate = isset($translations[$lang]) ? sanitize_title((string) $translations[$lang]) : '';
-        if ($candidate !== $translated_slug) {
-            continue;
-        }
-
-        $base_slug = isset($translations[$default_lang]) ? sanitize_title((string) $translations[$default_lang]) : '';
-        break;
-    }
-
-    if ($base_slug === '') {
-        return;
-    }
-
-    $page = get_page_by_path($base_slug, OBJECT, 'page');
-    if (!$page instanceof WP_Post) {
-        return;
-    }
-
-    global $wp_query, $post;
-
-    $post = $page;
-    $wp_query->is_404 = false;
-    $wp_query->is_page = true;
-    $wp_query->is_singular = true;
-    $wp_query->is_home = false;
-    $wp_query->posts = [$post];
-    $wp_query->post = $post;
-    $wp_query->post_count = 1;
-    $wp_query->queried_object = $post;
-    $wp_query->queried_object_id = (int) $post->ID;
-
-    status_header(200);
-    setup_postdata($post);
-
-    $template = get_page_template();
-    if (!$template) {
-        $template = get_index_template();
-    }
-
-    include $template;
-    exit;
-}, 1);
-
 /**
- * Fallback para posts regulares con prefijo de idioma: /{lang}/{post-slug}/
- * El post_name no se traduce (es un solo post con contenido/título traducido vía meta),
- * asi que basta con resolverlo contra el CPT 'post' cuando la ruta con prefijo da 404.
+ * Red de seguridad: si las reglas de rewrite dinámicas (mas arriba en este
+ * archivo) todavía no se flushearon, WP no reconoce /{lang}/{slug}/ y 404ea
+ * antes de que el filtro 'request' llegue a intervenir — ver el NOTE de este
+ * archivo sobre por qué no se flushea en cada request. Reparsea la URL a mano y
+ * resuelve con la misma lógica (idml_resolve_translated_slug) para 'post' y
+ * 'page' — antes esto eran dos bloques separados (uno vía diccionario JSON,
+ * solo para 'page'; otro a mano, solo para 'post'). Ya no depende de JSON.
  */
 add_action('template_redirect', function() {
     if (is_admin() || !is_404()) {
         return;
     }
 
-    $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
-    if ($request_uri === '') {
-        return;
-    }
-
-    $request_path = trim((string) wp_parse_url($request_uri, PHP_URL_PATH), '/');
-    $home_path = trim((string) wp_parse_url(home_url('/'), PHP_URL_PATH), '/');
-
-    if ($home_path !== '') {
-        if ($request_path === $home_path) {
-            $request_path = '';
-        } elseif (strpos($request_path, $home_path . '/') === 0) {
-            $request_path = (string) substr($request_path, strlen($home_path) + 1);
-        }
-    }
-
-    if ($request_path === '') {
-        return;
-    }
-
-    $segments = explode('/', trim($request_path, '/'));
+    $segments = function_exists('idml_get_request_path_segments') ? idml_get_request_path_segments() : [];
     if (count($segments) !== 2) {
         return;
     }
@@ -520,29 +432,29 @@ add_action('template_redirect', function() {
         return;
     }
 
-    $post_slug = sanitize_title((string) $segments[1]);
-    if ($post_slug === '') {
+    $slug = sanitize_title((string) $segments[1]);
+    if ($slug === '') {
         return;
     }
 
-    $translated_post_id = function_exists('intelindev_get_post_id_by_translated_slug')
-        ? intelindev_get_post_id_by_translated_slug($post_slug, $lang)
-        : 0;
+    $resolved = idml_resolve_translated_slug($slug, $lang);
+    if (empty($resolved)) {
+        return;
+    }
 
-    $translated_post = $translated_post_id
-        ? get_post($translated_post_id)
-        : get_page_by_path($post_slug, OBJECT, 'post');
-
-    if (!$translated_post instanceof WP_Post || $translated_post->post_status !== 'publish') {
+    $target = get_post($resolved['id']);
+    if (!$target instanceof WP_Post || $target->post_status !== 'publish') {
         return;
     }
 
     global $wp_query, $post;
 
-    $post = $translated_post;
+    $is_page = $resolved['post_type'] === 'page';
+
+    $post = $target;
     $wp_query->is_404 = false;
-    $wp_query->is_page = false;
-    $wp_query->is_single = true;
+    $wp_query->is_page = $is_page;
+    $wp_query->is_single = !$is_page;
     $wp_query->is_singular = true;
     $wp_query->is_home = false;
     $wp_query->posts = [$post];
@@ -554,7 +466,7 @@ add_action('template_redirect', function() {
     status_header(200);
     setup_postdata($post);
 
-    $template = get_single_template();
+    $template = $is_page ? get_page_template() : get_single_template();
     if (!$template) {
         $template = get_index_template();
     }
