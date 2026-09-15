@@ -27,6 +27,7 @@ class CoreFileLoader
             '/inc/admin/admin-footer-settings.php',
             '/inc/admin/admin-post-translation-settings.php',
             '/inc/admin/admin-post-categories-translation-settings.php',
+            '/inc/admin/cpt-components.php',
             '/inc/admin/cache.php',
             '/inc/admin/menus.php',
             '/inc/admin/customizer.php',
