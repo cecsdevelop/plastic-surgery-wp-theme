@@ -9,9 +9,8 @@
   /* Header (Apariencia → Intelindev Header): estos son los defaults. Se
      sobreescriben en <head> solo si el admin configura algo — ver
      intelindev_print_header_style_overrides() en inc/admin/admin-header-settings.php. */
+  --intelindev-header-bg: var(--intelindev-color-canvas);
   --intelindev-header-link-color: var(--intelindev-color-ink);
-  --intelindev-header-scrolled-bg: var(--intelindev-color-canvas);
-  --intelindev-header-scrolled-link-color: var(--intelindev-color-ink);
   --intelindev-header-submenu-bg: var(--intelindev-color-canvas);
   --intelindev-header-submenu-link-color: var(--intelindev-color-ink);
   --intelindev-header-submenu-hover-bg: rgba(81, 102, 236, 0.08);
@@ -20,25 +19,40 @@
   --intelindev-header-cta-text-color: var(--intelindev-color-canvas);
   --intelindev-header-cta-hover-bg: var(--intelindev-color-yellow);
   --intelindev-header-cta-hover-text-color: var(--intelindev-color-ink);
-  --intelindev-header-scrolled-cta-bg: var(--intelindev-color-yellow);
-  --intelindev-header-scrolled-cta-text-color: var(--intelindev-color-ink);
+
+  /* Estado sticky (.is-scrolled): cada variable cae a su equivalente normal, así
+     el admin solo define las que quiere distintas. */
+  --intelindev-header-sticky-bg: var(--intelindev-header-bg);
+  --intelindev-header-sticky-link-color: var(--intelindev-header-link-color);
+  --intelindev-header-sticky-submenu-bg: var(--intelindev-header-submenu-bg);
+  --intelindev-header-sticky-submenu-link-color: var(--intelindev-header-submenu-link-color);
+  --intelindev-header-sticky-submenu-hover-bg: var(--intelindev-header-submenu-hover-bg);
+  --intelindev-header-sticky-submenu-hover-link-color: var(--intelindev-header-submenu-hover-link-color);
+  --intelindev-header-sticky-cta-bg: var(--intelindev-color-yellow);
+  --intelindev-header-sticky-cta-text-color: var(--intelindev-color-ink);
+  --intelindev-header-sticky-cta-hover-bg: var(--intelindev-header-cta-hover-bg);
+  --intelindev-header-sticky-cta-hover-text-color: var(--intelindev-header-cta-hover-text-color);
 }
 
 /**********************
 * Header
 ***********************/
 .site-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   padding: 16px 24px;
-  background: var(--intelindev-color-canvas);
+  background: var(--intelindev-header-bg);
   border-bottom: 1px solid rgba(15, 23, 42, 0.08);
   transition: background-color .2s ease;
+}
+/* Sticky: la clase la imprime header.php solo si está activado en Apariencia → Intelindev Header */
+.site-header--sticky {
+  position: sticky;
+  top: 0;
 }
 
 .site-branding .site-title {
@@ -47,9 +61,23 @@
   text-decoration: none;
   color: var(--intelindev-color-ink);
 }
-.site-branding img.custom-logo {
+.site-branding img.custom-logo,
+.site-logo__img {
   max-height: 40px;
   width: auto;
+  display: block;
+}
+.site-logo {
+  display: block;
+  line-height: 0;
+}
+.site-logo__img--sticky {
+  display: none;
+}
+.site-header.is-scrolled .site-logo--has-sticky .site-logo__img--default {
+  display: none;
+}
+.site-header.is-scrolled .site-logo--has-sticky .site-logo__img--sticky {
   display: block;
 }
 
@@ -105,6 +133,9 @@
 }
 
 .header-cta {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -123,14 +154,75 @@
   color: var(--intelindev-header-cta-hover-text-color);
 }
 
-/* --- Header sticky: la clase la agrega scripts.js al pasar el umbral de scroll --- */
+/* --- Estado sticky: .is-scrolled la agrega scripts.js al pasar el umbral de scroll --- */
 .site-header.is-scrolled {
-  background: var(--intelindev-header-scrolled-bg);
+  background: var(--intelindev-header-sticky-bg);
 }
 .site-header.is-scrolled .nav-list > li > a {
-  color: var(--intelindev-header-scrolled-link-color);
+  color: var(--intelindev-header-sticky-link-color);
+}
+.site-header.is-scrolled .nav-list .sub-menu {
+  background: var(--intelindev-header-sticky-submenu-bg);
+}
+.site-header.is-scrolled .nav-list .sub-menu a {
+  color: var(--intelindev-header-sticky-submenu-link-color);
+}
+.site-header.is-scrolled .nav-list .sub-menu a:hover,
+.site-header.is-scrolled .nav-list .sub-menu a:focus {
+  background: var(--intelindev-header-sticky-submenu-hover-bg);
+  color: var(--intelindev-header-sticky-submenu-hover-link-color);
 }
 .site-header.is-scrolled .header-cta {
-  background: var(--intelindev-header-scrolled-cta-bg);
-  color: var(--intelindev-header-scrolled-cta-text-color);
+  background: var(--intelindev-header-sticky-cta-bg);
+  color: var(--intelindev-header-sticky-cta-text-color);
+}
+.site-header.is-scrolled .header-cta:hover,
+.site-header.is-scrolled .header-cta:focus {
+  background: var(--intelindev-header-sticky-cta-hover-bg);
+  color: var(--intelindev-header-sticky-cta-hover-text-color);
+}
+
+/**********************
+* Modal del CTA (<dialog> nativo; lo abre scripts.js)
+***********************/
+.header-cta-modal {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  max-width: min(640px, calc(100vw - 32px));
+  width: 100%;
+}
+.header-cta-modal::backdrop {
+  background: rgba(15, 23, 42, 0.6);
+}
+.header-cta-modal__box {
+  position: relative;
+  background: var(--intelindev-color-canvas);
+  color: var(--intelindev-color-ink);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, .3);
+}
+.header-cta-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--intelindev-color-slate);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.header-cta-modal__close:hover,
+.header-cta-modal__close:focus {
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--intelindev-color-ink);
+}
+.header-cta-modal__title {
+  margin: 0 32px 16px 0;
+  font-size: 24px;
 }

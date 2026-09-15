@@ -1,16 +1,30 @@
 <?php
 /**
- * Intelindev Header (Apariencia → Intelindev Header): CTA y estilos generales
- * del header.
+ * Intelindev Header (Apariencia → Intelindev Header): sticky, logos, menú,
+ * colores y CTA del header en tres pestañas (Header / Menú / CTA).
  *
- * El menú en sí (qué items, a dónde apuntan) se administra en Apariencia →
- * Menús → Menú principal (location 'primary', hardcodeado en header.php): un
- * selector de menú aquí duplicaría esa asignación sin aportar nada.
+ * Todo vive en la option intelindev_header_settings y se lee con
+ * intelindev_get_header_setting(). Los colores se imprimen como custom
+ * properties CSS (--intelindev-header-*) en un <style> en wp_head, solo las
+ * que el admin configuró — el resto lo cubre el default de
+ * assets/css/styles.css en :root, así que sin configurar nada no cambia nada.
  *
- * Los valores se leen con intelindev_get_header_setting() y se imprimen como
- * custom properties CSS (--intelindev-header-*) en un <style> en wp_head, solo
- * para las claves que el admin configuró — el resto lo cubre el default que ya
- * trae assets/css/styles.css en :root, así que sin configurar nada no cambia nada.
+ * Sticky es la primera decisión: apagado, el header es estático (sin
+ * position:sticky, sin listener de scroll, sin variables sticky); encendido,
+ * habilita el logo sticky y la columna "Sticky" de cada color. Los valores
+ * sticky se conservan en la option aunque se apague el toggle.
+ *
+ * El menú no se guarda acá: el dropdown asigna la ubicación 'primary'
+ * (theme mod nav_menu_locations), lo mismo que Apariencia → Menús →
+ * Ubicaciones, así las dos pantallas coinciden y los filtros de menus.php que
+ * dependen de theme_location === 'primary' siguen aplicando.
+ *
+ * CTA: apunta a una Página (permalink y título pasan por los filtros de
+ * traducción, así que cambian por idioma solos), a una URL libre, o abre un
+ * modal cuyo contenido es libre (script de CRM, HTML de un form, shortcode).
+ * Ese contenido se imprime en un <template> inerte y scripts.js lo inyecta en
+ * el <dialog> recién al primer clic, así el JS del CRM no carga hasta que
+ * alguien abre el modal.
  *
  * @package intelindev
  */
@@ -31,132 +45,50 @@ add_action('admin_init', function () {
     register_setting('intelindev_header_settings_group', 'intelindev_header_settings', 'intelindev_header_settings_sanitize');
 });
 
-/**
- * Imprime los overrides de color/CTA del header como custom properties CSS.
- * Prioridad 20 (después de que wp_head imprime las hojas encoladas en
- * prioridad 10): para :root, con la misma especificidad gana la declaración que
- * aparece después en el documento, así que esto pisa los defaults de styles.css
- * sin !important y sin reescribir el archivo estático en cada guardado.
- */
-add_action('wp_head', 'intelindev_print_header_style_overrides', 20);
+add_action('admin_enqueue_scripts', function ($hook) {
+    if ($hook === 'appearance_page_intelindev-header-settings') {
+        intelindev_admin_enqueue_field_assets();
+    }
+}, 20);
 
-function intelindev_print_header_style_overrides() {
-    $map = [
-        'link_color'                => '--intelindev-header-link-color',
-        'scrolled_bg_color'         => '--intelindev-header-scrolled-bg',
-        'scrolled_link_color'       => '--intelindev-header-scrolled-link-color',
-        'submenu_bg_color'          => '--intelindev-header-submenu-bg',
-        'submenu_link_color'        => '--intelindev-header-submenu-link-color',
-        'submenu_hover_bg_color'    => '--intelindev-header-submenu-hover-bg',
-        'submenu_hover_link_color'  => '--intelindev-header-submenu-hover-link-color',
-        'cta_bg_color'              => '--intelindev-header-cta-bg',
-        'cta_text_color'            => '--intelindev-header-cta-text-color',
-        'cta_hover_bg_color'        => '--intelindev-header-cta-hover-bg',
-        'cta_hover_text_color'      => '--intelindev-header-cta-hover-text-color',
-        'scrolled_cta_bg_color'     => '--intelindev-header-scrolled-cta-bg',
-        'scrolled_cta_text_color'   => '--intelindev-header-scrolled-cta-text-color',
+/* ------------------------------------------------------------------ */
+/* Definición de colores                                                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Matriz de colores del header: clave de option => label + custom property.
+ * La variante sticky de cada clave es 'sticky_' . $key y su custom property
+ * intelindev_header_sticky_css_var(). Única fuente para sanitize, salida CSS
+ * y formulario: agregar un color acá alcanza para que aparezca en todos lados
+ * (styles.css debe traer el default de la variable nueva).
+ */
+function intelindev_header_color_matrix(): array {
+    return [
+        'menu' => [
+            'bg_color'                 => ['label' => __('Fondo del header', 'intelindev'),               'var' => '--intelindev-header-bg'],
+            'link_color'               => ['label' => __('Color de los links', 'intelindev'),             'var' => '--intelindev-header-link-color'],
+            'submenu_bg_color'         => ['label' => __('Fondo del submenú', 'intelindev'),              'var' => '--intelindev-header-submenu-bg'],
+            'submenu_link_color'       => ['label' => __('Color de los links del submenú', 'intelindev'), 'var' => '--intelindev-header-submenu-link-color'],
+            'submenu_hover_bg_color'   => ['label' => __('Fondo del submenú (hover)', 'intelindev'),      'var' => '--intelindev-header-submenu-hover-bg'],
+            'submenu_hover_link_color' => ['label' => __('Link del submenú (hover)', 'intelindev'),       'var' => '--intelindev-header-submenu-hover-link-color'],
+        ],
+        'cta' => [
+            'cta_bg_color'         => ['label' => __('Fondo', 'intelindev'),         'var' => '--intelindev-header-cta-bg'],
+            'cta_text_color'       => ['label' => __('Texto', 'intelindev'),         'var' => '--intelindev-header-cta-text-color'],
+            'cta_hover_bg_color'   => ['label' => __('Fondo (hover)', 'intelindev'), 'var' => '--intelindev-header-cta-hover-bg'],
+            'cta_hover_text_color' => ['label' => __('Texto (hover)', 'intelindev'), 'var' => '--intelindev-header-cta-hover-text-color'],
+        ],
     ];
-
-    $declarations = '';
-    foreach ($map as $key => $css_var) {
-        $value = intelindev_sanitize_css_color((string) intelindev_get_header_setting($key, ''));
-        if ($value === '') continue;
-        $declarations .= $css_var . ':' . $value . ';';
-    }
-
-    if ($declarations === '') return;
-
-    echo '<style id="intelindev-header-style-overrides">:root{' . $declarations . '}</style>' . "\n";
 }
 
-/**
- * Whitelist estricta para valores que se imprimen dentro de un bloque <style>: hex
- * (#fff, #ffffff, #ffffffff) o rgb()/rgba() con componentes numéricos. Cualquier
- * otra cosa (incluido un intento de cerrar la etiqueta </style>) se descarta entera.
- */
-function intelindev_sanitize_css_color(string $value): string {
-    $value = trim($value);
-    if ($value === '') return '';
-
-    if (preg_match('/^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', $value)) {
-        return $value;
-    }
-
-    if (preg_match('/^rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(?:,\s*(?:0|1|0?\.\d+)\s*)?\)$/', $value)) {
-        return $value;
-    }
-
-    return '';
+function intelindev_header_sticky_css_var(string $var): string {
+    return str_replace('--intelindev-header-', '--intelindev-header-sticky-', $var);
 }
 
-/**
- * Sanitize — parte de lo ya guardado y sobreescribe solo las claves que este
- * formulario gestiona. Un array nuevo con solo las claves del form borraría
- * cualquier otra clave que llegara a vivir en esta option más adelante.
- */
-function intelindev_header_settings_sanitize($input) {
-    $input    = is_array($input) ? $input : [];
-    $existing = get_option('intelindev_header_settings', []);
-    $out      = is_array($existing) ? $existing : [];
+/* ------------------------------------------------------------------ */
+/* Lectura (frontend)                                                   */
+/* ------------------------------------------------------------------ */
 
-    // CTA: texto por idioma (array lang => texto, solo los no vacíos). Sin
-    // texto en ningún idioma o sin URL = sin CTA (ver header.php).
-    $cta_text = [];
-    $raw_text = $input['cta_text'] ?? [];
-    if (is_string($raw_text)) {
-        // Valor legacy (texto global): se asigna al idioma por defecto.
-        $raw_text = [idml_get_default_language() => $raw_text];
-    }
-    if (is_array($raw_text)) {
-        foreach (idml_get_languages() as $lang) {
-            $text = sanitize_text_field((string) ($raw_text[$lang] ?? ''));
-            if ($text !== '') {
-                $cta_text[$lang] = $text;
-            }
-        }
-    }
-    if ($cta_text) {
-        $out['cta_text'] = $cta_text;
-    } else {
-        unset($out['cta_text']);
-    }
-
-    if (!empty($input['cta_url'])) {
-        $url = esc_url_raw($input['cta_url']);
-        // Sin esquema http(s) no sirve como href real; se descarta en vez de
-        // guardar algo que rompería el CTA.
-        $out['cta_url'] = (is_string($url) && preg_match('#^https?://#i', $url)) ? $url : '';
-        if ($out['cta_url'] === '') unset($out['cta_url']);
-    } else {
-        unset($out['cta_url']);
-    }
-
-    // Colores: vacío o inválido = se quita la clave (vuelve al default de styles.css).
-    $color_keys = [
-        'link_color', 'scrolled_bg_color', 'scrolled_link_color',
-        'submenu_bg_color', 'submenu_link_color', 'submenu_hover_bg_color', 'submenu_hover_link_color',
-        'cta_bg_color', 'cta_text_color', 'cta_hover_bg_color', 'cta_hover_text_color',
-        'scrolled_cta_bg_color', 'scrolled_cta_text_color',
-    ];
-    foreach ($color_keys as $key) {
-        $clean = intelindev_sanitize_css_color((string) ($input[$key] ?? ''));
-        if ($clean !== '') {
-            $out[$key] = $clean;
-        } else {
-            unset($out[$key]);
-        }
-    }
-
-    return $out;
-}
-
-/**
- * Lee una clave de intelindev_header_settings (CTA, colores).
- *
- * @param string $key
- * @param mixed  $default
- * @return mixed
- */
 if (!function_exists('intelindev_get_header_setting')) {
     function intelindev_get_header_setting($key, $default = null) {
         $opts = get_option('intelindev_header_settings', []);
@@ -164,130 +96,423 @@ if (!function_exists('intelindev_get_header_setting')) {
     }
 }
 
-/**
- * Texto del CTA para un idioma: el propio, si no el del idioma por defecto,
- * si no el primero cargado. '' = sin texto en ningún idioma.
- *
- * @param string|null $lang null = idioma actual del request.
- */
-if (!function_exists('intelindev_get_header_cta_text')) {
-    function intelindev_get_header_cta_text($lang = null): string {
-        $texts = intelindev_get_header_setting('cta_text', []);
-        if (is_string($texts)) {
-            return trim($texts); // valor legacy global, previo al texto por idioma
-        }
-        if (!is_array($texts) || !$texts) {
-            return '';
-        }
+function intelindev_header_is_sticky(): bool {
+    return !empty(intelindev_get_header_setting('sticky_enabled', 0));
+}
 
-        $lang = $lang !== null ? idml_normalize_lang($lang) : idml_get_current_language();
-        foreach ([$lang, idml_get_default_language()] as $candidate) {
-            if (isset($texts[$candidate]) && is_string($texts[$candidate]) && trim($texts[$candidate]) !== '') {
-                return trim($texts[$candidate]);
+function intelindev_get_header_sticky_threshold(): int {
+    $threshold = (int) intelindev_get_header_setting('sticky_threshold', 80);
+    return max(0, min(1000, $threshold));
+}
+
+function intelindev_get_header_cta_text($lang = null): string {
+    return intelindev_resolve_lang_text(intelindev_get_header_setting('cta_text', []), $lang);
+}
+
+/**
+ * CTA resuelto para el idioma: type none|page|url|modal, href, text,
+ * modal_title y modal_content (ya con do_shortcode). type 'none' = no imprimir.
+ */
+function intelindev_get_header_cta($lang = null): array {
+    $none = ['type' => 'none', 'href' => '', 'text' => '', 'modal_title' => '', 'modal_content' => ''];
+
+    $type = (string) intelindev_get_header_setting('cta_type', 'none');
+    $text = intelindev_get_header_cta_text($lang);
+    $href = '';
+    $modal_title = '';
+    $modal_content = '';
+
+    switch ($type) {
+        case 'page':
+            $page_id = (int) intelindev_get_header_setting('cta_page_id', 0);
+            if ($page_id <= 0 || get_post_type($page_id) !== 'page' || get_post_status($page_id) !== 'publish') {
+                return $none;
+            }
+            $href = (string) get_permalink($page_id); // page_link → slug traducido
+            if ($text === '') {
+                $text = (string) get_the_title($page_id); // the_title → título traducido
+            }
+            break;
+
+        case 'url':
+            $href = trim((string) intelindev_get_header_setting('cta_url', ''));
+            if (!preg_match('#^https?://#i', $href)) {
+                return $none;
+            }
+            break;
+
+        case 'modal':
+            $modal_content = trim((string) intelindev_get_header_setting('cta_modal_content', ''));
+            if ($modal_content === '') {
+                return $none;
+            }
+            $modal_content = do_shortcode($modal_content);
+            $modal_title = intelindev_resolve_lang_text(intelindev_get_header_setting('cta_modal_title', []), $lang);
+            break;
+
+        default:
+            return $none;
+    }
+
+    if ($text === '') {
+        return $none;
+    }
+
+    return compact('type', 'href', 'text', 'modal_title', 'modal_content');
+}
+
+/**
+ * Logo del header: el elegido acá (y el sticky, si hay), si no el del
+ * Personalizador, si no el nombre del sitio. Los dos <img> se imprimen y CSS
+ * muestra uno u otro según .is-scrolled — sin JS extra. Eager + fetchpriority
+ * en el principal porque suele ser el LCP.
+ */
+function intelindev_render_header_logo(string $home_url): void {
+    $logo_id        = (int) intelindev_get_header_setting('logo_id', 0);
+    $sticky_logo_id = intelindev_header_is_sticky() ? (int) intelindev_get_header_setting('sticky_logo_id', 0) : 0;
+    $site_name      = get_bloginfo('name');
+
+    if ($logo_id > 0 && wp_attachment_is_image($logo_id)) {
+        $classes = 'site-logo' . ($sticky_logo_id > 0 && $sticky_logo_id !== $logo_id ? ' site-logo--has-sticky' : '');
+        echo '<a class="' . esc_attr($classes) . '" href="' . esc_url($home_url) . '" rel="home">';
+        echo wp_get_attachment_image($logo_id, 'full', false, [
+            'class'         => 'site-logo__img site-logo__img--default',
+            'alt'           => $site_name,
+            'loading'       => 'eager',
+            'fetchpriority' => 'high',
+        ]);
+        if ($sticky_logo_id > 0 && $sticky_logo_id !== $logo_id && wp_attachment_is_image($sticky_logo_id)) {
+            echo wp_get_attachment_image($sticky_logo_id, 'full', false, [
+                'class'   => 'site-logo__img site-logo__img--sticky',
+                'alt'     => $site_name,
+                'loading' => 'eager',
+            ]);
+        }
+        echo '</a>';
+        return;
+    }
+
+    if (has_custom_logo()) {
+        the_custom_logo();
+        return;
+    }
+
+    echo '<a class="site-title" href="' . esc_url($home_url) . '" rel="home">' . esc_html($site_name) . '</a>';
+}
+
+/**
+ * Imprime los overrides de color como custom properties. Prioridad 20
+ * (después de que wp_head imprime las hojas encoladas en prioridad 10): para
+ * :root, con la misma especificidad gana la declaración que aparece después
+ * en el documento, así que esto pisa los defaults de styles.css sin
+ * !important. Las variables sticky solo se imprimen con sticky activo.
+ */
+add_action('wp_head', 'intelindev_print_header_style_overrides', 20);
+
+function intelindev_print_header_style_overrides() {
+    $sticky = intelindev_header_is_sticky();
+    $declarations = '';
+
+    foreach (intelindev_header_color_matrix() as $group) {
+        foreach ($group as $key => $def) {
+            $value = intelindev_sanitize_css_color((string) intelindev_get_header_setting($key, ''));
+            if ($value !== '') {
+                $declarations .= $def['var'] . ':' . $value . ';';
+            }
+            if ($sticky) {
+                $value = intelindev_sanitize_css_color((string) intelindev_get_header_setting('sticky_' . $key, ''));
+                if ($value !== '') {
+                    $declarations .= intelindev_header_sticky_css_var($def['var']) . ':' . $value . ';';
+                }
             }
         }
-
-        $first = trim((string) reset($texts));
-        return $first;
     }
+
+    if ($declarations === '') return;
+
+    echo '<style id="intelindev-header-style-overrides">:root{' . $declarations . '}</style>' . "\n";
+}
+
+/* ------------------------------------------------------------------ */
+/* Sanitize                                                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Parte de lo ya guardado y sobreescribe solo las claves que este formulario
+ * gestiona; una clave sin valor válido se quita (vuelve al default).
+ */
+function intelindev_header_settings_sanitize($input) {
+    $input    = is_array($input) ? $input : [];
+    $existing = get_option('intelindev_header_settings', []);
+    $out      = is_array($existing) ? $existing : [];
+
+    // Claves de la versión anterior del panel (scrolled_*): ya no se leen.
+    foreach (array_keys($out) as $key) {
+        if (strpos((string) $key, 'scrolled_') === 0) {
+            unset($out[$key]);
+        }
+    }
+
+    // --- Header: sticky + logos ---
+    $out['sticky_enabled']   = !empty($input['sticky_enabled']) ? 1 : 0;
+    $out['sticky_threshold'] = max(0, min(1000, (int) ($input['sticky_threshold'] ?? 80)));
+
+    foreach (['logo_id', 'sticky_logo_id'] as $key) {
+        $id = (int) ($input[$key] ?? 0);
+        if ($id > 0 && wp_attachment_is_image($id)) {
+            $out[$key] = $id;
+        } else {
+            unset($out[$key]);
+        }
+    }
+
+    // --- Menú: asigna la ubicación primary (no se guarda en la option) ---
+    if (array_key_exists('menu_id', $input)) {
+        $menu_id   = (int) $input['menu_id'];
+        $locations = get_theme_mod('nav_menu_locations', []);
+        $locations = is_array($locations) ? $locations : [];
+        if ($menu_id > 0 && wp_get_nav_menu_object($menu_id)) {
+            $locations['primary'] = $menu_id;
+        } else {
+            unset($locations['primary']);
+        }
+        set_theme_mod('nav_menu_locations', $locations);
+    }
+
+    // --- Colores (normal + sticky) ---
+    foreach (intelindev_header_color_matrix() as $group) {
+        foreach (array_keys($group) as $key) {
+            foreach ([$key, 'sticky_' . $key] as $option_key) {
+                $clean = intelindev_sanitize_css_color((string) ($input[$option_key] ?? ''));
+                if ($clean !== '') {
+                    $out[$option_key] = $clean;
+                } else {
+                    unset($out[$option_key]);
+                }
+            }
+        }
+    }
+
+    // --- CTA ---
+    $type = sanitize_key((string) ($input['cta_type'] ?? 'none'));
+    $out['cta_type'] = in_array($type, ['page', 'url', 'modal'], true) ? $type : 'none';
+
+    $page_id = (int) ($input['cta_page_id'] ?? 0);
+    if ($page_id > 0 && get_post_type($page_id) === 'page') {
+        $out['cta_page_id'] = $page_id;
+    } else {
+        unset($out['cta_page_id']);
+    }
+
+    $url = esc_url_raw((string) ($input['cta_url'] ?? ''));
+    if (is_string($url) && preg_match('#^https?://#i', $url)) {
+        $out['cta_url'] = $url;
+    } else {
+        unset($out['cta_url']);
+    }
+
+    foreach (['cta_text', 'cta_modal_title'] as $key) {
+        $texts = intelindev_sanitize_lang_text($input[$key] ?? []);
+        if ($texts) {
+            $out[$key] = $texts;
+        } else {
+            unset($out[$key]);
+        }
+    }
+
+    // Contenido del modal: HTML/script/shortcode. Mismo criterio que el widget
+    // "HTML personalizado" de WP: tal cual solo para quien tiene unfiltered_html.
+    $content = trim((string) ($input['cta_modal_content'] ?? ''));
+    if ($content !== '') {
+        $out['cta_modal_content'] = current_user_can('unfiltered_html') ? $content : wp_kses_post($content);
+    } else {
+        unset($out['cta_modal_content']);
+    }
+
+    return $out;
 }
 
 /* ------------------------------------------------------------------ */
 /* Page HTML                                                            */
 /* ------------------------------------------------------------------ */
+
 function intelindev_header_settings_page_html() {
     if (!current_user_can('manage_options')) return;
 
+    $opts   = get_option('intelindev_header_settings', []);
+    $opts   = is_array($opts) ? $opts : [];
+    $sticky = !empty($opts['sticky_enabled']);
+    $matrix = intelindev_header_color_matrix();
+    $option = 'intelindev_header_settings';
+    $sticky_if = $option . '[sticky_enabled]';
+    $cta_if    = $option . '[cta_type]';
+
+    $tabs = [
+        'header' => ['🧭', __('Header', 'intelindev')],
+        'menu'   => ['☰', __('Menú', 'intelindev')],
+        'cta'    => ['🔘', __('CTA', 'intelindev')],
+    ];
+
     if (isset($_GET['settings-updated'])) {
-        echo '<div class="notice notice-success is-dismissible"><p>'
-            . esc_html__('Configuración del header guardada correctamente.', 'intelindev')
-            . '</p></div>';
+        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Configuración del header guardada correctamente.', 'intelindev') . '</p></div>';
     }
-    $opts = get_option('intelindev_header_settings', []);
     ?>
     <div class="wrap">
         <h1><?php esc_html_e('Intelindev Header', 'intelindev'); ?></h1>
-        <p><?php esc_html_e('CTA y colores del header. El logo se administra de forma nativa en Apariencia → Personalizar → Identidad del sitio; los items del menú principal, en Apariencia → Menús.', 'intelindev'); ?></p>
+        <p><?php esc_html_e('Comportamiento sticky, logos, menú, colores y botón CTA del header.', 'intelindev'); ?></p>
 
-        <form action="options.php" method="post">
+        <form action="options.php" method="post" class="intelindev-settings-form intelindev-panel-form">
             <?php settings_fields('intelindev_header_settings_group'); ?>
 
-            <h2><?php esc_html_e('CTA — botón del header', 'intelindev'); ?></h2>
-            <p class="description"><?php esc_html_e('Sin URL o sin texto en ningún idioma = sin CTA en el header. Si un idioma queda vacío se usa el texto del idioma por defecto.', 'intelindev'); ?></p>
-            <table class="form-table" role="presentation">
-                <?php
-                $cta_texts = $opts['cta_text'] ?? [];
-                if (is_string($cta_texts)) {
-                    $cta_texts = [idml_get_default_language() => $cta_texts];
-                }
-                foreach (idml_get_languages() as $lang) :
-                    $field_id = 'intelindev_cta_text_' . $lang;
-                ?>
-                <tr>
-                    <th scope="row"><label for="<?php echo esc_attr($field_id); ?>"><?php printf(esc_html__('Texto (%s)', 'intelindev'), esc_html(strtoupper($lang))); ?></label></th>
-                    <td>
-                        <input type="text" id="<?php echo esc_attr($field_id); ?>" name="intelindev_header_settings[cta_text][<?php echo esc_attr($lang); ?>]" value="<?php echo esc_attr((string) ($cta_texts[$lang] ?? '')); ?>" class="regular-text" />
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-                <tr>
-                    <th scope="row"><label for="intelindev_cta_url"><?php esc_html_e('URL', 'intelindev'); ?></label></th>
-                    <td>
-                        <input type="url" id="intelindev_cta_url" name="intelindev_header_settings[cta_url]" value="<?php echo esc_attr($opts['cta_url'] ?? ''); ?>" class="regular-text" placeholder="https://..." />
-                        <p class="description"><?php esc_html_e('Debe empezar con http:// o https://.', 'intelindev'); ?></p>
-                    </td>
-                </tr>
-                <?php
-                intelindev_header_color_field('cta_bg_color', __('Fondo', 'intelindev'), $opts);
-                intelindev_header_color_field('cta_text_color', __('Texto', 'intelindev'), $opts);
-                intelindev_header_color_field('cta_hover_bg_color', __('Fondo (hover)', 'intelindev'), $opts);
-                intelindev_header_color_field('cta_hover_text_color', __('Texto (hover)', 'intelindev'), $opts);
-                intelindev_header_color_field('scrolled_cta_bg_color', __('Fondo con header sticky', 'intelindev'), $opts);
-                intelindev_header_color_field('scrolled_cta_text_color', __('Texto con header sticky', 'intelindev'), $opts);
-                ?>
-            </table>
+            <?php intelindev_admin_tabs_nav($tabs); ?>
 
-            <h2><?php esc_html_e('Estilos generales del header', 'intelindev'); ?></h2>
-            <table class="form-table" role="presentation">
-                <?php
-                intelindev_header_color_field('link_color', __('Color de los links del menú', 'intelindev'), $opts);
-                intelindev_header_color_field('scrolled_bg_color', __('Fondo del header sticky (al scrollear)', 'intelindev'), $opts);
-                intelindev_header_color_field('scrolled_link_color', __('Color de los links con header sticky', 'intelindev'), $opts);
-                intelindev_header_color_field('submenu_bg_color', __('Fondo de los submenús', 'intelindev'), $opts);
-                intelindev_header_color_field('submenu_link_color', __('Color de los links del submenú', 'intelindev'), $opts);
-                intelindev_header_color_field('submenu_hover_bg_color', __('Fondo del submenú (hover)', 'intelindev'), $opts);
-                intelindev_header_color_field('submenu_hover_link_color', __('Color del link del submenú (hover)', 'intelindev'), $opts);
-                ?>
-            </table>
+            <div class="tab-content intelindev-tabs-container">
+
+                <!-- ===================== HEADER ===================== -->
+                <div class="tab-pane fade show active" id="content-header" role="tabpanel">
+                    <h2><?php esc_html_e('Comportamiento', 'intelindev'); ?></h2>
+                    <table class="form-table" role="presentation">
+                        <tr>
+                            <th scope="row"><?php esc_html_e('Header sticky', 'intelindev'); ?></th>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="intelindev_sticky_enabled" name="intelindev_header_settings[sticky_enabled]" value="1"<?php checked($sticky); ?> />
+                                    <?php esc_html_e('El header queda fijo arriba al hacer scroll', 'intelindev'); ?>
+                                </label>
+                                <p class="description"><?php esc_html_e('Activarlo habilita el logo sticky y la columna "Sticky" de los colores en Menú y CTA. Apagado, el header es estático y no carga ningún script de scroll.', 'intelindev'); ?></p>
+                            </td>
+                        </tr>
+                        <tr data-show-if="<?php echo esc_attr($sticky_if); ?>">
+                            <th scope="row"><label for="intelindev_sticky_threshold"><?php esc_html_e('Umbral de scroll', 'intelindev'); ?></label></th>
+                            <td>
+                                <input type="number" id="intelindev_sticky_threshold" name="intelindev_header_settings[sticky_threshold]" value="<?php echo esc_attr((string) ($opts['sticky_threshold'] ?? 80)); ?>" min="0" max="1000" step="1" class="small-text" /> px
+                                <p class="description"><?php esc_html_e('Píxeles de scroll a partir de los cuales el header pasa a su estado sticky (logo y colores sticky).', 'intelindev'); ?></p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2><?php esc_html_e('Logo', 'intelindev'); ?></h2>
+                    <table class="form-table" role="presentation">
+                        <?php
+                        intelindev_admin_media_field($option, 'logo_id', __('Logo del header', 'intelindev'), $opts, __('Sin logo elegido se usa el del Personalizador (Identidad del sitio) y, si tampoco hay, el nombre del sitio.', 'intelindev'));
+                        intelindev_admin_media_field($option, 'sticky_logo_id', __('Logo con header sticky', 'intelindev'), $opts, __('Se muestra en lugar del logo principal cuando el header está en estado sticky. Vacío = se mantiene el principal.', 'intelindev'), $sticky_if);
+                        ?>
+                    </table>
+                </div>
+
+                <!-- ===================== MENÚ ===================== -->
+                <div class="tab-pane fade" id="content-menu" role="tabpanel">
+                    <h2><?php esc_html_e('Menú principal', 'intelindev'); ?></h2>
+                    <table class="form-table" role="presentation">
+                        <tr>
+                            <th scope="row"><label for="intelindev_menu_id"><?php esc_html_e('Menú a mostrar', 'intelindev'); ?></label></th>
+                            <td>
+                                <?php
+                                $locations  = get_nav_menu_locations();
+                                $current_id = (int) ($locations['primary'] ?? 0);
+                                $menus      = wp_get_nav_menus();
+                                ?>
+                                <select id="intelindev_menu_id" name="intelindev_header_settings[menu_id]">
+                                    <option value="0"><?php esc_html_e('— Ninguno —', 'intelindev'); ?></option>
+                                    <?php foreach ($menus as $menu) : ?>
+                                        <option value="<?php echo (int) $menu->term_id; ?>"<?php selected($current_id, (int) $menu->term_id); ?>><?php echo esc_html($menu->name); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <p class="description">
+                                    <?php
+                                    printf(
+                                        esc_html__('Es la ubicación "Menú principal": lo mismo que asignarla en %s. Los ítems del menú se editan ahí.', 'intelindev'),
+                                        '<a href="' . esc_url(admin_url('nav-menus.php')) . '">' . esc_html__('Apariencia → Menús', 'intelindev') . '</a>'
+                                    );
+                                    ?>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2><?php esc_html_e('Colores del header y del menú', 'intelindev'); ?></h2>
+                    <?php
+                    $color_columns = [
+                        ['prefix' => '', 'label' => __('Normal', 'intelindev')],
+                        ['prefix' => 'sticky_', 'label' => __('Sticky', 'intelindev'), 'show_if' => $sticky_if],
+                    ];
+                    intelindev_admin_color_table($option, array_map(fn($def) => $def['label'], $matrix['menu']), $opts, $color_columns);
+                    ?>
+                </div>
+
+                <!-- ===================== CTA ===================== -->
+                <div class="tab-pane fade" id="content-cta" role="tabpanel">
+                    <h2><?php esc_html_e('Botón CTA', 'intelindev'); ?></h2>
+                    <table class="form-table" role="presentation">
+                        <tr>
+                            <th scope="row"><?php esc_html_e('Tipo', 'intelindev'); ?></th>
+                            <td>
+                                <?php
+                                $cta_type = (string) ($opts['cta_type'] ?? 'none');
+                                $types = [
+                                    'none'  => __('Sin CTA', 'intelindev'),
+                                    'page'  => __('Ir a una página del sitio', 'intelindev'),
+                                    'url'   => __('Ir a una URL', 'intelindev'),
+                                    'modal' => __('Abrir un modal', 'intelindev'),
+                                ];
+                                foreach ($types as $value => $label) :
+                                ?>
+                                    <label class="intelindev-radio-row">
+                                        <input type="radio" name="intelindev_header_settings[cta_type]" value="<?php echo esc_attr($value); ?>"<?php checked($cta_type, $value); ?> />
+                                        <?php echo esc_html($label); ?>
+                                    </label>
+                                <?php endforeach; ?>
+                            </td>
+                        </tr>
+
+                        <tr data-show-if="<?php echo esc_attr($cta_if); ?>=page">
+                            <th scope="row"><label for="intelindev_cta_page_id"><?php esc_html_e('Página', 'intelindev'); ?></label></th>
+                            <td>
+                                <?php
+                                wp_dropdown_pages([
+                                    'name'              => 'intelindev_header_settings[cta_page_id]',
+                                    'id'                => 'intelindev_cta_page_id',
+                                    'selected'          => (int) ($opts['cta_page_id'] ?? 0),
+                                    'show_option_none'  => __('— Seleccionar —', 'intelindev'),
+                                    'option_none_value' => 0,
+                                    'post_status'       => 'publish',
+                                ]);
+                                ?>
+                                <p class="description"><?php esc_html_e('La URL y el título se toman de la página y cambian solos según el idioma (slug y título traducidos de la página).', 'intelindev'); ?></p>
+                            </td>
+                        </tr>
+
+                        <tr data-show-if="<?php echo esc_attr($cta_if); ?>=url">
+                            <th scope="row"><label for="intelindev_cta_url"><?php esc_html_e('URL', 'intelindev'); ?></label></th>
+                            <td>
+                                <input type="url" id="intelindev_cta_url" name="intelindev_header_settings[cta_url]" value="<?php echo esc_attr((string) ($opts['cta_url'] ?? '')); ?>" class="regular-text" placeholder="https://..." />
+                                <p class="description"><?php esc_html_e('Debe empezar con http:// o https://.', 'intelindev'); ?></p>
+                            </td>
+                        </tr>
+
+                        <?php
+                        intelindev_admin_lang_text_fields($option, 'cta_text', __('Texto del botón (%s)', 'intelindev'), $opts, __('Si un idioma queda vacío se usa el del idioma por defecto. Con tipo "página", vacío = título de la página.', 'intelindev'), $cta_if . '!=none');
+                        intelindev_admin_lang_text_fields($option, 'cta_modal_title', __('Título del modal (%s)', 'intelindev'), $opts, '', $cta_if . '=modal');
+                        ?>
+                        <tr data-show-if="<?php echo esc_attr($cta_if); ?>=modal">
+                            <th scope="row"><label for="intelindev_cta_modal_content"><?php esc_html_e('Contenido del modal', 'intelindev'); ?></label></th>
+                            <td>
+                                <textarea id="intelindev_cta_modal_content" name="intelindev_header_settings[cta_modal_content]" rows="10" class="large-text code" spellcheck="false"><?php echo esc_textarea((string) ($opts['cta_modal_content'] ?? '')); ?></textarea>
+                                <p class="description"><?php esc_html_e('Acepta el script de embed de un CRM (GoHighLevel, HubSpot…), el HTML de un formulario o un shortcode. Se carga recién cuando el visitante abre el modal, así no afecta la velocidad del sitio.', 'intelindev'); ?></p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div data-show-if="<?php echo esc_attr($cta_if); ?>!=none">
+                        <h2><?php esc_html_e('Colores del CTA', 'intelindev'); ?></h2>
+                        <?php intelindev_admin_color_table($option, array_map(fn($def) => $def['label'], $matrix['cta']), $opts, $color_columns); ?>
+                    </div>
+                </div>
+
+            </div>
 
             <?php submit_button(__('Guardar', 'intelindev')); ?>
         </form>
     </div>
-    <script>
-    (function($){
-        $('.intelindev-color-input').on('input', function(){
-            var input = $(this);
-            $('.intelindev-color-preview[data-input="#' + input.attr('id') + '"]').css('background', input.val() || 'transparent');
-        });
-    })(jQuery);
-    </script>
-    <?php
-}
-
-/**
- * Fila de form-table para un campo de color con vista previa. El input queda como
- * texto libre (no <input type="color">, que fuerza #rrggbb y no admite vacío ni
- * rgba) para que "vacío" siga significando "usar el default del sitio".
- */
-function intelindev_header_color_field(string $key, string $label, array $opts): void {
-    $val = esc_attr((string) ($opts[$key] ?? ''));
-    ?>
-    <tr>
-        <th scope="row"><label for="intelindev_<?php echo esc_attr($key); ?>"><?php echo esc_html($label); ?></label></th>
-        <td>
-            <span class="intelindev-color-preview" data-input="#intelindev_<?php echo esc_attr($key); ?>" style="display:inline-block;width:24px;height:24px;border:1px solid #dcdcde;border-radius:4px;vertical-align:middle;margin-right:8px;background:<?php echo $val !== '' ? $val : 'transparent'; ?>;"></span>
-            <input type="text" id="intelindev_<?php echo esc_attr($key); ?>" name="intelindev_header_settings[<?php echo esc_attr($key); ?>]" value="<?php echo $val; ?>" class="intelindev-color-input" placeholder="#5166ec" style="width:140px;" />
-        </td>
-    </tr>
     <?php
 }

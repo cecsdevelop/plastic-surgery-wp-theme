@@ -2,6 +2,11 @@
 if (!defined('ABSPATH')) exit;
 
 $current_lang = function_exists('idml_get_current_language') ? idml_get_current_language() : get_locale();
+$home_url     = function_exists('idml_get_language_home_url') ? idml_get_language_home_url($current_lang) : home_url('/');
+
+// Apariencia → Intelindev Header: sticky, logo, CTA (ver admin-header-settings.php).
+$header_is_sticky = function_exists('intelindev_header_is_sticky') && intelindev_header_is_sticky();
+$header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_get_header_cta($current_lang) : ['type' => 'none'];
 ?>
 <!doctype html>
 <html lang="<?php echo esc_attr($current_lang); ?>">
@@ -21,13 +26,17 @@ $current_lang = function_exists('idml_get_current_language') ? idml_get_current_
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<header class="site-header" data-scroll-threshold="80">
+<header class="site-header<?php echo $header_is_sticky ? ' site-header--sticky' : ''; ?>"<?php if ($header_is_sticky) printf(' data-scroll-threshold="%d"', intelindev_get_header_sticky_threshold()); ?>>
   <div class="site-branding">
-    <?php if (has_custom_logo()) : ?>
-      <?php the_custom_logo(); ?>
-    <?php else : ?>
-      <a class="site-title" href="<?php echo esc_url(function_exists('idml_get_language_home_url') ? idml_get_language_home_url($current_lang) : home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a>
-    <?php endif; ?>
+    <?php
+    if (function_exists('intelindev_render_header_logo')) {
+      intelindev_render_header_logo($home_url);
+    } elseif (has_custom_logo()) {
+      the_custom_logo();
+    } else {
+      echo '<a class="site-title" href="' . esc_url($home_url) . '" rel="home">' . esc_html(get_bloginfo('name')) . '</a>';
+    }
+    ?>
   </div>
 
   <nav class="site-nav" aria-label="<?php echo esc_attr(idml_t('nav.primary_label')); ?>">
@@ -42,14 +51,24 @@ $current_lang = function_exists('idml_get_current_language') ? idml_get_current_
     ?>
   </nav>
 
-  <?php
-  // CTA configurable desde Apariencia → Intelindev Header. Vacío = sin CTA (a
-  // diferencia de Sanasana, este theme no tiene un portal/login fijo al que
-  // apuntar por defecto, así que sin URL configurada simplemente no se imprime).
-  $header_cta_url  = function_exists('intelindev_get_header_setting') ? trim((string) intelindev_get_header_setting('cta_url', '')) : '';
-  $header_cta_text = function_exists('intelindev_get_header_cta_text') ? intelindev_get_header_cta_text($current_lang) : '';
-  if ($header_cta_url !== '' && preg_match('#^https?://#i', $header_cta_url) && $header_cta_text !== '') :
-  ?>
-    <a href="<?php echo esc_url($header_cta_url); ?>" class="header-cta"><?php echo esc_html($header_cta_text); ?></a>
+  <?php if ($header_cta['type'] === 'modal') : ?>
+    <button type="button" class="header-cta" data-cta-modal="header-cta-modal"><?php echo esc_html($header_cta['text']); ?></button>
+  <?php elseif ($header_cta['type'] !== 'none') : ?>
+    <a href="<?php echo esc_url($header_cta['href']); ?>" class="header-cta"><?php echo esc_html($header_cta['text']); ?></a>
   <?php endif; ?>
 </header>
+<?php if ($header_cta['type'] === 'modal') : ?>
+<dialog id="header-cta-modal" class="header-cta-modal"<?php echo $header_cta['modal_title'] !== '' ? ' aria-labelledby="header-cta-modal-title"' : ''; ?>>
+  <div class="header-cta-modal__box">
+    <button type="button" class="header-cta-modal__close" data-cta-modal-close aria-label="<?php echo esc_attr(idml_t('cta.modal_close_label')); ?>">&times;</button>
+    <?php if ($header_cta['modal_title'] !== '') : ?>
+      <h2 id="header-cta-modal-title" class="header-cta-modal__title"><?php echo esc_html($header_cta['modal_title']); ?></h2>
+    <?php endif; ?>
+    <div class="header-cta-modal__content" data-cta-modal-content></div>
+  </div>
+</dialog>
+<?php
+// Contenido libre del admin (script de CRM / HTML / shortcode ya procesado).
+// Inerte hasta que scripts.js lo inyecta en el <dialog> al primer clic.
+echo '<template id="header-cta-modal-template">' . $header_cta['modal_content'] . '</template>' . "\n";
+endif;

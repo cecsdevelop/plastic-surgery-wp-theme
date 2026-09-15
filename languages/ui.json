@@ -50,5 +50,9 @@
     "title.404": {
         "es": "Página no encontrada",
         "en": "Page not found"
+    },
+    "cta.modal_close_label": {
+        "es": "Cerrar",
+        "en": "Close"
     }
 }

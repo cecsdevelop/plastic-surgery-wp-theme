@@ -1,0 +1,166 @@
+/* Campos compartidos de los paneles Intelindev (solo admin) */
+.intelindev-panel-form .intelindev-tab-icon {
+    font-size: 16px;
+    margin-right: 6px;
+}
+
+.intelindev-panel-form .intelindev-radio-row {
+    display: block;
+    margin: 0 0 6px;
+}
+
+/* Logos */
+.intelindev-media-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.intelindev-media-field .intelindev-media-preview {
+    max-height: 60px;
+    max-width: 240px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 4px;
+    background: #f6f7f7;
+}
+
+/* Tabla de colores Normal | Sticky */
+.intelindev-color-table {
+    max-width: 640px;
+    margin: 8px 0 24px;
+}
+.intelindev-color-table th,
+.intelindev-color-table td {
+    vertical-align: middle;
+}
+.intelindev-color-table tbody th {
+    font-weight: 400;
+    width: 40%;
+}
+/* Swatch solo-color + input siempre visible (WP lo oculta con .hidden hasta
+   abrir) + picker flotando debajo sin mover la tabla. */
+.intelindev-color-table .wp-picker-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+.intelindev-color-table .wp-picker-container .wp-color-result.button {
+    width: 30px;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+}
+.intelindev-color-table .wp-color-result-text {
+    display: none;
+}
+.intelindev-color-table .wp-picker-container .wp-picker-input-wrap,
+.intelindev-color-table .wp-picker-container .wp-picker-input-wrap.hidden {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.intelindev-color-table .wp-picker-container input[type="text"].wp-color-picker {
+    width: 120px;
+    margin: 0;
+}
+.intelindev-color-table .wp-picker-container .wp-picker-input-wrap .button.wp-picker-clear {
+    margin: 0;
+    min-height: 30px;
+    line-height: 2.5;
+}
+/* El picker se abre al costado, nunca sobre otros inputs: columna Normal hacia
+   la izquierda (sobre las etiquetas), columna Sticky hacia la derecha (fuera de
+   la tabla). El padding (no margin) mantiene el hueco dentro del contenedor, así
+   el mouse no "sale" al pasar del swatch al picker. */
+.intelindev-color-table .wp-picker-holder {
+    position: absolute;
+    top: -10px;
+    z-index: 100;
+}
+.intelindev-color-table td:nth-child(2) .wp-picker-holder {
+    right: 100%;
+    padding-right: 6px;
+}
+.intelindev-color-table td:nth-child(3) .wp-picker-holder {
+    left: 100%;
+    padding-left: 6px;
+}
+
+/* Filas del footer (Apariencia → Intelindev Footer) */
+.intelindev-footer-rows {
+    max-width: 640px;
+    margin: 8px 0 12px;
+}
+.intelindev-footer-rows td,
+.intelindev-footer-rows th {
+    vertical-align: middle;
+}
+.intelindev-footer-rows .intelindev-footer-row__index {
+    width: 40px;
+    font-weight: 600;
+}
+
+/* Grilla visual del footer (celda = área de widgets; botones por idioma → Personalizador) */
+.intelindev-footer-grid {
+    max-width: 760px;
+    margin: 8px 0 16px;
+    padding: 16px;
+    background: #1d2327;
+    border-radius: 8px;
+}
+.intelindev-footer-grid__row {
+    display: grid;
+    gap: 12px;
+}
+.intelindev-footer-grid__row + .intelindev-footer-grid__row {
+    margin-top: 12px;
+}
+.intelindev-footer-grid__cell {
+    min-width: 0;
+    min-height: 88px;
+    padding: 12px;
+    border: 1px dashed #8c8f94;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+.intelindev-footer-grid__name {
+    color: #f0f0f1;
+    font-weight: 600;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.intelindev-footer-grid__langs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.intelindev-footer-grid__langs .button.button-small {
+    min-height: 26px;
+    line-height: 2;
+    padding: 0 8px;
+}
+.intelindev-footer-grid__langs .intelindev-footer-grid__lang--filled {
+    background: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+}
+.intelindev-footer-grid__count {
+    display: inline-block;
+    min-width: 16px;
+    margin-left: 4px;
+    padding: 0 4px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.25);
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+}
