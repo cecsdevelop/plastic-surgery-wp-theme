@@ -32,6 +32,23 @@
   --intelindev-header-sticky-cta-text-color: var(--intelindev-color-ink);
   --intelindev-header-sticky-cta-hover-bg: var(--intelindev-header-cta-hover-bg);
   --intelindev-header-sticky-cta-hover-text-color: var(--intelindev-header-cta-hover-text-color);
+
+  /* Footer (Apariencia → Intelindev Footer): defaults, se sobreescriben en <head>
+     solo lo configurado — ver intelindev_print_footer_style_overrides(). */
+  --intelindev-footer-bg: var(--intelindev-color-ink);
+  --intelindev-footer-text-color: rgba(255, 255, 255, 0.8);
+  --intelindev-footer-heading-color: var(--intelindev-color-canvas);
+  --intelindev-footer-link-color: var(--intelindev-color-canvas);
+  --intelindev-footer-link-hover-color: var(--intelindev-color-yellow);
+  --intelindev-footer-padding-top: 56px;
+  --intelindev-footer-padding-bottom: 56px;
+  --intelindev-footer-padding-x: 24px;
+  --intelindev-footer-gap: 32px;
+  --intelindev-footer-max-width: 1200px;
+  --intelindev-footer-bar-bg: rgba(0, 0, 0, 0.25);
+  --intelindev-footer-bar-text-color: rgba(255, 255, 255, 0.7);
+  --intelindev-footer-bar-link-color: var(--intelindev-color-canvas);
+  --intelindev-footer-bar-padding: 16px;
 }
 
 /**********************
@@ -225,4 +242,97 @@
 .header-cta-modal__title {
   margin: 0 32px 16px 0;
   font-size: 24px;
+}
+
+/**********************
+* Footer (grilla de áreas de widgets + barra de copyright; ver footer.php)
+***********************/
+.site-footer {
+  background: var(--intelindev-footer-bg);
+  color: var(--intelindev-footer-text-color);
+}
+.site-footer a {
+  color: var(--intelindev-footer-link-color);
+  text-decoration: none;
+}
+.site-footer a:hover,
+.site-footer a:focus {
+  color: var(--intelindev-footer-link-hover-color);
+}
+.site-footer__inner {
+  max-width: var(--intelindev-footer-max-width);
+  margin: 0 auto;
+}
+.site-footer__widgets {
+  padding: var(--intelindev-footer-padding-top) var(--intelindev-footer-padding-x) var(--intelindev-footer-padding-bottom);
+}
+/* grid-template-columns lo imprime footer.php inline por fila (cantidad + distribución) */
+.footer-row {
+  display: grid;
+  gap: var(--intelindev-footer-gap);
+}
+.footer-row + .footer-row {
+  margin-top: var(--intelindev-footer-gap);
+}
+.footer-col {
+  min-width: 0;
+}
+.footer-widget + .footer-widget {
+  margin-top: 24px;
+}
+.footer-widget__title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--intelindev-footer-heading-color);
+}
+.footer-widget p:first-child { margin-top: 0; }
+.footer-widget p:last-child { margin-bottom: 0; }
+.footer-widget ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.footer-widget li + li {
+  margin-top: 8px;
+}
+
+.site-footer__bar {
+  background: var(--intelindev-footer-bar-bg);
+  color: var(--intelindev-footer-bar-text-color);
+  padding: var(--intelindev-footer-bar-padding) var(--intelindev-footer-padding-x);
+  font-size: 14px;
+}
+.site-footer__bar .site-footer__inner {
+  display: flex;
+  align-items: center;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+}
+.site-footer__bar--space-between .site-footer__inner { justify-content: space-between; }
+.site-footer__bar--left .site-footer__inner { justify-content: flex-start; }
+.site-footer__bar--center .site-footer__inner { justify-content: center; text-align: center; }
+.site-footer__bar .site-copyright {
+  margin: 0;
+}
+.site-footer__bar a {
+  color: var(--intelindev-footer-bar-link-color);
+}
+.footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 767px) {
+  .footer-row {
+    grid-template-columns: minmax(0, 1fr) !important; /* pisa el inline de footer.php */
+  }
+  .site-footer__bar .site-footer__inner {
+    flex-direction: column;
+    text-align: center;
+  }
 }
