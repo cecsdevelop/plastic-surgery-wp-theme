@@ -14,9 +14,16 @@ get_header();
         <div class="entry-summary"><?php the_excerpt(); ?></div>
       </article>
     <?php endwhile; ?>
-    <?php the_posts_pagination(); ?>
+    <?php
+    the_posts_pagination([
+      'prev_text'          => esc_html(idml_t('nav.prev_page')),
+      'next_text'          => esc_html(idml_t('nav.next_page')),
+      'screen_reader_text' => esc_html(idml_t('nav.pagination_label')),
+      'aria_label'         => idml_t('nav.pagination_label'),
+    ]);
+    ?>
   <?php else : ?>
-    <p><?php esc_html_e('Nothing found.', 'intelindev'); ?></p>
+    <p><?php echo esc_html(idml_t('archive.nothing_found')); ?></p>
   <?php endif; ?>
 </main>
 <?php

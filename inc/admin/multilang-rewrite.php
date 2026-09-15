@@ -30,207 +30,50 @@ if (!function_exists('idml_get_request_path_segments')) {
     }
 }
 
-if (!function_exists('idml_pretty_title_from_slug')) {
-    function idml_pretty_title_from_slug(string $slug): string {
-        $slug = sanitize_title($slug);
-        if ($slug === '') {
-            return '';
-        }
-
-        $words = str_replace('-', ' ', $slug);
-        return ucwords($words);
-    }
-}
-
-if (!function_exists('idml_get_browser_title_overrides')) {
-    function idml_get_browser_title_overrides(): array {
-        static $cache = null;
-
-        if (is_array($cache)) {
-            return $cache;
-        }
-
-        $path = get_template_directory() . '/languages/modules/page-browser-titles.json';
-        if (!file_exists($path)) {
-            $cache = [];
-            return $cache;
-        }
-
-        $decoded = json_decode((string) file_get_contents($path), true);
-        $cache = is_array($decoded) ? $decoded : [];
-
-        return $cache;
-    }
-}
-
-if (!function_exists('idml_get_browser_title_for_slug_key')) {
-    function idml_get_browser_title_for_slug_key(string $slug_key, string $lang): string {
-        $slug_key = trim($slug_key);
-        $lang = sanitize_key($lang);
-        if ($slug_key === '' || $lang === '') {
-            return '';
-        }
-
-        $titles = idml_get_browser_title_overrides();
-        if (!isset($titles[$slug_key]) || !is_array($titles[$slug_key])) {
-            return '';
-        }
-
-        $entry = $titles[$slug_key];
-        $default_lang = function_exists('idml_get_default_language') ? idml_get_default_language() : 'es';
-
-        if (isset($entry[$lang]) && is_string($entry[$lang]) && trim($entry[$lang]) !== '') {
-            return trim($entry[$lang]);
-        }
-
-        if (isset($entry[$default_lang]) && is_string($entry[$default_lang]) && trim($entry[$default_lang]) !== '') {
-            return trim($entry[$default_lang]);
-        }
-
-        return '';
-    }
-}
-
-if (!function_exists('idml_resolve_request_browser_title')) {
-    function idml_resolve_request_browser_title(): string {
-        $segments = idml_get_request_path_segments();
-        if (count($segments) < 2) {
-            return '';
-        }
-
-        $supported_langs = function_exists('idml_get_supported_languages') ? idml_get_supported_languages() : idml_get_languages();
-        $default_lang = function_exists('idml_get_default_language') ? idml_get_default_language() : 'es';
-        $lang = sanitize_key((string) $segments[0]);
-
-        if ($lang === '' || !in_array($lang, $supported_langs, true) || $lang === $default_lang) {
-            return '';
-        }
-
-        $translated_slug = sanitize_title((string) $segments[1]);
-        if ($translated_slug === '') {
-            return '';
-        }
-
-        $json_path = get_template_directory() . '/languages/modules/header-menu-slugs.json';
-        if (!file_exists($json_path)) {
-            return '';
-        }
-
-        $slugs = json_decode((string) file_get_contents($json_path), true);
-        if (!is_array($slugs)) {
-            return '';
-        }
-
-        $matched_slug_key = '';
-        foreach ($slugs as $slug_key => $translations) {
-            if (strpos((string) $slug_key, 'menu-slug.') !== 0 || !is_array($translations)) {
-                continue;
-            }
-
-            $candidate = isset($translations[$lang]) ? sanitize_title((string) $translations[$lang]) : '';
-            if ($candidate !== $translated_slug) {
-                continue;
-            }
-
-            $matched_slug_key = (string) $slug_key;
-            break;
-        }
-
-        if ($matched_slug_key === '') {
-            return '';
-        }
-
-        $localized_title = idml_get_browser_title_for_slug_key($matched_slug_key, $lang);
-        if ($localized_title === '') {
-            $localized_title = idml_pretty_title_from_slug($translated_slug);
-        }
-
-        return trim((string) $localized_title);
-    }
-}
-
-add_filter('document_title_parts', function($parts) {
-    if (is_admin()) {
-        return $parts;
-    }
-
-    if (!is_array($parts)) {
-        return $parts;
-    }
-
-    $localized_title = idml_resolve_request_browser_title();
-    if ($localized_title === '') {
-        return $parts;
-    }
-
-    $parts['title'] = $localized_title;
-    return $parts;
-}, 20);
-
-add_filter('pre_get_document_title', function($title) {
-    if (is_admin()) {
-        return $title;
-    }
-
-    $localized_title = idml_resolve_request_browser_title();
-    if ($localized_title === '') {
-        return $title;
-    }
-
-    $site_name = get_bloginfo('name');
-    $separator = apply_filters('document_title_separator', '-');
-
-    if ($site_name === '') {
-        return $localized_title;
-    }
-
-    return trim($localized_title . ' ' . $separator . ' ' . $site_name);
-}, 9999);
-
 /**
- * Rank Math hookea pre_get_document_title en prioridad 15 con su propio título
- * (no pasa por get_the_title()/'the_title'), asi que para posts regulares hay
- * que sobreescribirlo despues, con prioridad mas alta, para que la pestaña del
- * navegador tambien muestre el título traducido.
+ * Título de la pestaña en idioma no-default: se cambia solo la parte 'title'
+ * y WP arma el resto (separador, nombre del sitio, y en la portada usa el
+ * nombre del sitio en vez del título de la página, igual que en el idioma
+ * default). Si algún día se instala un plugin SEO que hookee
+ * pre_get_document_title (Rank Math, Yoast), ese plugin pasa a mandar acá.
  */
-add_filter('pre_get_document_title', function($title) {
-    if (is_admin() || !is_singular(['post', 'page'])) {
-        return $title;
+add_filter('document_title_parts', function($parts) {
+    if (is_admin() || !is_array($parts)) {
+        return $parts;
     }
 
-    $lang = function_exists('idml_get_current_language') ? idml_get_current_language() : 'es';
-    $default_lang = function_exists('idml_get_default_language') ? idml_get_default_language() : 'es';
+    $lang = idml_get_current_language();
 
-    if ($lang === '' || $lang === $default_lang) {
-        return $title;
+    // Búsqueda y 404: WP core los titula en el locale del sitio (es_*) sin
+    // importar el idioma de la URL; acá salen del diccionario, en ambos idiomas.
+    if (is_search()) {
+        $parts['title'] = idml_t_vars('title.search', ['query' => get_search_query(false)], $lang);
+        return $parts;
+    }
+    if (is_404()) {
+        $parts['title'] = idml_t('title.404', $lang);
+        return $parts;
+    }
+
+    if (!is_singular(['post', 'page']) || is_front_page() || $lang === idml_get_default_language()) {
+        return $parts;
     }
 
     $post = get_queried_object();
-    if (!($post instanceof WP_Post)) {
-        return $title;
+    if (!($post instanceof WP_Post) || !function_exists('intelindev_get_post_translated_title')) {
+        return $parts;
     }
 
-    $translated_title = '';
-    if (function_exists('intelindev_get_post_translated_title')) {
-        $translated_title = intelindev_get_post_translated_title($post, $lang);
+    $translated_title = intelindev_get_post_translated_title($post, $lang);
+    if ($translated_title !== '') {
+        $parts['title'] = $translated_title;
     }
 
-    if ($translated_title === '') {
-        return $title;
-    }
-
-    $site_name = get_bloginfo('name');
-    $separator = apply_filters('document_title_separator', '-');
-
-    if ($site_name === '') {
-        return $translated_title;
-    }
-
-    return trim($translated_title . ' ' . $separator . ' ' . $site_name);
-}, 10000);
+    return $parts;
+}, 20);
 
 add_action('init', function() {
-    $langs = function_exists('idml_get_supported_languages') ? idml_get_supported_languages() : idml_get_languages();
+    $langs = idml_get_languages();
     foreach ($langs as $lang) {
         if ($lang === idml_get_default_language()) continue; // No para el idioma por defecto
         add_rewrite_rule(
@@ -245,7 +88,7 @@ add_action('init', function() {
 
 
 add_action('init', function() {
-    $supported_langs = function_exists('idml_get_supported_languages') ? idml_get_supported_languages() : idml_get_languages();
+    $supported_langs = idml_get_languages();
     $default_lang = function_exists('idml_get_default_language') ? idml_get_default_language() : 'es';
 
     // Regular posts (CPT 'post') may have a translated slug (per-post meta) or keep the
@@ -375,6 +218,12 @@ add_action('template_redirect', function() {
         return;
     }
 
+    // /{lang}/?s=x matchea la misma regla: WP ya armó la query de búsqueda
+    // (lee 's' de $_GET), así que se deja seguir al template normal.
+    if (is_search()) {
+        return;
+    }
+
     if ('page' === get_option('show_on_front')) {
         $front_id = (int) get_option('page_on_front');
         $front = $front_id ? get_post($front_id) : null;
@@ -424,7 +273,7 @@ add_action('template_redirect', function() {
         return;
     }
 
-    $supported_langs = function_exists('idml_get_supported_languages') ? idml_get_supported_languages() : idml_get_languages();
+    $supported_langs = idml_get_languages();
     $default_lang = function_exists('idml_get_default_language') ? idml_get_default_language() : 'es';
     $lang = sanitize_key((string) $segments[0]);
 

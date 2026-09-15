@@ -1,14 +1,54 @@
 {
-    "menu.intelindev": {
-        "es": "Intelindev",
-        "en": "Intelindev"
+    "archive.nothing_found": {
+        "es": "No se encontraron resultados.",
+        "en": "Nothing found."
     },
-    "menu.contactanos": {
-        "es": "Contactanos",
-        "en": "Contact us"
+    "nav.primary_label": {
+        "es": "Navegación principal",
+        "en": "Primary navigation"
     },
-    "menu.contact-us": {
-        "es": "Contactanos",
-        "en": "Contact us"
+    "nav.post_navigation_label": {
+        "es": "Navegación de entradas",
+        "en": "Post navigation"
+    },
+    "nav.pagination_label": {
+        "es": "Paginación",
+        "en": "Pagination"
+    },
+    "nav.prev_page": {
+        "es": "Anteriores",
+        "en": "Previous"
+    },
+    "nav.next_page": {
+        "es": "Siguientes",
+        "en": "Next"
+    },
+    "footer.copyright": {
+        "es": "© {year} {site}. Todos los derechos reservados.",
+        "en": "© {year} {site}. All rights reserved."
+    },
+    "language.name.es": {
+        "es": "Español",
+        "en": "Español"
+    },
+    "language.name.en": {
+        "es": "English",
+        "en": "English"
+    },
+    "language.switcher_label": {
+        "es": "Abrir selector de idioma",
+        "en": "Open language selector"
+    },
+    "nav.submenu_toggle_label": {
+        "es": "Abrir submenú",
+        "en": "Open submenu"
+    },
+    "title.search": {
+        "es": "Resultados para “{query}”",
+        "en": "Search results for “{query}”"
+    },
+    "title.404": {
+        "es": "Página no encontrada",
+        "en": "Page not found"
     }
 }

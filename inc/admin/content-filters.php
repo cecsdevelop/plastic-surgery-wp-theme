@@ -20,7 +20,7 @@ add_filter('wp_nav_menu_items', function($items, $args) {
             ? id_get_translated_current_url($lang)
             : idml_get_language_home_url($lang);
         $submenu_items .= sprintf(
-            '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="%s" onclick="document.cookie=\'idml_lang=%s;path=/;max-age=31536000\'">%s</a></li>',
+            '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="%s" hreflang="%s">%s</a></li>',
             esc_url($url),
             esc_attr($lang),
             esc_html(idml_get_language_label($lang))
@@ -30,7 +30,7 @@ add_filter('wp_nav_menu_items', function($items, $args) {
     $switcher_html = '<li id="menu-item-lang-switcher" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children idml-lang-switcher">';
     $switcher_html .= '<a href="#" aria-haspopup="true" aria-expanded="false">' . esc_html(idml_get_language_label($current_lang)) . '</a>';
     if ($submenu_items !== '') {
-        $switcher_html .= '<button class="idml-submenu-toggle" tabindex="0" aria-label="Abrir selector de idioma" type="button">'
+        $switcher_html .= '<button class="idml-submenu-toggle" tabindex="0" aria-label="' . esc_attr(idml_t('language.switcher_label')) . '" type="button">'
             . '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>'
             . '</button>';
         $switcher_html .= '<ul class="sub-menu">' . $submenu_items . '</ul>';

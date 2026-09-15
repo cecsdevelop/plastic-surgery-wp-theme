@@ -46,60 +46,6 @@ if (!function_exists('idml_get_languages')) {
   }
 }
 
-if (!function_exists('idml_get_supported_languages')) {
-  function idml_get_supported_languages() {
-    static $cache = null;
-
-    if (is_array($cache)) {
-      return $cache;
-    }
-
-    $langs = idml_get_languages();
-    $json_files = glob(get_template_directory() . '/languages/modules/*.json');
-    if (is_array($json_files)) {
-      foreach ($json_files as $json_file) {
-        if (!is_readable($json_file)) {
-          continue;
-        }
-
-        $decoded = json_decode((string) file_get_contents($json_file), true);
-        if (!is_array($decoded)) {
-          continue;
-        }
-
-        $stack = [$decoded];
-        while ($stack) {
-          $node = array_pop($stack);
-          if (!is_array($node)) {
-            continue;
-          }
-
-          $keys = array_keys($node);
-          $is_lang_map = !empty($keys) && count(array_filter($keys, function($key) {
-            return is_string($key) && preg_match('/^[a-z]{2}(?:-[a-z]{2})?$/i', $key);
-          })) === count($keys);
-
-          if ($is_lang_map) {
-            foreach ($keys as $key) {
-              $langs[] = idml_normalize_lang($key);
-            }
-            continue;
-          }
-
-          foreach ($node as $child) {
-            if (is_array($child)) {
-              $stack[] = $child;
-            }
-          }
-        }
-      }
-    }
-
-    $cache = array_values(array_unique(array_filter($langs)));
-    return $cache;
-  }
-}
-
 if (!function_exists('idml_get_default_language')) {
   function idml_get_default_language() {
     $default = idml_normalize_lang(get_option('idml_default_language', 'es'));
@@ -115,7 +61,7 @@ if (!function_exists('idml_get_default_language')) {
 
 if (!function_exists('idml_get_current_language')) {
   function idml_get_current_language() {
-    $languages = idml_get_supported_languages();
+    $languages = idml_get_languages();
 
     $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
     if ($request_uri !== '') {
@@ -167,8 +113,24 @@ if (!function_exists('idml_get_language_home_url')) {
 }
 
 
-if (!function_exists('idml_get_dictionary')) {
-  function idml_get_dictionary($namespace = 'ui') {
+if (!function_exists('idml_get_translations_option_name')) {
+  /**
+   * Option donde Apariencia → Traducciones guarda los strings de UI de un
+   * namespace. Autoloaded: en frontend llega con alloptions, cero queries extra.
+   */
+  function idml_get_translations_option_name($namespace = 'ui') {
+    $namespace = sanitize_key((string) $namespace);
+    return 'idml_translations_' . ($namespace !== '' ? $namespace : 'ui');
+  }
+}
+
+if (!function_exists('idml_get_dictionary_defaults')) {
+  /**
+   * Defaults que trae el theme: languages/{namespace}.json. Es el piso del
+   * diccionario y solo lo toca el desarrollador al agregar claves nuevas a los
+   * templates; el admin no lo edita ni lo necesita (ver admin-translations.php).
+   */
+  function idml_get_dictionary_defaults($namespace = 'ui') {
     static $cache = [];
 
     $namespace = sanitize_key((string) $namespace);
@@ -193,6 +155,53 @@ if (!function_exists('idml_get_dictionary')) {
   }
 }
 
+if (!function_exists('idml_get_dictionary_overrides')) {
+  /**
+   * Lo que el admin guardó desde Apariencia → Traducciones. Solo guarda valores
+   * no vacíos, así que un campo vaciado en el dashboard vuelve al default.
+   */
+  function idml_get_dictionary_overrides($namespace = 'ui') {
+    $stored = get_option(idml_get_translations_option_name($namespace), []);
+    return is_array($stored) ? $stored : [];
+  }
+}
+
+if (!function_exists('idml_get_dictionary')) {
+  /**
+   * Diccionario efectivo: defaults del JSON pisados, clave por clave e idioma
+   * por idioma, por los overrides del dashboard.
+   */
+  function idml_get_dictionary($namespace = 'ui') {
+    static $cache = [];
+
+    $namespace = sanitize_key((string) $namespace);
+    if ($namespace === '') {
+      $namespace = 'ui';
+    }
+
+    if (isset($cache[$namespace])) {
+      return $cache[$namespace];
+    }
+
+    $dictionary = idml_get_dictionary_defaults($namespace);
+
+    foreach (idml_get_dictionary_overrides($namespace) as $key => $row) {
+      if (!is_array($row)) {
+        continue;
+      }
+      foreach ($row as $lang => $value) {
+        if (is_string($value) && $value !== '') {
+          $dictionary[$key][$lang] = $value;
+        }
+      }
+    }
+
+    $cache[$namespace] = $dictionary;
+
+    return $cache[$namespace];
+  }
+}
+
 if (!function_exists('idml_t')) {
   function idml_t($key, $lang = null, $namespace = 'ui') {
     $key = trim((string) $key);
@@ -209,15 +218,35 @@ if (!function_exists('idml_t')) {
     $dictionary = idml_get_dictionary($namespace);
     $entry = isset($dictionary[$key]) && is_array($dictionary[$key]) ? $dictionary[$key] : [];
 
-    if (isset($entry[$lang]) && is_string($entry[$lang])) {
+    if (isset($entry[$lang]) && is_string($entry[$lang]) && $entry[$lang] !== '') {
       return $entry[$lang];
     }
 
-    if (isset($entry[$default_lang]) && is_string($entry[$default_lang])) {
+    if (isset($entry[$default_lang]) && is_string($entry[$default_lang]) && $entry[$default_lang] !== '') {
       return $entry[$default_lang];
     }
 
     return $key;
+  }
+}
+
+if (!function_exists('idml_t_vars')) {
+  /**
+   * idml_t() + reemplazo de placeholders {nombre} (ej. "© {year} {site}").
+   * Los valores se insertan tal cual: escapar el resultado al imprimir.
+   */
+  function idml_t_vars($key, array $vars = [], $lang = null, $namespace = 'ui') {
+    $text = idml_t($key, $lang, $namespace);
+    if (!$vars) {
+      return $text;
+    }
+
+    $map = [];
+    foreach ($vars as $name => $value) {
+      $map['{' . $name . '}'] = (string) $value;
+    }
+
+    return strtr($text, $map);
   }
 }
 

@@ -30,7 +30,7 @@ $current_lang = function_exists('idml_get_current_language') ? idml_get_current_
     <?php endif; ?>
   </div>
 
-  <nav class="site-nav" aria-label="<?php esc_attr_e('Primary', 'intelindev'); ?>">
+  <nav class="site-nav" aria-label="<?php echo esc_attr(idml_t('nav.primary_label')); ?>">
     <?php
     wp_nav_menu([
       'theme_location' => 'primary',
@@ -47,7 +47,7 @@ $current_lang = function_exists('idml_get_current_language') ? idml_get_current_
   // diferencia de Sanasana, este theme no tiene un portal/login fijo al que
   // apuntar por defecto, así que sin URL configurada simplemente no se imprime).
   $header_cta_url  = function_exists('intelindev_get_header_setting') ? trim((string) intelindev_get_header_setting('cta_url', '')) : '';
-  $header_cta_text = function_exists('intelindev_get_header_setting') ? trim((string) intelindev_get_header_setting('cta_text', '')) : '';
+  $header_cta_text = function_exists('intelindev_get_header_cta_text') ? intelindev_get_header_cta_text($current_lang) : '';
   if ($header_cta_url !== '' && preg_match('#^https?://#i', $header_cta_url) && $header_cta_text !== '') :
   ?>
     <a href="<?php echo esc_url($header_cta_url); ?>" class="header-cta"><?php echo esc_html($header_cta_text); ?></a>

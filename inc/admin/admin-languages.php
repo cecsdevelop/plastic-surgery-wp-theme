@@ -38,7 +38,7 @@ function idml_languages_admin_page() {
                     <th><label for="idml_languages">Códigos de idioma (ej: es,en,pt)</label></th>
                     <td>
                         <input type="text" id="idml_languages" name="idml_languages" value="<?php echo esc_attr(implode(',', $langs)); ?>" class="regular-text" />
-                        <p class="description">Separados por coma. Deben coincidir con los códigos usados en el JSON de traducciones.</p>
+                        <p class="description">Separados por coma. Cada idioma agrega una columna en Apariencia → Traducciones.</p>
                     </td>
                 </tr>
             </table>

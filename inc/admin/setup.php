@@ -15,7 +15,7 @@ add_action('after_setup_theme', function () {
   add_theme_support('editor-styles');
 
   register_nav_menus([
-    'primary' => __('Primary Menu', 'intelindev'),
-    'footer' => __('Footer Menu', 'intelindev'),
+    'primary' => __('Menú principal', 'intelindev'),
+    'footer'  => __('Menú del footer', 'intelindev'),
   ]);
 });

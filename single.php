@@ -9,7 +9,12 @@ get_header();
       <time class="entry-date" datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
       <div class="entry-content"><?php the_content(); ?></div>
     </article>
-    <?php the_post_navigation(); ?>
+    <?php
+    the_post_navigation([
+      'screen_reader_text' => esc_html(idml_t('nav.post_navigation_label')),
+      'aria_label'         => idml_t('nav.post_navigation_label'),
+    ]);
+    ?>
   <?php endwhile; ?>
 </main>
 <?php

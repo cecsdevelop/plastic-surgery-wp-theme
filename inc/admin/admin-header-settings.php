@@ -99,10 +99,24 @@ function intelindev_header_settings_sanitize($input) {
     $existing = get_option('intelindev_header_settings', []);
     $out      = is_array($existing) ? $existing : [];
 
-    // CTA: texto/URL vacíos = sin CTA (ver header.php). Un texto override es
-    // global (mismo texto para todos los idiomas del sitio).
-    if (!empty($input['cta_text'])) {
-        $out['cta_text'] = sanitize_text_field($input['cta_text']);
+    // CTA: texto por idioma (array lang => texto, solo los no vacíos). Sin
+    // texto en ningún idioma o sin URL = sin CTA (ver header.php).
+    $cta_text = [];
+    $raw_text = $input['cta_text'] ?? [];
+    if (is_string($raw_text)) {
+        // Valor legacy (texto global): se asigna al idioma por defecto.
+        $raw_text = [idml_get_default_language() => $raw_text];
+    }
+    if (is_array($raw_text)) {
+        foreach (idml_get_languages() as $lang) {
+            $text = sanitize_text_field((string) ($raw_text[$lang] ?? ''));
+            if ($text !== '') {
+                $cta_text[$lang] = $text;
+            }
+        }
+    }
+    if ($cta_text) {
+        $out['cta_text'] = $cta_text;
     } else {
         unset($out['cta_text']);
     }
@@ -150,6 +164,34 @@ if (!function_exists('intelindev_get_header_setting')) {
     }
 }
 
+/**
+ * Texto del CTA para un idioma: el propio, si no el del idioma por defecto,
+ * si no el primero cargado. '' = sin texto en ningún idioma.
+ *
+ * @param string|null $lang null = idioma actual del request.
+ */
+if (!function_exists('intelindev_get_header_cta_text')) {
+    function intelindev_get_header_cta_text($lang = null): string {
+        $texts = intelindev_get_header_setting('cta_text', []);
+        if (is_string($texts)) {
+            return trim($texts); // valor legacy global, previo al texto por idioma
+        }
+        if (!is_array($texts) || !$texts) {
+            return '';
+        }
+
+        $lang = $lang !== null ? idml_normalize_lang($lang) : idml_get_current_language();
+        foreach ([$lang, idml_get_default_language()] as $candidate) {
+            if (isset($texts[$candidate]) && is_string($texts[$candidate]) && trim($texts[$candidate]) !== '') {
+                return trim($texts[$candidate]);
+            }
+        }
+
+        $first = trim((string) reset($texts));
+        return $first;
+    }
+}
+
 /* ------------------------------------------------------------------ */
 /* Page HTML                                                            */
 /* ------------------------------------------------------------------ */
@@ -171,14 +213,23 @@ function intelindev_header_settings_page_html() {
             <?php settings_fields('intelindev_header_settings_group'); ?>
 
             <h2><?php esc_html_e('CTA — botón del header', 'intelindev'); ?></h2>
-            <p class="description"><?php esc_html_e('Ambos campos vacíos = sin CTA en el header.', 'intelindev'); ?></p>
+            <p class="description"><?php esc_html_e('Sin URL o sin texto en ningún idioma = sin CTA en el header. Si un idioma queda vacío se usa el texto del idioma por defecto.', 'intelindev'); ?></p>
             <table class="form-table" role="presentation">
+                <?php
+                $cta_texts = $opts['cta_text'] ?? [];
+                if (is_string($cta_texts)) {
+                    $cta_texts = [idml_get_default_language() => $cta_texts];
+                }
+                foreach (idml_get_languages() as $lang) :
+                    $field_id = 'intelindev_cta_text_' . $lang;
+                ?>
                 <tr>
-                    <th scope="row"><label for="intelindev_cta_text"><?php esc_html_e('Texto', 'intelindev'); ?></label></th>
+                    <th scope="row"><label for="<?php echo esc_attr($field_id); ?>"><?php printf(esc_html__('Texto (%s)', 'intelindev'), esc_html(strtoupper($lang))); ?></label></th>
                     <td>
-                        <input type="text" id="intelindev_cta_text" name="intelindev_header_settings[cta_text]" value="<?php echo esc_attr($opts['cta_text'] ?? ''); ?>" class="regular-text" placeholder="<?php esc_attr_e('Contactanos', 'intelindev'); ?>" />
+                        <input type="text" id="<?php echo esc_attr($field_id); ?>" name="intelindev_header_settings[cta_text][<?php echo esc_attr($lang); ?>]" value="<?php echo esc_attr((string) ($cta_texts[$lang] ?? '')); ?>" class="regular-text" />
                     </td>
                 </tr>
+                <?php endforeach; ?>
                 <tr>
                     <th scope="row"><label for="intelindev_cta_url"><?php esc_html_e('URL', 'intelindev'); ?></label></th>
                     <td>
