@@ -42,14 +42,13 @@ function idml_sanitize_translation_key($key) {
     return trim((string) $key, '._-');
 }
 
-function idml_translations_handle_save() {
-    if (!isset($_POST['idml_translations_nonce'])) return;
-    if (!current_user_can('manage_options')) return;
-    check_admin_referer('idml_translations_save', 'idml_translations_nonce');
-
+/**
+ * Convierte los arrays del formulario (idml_keys[i], idml_val[lang][i]) en el
+ * mapa de overrides clave => [lang => texto] y lo guarda. Sin redirect: la
+ * usa el handler del POST y los tests.
+ */
+function idml_translations_save(array $keys, array $vals): array {
     $langs = idml_get_languages();
-    $keys  = isset($_POST['idml_keys']) && is_array($_POST['idml_keys']) ? wp_unslash($_POST['idml_keys']) : [];
-    $vals  = isset($_POST['idml_val']) && is_array($_POST['idml_val']) ? wp_unslash($_POST['idml_val']) : [];
 
     $overrides = [];
     foreach ($keys as $i => $raw_key) {
@@ -69,9 +68,45 @@ function idml_translations_handle_save() {
     }
 
     update_option(idml_get_translations_option_name('ui'), $overrides, true);
+    return $overrides;
+}
+
+function idml_translations_handle_save() {
+    if (!isset($_POST['idml_translations_nonce'])) return;
+    if (!current_user_can('manage_options')) return;
+    check_admin_referer('idml_translations_save', 'idml_translations_nonce');
+
+    idml_translations_save(
+        isset($_POST['idml_keys']) && is_array($_POST['idml_keys']) ? wp_unslash($_POST['idml_keys']) : [],
+        isset($_POST['idml_val']) && is_array($_POST['idml_val']) ? wp_unslash($_POST['idml_val']) : []
+    );
 
     wp_safe_redirect(add_query_arg(['page' => 'idml-translations', 'updated' => '1'], admin_url('themes.php')));
     exit;
+}
+
+/**
+ * Título legible del grupo de una clave (la parte antes del primer punto).
+ * Prefijos desconocidos (ej. "hero" de un Componente {t:hero.x}) se muestran
+ * capitalizados; claves sin punto van a "General". El orden del array es el
+ * orden de las secciones.
+ */
+function idml_translation_group_labels(): array {
+    return apply_filters('idml_translation_group_labels', [
+        'menu'     => __('Menú', 'intelindev'),
+        'nav'      => __('Navegación', 'intelindev'),
+        'title'    => __('Títulos del navegador', 'intelindev'),
+        'archive'  => __('Listados', 'intelindev'),
+        'footer'   => __('Footer', 'intelindev'),
+        'cta'      => __('CTA', 'intelindev'),
+        'language' => __('Idiomas', 'intelindev'),
+        'general'  => __('General', 'intelindev'),
+    ]);
+}
+
+function idml_translation_group_of(string $key): string {
+    $dot = strpos($key, '.');
+    return $dot === false ? 'general' : substr($key, 0, $dot);
 }
 
 function idml_translations_admin_page() {
@@ -80,78 +115,197 @@ function idml_translations_admin_page() {
     $langs     = idml_get_languages();
     $defaults  = idml_get_dictionary_defaults('ui');
     $overrides = idml_get_dictionary_overrides('ui');
+    $labels    = idml_translation_group_labels();
 
-    // Unión de claves del theme + del admin, ordenadas para que sea fácil
-    // ubicar una (ej. todas las "footer.*" juntas).
+    // Unión de claves del theme + del admin, agrupadas por prefijo. Grupos
+    // conocidos en el orden de idml_translation_group_labels(), el resto
+    // alfabético al final.
     $keys = array_unique(array_merge(array_keys($defaults), array_keys($overrides)));
     sort($keys, SORT_STRING);
+    $groups = [];
+    foreach ($keys as $key) {
+        $groups[idml_translation_group_of($key)][] = $key;
+    }
+    uksort($groups, function ($a, $b) use ($labels) {
+        $ia = array_search($a, array_keys($labels), true);
+        $ib = array_search($b, array_keys($labels), true);
+        if ($ia === false && $ib === false) return strcmp($a, $b);
+        if ($ia === false) return 1;
+        if ($ib === false) return -1;
+        return $ia <=> $ib;
+    });
 
     if (isset($_GET['updated'])) {
         echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Traducciones guardadas.', 'intelindev') . '</p></div>';
     }
+
+    $origin_badge = function (string $key) use ($defaults, $overrides): string {
+        if (!isset($defaults[$key])) {
+            return '<span class="idml-badge idml-badge--own">' . esc_html__('propia', 'intelindev') . '</span>';
+        }
+        if (!empty($overrides[$key])) {
+            return '<span class="idml-badge idml-badge--edited">' . esc_html__('editada', 'intelindev') . '</span>';
+        }
+        return '<span class="idml-badge idml-badge--default">' . esc_html__('default', 'intelindev') . '</span>';
+    };
     ?>
-    <div class="wrap">
+    <style>
+        .idml-translations .idml-toolbar { display: flex; gap: 12px; align-items: center; margin: 12px 0; }
+        .idml-translations .idml-toolbar input[type="search"] { min-width: 320px; }
+        .idml-translations details.idml-group { background: #fff; border: 1px solid #dcdcde; border-radius: 6px; margin: 0 0 12px; }
+        .idml-translations details.idml-group > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 10px; }
+        .idml-translations details.idml-group > summary::-webkit-details-marker { display: none; }
+        .idml-translations details.idml-group > summary::before { content: "▸"; color: #8c8f94; }
+        .idml-translations details.idml-group[open] > summary::before { content: "▾"; }
+        .idml-translations details.idml-group > summary .idml-count { font-weight: 400; color: #646970; }
+        .idml-translations details.idml-group table { border: 0; border-top: 1px solid #dcdcde; }
+        .idml-translations .idml-badge { display: inline-block; font-size: 11px; line-height: 18px; padding: 0 7px; border-radius: 9px; white-space: nowrap; }
+        .idml-translations .idml-badge--default { background: #f0f0f1; color: #646970; }
+        .idml-translations .idml-badge--edited { background: #2271b1; color: #fff; }
+        .idml-translations .idml-badge--own { background: #00a32a; color: #fff; }
+        .idml-translations .idml-col-key { width: 34%; }
+        .idml-translations .idml-col-origin { width: 80px; }
+        .idml-translations tr.idml-hidden, .idml-translations details.idml-hidden { display: none; }
+    </style>
+    <div class="wrap idml-translations">
         <h1><?php esc_html_e('Traducciones UI', 'intelindev'); ?></h1>
         <p class="description">
-            <?php esc_html_e('Textos fijos del sitio (menús, botones, avisos, pie de página). El texto en gris es el default del theme: escribí para reemplazarlo, vaciá el campo para volver a él. Las claves que trae el theme no se pueden eliminar, solo sobrescribir; las que agregues vos se eliminan borrando la clave y guardando.', 'intelindev'); ?>
+            <?php esc_html_e('Textos fijos del sitio, agrupados por el prefijo de la clave (menu.*, footer.*…). El texto en gris es el default del theme: escribí para reemplazarlo, vaciá el campo para volver a él. Las claves que trae el theme no se pueden eliminar, solo sobrescribir; las que agregues vos se eliminan borrando la clave y guardando. Una clave nueva cae en su grupo al guardar (ej. menu.blog → Menú); un prefijo nuevo crea su propio grupo.', 'intelindev'); ?>
         </p>
         <form method="post">
             <?php wp_nonce_field('idml_translations_save', 'idml_translations_nonce'); ?>
-            <table class="widefat fixed striped" id="idml-translations-table">
-                <thead>
-                    <tr>
-                        <th><?php esc_html_e('Clave', 'intelindev'); ?></th>
-                        <?php foreach ($langs as $lang): ?><th><?php echo esc_html(strtoupper($lang)); ?></th><?php endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 0; foreach ($keys as $key): ?>
-                    <tr>
-                        <td>
-                            <input type="text" name="idml_keys[<?php echo (int) $i; ?>]" value="<?php echo esc_attr($key); ?>" class="regular-text"<?php echo isset($defaults[$key]) ? ' readonly' : ''; ?> />
-                        </td>
-                        <?php foreach ($langs as $lang): ?>
-                        <td>
-                            <input type="text"
-                                   name="idml_val[<?php echo esc_attr($lang); ?>][<?php echo (int) $i; ?>]"
-                                   value="<?php echo esc_attr($overrides[$key][$lang] ?? ''); ?>"
-                                   placeholder="<?php echo esc_attr($defaults[$key][$lang] ?? ''); ?>"
-                                   class="regular-text" />
-                        </td>
-                        <?php endforeach; ?>
-                    </tr>
-                    <?php $i++; endforeach; ?>
-                    <tr class="idml-new-row">
-                        <td><input type="text" name="idml_keys[<?php echo (int) $i; ?>]" value="" class="regular-text" placeholder="<?php esc_attr_e('nueva.clave', 'intelindev'); ?>" /></td>
-                        <?php foreach ($langs as $lang): ?>
-                        <td><input type="text" name="idml_val[<?php echo esc_attr($lang); ?>][<?php echo (int) $i; ?>]" value="" class="regular-text" /></td>
-                        <?php endforeach; ?>
-                    </tr>
-                </tbody>
-            </table>
-            <p>
-                <button type="button" class="button" id="idml-add-row"><?php esc_html_e('+ Agregar fila', 'intelindev'); ?></button>
-            </p>
+
+            <div class="idml-toolbar">
+                <input type="search" id="idml-search" placeholder="<?php esc_attr_e('Buscar por clave o texto…', 'intelindev'); ?>" />
+                <button type="button" class="button" id="idml-expand"><?php esc_html_e('Expandir todo', 'intelindev'); ?></button>
+                <button type="button" class="button" id="idml-collapse"><?php esc_html_e('Contraer todo', 'intelindev'); ?></button>
+            </div>
+
+            <?php $i = 0; foreach ($groups as $prefix => $group_keys) :
+                $edited = count(array_filter($group_keys, fn($k) => !empty($overrides[$k])));
+                $label  = $labels[$prefix] ?? ucfirst($prefix);
+            ?>
+            <details class="idml-group" data-group="<?php echo esc_attr($prefix); ?>" open>
+                <summary>
+                    <span><?php echo esc_html($label); ?></span>
+                    <code><?php echo esc_html($prefix === 'general' ? '' : $prefix . '.*'); ?></code>
+                    <span class="idml-count"><?php printf(esc_html__('%1$d claves · %2$d editadas', 'intelindev'), count($group_keys), $edited); ?></span>
+                </summary>
+                <table class="widefat fixed striped">
+                    <thead>
+                        <tr>
+                            <th class="idml-col-key"><?php esc_html_e('Clave', 'intelindev'); ?></th>
+                            <th class="idml-col-origin"><?php esc_html_e('Origen', 'intelindev'); ?></th>
+                            <?php foreach ($langs as $lang): ?><th><?php echo esc_html(strtoupper($lang)); ?></th><?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($group_keys as $key): ?>
+                        <tr class="idml-row">
+                            <td><input type="text" name="idml_keys[<?php echo (int) $i; ?>]" value="<?php echo esc_attr($key); ?>" class="regular-text"<?php echo isset($defaults[$key]) ? ' readonly' : ''; ?> /></td>
+                            <td><?php echo $origin_badge($key); ?></td>
+                            <?php foreach ($langs as $lang): ?>
+                            <td>
+                                <input type="text"
+                                       name="idml_val[<?php echo esc_attr($lang); ?>][<?php echo (int) $i; ?>]"
+                                       value="<?php echo esc_attr($overrides[$key][$lang] ?? ''); ?>"
+                                       placeholder="<?php echo esc_attr($defaults[$key][$lang] ?? ''); ?>"
+                                       class="regular-text" />
+                            </td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php $i++; endforeach; ?>
+                    </tbody>
+                </table>
+            </details>
+            <?php endforeach; ?>
+
+            <details class="idml-group idml-group--new" open>
+                <summary><span><?php esc_html_e('Nuevas claves', 'intelindev'); ?></span><span class="idml-count"><?php esc_html_e('se ubican en su grupo al guardar', 'intelindev'); ?></span></summary>
+                <table class="widefat fixed striped" id="idml-translations-table">
+                    <thead>
+                        <tr>
+                            <th class="idml-col-key"><?php esc_html_e('Clave', 'intelindev'); ?></th>
+                            <th class="idml-col-origin"></th>
+                            <?php foreach ($langs as $lang): ?><th><?php echo esc_html(strtoupper($lang)); ?></th><?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="idml-new-row">
+                            <td><input type="text" name="idml_keys[<?php echo (int) $i; ?>]" value="" class="regular-text" placeholder="<?php esc_attr_e('grupo.clave', 'intelindev'); ?>" /></td>
+                            <td></td>
+                            <?php foreach ($langs as $lang): ?>
+                            <td><input type="text" name="idml_val[<?php echo esc_attr($lang); ?>][<?php echo (int) $i; ?>]" value="" class="regular-text" /></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="padding: 0 14px 12px"><button type="button" class="button" id="idml-add-row"><?php esc_html_e('+ Agregar fila', 'intelindev'); ?></button></p>
+            </details>
+
             <p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e('Guardar cambios', 'intelindev'); ?>" /></p>
         </form>
     </div>
     <script>
     (function () {
+        var wrap = document.querySelector('.idml-translations');
+        if (!wrap) return;
+
+        // Fila nueva
         var table = document.getElementById('idml-translations-table');
         var button = document.getElementById('idml-add-row');
-        if (!table || !button) return;
         var next = <?php echo (int) $i + 1; ?>;
-        button.addEventListener('click', function () {
-            var template = table.querySelector('tr.idml-new-row');
-            var row = template.cloneNode(true);
-            row.querySelectorAll('input').forEach(function (input) {
-                input.value = '';
-                input.name = input.name.replace(/\[\d+\]$/, '[' + next + ']');
+        if (table && button) {
+            button.addEventListener('click', function () {
+                var template = table.querySelector('tr.idml-new-row');
+                var row = template.cloneNode(true);
+                row.querySelectorAll('input').forEach(function (input) {
+                    input.value = '';
+                    input.name = input.name.replace(/\[\d+\]$/, '[' + next + ']');
+                });
+                template.parentNode.appendChild(row);
+                row.querySelector('input').focus();
+                next++;
             });
-            template.parentNode.appendChild(row);
-            row.querySelector('input').focus();
-            next++;
+        }
+
+        // Buscador: filtra filas por clave o texto (valor o default); oculta grupos vacíos.
+        var search = document.getElementById('idml-search');
+        var groups = wrap.querySelectorAll('details.idml-group:not(.idml-group--new)');
+        if (search) {
+            search.addEventListener('input', function () {
+                var q = search.value.trim().toLowerCase();
+                groups.forEach(function (group) {
+                    var visible = 0;
+                    group.querySelectorAll('tr.idml-row').forEach(function (row) {
+                        var text = Array.prototype.map.call(row.querySelectorAll('input'), function (input) {
+                            return (input.value + ' ' + (input.placeholder || '')).toLowerCase();
+                        }).join(' ');
+                        var match = q === '' || text.indexOf(q) !== -1;
+                        row.classList.toggle('idml-hidden', !match);
+                        if (match) visible++;
+                    });
+                    group.classList.toggle('idml-hidden', visible === 0);
+                    if (q !== '' && visible > 0) group.open = true;
+                });
+            });
+        }
+
+        // Expandir / contraer, con memoria por grupo en localStorage.
+        var KEY = 'idml-translations-collapsed';
+        var collapsed = [];
+        try { collapsed = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+        groups.forEach(function (group) {
+            if (collapsed.indexOf(group.dataset.group) !== -1) group.open = false;
+            group.addEventListener('toggle', function () {
+                var list = Array.prototype.filter.call(groups, function (g) { return !g.open; }).map(function (g) { return g.dataset.group; });
+                try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {}
+            });
         });
+        var setAll = function (open) { groups.forEach(function (g) { g.open = open; }); };
+        var expand = document.getElementById('idml-expand'), collapse = document.getElementById('idml-collapse');
+        if (expand) expand.addEventListener('click', function () { setAll(true); });
+        if (collapse) collapse.addEventListener('click', function () { setAll(false); });
     })();
     </script>
     <?php
