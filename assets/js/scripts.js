@@ -27,23 +27,24 @@
     applyScrolled();
   }
 
-  // Modal del CTA (<dialog> nativo). El contenido (script de CRM, HTML, shortcode)
-  // viene en un <template> inerte y se inyecta en el primer clic: los <script>
-  // se re-crean para que el navegador los ejecute recién ahí, así el JS del CRM
-  // no carga hasta que alguien abre el modal.
-  var modalLoaded = false;
+  // Modal del CTA (<dialog> nativo). El contenido (formulario, script de CRM,
+  // HTML, shortcode) NO viene en la página: se pide al endpoint REST
+  // (data-cta-modal-src) en el primer clic y se inyecta re-creando los <script>
+  // para que ejecuten recién ahí. Así ni el HTML ni el JS de terceros cargan
+  // hasta que alguien abre el modal, y el token antispam del formulario es fresco.
+  var modalState = null; // null | 'loading' | 'loaded'
 
-  function loadModalContent(dialog) {
-    if (modalLoaded) return;
-    modalLoaded = true;
-
-    var template = document.getElementById('header-cta-modal-template');
-    var target = dialog.querySelector('[data-cta-modal-content]');
-    if (!template || !target) return;
-
-    var fragment = document.importNode(template.content, true);
-    var scripts = fragment.querySelectorAll('script');
-    Array.prototype.forEach.call(scripts, function (old) {
+  function injectHtml(target, html) {
+    var fragment = document.createRange().createContextualFragment(html);
+    // createContextualFragment deja los <script> inertes: se re-crean para que corran.
+    Array.prototype.forEach.call(fragment.querySelectorAll('script'), function (old) {
+      // Un script externo ya presente en el documento (ej. api.js de Turnstile
+      // cargado por un formulario de la página) no se carga dos veces.
+      var src = old.getAttribute('src');
+      if (src && document.querySelector('script[src="' + src.replace(/"/g, '\\"') + '"]')) {
+        old.parentNode.removeChild(old);
+        return;
+      }
       var script = document.createElement('script');
       Array.prototype.forEach.call(old.attributes, function (attr) {
         script.setAttribute(attr.name, attr.value);
@@ -51,7 +52,33 @@
       script.textContent = old.textContent;
       old.parentNode.replaceChild(script, old);
     });
+    target.innerHTML = '';
     target.appendChild(fragment);
+    if (window.intelindevTurnstileRender) window.intelindevTurnstileRender();
+  }
+
+  function loadModalContent(dialog) {
+    if (modalState) return;
+    var target = dialog.querySelector('[data-cta-modal-content]');
+    var src = dialog.getAttribute('data-cta-modal-src');
+    if (!target || !src || !window.fetch) return;
+
+    modalState = 'loading';
+    target.textContent = dialog.getAttribute('data-loading') || '';
+
+    fetch(src, { headers: { 'Accept': 'application/json' }, credentials: 'same-origin', cache: 'no-store' })
+      .then(function (response) { return response.json(); })
+      .then(function (body) {
+        if (!body || typeof body.html !== 'string' || body.html === '') throw new Error('empty');
+        injectHtml(target, body.html);
+        modalState = 'loaded';
+        var focusable = target.querySelector('input, select, textarea, button, a[href]');
+        if (focusable) focusable.focus();
+      })
+      .catch(function () {
+        modalState = null; // permite reintentar en el próximo clic
+        target.textContent = dialog.getAttribute('data-error') || '';
+      });
   }
 
   document.addEventListener('click', function (event) {
@@ -86,6 +113,17 @@
     if (open) open.close();
   });
 })();
+
+// Cloudflare Turnstile: api.js se carga con ?onload=intelindevTurnstileRender&render=explicit
+// solo donde hay un formulario protegido; esta función renderiza los widgets que
+// todavía no lo están (también los que llegan después, ej. al abrir el modal).
+window.intelindevTurnstileRender = function () {
+  if (!window.turnstile) return;
+  Array.prototype.forEach.call(document.querySelectorAll('.cf-turnstile:not([data-widget-id])'), function (el) {
+    var id = window.turnstile.render(el, { sitekey: el.getAttribute('data-sitekey'), language: el.getAttribute('data-language') || 'auto' });
+    if (id) el.setAttribute('data-widget-id', id);
+  });
+};
 
 // Formularios ([form slug="…"]): envío por fetch al endpoint REST sin recargar,
 // errores por campo y mensaje de éxito. Sin JS el formulario no envía (el
@@ -146,6 +184,9 @@
         }
         showErrors(form, body.errors);
         setMessage(form, body.message || form.getAttribute('data-error') || '', true);
+        // El token de Turnstile es de un solo uso: nuevo desafío para reintentar.
+        var widget = form.querySelector('.cf-turnstile[data-widget-id]');
+        if (widget && window.turnstile) window.turnstile.reset(widget.getAttribute('data-widget-id'));
       })
       .catch(function () {
         setMessage(form, form.getAttribute('data-error') || '', true);

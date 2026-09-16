@@ -95,6 +95,13 @@ class FormRenderer
   <input type="hidden" name="_sig" value="<?php echo esc_attr(self::sign($id, $ts)); ?>">
   <input type="hidden" name="_page" value="<?php echo esc_url(self::current_url()); ?>">
   <div class="intelindev-form__hp" aria-hidden="true"><label>Website <input type="text" name="_website" tabindex="-1" autocomplete="off"></label></div>
+<?php if (FormsController::form_uses_turnstile($id)) : ?>
+  <div class="intelindev-form__captcha">
+    <div class="cf-turnstile" data-sitekey="<?php echo esc_attr((string) (FormsController::get_global_settings()['turnstile_site_key'] ?? '')); ?>" data-language="<?php echo esc_attr($lang); ?>"></div>
+    <span class="intelindev-form__error" data-error-for="_captcha" role="alert"></span>
+  </div>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=intelindevTurnstileRender&render=explicit" async defer></script>
+<?php endif; ?>
   <p class="intelindev-form__actions"><button type="submit" class="intelindev-form__submit"><?php echo esc_html($button); ?></button></p>
   <div class="intelindev-form__message" role="status" aria-live="polite"></div>
 </form>

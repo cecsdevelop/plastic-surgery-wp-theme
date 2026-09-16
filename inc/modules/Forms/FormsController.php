@@ -28,6 +28,8 @@ class FormsController extends BaseController
     public const NONCE_FIELD   = 'intelindev_form_nonce';
     public const FIELD         = 'intelindev_form'; // name= raíz del formulario de edición
     public const SHORTCODE     = 'form';
+    public const OPTION        = 'intelindev_forms_settings'; // ajustes globales (Turnstile)
+    public const SETTINGS_PAGE = 'intelindev-forms-settings';
 
     public const TYPES = ['text', 'email', 'tel', 'textarea', 'select', 'checkbox', 'hidden'];
     /** HTML permitido en etiquetas (link a política de privacidad, énfasis). */
@@ -52,6 +54,8 @@ class FormsController extends BaseController
         add_filter('default_hidden_meta_boxes', [$this, 'show_slug_meta_box'], 10, 2);
         add_action('save_post_' . self::POST_TYPE, [$this, 'save']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin']);
+        add_action('admin_menu', [$this, 'add_settings_page']);
+        add_action('admin_init', [$this, 'register_settings']);
 
         add_filter('manage_' . self::POST_TYPE . '_posts_columns', [$this, 'columns']);
         add_action('manage_' . self::POST_TYPE . '_posts_custom_column', [$this, 'render_column'], 10, 2);
@@ -124,6 +128,78 @@ class FormsController extends BaseController
         if ($slug === '') return null;
         $post = get_page_by_path($slug, OBJECT, self::POST_TYPE);
         return $post instanceof WP_Post && $post->post_status === 'publish' ? $post : null;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Ajustes globales (Cloudflare Turnstile)                              */
+    /* ------------------------------------------------------------------ */
+
+    public static function get_global_settings(): array
+    {
+        $opts = get_option(self::OPTION, []);
+        return is_array($opts) ? $opts : [];
+    }
+
+    /** true si hay site key y secret configurados. */
+    public static function turnstile_available(): bool
+    {
+        $opts = self::get_global_settings();
+        return trim((string) ($opts['turnstile_site_key'] ?? '')) !== '' && trim((string) ($opts['turnstile_secret'] ?? '')) !== '';
+    }
+
+    /** true si este formulario debe mostrar y verificar Turnstile. */
+    public static function form_uses_turnstile(int $form_id): bool
+    {
+        return !empty(self::get_settings($form_id)['captcha']) && self::turnstile_available();
+    }
+
+    public function add_settings_page(): void
+    {
+        add_submenu_page('edit.php?post_type=' . self::POST_TYPE, __('Ajustes de formularios', 'intelindev'), __('Ajustes', 'intelindev'), 'manage_options', self::SETTINGS_PAGE, [$this, 'render_settings_page']);
+    }
+
+    public function register_settings(): void
+    {
+        register_setting(self::OPTION . '_group', self::OPTION, [$this, 'sanitize_global_settings']);
+    }
+
+    public function sanitize_global_settings($input): array
+    {
+        $input = is_array($input) ? $input : [];
+        return [
+            'turnstile_site_key' => sanitize_text_field((string) ($input['turnstile_site_key'] ?? '')),
+            'turnstile_secret'   => sanitize_text_field((string) ($input['turnstile_secret'] ?? '')),
+        ];
+    }
+
+    public function render_settings_page(): void
+    {
+        if (!current_user_can('manage_options')) return;
+        $opts = self::get_global_settings();
+        if (isset($_GET['settings-updated'])) {
+            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Ajustes guardados.', 'intelindev') . '</p></div>';
+        }
+        ?>
+        <div class="wrap">
+            <h1><?php esc_html_e('Ajustes de formularios', 'intelindev'); ?></h1>
+            <form action="options.php" method="post">
+                <?php settings_fields(self::OPTION . '_group'); ?>
+                <h2><?php esc_html_e('Cloudflare Turnstile (antispam con verificación)', 'intelindev'); ?></h2>
+                <p class="description"><?php printf(esc_html__('Gratis y sin cookies de Google. Creá un widget en %s (tipo "Managed"), pegá sus claves y activá "Proteger con Turnstile" en cada formulario que lo necesite. El script de Cloudflare se carga solo donde hay un formulario protegido.', 'intelindev'), '<a href="https://dash.cloudflare.com/?to=/:account/turnstile" target="_blank" rel="noopener">Cloudflare → Turnstile</a>'); ?></p>
+                <table class="form-table" role="presentation">
+                    <tr>
+                        <th scope="row"><label for="intelindev_turnstile_site_key"><?php esc_html_e('Site key', 'intelindev'); ?></label></th>
+                        <td><input type="text" id="intelindev_turnstile_site_key" name="<?php echo esc_attr(self::OPTION); ?>[turnstile_site_key]" value="<?php echo esc_attr((string) ($opts['turnstile_site_key'] ?? '')); ?>" class="regular-text code" autocomplete="off" /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="intelindev_turnstile_secret"><?php esc_html_e('Secret key', 'intelindev'); ?></label></th>
+                        <td><input type="password" id="intelindev_turnstile_secret" name="<?php echo esc_attr(self::OPTION); ?>[turnstile_secret]" value="<?php echo esc_attr((string) ($opts['turnstile_secret'] ?? '')); ?>" class="regular-text code" autocomplete="off" /></td>
+                    </tr>
+                </table>
+                <?php submit_button(__('Guardar', 'intelindev')); ?>
+            </form>
+        </div>
+        <?php
     }
 
     /* ------------------------------------------------------------------ */
@@ -306,6 +382,15 @@ class FormsController extends BaseController
                 </td>
             </tr>
             <tr>
+                <th scope="row"><?php esc_html_e('Turnstile', 'intelindev'); ?></th>
+                <td>
+                    <label><input type="checkbox" name="<?php echo esc_attr($option); ?>[captcha]" value="1"<?php checked(!empty($s['captcha'])); ?> /> <?php esc_html_e('Proteger con Cloudflare Turnstile', 'intelindev'); ?></label>
+                    <?php if (!self::turnstile_available()) : ?>
+                        <p class="description"><?php printf(esc_html__('Sin efecto hasta cargar las claves en %s.', 'intelindev'), '<a href="' . esc_url(admin_url('edit.php?post_type=' . self::POST_TYPE . '&page=' . self::SETTINGS_PAGE)) . '">' . esc_html__('Formularios → Ajustes', 'intelindev') . '</a>'); ?></p>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row"><?php esc_html_e('Guardar envíos', 'intelindev'); ?></th>
                 <td><label><input type="checkbox" name="<?php echo esc_attr($option); ?>[store]" value="1"<?php checked($is_new || !empty($s['store'])); ?> /> <?php esc_html_e('Registrar cada envío en Formularios → Envíos', 'intelindev'); ?></label></td>
             </tr>
@@ -393,6 +478,7 @@ class FormsController extends BaseController
             'redirect'   => $url($input['redirect'] ?? ''),
             'webhook'    => $url($input['webhook'] ?? ''),
             'store'      => !empty($input['store']) ? 1 : 0,
+            'captcha'    => !empty($input['captcha']) ? 1 : 0,
         ];
     }
 
@@ -433,6 +519,9 @@ class FormsController extends BaseController
                     'meta_key' => SubmissionsController::META_FORM, 'meta_value' => (int) $post->ID,
                 ]))->found_posts;
                 echo '<a href="' . esc_url(admin_url('edit.php?post_type=' . SubmissionsController::POST_TYPE . '&intelindev_form=' . (int) $post->ID)) . '">' . (int) $count . '</a>';
+                if ($count > 0 && current_user_can('manage_options')) {
+                    echo ' · <a href="' . esc_url(SubmissionsController::export_url((int) $post->ID)) . '">CSV</a>';
+                }
                 break;
         }
     }

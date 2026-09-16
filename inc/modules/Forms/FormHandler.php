@@ -70,6 +70,9 @@ class FormHandler
         }
 
         [$data, $errors] = $this->validate($form, $params, $lang);
+        if (FormsController::form_uses_turnstile((int) $form->ID) && !$this->verify_turnstile((string) ($params['cf-turnstile-response'] ?? ''))) {
+            $errors['_captcha'] = $t('form.captcha_failed');
+        }
         $errors = (array) apply_filters('intelindev_form_validate', $errors, $data, $form, $params, $lang);
         if ($errors) {
             return new WP_REST_Response(['ok' => false, 'errors' => $errors, 'message' => $t('form.fix_errors')], 422);
@@ -172,6 +175,27 @@ class FormHandler
         }
 
         return [$data, $errors];
+    }
+
+    /** Verifica el token del widget contra Cloudflare. Sin token o sin respuesta = falla. */
+    public function verify_turnstile(string $token): bool
+    {
+        if ($token === '') {
+            return false;
+        }
+        $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+            'timeout' => 8,
+            'body'    => [
+                'secret'   => (string) (FormsController::get_global_settings()['turnstile_secret'] ?? ''),
+                'response' => $token,
+                'remoteip' => $this->client_ip(),
+            ],
+        ]);
+        if ($response instanceof WP_Error) {
+            return false;
+        }
+        $body = json_decode((string) wp_remote_retrieve_body($response), true);
+        return is_array($body) && !empty($body['success']);
     }
 
     private function rate_limited(): bool

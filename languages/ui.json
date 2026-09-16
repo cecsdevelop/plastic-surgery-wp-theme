@@ -90,5 +90,17 @@
     "form.sending": {
         "es": "Enviando…",
         "en": "Sending…"
+    },
+    "cta.modal_loading": {
+        "es": "Cargando…",
+        "en": "Loading…"
+    },
+    "cta.modal_error": {
+        "es": "No se pudo cargar. Intentá de nuevo.",
+        "en": "Could not load. Please try again."
+    },
+    "form.captcha_failed": {
+        "es": "No pudimos verificar que sos humano. Intentá de nuevo.",
+        "en": "We couldn't verify you're human. Please try again."
     }
 }

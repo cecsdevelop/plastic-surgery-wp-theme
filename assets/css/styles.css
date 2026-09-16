@@ -439,3 +439,6 @@
   background: rgba(179, 45, 46, 0.1);
   color: var(--form-error);
 }
+.intelindev-form__captcha {
+  margin: 0 0 16px;
+}

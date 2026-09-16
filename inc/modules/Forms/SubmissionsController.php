@@ -19,6 +19,7 @@ class SubmissionsController extends BaseController
     public const META_FORM    = '_intelindev_submission_form';
     public const META_DATA    = '_intelindev_submission_data';
     public const META_CONTEXT = '_intelindev_submission_context';
+    public const EXPORT_ACTION = 'intelindev_export_entries';
 
     public function register(): void
     {
@@ -28,6 +29,8 @@ class SubmissionsController extends BaseController
         add_action('manage_' . self::POST_TYPE . '_posts_custom_column', [$this, 'render_column'], 10, 2);
         add_action('restrict_manage_posts', [$this, 'filter_dropdown']);
         add_action('pre_get_posts', [$this, 'apply_filter']);
+        add_action('manage_posts_extra_tablenav', [$this, 'export_button']);
+        add_action('admin_post_' . self::EXPORT_ACTION, [$this, 'handle_export']);
     }
 
     public function register_post_type(): void
@@ -84,6 +87,117 @@ class SubmissionsController extends BaseController
         update_post_meta($id, self::META_CONTEXT, $context);
 
         return (int) $id;
+    }
+
+
+    /* ------------------------------------------------------------------ */
+    /* Exportar CSV                                                         */
+    /* ------------------------------------------------------------------ */
+
+    public static function export_url(int $form_id = 0): string
+    {
+        return wp_nonce_url(add_query_arg(['action' => self::EXPORT_ACTION, 'form' => $form_id], admin_url('admin-post.php')), self::EXPORT_ACTION);
+    }
+
+    /** Botón "Exportar CSV" arriba del listado de envíos (respeta el filtro por formulario). */
+    public function export_button(string $which): void
+    {
+        $screen = get_current_screen();
+        if ($which !== 'top' || !$screen || $screen->post_type !== self::POST_TYPE || !current_user_can('manage_options')) return;
+        $form_id = (int) ($_GET['intelindev_form'] ?? 0);
+        echo '<div class="alignleft actions"><a class="button" href="' . esc_url(self::export_url($form_id)) . '">' . esc_html__('Exportar CSV', 'intelindev') . '</a></div>';
+    }
+
+    public function handle_export(): void
+    {
+        if (!current_user_can('manage_options')) wp_die(__('Sin permisos.', 'intelindev'), 403);
+        check_admin_referer(self::EXPORT_ACTION);
+
+        $form_id = (int) ($_GET['form'] ?? 0);
+        $form    = $form_id ? get_post($form_id) : null;
+        $slug    = $form instanceof WP_Post ? $form->post_name : 'todos';
+
+        nocache_headers();
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="envios-' . sanitize_file_name($slug) . '-' . gmdate('Ymd-His') . '.csv"');
+        echo self::build_csv($form_id);
+        exit;
+    }
+
+    /**
+     * CSV de los envíos (todos, o solo los de un formulario). Columnas fijas +
+     * una por campo (etiqueta en el idioma por defecto); con "todos", la unión
+     * de los campos de todos los formularios. Sin exit ni headers: testeable.
+     */
+    public static function build_csv(int $form_id = 0): string
+    {
+        $query = ['post_type' => self::POST_TYPE, 'post_status' => 'publish', 'posts_per_page' => -1, 'orderby' => 'ID', 'order' => 'DESC'];
+        if ($form_id > 0) {
+            $query['meta_key'] = self::META_FORM;
+            $query['meta_value'] = $form_id;
+        }
+        $entries = get_posts($query);
+        $lang    = idml_get_default_language();
+
+        // Columnas de campos: nombre => etiqueta. Orden determinista: por
+        // formulario (ID ascendente) y dentro de cada uno en su orden de campos;
+        // un nombre repetido entre formularios conserva la primera etiqueta.
+        $form_ids = [];
+        foreach ($entries as $entry) {
+            $form_ids[] = (int) get_post_meta($entry->ID, self::META_FORM, true);
+        }
+        $form_ids = array_unique($form_ids);
+        sort($form_ids);
+        $columns = [];
+        foreach ($form_ids as $fid) {
+            foreach (FormsController::get_fields($fid) as $field) {
+                if (!isset($columns[$field['name']])) {
+                    $label = intelindev_resolve_lang_text($field['label'] ?? [], $lang);
+                    $columns[$field['name']] = $label !== '' ? wp_strip_all_tags($label) : $field['name'];
+                }
+            }
+        }
+        foreach ($entries as $entry) {
+            foreach ((array) get_post_meta($entry->ID, self::META_DATA, true) as $name => $value) {
+                if (!isset($columns[$name])) $columns[$name] = (string) $name; // campos que ya no existen en el formulario
+            }
+        }
+
+        $fixed = ['ID', __('Fecha', 'intelindev'), __('Formulario', 'intelindev'), __('Idioma', 'intelindev'), __('Página', 'intelindev'), 'IP', __('Correo enviado', 'intelindev'), __('Webhook', 'intelindev')];
+
+        $out = fopen('php://temp', 'r+');
+        fwrite($out, "\xEF\xBB\xBF"); // BOM: Excel abre UTF-8 con acentos correctos
+        fputcsv($out, array_merge($fixed, array_values($columns)));
+        foreach ($entries as $entry) {
+            $fid     = (int) get_post_meta($entry->ID, self::META_FORM, true);
+            $data    = (array) get_post_meta($entry->ID, self::META_DATA, true);
+            $context = (array) get_post_meta($entry->ID, self::META_CONTEXT, true);
+            $form    = get_post($fid);
+            $row = [
+                (int) $entry->ID,
+                get_date_from_gmt($entry->post_date_gmt, 'Y-m-d H:i:s'),
+                $form instanceof WP_Post ? $form->post_title : '',
+                strtoupper((string) ($context['lang'] ?? '')),
+                (string) ($context['page'] ?? ''),
+                (string) ($context['ip'] ?? ''),
+                isset($context['mail']['sent']) ? ($context['mail']['sent'] ? __('sí', 'intelindev') : __('no', 'intelindev')) : '',
+                isset($context['webhook']['status']) ? (string) $context['webhook']['status'] : '',
+            ];
+            foreach (array_keys($columns) as $name) {
+                $row[] = self::csv_safe((string) ($data[$name] ?? ''));
+            }
+            fputcsv($out, $row);
+        }
+        rewind($out);
+        $csv = (string) stream_get_contents($out);
+        fclose($out);
+        return $csv;
+    }
+
+    /** Evita inyección de fórmulas al abrir en Excel/Sheets (=, +, -, @ al inicio). */
+    private static function csv_safe(string $value): string
+    {
+        return preg_match('/^[=+\-@\t\r]/', $value) ? "'" . $value : $value;
     }
 
     /* ------------------------------------------------------------------ */

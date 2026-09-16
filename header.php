@@ -58,7 +58,7 @@ $header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_ge
   <?php endif; ?>
 </header>
 <?php if ($header_cta['type'] === 'modal') : ?>
-<dialog id="header-cta-modal" class="header-cta-modal"<?php echo $header_cta['modal_title'] !== '' ? ' aria-labelledby="header-cta-modal-title"' : ''; ?>>
+<dialog id="header-cta-modal" class="header-cta-modal"<?php echo $header_cta['modal_title'] !== '' ? ' aria-labelledby="header-cta-modal-title"' : ''; ?> data-cta-modal-src="<?php echo esc_url(add_query_arg('lang', $current_lang, rest_url('intelindev/v1/modal'))); ?>" data-loading="<?php echo esc_attr(idml_t('cta.modal_loading')); ?>" data-error="<?php echo esc_attr(idml_t('cta.modal_error')); ?>">
   <div class="header-cta-modal__box">
     <button type="button" class="header-cta-modal__close" data-cta-modal-close aria-label="<?php echo esc_attr(idml_t('cta.modal_close_label')); ?>">&times;</button>
     <?php if ($header_cta['modal_title'] !== '') : ?>
@@ -67,8 +67,4 @@ $header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_ge
     <div class="header-cta-modal__content" data-cta-modal-content></div>
   </div>
 </dialog>
-<?php
-// Contenido libre del admin (script de CRM / HTML / shortcode ya procesado).
-// Inerte hasta que scripts.js lo inyecta en el <dialog> al primer clic.
-echo '<template id="header-cta-modal-template">' . $header_cta['modal_content'] . '</template>' . "\n";
-endif;
+<?php endif;

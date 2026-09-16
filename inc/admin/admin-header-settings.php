@@ -142,11 +142,12 @@ function intelindev_get_header_cta($lang = null): array {
             break;
 
         case 'modal':
-            $modal_content = trim((string) intelindev_get_header_setting('cta_modal_content', ''));
-            if ($modal_content === '') {
+            if (trim((string) intelindev_get_header_setting('cta_modal_content', '')) === '') {
                 return $none;
             }
-            $modal_content = do_shortcode($modal_content);
+            // El contenido no se imprime en la página: lo pide scripts.js al primer
+            // clic a GET intelindev/v1/modal?lang= (ver intelindev_render_header_modal_content).
+            $modal_content = '';
             $modal_title = intelindev_resolve_lang_text(intelindev_get_header_setting('cta_modal_title', []), $lang);
             break;
 
@@ -160,6 +161,40 @@ function intelindev_get_header_cta($lang = null): array {
 
     return compact('type', 'href', 'text', 'modal_title', 'modal_content');
 }
+
+/**
+ * Contenido del modal renderizado (shortcodes incluidos) para un idioma. Lo
+ * sirve el endpoint REST de abajo, así el HTML/JS del modal (formulario, script
+ * de CRM, captcha) no viaja en cada página y el token antispam de un
+ * formulario nace al abrir el modal, no al cachear la página.
+ */
+function intelindev_render_header_modal_content(string $lang): string {
+    $content = trim((string) intelindev_get_header_setting('cta_modal_content', ''));
+    if ($content === '' || (string) intelindev_get_header_setting('cta_type', 'none') !== 'modal') {
+        return '';
+    }
+    idml_set_current_language($lang);
+    return do_shortcode($content);
+}
+
+add_action('rest_api_init', function () {
+    register_rest_route('intelindev/v1', '/modal', [
+        'methods'             => 'GET',
+        'permission_callback' => '__return_true',
+        'args'                => ['lang' => ['sanitize_callback' => 'sanitize_key']],
+        'callback'            => function (\WP_REST_Request $request) {
+            $lang = idml_normalize_lang((string) $request->get_param('lang'));
+            if (!in_array($lang, idml_get_languages(), true)) {
+                $lang = idml_get_default_language();
+            }
+            $html = intelindev_render_header_modal_content($lang);
+            $response = new \WP_REST_Response($html === '' ? ['html' => ''] : ['html' => $html], $html === '' ? 404 : 200);
+            // Token antispam fresco en cada apertura: sin caché intermedia.
+            $response->header('Cache-Control', 'no-store, max-age=0');
+            return $response;
+        },
+    ]);
+});
 
 /**
  * Logo del header: el elegido acá (y el sticky, si hay), si no el del

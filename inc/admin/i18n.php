@@ -63,6 +63,12 @@ if (!function_exists('idml_get_current_language')) {
   function idml_get_current_language() {
     $languages = idml_get_languages();
 
+    // Override explícito (ej. endpoints REST que reciben ?lang=): la URL de
+    // /wp-json/ no lleva prefijo de idioma.
+    if (!empty($GLOBALS['idml_language_override']) && in_array($GLOBALS['idml_language_override'], $languages, true)) {
+      return $GLOBALS['idml_language_override'];
+    }
+
     $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
     if ($request_uri !== '') {
       $path = trim((string) wp_parse_url($request_uri, PHP_URL_PATH), '/');
@@ -95,6 +101,14 @@ if (!function_exists('idml_get_current_language')) {
     */
 
     return idml_get_default_language();
+  }
+}
+
+if (!function_exists('idml_set_current_language')) {
+  /** Fija el idioma del request actual (REST/AJAX). '' lo quita. */
+  function idml_set_current_language($lang) {
+    $lang = idml_normalize_lang($lang);
+    $GLOBALS['idml_language_override'] = in_array($lang, idml_get_languages(), true) ? $lang : '';
   }
 }
 
