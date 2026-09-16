@@ -1,5 +1,6 @@
 /* Generado por scripts/build-grid.js — NO editar a mano. Grid estilo Bootstrap 5 (mobile-first, alias xs) + utilidades en px. */
 *,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
 :root{--grid-gap:24px}
 .container,.container-fluid{width:100%;margin-right:auto;margin-left:auto;padding-right:calc(var(--grid-gap) * .5);padding-left:calc(var(--grid-gap) * .5)}
 .row{display:flex;flex-wrap:wrap;margin-right:calc(var(--grid-gap) * -.5);margin-left:calc(var(--grid-gap) * -.5)}

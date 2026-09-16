@@ -54,5 +54,41 @@
     "cta.modal_close_label": {
         "es": "Cerrar",
         "en": "Close"
+    },
+    "form.default_button": {
+        "es": "Enviar",
+        "en": "Send"
+    },
+    "form.default_success": {
+        "es": "¡Gracias! Recibimos tu mensaje.",
+        "en": "Thanks! We got your message."
+    },
+    "form.required": {
+        "es": "Este campo es obligatorio.",
+        "en": "This field is required."
+    },
+    "form.invalid_email": {
+        "es": "Ingresá un email válido.",
+        "en": "Enter a valid email."
+    },
+    "form.invalid": {
+        "es": "Valor no válido.",
+        "en": "Invalid value."
+    },
+    "form.fix_errors": {
+        "es": "Revisá los campos marcados.",
+        "en": "Please check the highlighted fields."
+    },
+    "form.error_send": {
+        "es": "No se pudo enviar. Intentá de nuevo.",
+        "en": "Could not send. Please try again."
+    },
+    "form.too_many": {
+        "es": "Demasiados intentos, esperá unos minutos.",
+        "en": "Too many attempts, please wait a few minutes."
+    },
+    "form.sending": {
+        "es": "Enviando…",
+        "en": "Sending…"
     }
 }

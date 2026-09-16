@@ -86,3 +86,72 @@
     if (open) open.close();
   });
 })();
+
+// Formularios ([form slug="…"]): envío por fetch al endpoint REST sin recargar,
+// errores por campo y mensaje de éxito. Sin JS el formulario no envía (el
+// endpoint responde JSON); el markup sale de FormRenderer.
+(function () {
+  'use strict';
+
+  function setMessage(form, text, isError) {
+    var box = form.querySelector('.intelindev-form__message');
+    if (!box) return;
+    box.textContent = text || '';
+    box.classList.toggle('is-error', !!isError);
+    box.classList.toggle('is-success', !!text && !isError);
+  }
+
+  function clearErrors(form) {
+    Array.prototype.forEach.call(form.querySelectorAll('.intelindev-form__error'), function (el) { el.textContent = ''; });
+    Array.prototype.forEach.call(form.querySelectorAll('.has-error'), function (el) { el.classList.remove('has-error'); });
+  }
+
+  function showErrors(form, errors) {
+    Object.keys(errors || {}).forEach(function (name) {
+      var el = form.querySelector('[data-error-for="' + name + '"]');
+      if (el) {
+        el.textContent = errors[name];
+        var field = el.closest('.intelindev-form__field');
+        if (field) field.classList.add('has-error');
+      }
+    });
+    var first = form.querySelector('.has-error input, .has-error select, .has-error textarea');
+    if (first) first.focus();
+  }
+
+  document.addEventListener('submit', function (event) {
+    var form = event.target.closest('form.intelindev-form');
+    if (!form || !window.fetch) return;
+    event.preventDefault();
+
+    var button = form.querySelector('.intelindev-form__submit');
+    var original = button ? button.textContent : '';
+    clearErrors(form);
+    setMessage(form, '', false);
+    if (button) { button.disabled = true; button.setAttribute('aria-busy', 'true'); }
+
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }, credentials: 'same-origin' })
+      .then(function (response) { return response.json().then(function (body) { return { status: response.status, body: body }; }); })
+      .then(function (result) {
+        var body = result.body || {};
+        if (body.ok) {
+          if (body.redirect) { window.location.href = body.redirect; return; }
+          form.classList.add('is-sent');
+          var row = form.querySelector('.row');
+          var actions = form.querySelector('.intelindev-form__actions');
+          if (row) row.hidden = true;
+          if (actions) actions.hidden = true;
+          setMessage(form, body.message || form.getAttribute('data-success') || '', false);
+          return;
+        }
+        showErrors(form, body.errors);
+        setMessage(form, body.message || form.getAttribute('data-error') || '', true);
+      })
+      .catch(function () {
+        setMessage(form, form.getAttribute('data-error') || '', true);
+      })
+      .finally(function () {
+        if (button) { button.disabled = false; button.removeAttribute('aria-busy'); button.textContent = original; }
+      });
+  });
+})();

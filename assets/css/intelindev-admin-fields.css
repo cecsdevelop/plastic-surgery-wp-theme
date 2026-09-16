@@ -164,3 +164,42 @@
     line-height: 16px;
     text-align: center;
 }
+
+/* Editor de campos de Formularios */
+.intelindev-form-fields td,
+.intelindev-form-fields th {
+    vertical-align: top;
+}
+.intelindev-form-fields .intelindev-form-field__handle {
+    cursor: move;
+    color: #8c8f94;
+    font-size: 16px;
+    padding-top: 14px;
+}
+.intelindev-form-fields td p {
+    margin: 4px 0 8px;
+}
+.intelindev-form-field__langs {
+    width: 100%;
+    border-collapse: collapse;
+}
+.intelindev-form-field__langs th {
+    width: 36px;
+    text-align: left;
+    padding: 6px 6px 6px 0;
+    font-weight: 600;
+}
+.intelindev-form-field__langs td {
+    padding: 4px 0;
+}
+.intelindev-form-field__langs input,
+.intelindev-form-field__langs textarea {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 0 6px;
+}
+.intelindev-form-field.ui-sortable-helper {
+    background: #f6f7f7;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}

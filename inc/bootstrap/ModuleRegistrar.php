@@ -25,6 +25,8 @@ class ModuleRegistrar
             // CPTs: un módulo por carpeta en inc/modules/{Modulo}/{Modulo}Controller
             // (ver skill wp-theme-cpt-module).
             'IntelindevInit\\Components\\ComponentsController',
+            'IntelindevInit\\Forms\\FormsController',
+            'IntelindevInit\\Forms\\SubmissionsController',
         ];
     }
 }

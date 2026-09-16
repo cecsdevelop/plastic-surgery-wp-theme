@@ -87,6 +87,8 @@ out.push(`/* Generado por scripts/build-grid.js — NO editar a mano. Grid estil
 // Modelo de caja border-box global (como el reboot de Bootstrap): el HTML escrito
 // "a la Bootstrap" lo asume y los anchos en % + padding solo cierran así.
 rule('*,*::before,*::after', 'box-sizing:border-box');
+// El atributo hidden debe ganar a cualquier display de utilidad (.row, .d-flex…).
+rule('[hidden]', 'display:none !important');
 out.push(`:root{--grid-gap:${CONFIG.gap}}`);
 rule('.container,.container-fluid', 'width:100%;margin-right:auto;margin-left:auto;padding-right:calc(var(--grid-gap) * .5);padding-left:calc(var(--grid-gap) * .5)');
 rule('.row', 'display:flex;flex-wrap:wrap;margin-right:calc(var(--grid-gap) * -.5);margin-left:calc(var(--grid-gap) * -.5)');

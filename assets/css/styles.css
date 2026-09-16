@@ -336,3 +336,106 @@
     text-align: center;
   }
 }
+/**********************
+* Formularios ([form slug="…"], ver inc/modules/Forms)
+***********************/
+.intelindev-form {
+  --form-border: rgba(15, 23, 42, 0.2);
+  --form-focus: var(--intelindev-color-blue);
+  --form-error: #b32d2e;
+}
+.intelindev-form__field {
+  margin-bottom: 16px;
+}
+.intelindev-form__label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.intelindev-form__req {
+  color: var(--form-error);
+}
+.intelindev-form input:not([type="checkbox"]),
+.intelindev-form select,
+.intelindev-form textarea {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--form-border);
+  border-radius: 8px;
+  background: var(--intelindev-color-canvas);
+  color: var(--intelindev-color-ink);
+  font: inherit;
+}
+.intelindev-form input:focus,
+.intelindev-form select:focus,
+.intelindev-form textarea:focus {
+  outline: 2px solid var(--form-focus);
+  outline-offset: 1px;
+  border-color: var(--form-focus);
+}
+.intelindev-form__check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.intelindev-form__check input {
+  margin-top: 4px;
+}
+.intelindev-form__error {
+  display: block;
+  min-height: 0;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--form-error);
+}
+.intelindev-form__error:empty {
+  display: none;
+}
+.intelindev-form__field.has-error input,
+.intelindev-form__field.has-error select,
+.intelindev-form__field.has-error textarea {
+  border-color: var(--form-error);
+}
+/* Honeypot: fuera de pantalla, nunca display:none (algunos bots lo detectan) */
+.intelindev-form__hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.intelindev-form__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--intelindev-color-blue);
+  color: var(--intelindev-color-canvas);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.intelindev-form__submit[disabled] {
+  opacity: .6;
+  cursor: progress;
+}
+.intelindev-form__message:empty {
+  display: none;
+}
+.intelindev-form__message {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+.intelindev-form__message.is-success {
+  background: rgba(0, 163, 42, 0.1);
+  color: #1a5f2a;
+}
+.intelindev-form__message.is-error {
+  background: rgba(179, 45, 46, 0.1);
+  color: var(--form-error);
+}
