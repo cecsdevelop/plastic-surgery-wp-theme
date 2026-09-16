@@ -25,8 +25,8 @@ class BaseController
      */
     public function get_current_lang()
     {
-        if (function_exists('intelindev_get_current_language')) {
-            return intelindev_get_current_language();
+        if (function_exists('idml_get_current_language')) {
+            return idml_get_current_language();
         }
         $request_uri = $_SERVER['REQUEST_URI'] ?? '';
         return (strpos($request_uri, '/en/') !== false) ? 'en' : 'es';
