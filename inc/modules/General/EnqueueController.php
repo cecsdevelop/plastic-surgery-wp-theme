@@ -15,12 +15,26 @@ class EnqueueController extends BaseController
 
     public function enqueue_files()
     {
+        // Grid + utilidades (generado por scripts/build-grid.js). Va antes de
+        // styles.css: los componentes del theme pueden pisar utilidades.
+        $grid_path = $this->plugin_path . 'assets/css/grid.css';
+        $deps = [];
+        if (file_exists($grid_path)) {
+            wp_enqueue_style(
+                'intelindev-grid',
+                $this->plugin_url . 'assets/css/grid.css',
+                [],
+                filemtime($grid_path)
+            );
+            $deps[] = 'intelindev-grid';
+        }
+
         $css_path = $this->plugin_path . 'assets/css/styles.css';
         if (file_exists($css_path)) {
             wp_enqueue_style(
                 'intelindev-styles',
                 $this->plugin_url . 'assets/css/styles.css',
-                [],
+                $deps,
                 filemtime($css_path)
             );
         }
