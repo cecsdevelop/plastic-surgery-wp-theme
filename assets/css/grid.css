@@ -1012,7 +1012,7 @@
 .gap-xl-40{gap:40px}
 }
 @media (min-width:1400px){
-.container{max-width:1320px}
+.container{max-width:1276px}
 .col-xxl{flex:1 0 0%}
 .col-xxl-auto{flex:0 0 auto;width:auto}
 .col-xxl-1{flex:0 0 auto;width:8.333333%}

@@ -1,32 +1,88 @@
-/* Design tokens (theme.json palette) */
+/**********************
+* Design tokens — Figma "Website - DS Intelindev", sección Wireframes V1
+* (valores medidos con scripts/figma-pull.js tokens; ver docs/figma/spec/).
+* Los colores también viven en theme.json (paleta del editor).
+***********************/
 :root {
-  --intelindev-color-ink: #0f172a;
-  --intelindev-color-canvas: #ffffff;
-  --intelindev-color-blue: #5166ec;
-  --intelindev-color-yellow: #f9de42;
-  --intelindev-color-slate: #64748b;
+  /* Color */
+  --intelindev-color-white: #ffffff;
+  --intelindev-color-red: #e73728;        /* acento principal */
+  --intelindev-color-red-alt: #ec221f;
+  --intelindev-color-red-dark: #a4271c;   /* hover / fondos rojos */
+  --intelindev-color-red-deep: #611711;   /* secciones rojo oscuro */
+  --intelindev-color-black: #151414;
+  --intelindev-color-ink: #1b1a1a;        /* texto sobre claro */
+  --intelindev-color-charcoal: #232122;   /* superficies oscuras */
+  --intelindev-color-graphite: #2d2b2c;
+  --intelindev-color-slate: #312f30;      /* tarjetas oscuras, texto secundario */
+  --intelindev-color-gray: #d9d9d9;
+  --intelindev-color-gray-mid: #bfbfbf;
+  --intelindev-color-gray-light: #eaeaea;
+  --intelindev-color-sky: #a5d9e4;        /* decorativo (íconos) */
+  --intelindev-gradient-dark-red: linear-gradient(180deg, #232122 0%, #5f1a14 100%);
+  --intelindev-gradient-dark-radial: radial-gradient(circle at 50% 50%, #312f30 0%, #151414 100%);
+
+  /* Alias semánticos: lo que usan las secciones; cambiar aquí recolorea el sitio */
+  --intelindev-bg: var(--intelindev-color-white);
+  --intelindev-text: var(--intelindev-color-ink);
+  --intelindev-text-muted: var(--intelindev-color-slate);
+  --intelindev-accent: var(--intelindev-color-red);
+  --intelindev-accent-hover: var(--intelindev-color-red-dark);
+  --intelindev-surface-dark: var(--intelindev-color-charcoal);
+  --intelindev-text-on-dark: var(--intelindev-color-white);
 
   /* Tipografía (Apariencia → Intelindev Settings → Tipografía): defaults.
-     --wp--preset--font-family--* las imprime WP desde theme.json y la Biblioteca
-     de fuentes; los overrides van en <head> (admin-typography.php). */
-  --intelindev-font-body: var(--wp--preset--font-family--system, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+     --wp--preset--font-family--* las imprime WP desde theme.json (DM Sans y
+     DM Serif Text van en assets/fonts) y la Biblioteca de fuentes; los
+     overrides van en <head> (admin-typography.php). */
+  --intelindev-font-body: var(--wp--preset--font-family--dm-sans, "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
   --intelindev-font-heading: var(--intelindev-font-body);
+  --intelindev-font-accent: var(--wp--preset--font-family--dm-serif-text, "DM Serif Text", Georgia, serif);
   --intelindev-font-size-base: 16px;
-  --intelindev-font-weight-heading: 700;
+  --intelindev-font-weight-heading: 300;
+
+  /* Escala tipográfica: tamaño del diseño a 1440 px, fluida hacia móvil */
+  --intelindev-text-xs: 14px;
+  --intelindev-text-sm: var(--intelindev-font-size-base);
+  --intelindev-text-md: 18px;
+  --intelindev-text-lg: clamp(18px, 1.4vw, 20px);
+  --intelindev-text-xl: clamp(24px, 2.1vw, 30px);
+  --intelindev-text-2xl: clamp(32px, 3.5vw, 50px);
+  --intelindev-text-3xl: clamp(38px, 4.2vw, 60px);
+  --intelindev-text-4xl: clamp(48px, 4.9vw, 70px);
+  --intelindev-text-display: clamp(80px, 10.4vw, 150px);
+  --intelindev-leading-tight: 0.96;   /* títulos: 48/50, 57/60 */
+  --intelindev-leading-body: 1.3;     /* cuerpo: 21/16 */
+
+  /* Forma y espacio */
+  --intelindev-radius-sm: 5px;
+  --intelindev-radius-md: 10px;
+  --intelindev-radius-lg: 20px;
+  --intelindev-radius-xl: 30px;
+  --intelindev-radius-2xl: 40px;
+  --intelindev-radius-3xl: 50px;
+  --intelindev-radius-pill: 100px;
+  --intelindev-space-1: 10px;
+  --intelindev-space-2: 20px;
+  --intelindev-space-3: 30px;
+  --intelindev-space-4: 40px;
+  --intelindev-space-6: 60px;
+  --intelindev-section-py: clamp(60px, 7vw, 100px); /* separación vertical entre secciones */
+  --intelindev-content-max: 1252px;                 /* ancho interior del diseño (1440 − 2×94) */
 
   /* Header (Apariencia → Intelindev Header): estos son los defaults. Se
      sobreescriben en <head> solo si el admin configura algo — ver
      intelindev_print_header_style_overrides() en inc/admin/admin-header-settings.php. */
-  --intelindev-header-bg: var(--intelindev-color-canvas);
+  --intelindev-header-bg: var(--intelindev-color-white);
   --intelindev-header-link-color: var(--intelindev-color-ink);
-  --intelindev-header-submenu-bg: var(--intelindev-color-canvas);
+  --intelindev-header-submenu-bg: var(--intelindev-color-white);
   --intelindev-header-submenu-link-color: var(--intelindev-color-ink);
-  --intelindev-header-submenu-hover-bg: rgba(81, 102, 236, 0.08);
-  --intelindev-header-submenu-hover-link-color: var(--intelindev-color-blue);
-  --intelindev-header-cta-bg: var(--intelindev-color-blue);
-  --intelindev-header-cta-text-color: var(--intelindev-color-canvas);
-  --intelindev-header-cta-hover-bg: var(--intelindev-color-yellow);
-  --intelindev-header-cta-hover-text-color: var(--intelindev-color-ink);
+  --intelindev-header-submenu-hover-bg: rgba(231, 55, 40, 0.08);
+  --intelindev-header-submenu-hover-link-color: var(--intelindev-accent);
+  --intelindev-header-cta-bg: var(--intelindev-accent);
+  --intelindev-header-cta-text-color: var(--intelindev-color-white);
+  --intelindev-header-cta-hover-bg: var(--intelindev-accent-hover);
+  --intelindev-header-cta-hover-text-color: var(--intelindev-color-white);
 
   /* Estado sticky (.is-scrolled): cada variable cae a su equivalente normal, así
      el admin solo define las que quiere distintas. */
@@ -36,8 +92,8 @@
   --intelindev-header-sticky-submenu-link-color: var(--intelindev-header-submenu-link-color);
   --intelindev-header-sticky-submenu-hover-bg: var(--intelindev-header-submenu-hover-bg);
   --intelindev-header-sticky-submenu-hover-link-color: var(--intelindev-header-submenu-hover-link-color);
-  --intelindev-header-sticky-cta-bg: var(--intelindev-color-yellow);
-  --intelindev-header-sticky-cta-text-color: var(--intelindev-color-ink);
+  --intelindev-header-sticky-cta-bg: var(--intelindev-header-cta-bg);
+  --intelindev-header-sticky-cta-text-color: var(--intelindev-header-cta-text-color);
   --intelindev-header-sticky-cta-hover-bg: var(--intelindev-header-cta-hover-bg);
   --intelindev-header-sticky-cta-hover-text-color: var(--intelindev-header-cta-hover-text-color);
 
@@ -45,34 +101,168 @@
      solo lo configurado — ver intelindev_print_footer_style_overrides(). */
   --intelindev-footer-bg: var(--intelindev-color-ink);
   --intelindev-footer-text-color: rgba(255, 255, 255, 0.8);
-  --intelindev-footer-heading-color: var(--intelindev-color-canvas);
-  --intelindev-footer-link-color: var(--intelindev-color-canvas);
-  --intelindev-footer-link-hover-color: var(--intelindev-color-yellow);
+  --intelindev-footer-heading-color: var(--intelindev-color-white);
+  --intelindev-footer-link-color: var(--intelindev-color-white);
+  --intelindev-footer-link-hover-color: var(--intelindev-accent);
   --intelindev-footer-padding-top: 56px;
   --intelindev-footer-padding-bottom: 56px;
   --intelindev-footer-padding-x: 24px;
   --intelindev-footer-gap: 32px;
-  --intelindev-footer-max-width: 1200px;
+  --intelindev-footer-max-width: var(--intelindev-content-max);
   --intelindev-footer-bar-bg: rgba(0, 0, 0, 0.25);
   --intelindev-footer-bar-text-color: rgba(255, 255, 255, 0.7);
-  --intelindev-footer-bar-link-color: var(--intelindev-color-canvas);
+  --intelindev-footer-bar-link-color: var(--intelindev-color-white);
   --intelindev-footer-bar-padding: 16px;
 }
 
 /**********************
-* Tipografía base
+* Base
 ***********************/
 body {
   margin: 0;
+  background: var(--intelindev-bg);
+  color: var(--intelindev-text);
   font-family: var(--intelindev-font-body);
   font-size: var(--intelindev-font-size-base);
-  line-height: 1.5;
+  line-height: var(--intelindev-leading-body);
   -webkit-font-smoothing: antialiased;
 }
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: var(--intelindev-accent);
+}
+a:hover {
+  color: var(--intelindev-accent-hover);
+}
+p {
+  margin: 0 0 1em;
+}
+
+/* Títulos: DM Sans light con acentos en serif itálica (<em>), como en el diseño:
+   <h2>Servicios que convierten tus ideas en <em>productos reales</em></h2> */
 h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 .5em;
   font-family: var(--intelindev-font-heading);
+  line-height: var(--intelindev-leading-tight);
+}
+h1, h2, h3 {
   font-weight: var(--intelindev-font-weight-heading);
-  line-height: 1.2;
+}
+h1 { font-size: var(--intelindev-text-3xl); }
+h2 { font-size: var(--intelindev-text-2xl); }
+h3 { font-size: var(--intelindev-text-xl); }
+h4 { font-size: var(--intelindev-text-lg); font-weight: 600; line-height: 1.3; }
+h5 { font-size: var(--intelindev-text-md); font-weight: 700; line-height: 1.3; }
+h6 { font-size: var(--intelindev-text-sm); font-weight: 700; line-height: 1.3; }
+h1 em, h2 em, h3 em, h4 em,
+.accent {
+  font-family: var(--intelindev-font-accent);
+  font-style: italic;
+  font-weight: 400;
+}
+.text-display { font-size: var(--intelindev-text-display); font-weight: 700; line-height: 0.95; }
+.text-4xl { font-size: var(--intelindev-text-4xl); line-height: var(--intelindev-leading-tight); }
+.lead { font-size: var(--intelindev-text-lg); font-weight: 300; }
+.small { font-size: var(--intelindev-text-xs); }
+.text-muted { color: var(--intelindev-text-muted); }
+
+/* Etiqueta de sección ("Nuestros servicios"): píldora con punto rojo */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid currentColor;
+  border-radius: var(--intelindev-radius-pill);
+  font-size: var(--intelindev-text-xs);
+  line-height: 1;
+}
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--intelindev-accent);
+}
+
+/* Botones: píldora (padding 10×30, radio 100) con flecha ↗ opcional */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 30px;
+  border: 1px solid transparent;
+  border-radius: var(--intelindev-radius-pill);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1.3;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn--primary {
+  background: var(--intelindev-accent);
+  border-color: var(--intelindev-accent);
+  color: var(--intelindev-color-white);
+}
+.btn--primary:hover, .btn--primary:focus-visible {
+  background: var(--intelindev-accent-hover);
+  border-color: var(--intelindev-accent-hover);
+  color: var(--intelindev-color-white);
+}
+.btn--outline {
+  border-color: currentColor;
+}
+.btn--outline:hover, .btn--outline:focus-visible {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+.btn--light {
+  background: var(--intelindev-color-white);
+  color: var(--intelindev-color-ink);
+}
+.btn--light:hover, .btn--light:focus-visible {
+  background: var(--intelindev-color-gray);
+  color: var(--intelindev-color-ink);
+}
+/* Flecha ↗ (solar/arrow-right-up) pintada con currentColor vía mask */
+.btn--arrow::after,
+.icon-arrow::after {
+  content: "";
+  flex: none;
+  width: 1em;
+  height: 1em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17 17 7M8 7h9v9'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17 17 7M8 7h9v9'/></svg>") center / contain no-repeat;
+}
+
+/* Secciones: 100 % de ancho con el contenido acotado a --intelindev-content-max */
+.section {
+  padding-block: var(--intelindev-section-py);
+}
+.section--dark {
+  background: var(--intelindev-surface-dark);
+  color: var(--intelindev-text-on-dark);
+}
+.section--red {
+  background: var(--intelindev-color-red-deep);
+  color: var(--intelindev-text-on-dark);
+}
+.section--gradient {
+  background: var(--intelindev-gradient-dark-red);
+  color: var(--intelindev-text-on-dark);
+}
+.section--dark a:not(.btn), .section--red a:not(.btn), .section--gradient a:not(.btn) {
+  color: inherit;
+}
+.content-max {
+  max-width: var(--intelindev-content-max);
+  margin-inline: auto;
 }
 
 /**********************
@@ -238,7 +428,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .header-cta-modal__box {
   position: relative;
-  background: var(--intelindev-color-canvas);
+  background: var(--intelindev-color-white);
   color: var(--intelindev-color-ink);
   border-radius: 12px;
   padding: 32px;
@@ -365,7 +555,7 @@ h1, h2, h3, h4, h5, h6 {
 ***********************/
 .intelindev-form {
   --form-border: rgba(15, 23, 42, 0.2);
-  --form-focus: var(--intelindev-color-blue);
+  --form-focus: var(--intelindev-accent);
   --form-error: #b32d2e;
 }
 .intelindev-form__field {
@@ -387,7 +577,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px 12px;
   border: 1px solid var(--form-border);
   border-radius: 8px;
-  background: var(--intelindev-color-canvas);
+  background: var(--intelindev-color-white);
   color: var(--intelindev-color-ink);
   font: inherit;
 }
@@ -434,11 +624,11 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 10px 30px;
   border: 0;
-  border-radius: 8px;
-  background: var(--intelindev-color-blue);
-  color: var(--intelindev-color-canvas);
+  border-radius: var(--intelindev-radius-pill);
+  background: var(--intelindev-accent);
+  color: var(--intelindev-color-white);
   font: inherit;
   font-weight: 600;
   cursor: pointer;

@@ -1,0 +1,3346 @@
+# 🎨 Website - DS Intelindev
+
+Archivo `soT78LzfqhZ72LVTGOs9xC` · última modificación 2026-09-11T14:48:16Z · bajado 2026-09-17T18:23:53.931Z
+
+## 🦮 Setup Guide (`2635:178`)
+
+- WIDGET **To Do: Just a task on your canvas** `2995:5923` 
+  - FRAME widget `2995:5924` 513×120
+- WIDGET **To Do: Just a task on your canvas** `2995:6032` 
+  - FRAME widget `2995:6143` 513×168
+- WIDGET **To Do: Just a task on your canvas** `2995:6073` 
+  - FRAME widget `2995:6083` 513×168
+- WIDGET **To Do: Just a task on your canvas** `2995:6111` 
+  - FRAME widget `2995:6121` 513×168
+
+## --- (`96:259`)
+
+
+## 🖌️ Design Playgrpund (`96:261`)
+
+- SECTION **Wireframes V1** `7064:3330` 17073×9891
+  - FRAME Home V2 `7064:1482` 1440×8051
+  - GROUP Group 32 `7064:1804` 152×11
+  - FRAME Nosotros `7064:1825` 1440×5258
+  - FRAME Servicios `7064:2044` 1440×4720
+  - FRAME Portafolio `7064:2266` 1440×2901
+  - FRAME Servicios_Detalle `7064:2395` 1440×1716
+  - FRAME Portafolio_Detalle `7064:2494` 1440×2784
+  - FRAME Blog_Detalle `7064:2585` 1440×2998
+  - FRAME Blog `7064:2736` 1440×2346
+  - FRAME Blog `7126:2359` 1440×2346
+  - FRAME Contacto `7064:2888` 1440×1761
+- FRAME **Portafolio** `7436:9876` 1728×3400
+  - FRAME Frame 145 `7436:9897` 1728×620
+  - FRAME Frame 178 `7436:9904` 1728×1635
+  - FRAME Frame 179 `7674:14320` 1728×617
+  - FRAME Footer `7436:10669` 1728×528
+  - FRAME Header `7436:10338` 1536×80
+- FRAME **Home** `7351:8836` 1728×6716
+  - FRAME Frame 188 `7351:10332` 1728×900
+  - FRAME Frame 189 `7351:10574` 1728×235
+  - FRAME Frame 190 `7351:10771` 1728×868
+  - FRAME Frame 193 `7354:11256` 1728×793
+  - FRAME Frame 159 `7351:8969` 1728×772
+  - FRAME Frame 160 `7351:9014` 1728×286
+  - FRAME Frame 166 `7351:9031` 1728×1017
+  - FRAME Frame 186 `7568:12827` 1728×700
+  - FRAME Frame 194 `7674:14210` 1728×617
+  - FRAME Footer `7351:9146` 1728×528
+- FRAME **Sticky Header-Scroll Up** `7354:11566` 1728×4315
+  - FRAME Frame 188 `7354:11567` 1728×900
+  - FRAME Frame 189 `7354:11599` 1728×235
+  - FRAME Frame 190 `7354:11649` 1728×903
+  - FRAME Frame 193 `7354:11722` 1728×817
+  - FRAME Frame 159 `7428:9890` 1728×772
+  - FRAME Frame 160 `7354:11894` 1728×286
+  - FRAME Frame 196 `7429:10020` 1728×1017
+  - FRAME Frame 186 `7595:13114` 1728×700
+  - FRAME Frame 167 `7674:14100` 1728×617
+  - FRAME Footer `7354:12030` 1728×437
+  - FRAME Header `7449:12834` 1536×80
+- FRAME **Referencias Framer** `7004:2678` 1503×442
+  - TEXT https://www.framer.com/community/gallery/makora/ `7004:2679` 787×29
+  - TEXT https://www.framer.com/community/gallery/it-s-devarsh-pofo/ `7004:2680` 950×29
+  - TEXT https://www.framer.com/community/gallery/desses-co/ `7004:2681` 833×29
+  - TEXT https://www.framer.com/community/gallery/trailblazer-mktg/ `7004:2682` 920×29
+  - TEXT https://www.framer.com/community/gallery/roixpress/ `7004:2683` 814×29
+  - TEXT https://www.framer.com/community/gallery/mira-marketing-agency/ `7004:2684` 1034×29
+- FRAME **Referencias Webflow** `7004:2685` 1503×442
+  - TEXT https://webflow.com/templates/html/swiftform-website-template `7004:2686` 989×29
+  - TEXT https://webflow.com/templates/html/saleunion-website-template `7004:2687` 989×29
+  - TEXT https://webflow.com/templates/html/stuxen-website-template `7004:2688` 947×29
+  - TEXT https://webflow.com/templates/html/boostique-website-template `7004:2689` 997×29
+  - TEXT https://webflow.com/templates/html/structa-website-template `7004:2690` 955×29
+  - TEXT https://webflow.com/templates/html/logistflow-website-template `7004:2691` 990×29
+- FRAME **Plantilla Envato** `7051:2864` 1503×442
+  - TEXT https://demo.bravisthemes.com/gurus/home-11-dark/ `7051:2865` 801×29
+- SECTION **Trash** `7025:3379` 12673×15228
+  - FRAME Content `7018:735` 617×207
+  - FRAME Content `7017:764` 690×169
+  - RECTANGLE Image `7011:601` 742×449
+  - RECTANGLE Image `7011:593` 742×449
+  - FRAME Frame 149 `7008:1214` 1306×646
+  - INSTANCE Image `7008:1263` 221×160
+  - FRAME Frame 156 `7008:1512` 1276×131
+  - GROUP Group `7008:1300` 200×36
+  - INSTANCE Logo `7008:1336` 152×36
+  - GROUP BzYowD `7008:1369` 208×25
+  - FRAME logomeraki 1 `7008:1381` 163×55
+  - FRAME Frame 169 `7019:2995` 1552×648
+  - GROUP Group 56 `7008:1496` 148×22
+  - FRAME Frame 171 `7064:1066` 1728×757
+  - FRAME Frame 158 `7064:1097` 1728×781
+  - FRAME Frame 145 `7064:1128` 1728×900
+  - FRAME Frame 159 `7064:1160` 1728×773
+  - RECTANGLE image 3 `7064:1184` 2542×1166
+  - RECTANGLE image 1 `7064:1185` 1848×349
+  - RECTANGLE image 2 `7064:1186` 1870×1263
+  - RECTANGLE image 4 `7064:1187` 1942×834
+  - RECTANGLE image 5 `7064:1188` 2032×834
+  - RECTANGLE image 6 `7064:1189` 1530×624
+  - RECTANGLE image 7 `7064:1190` 1920×890
+  - FRAME Frame 185 `7124:2227` 1140×750
+  - FRAME Content `7124:2120` 591×623
+  - RECTANGLE Rectangle 71 `7116:6074` 400×496
+  - RECTANGLE Rectangle 83 `7116:6075` 400×496
+  - RECTANGLE Rectangle 99 `7116:6076` 400×496
+  - RECTANGLE Rectangle 86 `7116:6077` 400×496
+  - RECTANGLE Rectangle 96 `7116:6078` 400×496
+  - RECTANGLE Rectangle 89 `7116:6079` 400×496
+  - RECTANGLE Rectangle 82 `7116:6080` 85×52
+  - RECTANGLE Rectangle 81 `7116:6081` 284×106
+  - FRAME solar:arrow-right-up-outline `7116:6082` 30×30
+  - TEXT Néxito Plataforma inteligente para formar emprendedores `7116:6084` 239×49
+  - RECTANGLE Rectangle 84 `7116:6085` 85×52
+  - RECTANGLE Rectangle 85 `7116:6086` 284×106
+  - FRAME solar:arrow-right-up-outline `7116:6087` 30×30
+  - TEXT Sana Sana Programa de salud con beneficios exclusivos `7116:6089` 239×49
+  - RECTANGLE Rectangle 88 `7116:6090` 284×106
+  - TEXT Four Winds Group Sistema integral de gestión empresarial `7116:6091` 239×49
+  - RECTANGLE Rectangle 98 `7116:6092` 85×52
+  - RECTANGLE Rectangle 97 `7116:6093` 284×106
+  - TEXT Four Winds Group Sistema integral de gestión empresarial `7116:6094` 239×49
+  - RECTANGLE Rectangle 92 `7116:6095` 85×52
+  - RECTANGLE Rectangle 93 `7116:6096` 284×106
+  - FRAME solar:arrow-right-up-outline `7116:6097` 30×30
+  - TEXT Dhisve Ecommerce especializado en productos médicos `7116:6099` 239×49
+  - RECTANGLE Rectangle 94 `7116:6100` 85×52
+  - RECTANGLE Rectangle 95 `7116:6101` 284×106
+  - RECTANGLE Rectangle 87 `7116:6102` 85×52
+  - FRAME solar:arrow-right-up-outline `7116:6103` 30×30
+  - FRAME solar:arrow-right-up-outline `7116:6105` 30×30
+  - TEXT Sana Sana Programa de salud con beneficios exclusivos `7116:6107` 239×49
+  - FRAME solar:arrow-right-up-outline `7116:6108` 30×30
+  - INSTANCE BOTTOM ITEM 4 `7116:6060` 559×27
+  - RECTANGLE image 8 `7116:4714` 1927×1100
+  - FRAME Frame 170 `7290:5072` 1728×737
+  - FRAME Contacto `7745:13111` 1728×2120
+  - FRAME Contacto `7759:15869` 1728×2120
+- RECTANGLE **phone 1** `7531:12773` 512×512
+- FRAME **Jesús** `7063:1053` 568×442
+  - TEXT Home `7063:1054` 87×29
+  - TEXT Portafolio `7063:1055` 143×29
+  - TEXT Contacto `7063:1056` 139×29
+- FRAME **Estefania** `7063:1057` 627×442
+  - TEXT Nosotros `7063:1058` 134×29
+  - TEXT Servicios `7063:1059` 135×29
+  - TEXT Blog `7063:1060` 63×29
+- FRAME **Evelyn** `7063:1061` 627×442
+  - TEXT Servicios Detalle `7063:1062` 246×29
+  - TEXT Portafolio Detalle `7063:1063` 253×29
+  - TEXT Blog Detalle `7063:1064` 174×29
+- SECTION **Wireframes v2** `7436:10794` 23012×15724
+  - FRAME Blog_Detalle `7187:3948` 1728×3109
+  - FRAME Portafolio `7113:1653` 1728×2700
+  - FRAME Portafolio_Detalle `7155:6170` 1728×3535
+  - FRAME Blog `7151:2806` 1728×2948
+  - FRAME Contacto `7135:2577` 1728×1937
+  - FRAME Home `7004:3866` 1728×6447
+  - FRAME Home `7292:6265` 1728×6447
+  - FRAME Nosotros `7076:1483` 1728×5751
+  - FRAME Servicios `7126:2536` 1728×5586
+  - FRAME Servicios `7155:3136` 1728×2164
+  - FRAME Servicios `7155:5781` 1728×2164
+  - INSTANCE Divider `7135:3966` 300×0
+  - TEXT Servicios Detalle `7154:3132` 246×29
+  - TEXT Portafolio Detalle `7154:3133` 253×29
+  - TEXT Blog Detalle `7154:3134` 174×29
+  - FRAME Page 1 `7231:4230` 595×842
+  - FRAME Page 2 `7231:4340` 595×842
+  - FRAME Page 3 `7231:4468` 595×842
+  - FRAME Home `7335:8414` 1728×6447
+  - FRAME Blog_Detalle `7293:10600` 1728×3109
+  - FRAME Portafolio `7293:10718` 1728×2700
+  - FRAME Portafolio `7293:10840` 1728×3535
+  - FRAME Blog `7293:10897` 1728×2948
+  - FRAME Contacto `7293:11075` 1728×1875
+  - FRAME Home `7293:11181` 1728×6447
+  - FRAME Home `7293:11506` 1728×6447
+  - FRAME Nosotros `7293:11832` 1728×5671
+  - FRAME Servicios `7293:12083` 1728×5586
+  - FRAME Servicios `7293:12290` 1728×2164
+  - FRAME Servicios `7293:12364` 1728×2164
+  - INSTANCE Divider `7293:12438` 300×0
+- FRAME **Blog** `7466:14810` 1728×3364
+  - FRAME Frame 179 `7466:15672` 1728×620
+  - FRAME Frame 178 `7466:14838` 1728×1599
+  - FRAME Frame 180 `7674:14430` 1728×617
+  - FRAME Footer `7466:16137` 1728×528
+  - FRAME Header `7466:15679` 1536×80
+- FRAME **Blog Post** `7470:14818` 1728×3568
+  - FRAME Frame 179 `7470:14819` 1728×620
+  - FRAME Frame 235 `7470:15429` 1728×1659
+  - FRAME Frame 236 `7470:15430` 1728×144
+  - FRAME Frame 237 `7674:14540` 1728×617
+  - FRAME Footer `7470:14966` 1728×528
+  - FRAME Header `7470:15019` 1536×80
+- FRAME **Contacto** `7449:11611` 1728×2120
+  - FRAME Frame 145 `7449:11632` 1728×620
+  - FRAME Frame 179 `7449:13055` 1728×355
+  - FRAME Frame 167 `7674:14650` 1728×617
+  - FRAME Footer `7467:11645` 1728×528
+- FRAME **Nosotros** `7441:10207` 1728×4945
+  - FRAME Frame 188 `7452:11631` 1728×900
+  - FRAME Frame 99 `7441:10249` 1728×325
+  - FRAME Frame 209 `7464:12166` 1728×801
+  - FRAME Frame 174 `7441:10274` 1728×651
+  - FRAME Frame 178 `7441:10301` 1728×888
+  - FRAME Frame 212 `7496:12860` 1728×235
+  - FRAME Frame 213 `7674:13990` 1728×617
+  - FRAME Footer `7466:12912` 1728×528
+- FRAME **Servicios** `7466:13032` 1728×6013
+  - FRAME Frame 212 `7466:13992` 1728×620
+  - FRAME Frame 209 `7466:13065` 1728×1591
+  - FRAME Frame 214 `7466:14446` 1728×962
+  - FRAME Frame 186 `7595:13162` 1728×700
+  - FRAME Frame 146 `7466:14591` 1728×995
+  - FRAME Frame 167 `7674:13330` 1728×617
+  - FRAME Footer `7466:13369` 1728×528
+  - FRAME Header `7466:13999` 1536×80
+- FRAME **Servicios Detalle** `7470:12931` 1728×2415
+  - FRAME Frame 212 `7470:12932` 1728×620
+  - FRAME Frame 194 `7687:13152` 1728×1267
+  - FRAME Footer `7470:13121` 1728×528
+  - FRAME Header `7470:13174` 1536×80
+- FRAME **Proyecto Detalle** `7470:14322` 1728×3421
+  - FRAME Frame 212 `7470:14323` 1728×620
+  - FRAME Frame 196 `7470:14708` 1728×2273
+  - FRAME Footer `7470:14360` 1728×528
+  - FRAME Header `7470:14413` 1536×80
+- FRAME **Servicios Detalle 2** `7470:13550` 1728×2415
+  - FRAME Frame 212 `7470:13551` 1728×620
+  - FRAME Frame 194 `7470:13558` 1728×1267
+  - FRAME Footer `7470:13588` 1728×528
+  - FRAME Header `7470:13641` 1536×80
+- RECTANGLE **golden-ratio 3** `7354:10897` 512×512
+- SECTION **Iconos** `7516:12911` 497×946
+  - RECTANGLE write 1 `7354:10957` 96×96
+  - RECTANGLE social 1 `7354:10981` 96×96
+  - RECTANGLE mobile-app 1 `7354:10955` 96×96
+  - RECTANGLE call-center 1 `7354:10956` 96×96
+  - RECTANGLE code 1 `7354:10990` 96×96
+  - RECTANGLE design 1 `7354:10991` 96×96
+  - RECTANGLE search 1 `7354:10992` 96×96
+  - RECTANGLE design 2 `7354:10993` 96×96
+  - RECTANGLE update 1 `7354:11053` 96×96
+  - FRAME update 2 [Vectorized] `7366:9840` 96×96
+- RECTANGLE **update 2** `7366:9839` 96×96
+- RECTANGLE **telephone 1** `7431:10322` 512×512
+- RECTANGLE **email 1** `7431:10323` 512×512
+- GROUP **Mask group** `7568:12778` 820×417
+  - RECTANGLE image 10 `7568:12776` 820×417
+  - RECTANGLE Rectangle 114 `7568:12777` 1271×554
+- SECTION **Web** `7759:20298` 22182×8089
+  - FRAME Portafolio `7759:13111` 1728×3400
+  - FRAME Home `7759:13280` 1728×6716
+  - FRAME Sticky Header-Scroll Up `7759:13797` 1728×4315
+  - FRAME Blog `7759:14297` 1728×3364
+  - FRAME Blog Post `7759:14518` 1728×3568
+  - FRAME Contacto `7759:14704` 1728×2120
+  - FRAME Nosotros `7759:14858` 1728×4945
+  - FRAME Servicios `7759:15256` 1728×6013
+  - FRAME Servicios Detalle `7759:15519` 1728×2415
+  - FRAME Proyecto Detalle `7759:15635` 1728×3421
+  - FRAME Servicios Detalle 3 `7759:15748` 1728×2415
+
+## ✅ Design (`7025:3378`)
+
+
+## --- (`2635:181`)
+
+
+## 🎨 Color Palette (`34:8`)
+
+- FRAME **Primary** `54:793` 420×1386
+  - TEXT LABEL `40:1805` 66×100
+  - TEXT LABEL `40:1806` 66×100
+  - TEXT LABEL `40:1807` 66×100
+  - TEXT LABEL `40:1808` 64×100
+  - TEXT LABEL `40:1809` 82×100
+  - TEXT LABEL `40:1810` 85×100
+  - TEXT LABEL `40:1811` 85×100
+  - FRAME Swatch `40:2379` 50×50
+  - FRAME Swatch `40:2465` 302×100
+  - TEXT CATEGORY `40:1816` 92×29
+  - FRAME Swatch `40:2381` 50×50
+  - FRAME Swatch `40:2377` 50×50
+  - FRAME Swatch `40:2383` 50×50
+  - FRAME Swatch `40:2443` 50×50
+  - FRAME Swatch `40:2385` 50×50
+  - FRAME Swatch `40:2373` 50×50
+  - FRAME Swatch `40:2199` 100×100
+  - FRAME Swatch `40:2386` 100×100
+  - FRAME Swatch `40:2396` 100×100
+  - FRAME Swatch `40:2399` 100×100
+  - FRAME Swatch `40:2402` 100×100
+  - FRAME Swatch `40:2405` 100×100
+  - FRAME Swatch `40:2408` 100×100
+  - FRAME Frame `40:2203` 24×24
+  - FRAME Frame `40:2412` 24×24
+  - FRAME Frame `40:2418` 24×24
+  - FRAME Frame `40:2423` 24×24
+  - FRAME Frame `40:2428` 24×24
+  - FRAME Frame `40:2433` 24×24
+  - FRAME Frame `40:2438` 24×24
+- FRAME **Neutrals** `54:796` 420×1386
+  - TEXT LABEL `49:95` 66×100
+  - TEXT LABEL `49:96` 66×100
+  - TEXT LABEL `49:97` 66×100
+  - TEXT LABEL `49:98` 64×100
+  - TEXT LABEL `49:99` 82×100
+  - TEXT LABEL `49:100` 85×100
+  - TEXT LABEL `49:101` 85×100
+  - FRAME Swatch `49:102` 50×50
+  - FRAME Swatch `49:103` 302×100
+  - TEXT CATEGORY `49:104` 100×29
+  - FRAME Swatch `49:105` 50×50
+  - FRAME Swatch `49:106` 50×50
+  - FRAME Swatch `49:107` 50×50
+  - FRAME Swatch `49:108` 50×50
+  - FRAME Swatch `49:109` 50×50
+  - FRAME Swatch `49:110` 50×50
+  - FRAME Swatch `49:111` 100×100
+  - FRAME Swatch `49:113` 100×100
+  - FRAME Swatch `49:115` 100×100
+  - FRAME Swatch `49:117` 100×100
+  - FRAME Swatch `49:119` 100×100
+  - FRAME Swatch `49:121` 100×100
+  - FRAME Swatch `49:123` 100×100
+  - FRAME Frame `49:125` 24×24
+  - FRAME Frame `49:133` 24×24
+  - FRAME Frame `49:137` 24×24
+  - FRAME Frame `49:141` 24×24
+  - FRAME Frame `49:145` 24×24
+  - FRAME Frame `49:149` 24×24
+  - FRAME Frame `49:153` 24×24
+  - TEXT LABEL `53:407` 85×100
+  - FRAME Swatch `53:409` 100×100
+  - LINE Line 11 `53:416` 361×0
+- FRAME **Secondary** `54:808` 420×1329
+  - TEXT LABEL `40:2545` 66×100
+  - TEXT LABEL `40:2546` 66×100
+  - TEXT LABEL `40:2547` 66×100
+  - TEXT LABEL `40:2548` 64×100
+  - TEXT LABEL `40:2549` 82×100
+  - TEXT LABEL `40:2550` 85×100
+  - TEXT LABEL `40:2551` 85×100
+  - FRAME Swatch `40:2552` 50×50
+  - FRAME Swatch `40:2553` 302×100
+  - TEXT CATEGORY `40:2554` 128×29
+  - FRAME Swatch `40:2555` 50×50
+  - FRAME Swatch `40:2556` 50×50
+  - FRAME Swatch `40:2557` 50×50
+  - FRAME Swatch `40:2558` 50×50
+  - FRAME Swatch `40:2559` 50×50
+  - FRAME Swatch `40:2560` 50×50
+  - FRAME Swatch `40:2561` 100×100
+  - FRAME Swatch `40:2563` 100×100
+  - FRAME Swatch `40:2565` 100×100
+  - FRAME Swatch `40:2567` 100×100
+  - FRAME Swatch `40:2569` 100×100
+  - FRAME Swatch `40:2571` 100×100
+  - FRAME Swatch `40:2573` 100×100
+  - FRAME Frame `40:2575` 24×24
+  - FRAME Frame `40:2583` 24×24
+  - FRAME Frame `40:2587` 24×24
+  - FRAME Frame `40:2591` 24×24
+  - FRAME Frame `40:2595` 24×24
+  - FRAME Frame `40:2599` 24×24
+  - FRAME Frame `40:2603` 24×24
+- FRAME **Tertiary** `54:809` 420×1329
+  - TEXT LABEL `43:14` 66×100
+  - TEXT LABEL `43:15` 66×100
+  - TEXT LABEL `43:16` 66×100
+  - TEXT LABEL `43:17` 64×100
+  - TEXT LABEL `43:18` 82×100
+  - TEXT LABEL `43:19` 85×100
+  - TEXT LABEL `43:20` 85×100
+  - FRAME Swatch `43:21` 50×50
+  - FRAME Swatch `43:22` 302×100
+  - TEXT CATEGORY `43:23` 94×29
+  - FRAME Swatch `43:24` 50×50
+  - FRAME Swatch `43:25` 50×50
+  - FRAME Swatch `43:26` 50×50
+  - FRAME Swatch `43:27` 50×50
+  - FRAME Swatch `43:28` 50×50
+  - FRAME Swatch `43:29` 50×50
+  - FRAME Swatch `43:30` 100×100
+  - FRAME Swatch `43:32` 100×100
+  - FRAME Swatch `43:34` 100×100
+  - FRAME Swatch `43:36` 100×100
+  - FRAME Swatch `43:38` 100×100
+  - FRAME Swatch `43:40` 100×100
+  - FRAME Swatch `43:42` 100×100
+  - FRAME Frame `43:44` 24×24
+  - FRAME Frame `43:52` 24×24
+  - FRAME Frame `43:56` 24×24
+  - FRAME Frame `43:60` 24×24
+  - FRAME Frame `43:64` 24×24
+  - FRAME Frame `43:68` 24×24
+  - FRAME Frame `43:72` 24×24
+- FRAME **Info** `54:798` 420×1386
+  - TEXT LABEL `49:332` 66×100
+  - TEXT LABEL `49:333` 66×100
+  - TEXT LABEL `49:334` 66×100
+  - TEXT LABEL `49:335` 64×100
+  - TEXT LABEL `49:336` 82×100
+  - TEXT LABEL `49:337` 85×100
+  - TEXT LABEL `49:338` 85×100
+  - FRAME Swatch `49:339` 50×50
+  - FRAME Swatch `49:340` 302×100
+  - TEXT CATEGORY `49:341` 46×29
+  - FRAME Swatch `49:342` 50×50
+  - FRAME Swatch `49:343` 50×50
+  - FRAME Swatch `49:344` 50×50
+  - FRAME Swatch `49:345` 50×50
+  - FRAME Swatch `49:346` 50×50
+  - FRAME Swatch `49:347` 50×50
+  - FRAME Swatch `49:348` 100×100
+  - FRAME Swatch `49:350` 100×100
+  - FRAME Swatch `49:352` 100×100
+  - FRAME Swatch `49:354` 100×100
+  - FRAME Swatch `49:356` 100×100
+  - FRAME Swatch `49:358` 100×100
+  - FRAME Swatch `49:360` 100×100
+  - FRAME Frame `49:362` 24×24
+  - FRAME Frame `49:370` 24×24
+  - FRAME Frame `49:374` 24×24
+  - FRAME Frame `49:378` 24×24
+  - FRAME Frame `49:382` 24×24
+  - FRAME Frame `49:390` 24×24
+- FRAME **Success** `54:800` 420×1386
+  - TEXT LABEL `53:483` 66×100
+  - TEXT LABEL `53:484` 66×100
+  - TEXT LABEL `53:485` 66×100
+  - TEXT LABEL `53:486` 64×100
+  - TEXT LABEL `53:487` 82×100
+  - TEXT LABEL `53:488` 85×100
+  - TEXT LABEL `53:489` 85×100
+  - FRAME Swatch `53:490` 50×50
+  - FRAME Swatch `53:491` 302×100
+  - TEXT CATEGORY `53:492` 101×29
+  - FRAME Swatch `53:493` 50×50
+  - FRAME Swatch `53:494` 50×50
+  - FRAME Swatch `53:495` 50×50
+  - FRAME Swatch `53:496` 50×50
+  - FRAME Swatch `53:497` 50×50
+  - FRAME Swatch `53:498` 50×50
+  - FRAME Swatch `53:499` 100×100
+  - FRAME Swatch `53:501` 100×100
+  - FRAME Swatch `53:503` 100×100
+  - FRAME Swatch `53:505` 100×100
+  - FRAME Swatch `53:507` 100×100
+  - FRAME Swatch `53:509` 100×100
+  - FRAME Swatch `53:511` 100×100
+  - FRAME Frame `53:513` 24×24
+  - FRAME Frame `53:521` 24×24
+  - FRAME Frame `53:525` 24×24
+  - FRAME Frame `53:529` 24×24
+  - FRAME Frame `53:533` 24×24
+  - FRAME Frame `53:537` 24×24
+  - FRAME Frame `53:541` 24×24
+- FRAME **Warning** `54:802` 420×1386
+  - TEXT LABEL `53:555` 66×100
+  - TEXT LABEL `53:556` 66×100
+  - TEXT LABEL `53:557` 66×100
+  - TEXT LABEL `53:558` 64×100
+  - TEXT LABEL `53:559` 82×100
+  - TEXT LABEL `53:560` 85×100
+  - TEXT LABEL `53:561` 85×100
+  - FRAME Swatch `53:562` 50×50
+  - FRAME Swatch `53:563` 302×100
+  - TEXT CATEGORY `53:564` 99×29
+  - FRAME Swatch `53:565` 50×50
+  - FRAME Swatch `53:566` 50×50
+  - FRAME Swatch `53:567` 50×50
+  - FRAME Swatch `53:568` 50×50
+  - FRAME Swatch `53:569` 50×50
+  - FRAME Swatch `53:570` 50×50
+  - FRAME Swatch `53:571` 100×100
+  - FRAME Swatch `53:573` 100×100
+  - FRAME Swatch `53:575` 100×100
+  - FRAME Swatch `53:577` 100×100
+  - FRAME Swatch `53:579` 100×100
+  - FRAME Swatch `53:581` 100×100
+  - FRAME Swatch `53:583` 100×100
+  - FRAME Frame `53:585` 24×24
+  - FRAME Frame `53:593` 24×24
+  - FRAME Frame `53:597` 24×24
+  - FRAME Frame `53:601` 24×24
+  - FRAME Frame `53:605` 24×24
+  - FRAME Frame `53:609` 24×24
+  - FRAME Frame `53:613` 24×24
+- FRAME **Danger** `54:804` 420×1386
+  - TEXT LABEL `53:627` 66×100
+  - TEXT LABEL `53:628` 66×100
+  - TEXT LABEL `53:629` 66×100
+  - TEXT LABEL `53:630` 64×100
+  - TEXT LABEL `53:631` 82×100
+  - TEXT LABEL `53:632` 85×100
+  - TEXT LABEL `53:633` 85×100
+  - FRAME Swatch `53:634` 50×50
+  - FRAME Swatch `53:635` 302×100
+  - TEXT CATEGORY `53:636` 86×29
+  - FRAME Swatch `53:637` 50×50
+  - FRAME Swatch `53:638` 50×50
+  - FRAME Swatch `53:639` 50×50
+  - FRAME Swatch `53:640` 50×50
+  - FRAME Swatch `53:641` 50×50
+  - FRAME Swatch `53:642` 50×50
+  - FRAME Swatch `53:643` 100×100
+  - FRAME Swatch `53:645` 100×100
+  - FRAME Swatch `53:647` 100×100
+  - FRAME Swatch `53:649` 100×100
+  - FRAME Swatch `53:651` 100×100
+  - FRAME Swatch `53:653` 100×100
+  - FRAME Swatch `53:655` 100×100
+  - FRAME Frame `53:657` 24×24
+  - FRAME Frame `53:665` 24×24
+  - FRAME Frame `53:669` 24×24
+  - FRAME Frame `53:673` 24×24
+  - FRAME Frame `53:677` 24×24
+  - FRAME Frame `53:681` 24×24
+  - FRAME Frame `53:685` 24×24
+- FRAME **Home V2** `7004:462` 1440×8051
+  - RECTANGLE 11EF09D2-326C-40C8-BB0F-832B7A74CC22 1 `7004:463` 1440×1447
+  - RECTANGLE Rectangle 70 `7004:464` 1440×1447
+  - RECTANGLE Rectangle 76 `7004:465` 529×520
+  - RECTANGLE Rectangle 78 `7004:466` 529×520
+  - RECTANGLE Rectangle 80 `7004:467` 295×302
+  - RECTANGLE Rectangle 81 `7004:468` 315×302
+  - RECTANGLE Rectangle 82 `7004:469` 295×302
+  - RECTANGLE Rectangle 88 `7004:470` 295×302
+  - RECTANGLE metodologia-de-desarrollo-de-software-agil-flujo-de-trabajo-de-las-tablas-de-scrum-interfaz-virtual-de-toque-de-dedos 1 `7004:471` 295×298
+  - RECTANGLE Rectangle 83 `7004:472` 315×302
+  - RECTANGLE Rectangle 85 `7004:473` 315×302
+  - RECTANGLE Rectangle 44 `7004:474` 1440×160
+  - RECTANGLE intelindev 1 `7004:475` 1441×842
+  - FRAME Frame 16 `7004:476` 716×315
+  - RECTANGLE Rectangle 49 `7004:488` 1440×821
+  - RECTANGLE Rectangle 45 `7004:489` 820×89
+  - RECTANGLE Rectangle 46 `7004:490` 85×89
+  - FRAME Frame 38 `7004:491` 740×21
+  - FRAME Frame 87 `7004:505` 820×167
+  - FRAME Frame 88 `7004:511` 820×167
+  - RECTANGLE Rectangle 50 `7004:517` 295×391
+  - RECTANGLE Rectangle 67 `7004:518` 295×391
+  - RECTANGLE Rectangle 68 `7004:519` 295×391
+  - FRAME Frame 46 `7004:520` 235×311
+  - RECTANGLE Rectangle 69 `7004:527` 295×391
+  - FRAME Frame 47 `7004:528` 235×311
+  - FRAME Frame 48 `7004:535` 235×311
+  - FRAME Frame 49 `7004:542` 235×311
+  - GROUP Group 33 `7004:549` 48×48
+  - RECTANGLE Rectangle 56 `7004:553` 1440×286
+  - FRAME Frame 62 `7004:554` 1252×206
+  - RECTANGLE Rectangle 63 `7004:570` 1440×700
+  - RECTANGLE Rectangle 66 `7004:571` 1440×653
+  - RECTANGLE Rectangle 107 `7004:572` 1440×339
+  - FRAME Frame 82 `7004:573` 621×493
+  - GROUP Group 85 `7004:598` 1440×300
+  - INSTANCE Frame 86 `7004:647` 172×80
+  - FRAME Frame 52 `7004:648` 630×501
+  - FRAME Frame 89 `7004:670` 610×276
+  - GROUP Group 61 `7004:683` 536×569
+  - RECTANGLE Rectangle 71 `7004:686` 529×520
+  - TEXT Néxito Plataforma inteligente para formar emprendedores `7004:687` 489×75
+  - RECTANGLE Rectangle 73 `7004:688` 489×306
+  - RECTANGLE Rectangle 74 `7004:689` 529×520
+  - TEXT Sana Sana Programa de salud con beneficios exclusivos `7004:690` 489×75
+  - RECTANGLE Rectangle 75 `7004:691` 489×306
+  - TEXT Four Winds Group Sistema integral de gestión empresarial `7004:692` 489×52
+  - TEXT Dhisve Ecommerce especializado en productos médicos `7004:693` 489×75
+  - RECTANGLE Rectangle 77 `7004:694` 489×306
+  - RECTANGLE Rectangle 79 `7004:695` 489×306
+  - FRAME Frame 92 `7004:696` 262×134
+  - FRAME Frame 93 `7004:702` 262×141
+  - FRAME Frame 91 `7004:708` 188×16
+  - FRAME Frame 94 `7004:711` 262×118
+  - RECTANGLE Rectangle 86 `7004:717` 1440×638
+  - RECTANGLE Rectangle 87 `7004:718` 710×635
+  - FRAME Frame 95 `7004:719` 610×324
+  - TEXT Te contamos qué estamos construyendo y por qué importa. `7004:727` 438×42
+  - TEXT Súmate a nuestras novedades `7004:728` 489×114
+  - RECTANGLE concepto-de-control-de-calidad-estandar-m 1 `7004:729` 710×639
+  - FRAME Frame 141 `7004:730` 420×414
+  - GROUP Group 83 `7004:748` 696×487
+  - GROUP Group 84 `7004:763` 696×487
+  - RECTANGLE Rectangle 106 `7004:778` 197×169
+  - RECTANGLE Rectangle 108 `7004:779` 441×60
+  - GROUP Group 86 `7004:780` 50×50
+  - TEXT Ingresa tu correo electrónico `7004:783` 185×16
+
+## Alert (C) (`5006:512`)
+
+- COMPONENT_SET **Alert** `5006:844` 533×517
+  - COMPONENT Type=Info `5006:863` 488×102
+  - COMPONENT Type=Success `5006:10849` 488×102
+  - COMPONENT Type=Warning `5006:10855` 488×102
+  - COMPONENT Type=Danger `5006:10861` 488×102
+
+## Accordion (C) (`2110:3640`)
+
+- COMPONENT_SET **Accordion Item** `2184:60` 1673×1228
+  - COMPONENT State=Collapsed, Boxed=No `2184:61` 723×70
+  - COMPONENT State=Collapsed, Boxed=Yes `2185:69` 723×60
+  - COMPONENT State=Expanded, Boxed=No `2185:74` 723×132
+  - COMPONENT State=Expanded, Boxed=Yes `2185:111` 723×122
+  - COMPONENT State=Collapsed Hover, Boxed=Yes `2185:664` 723×60
+  - COMPONENT State=Collapsed Hover, Boxed=No `2185:668` 723×70
+  - COMPONENT State=Expanded Hover, Boxed=Yes `2185:681` 723×122
+  - COMPONENT State=Expanded Hover, Boxed=No `2185:686` 723×132
+- COMPONENT_SET **Accordion Group** `2189:782` 1543×1412
+  - COMPONENT Boxed=Yes `2189:293` 723×1040
+  - COMPONENT Boxed=No `2190:3110` 723×1190
+
+## Button (C) (`33:2`)
+
+- COMPONENT_SET **Button** `33:37` 1832×1740
+  - COMPONENT Type=Primary, State=Default, Size=Default `33:38` 98×47
+  - COMPONENT Type=Primary, State=Default, Size=Icon `5436:29246` 48×48
+  - COMPONENT Type=Primary, State=Hover, Size=Default `2096:13237` 98×47
+  - COMPONENT Type=Primary, State=Hover, Size=Icon `5436:29250` 48×48
+  - COMPONENT Type=Link, State=Default, Size=Default `67:143` 98×47
+  - COMPONENT Type=Link, State=Default, Size=Icon `5436:32802` 48×48
+  - COMPONENT Type=Link, State=Hover, Size=Default `2096:13286` 98×47
+  - COMPONENT Type=Link, State=Hover, Size=Icon `5436:32806` 48×48
+  - COMPONENT Type=Link - Alt, State=Default, Size=Default `2004:16` 98×47
+  - COMPONENT Type=Link - Alt, State=Default, Size=Icon `5436:32810` 48×48
+  - COMPONENT Type=Link - Alt, State=Hover, Size=Default `2096:13293` 98×47
+  - COMPONENT Type=Link - Alt, State=Hover, Size=Icon `5436:32814` 48×48
+  - COMPONENT Type=Primary - Alt, State=Default, Size=Default `67:125` 98×47
+  - COMPONENT Type=Primary - Alt, State=Default, Size=Icon `5436:32818` 48×48
+  - COMPONENT Type=Primary - Alt, State=Hover, Size=Default `2096:13251` 98×47
+  - COMPONENT Type=Primary - Alt, State=Hover, Size=Icon `5436:32822` 48×48
+  - COMPONENT Type=Secondary - Alt, State=Default, Size=Default `67:131` 98×47
+  - COMPONENT Type=Secondary - Alt, State=Default, Size=Icon `5436:32826` 48×48
+  - COMPONENT Type=Secondary - Alt, State=Hover, Size=Default `2096:13265` 98×47
+  - COMPONENT Type=Secondary - Alt, State=Hover, Size=Icon `5436:32830` 48×48
+  - COMPONENT Type=Danger, State=Default, Size=Default `33:42` 98×47
+  - COMPONENT Type=Danger, State=Default, Size=Icon `5436:32834` 48×48
+  - COMPONENT Type=Danger, State=Hover, Size=Default `2096:13300` 98×47
+  - COMPONENT Type=Danger, State=Hover, Size=Icon `5436:32838` 48×48
+  - COMPONENT Type=Secondary, State=Default, Size=Default `33:46` 98×47
+  - COMPONENT Type=Secondary, State=Default, Size=Icon `5436:32778` 48×48
+  - COMPONENT Type=Secondary, State=Hover, Size=Default `2096:13258` 98×47
+  - COMPONENT Type=Secondary, State=Hover, Size=Icon `5436:32782` 48×48
+  - COMPONENT Type=Ghost, State=Default, Size=Default `2076:5818` 98×47
+  - COMPONENT Type=Ghost, State=Default, Size=Icon `5436:32794` 48×48
+  - COMPONENT Type=Ghost, State=Hover, Size=Default `2096:13272` 98×47
+  - COMPONENT Type=Ghost, State=Hover, Size=Icon `5436:32790` 48×48
+  - COMPONENT Type=Ghost - Alt, State=Default, Size=Default `2076:6000` 98×47
+  - COMPONENT Type=Ghost - Alt, State=Default, Size=Icon `5436:32842` 48×48
+  - COMPONENT Type=Ghost - Alt, State=Hover, Size=Default `2096:13279` 98×47
+  - COMPONENT Type=Ghost - Alt, State=Hover, Size=Icon `5436:32846` 48×48
+
+## Button Group (C) (`2665:13890`)
+
+- COMPONENT_SET **Button Group** `2190:7823` 326×390
+  - COMPONENT Direction=Horizontal `2190:7815` 206×67
+  - COMPONENT Direction=Vertical `2190:7824` 208×104
+
+## Call to Action (C) (`59:18`)
+
+- COMPONENT_SET **Call to Action** `5229:7449` 7016×4233
+  - COMPONENT Image Position=Top, Image Size=Fill `5229:7450` 748×691
+  - COMPONENT Image Position=Bottom, Image Size=Fill `5229:7478` 748×780
+  - COMPONENT Image Position=Right, Image Size=Fill `5229:7506` 1200×396
+  - COMPONENT Image Position=Left, Image Size=Fill `5229:7534` 1347×369
+  - COMPONENT Image Position=Left, Image Size=10% - 1 `5229:7562` 972×342
+  - COMPONENT Image Position=Left, Image Size=15% - 2 `5229:7576` 1115×369
+  - COMPONENT Image Position=Left, Image Size=25% - 3 `5229:7590` 1258×342
+  - COMPONENT Image Position=Left, Image Size=35% - 4 `5229:7604` 1401×342
+  - COMPONENT Image Position=Left, Image Size=50% - 6 `5229:7618` 1687×342
+  - COMPONENT Image Position=Left, Image Size=65% - 8 `5229:7632` 1845×342
+  - COMPONENT Image Position=Left, Image Size=75% - 9 `5229:7646` 2051×342
+  - COMPONENT Image Position=Right, Image Size=10% - 1 `5229:8066` 972×342
+  - COMPONENT Image Position=Right, Image Size=15% - 2 `5229:8094` 1115×342
+  - COMPONENT Image Position=Right, Image Size=25% - 3 `5229:8122` 1258×342
+  - COMPONENT Image Position=Right, Image Size=35% - 4 `5229:8150` 1401×369
+  - COMPONENT Image Position=Right, Image Size=50% - 6 `5229:8178` 1687×369
+  - COMPONENT Image Position=Right, Image Size=65% - 8 `5229:8206` 1834×342
+  - COMPONENT Image Position=Right, Image Size=75% - 9 `5229:8234` 1965×342
+- COMPONENT_SET **Call to Cover** `5229:8458` 1241×1356
+  - COMPONENT Alignment=Center `5229:8459` 748×480
+  - COMPONENT Alignment=Left `5229:8471` 748×480
+- COMPONENT_SET **.GraphicContentCTA** `5229:8483` 1681×4374
+  - COMPONENT Type=Icon, Size=M `5229:8484` 748×30
+  - COMPONENT Type=Image, Size=M `5229:8487` 748×30
+  - COMPONENT Type=Image, Size=L `5229:8489` 748×40
+  - COMPONENT Type=Image, Size=XL `5229:8491` 748×60
+  - COMPONENT Type=Image, Size=2XL `5229:8493` 748×80
+  - COMPONENT Type=Image, Size=3XL `5229:8495` 748×120
+  - COMPONENT Type=Image, Size=4XL `5229:8497` 748×180
+  - COMPONENT Type=Image, Size=5XL `5229:8499` 748×260
+  - COMPONENT Type=Image, Size=6XL `5229:8501` 748×360
+  - COMPONENT Type=Image, Size=7XL `5229:8503` 748×480
+  - COMPONENT Type=Image, Size=8XL `5229:8505` 748×620
+  - COMPONENT Type=Image, Size=9XL `5229:8507` 748×780
+  - COMPONENT Type=Icon, Size=L `5229:8509` 748×40
+  - COMPONENT Type=Icon, Size=XL `5229:8512` 748×60
+  - COMPONENT Type=Icon, Size=2XL `5229:8515` 748×60
+  - COMPONENT Type=Icon, Size=3XL `5229:8518` 748×120
+  - COMPONENT Type=Icon, Size=4XL `5229:8521` 748×180
+  - COMPONENT Type=Icon, Size=5XL `5229:8524` 748×260
+  - COMPONENT Type=Icon, Size=6XL `5229:8527` 748×360
+  - COMPONENT Type=Icon, Size=7XL `5229:8530` 748×480
+  - COMPONENT Type=Icon, Size=8XL `5229:8533` 748×620
+  - COMPONENT Type=Icon, Size=9XL `5229:8536` 748×780
+- COMPONENT_SET **.ContentCTA** `5440:702` 2068×1012
+  - COMPONENT Alignment=Center, Color=Default `5440:699` 748×309
+  - COMPONENT Alignment=Left, Color=Default `5440:703` 748×309
+  - COMPONENT Alignment=Center, Color=Alt `5440:4607` 748×309
+  - COMPONENT Alignment=Left, Color=Alt `5440:4614` 748×309
+- COMPONENT_SET **.ContentBox** `5440:2257` 2068×501
+  - COMPONENT Boxed=No, Position=No `5440:2254` 748×369
+  - COMPONENT Boxed=Yes, Position=Bottom `5440:2258` 808×342
+
+## Card (C) (`2190:7870`)
+
+- COMPONENT_SET **Card** `3005:22669` 763×1108
+  - COMPONENT Type=Default `2355:49803` 723×362
+  - COMPONENT Type=Secondary `3005:22670` 723×362
+
+## Checkbox (`2096:13325`)
+
+- COMPONENT_SET **.CheckboxItem** `2150:2266` 402×182
+  - COMPONENT Checked=Off `2096:13366` 281×28
+  - COMPONENT Checked=On `2150:2267` 281×28
+- FRAME **Checkbox** `2990:3603` 413×317
+  - COMPONENT Checkbox `2990:3578` 276×191
+
+## Content (C) (`2257:733`)
+
+- COMPONENT_SET **Content** `2276:4335` 41813×18643
+  - COMPONENT Image Position=Top, Image Size=1 - 3XL `2276:4336` 829×603
+  - COMPONENT Image Position=Bottom, Image Size=1 - 3XL `2415:3159` 829×547
+  - COMPONENT Image Position=Left, Image Size=1 - 4XL `2321:1177` 829×452
+  - COMPONENT Image Position=Right, Image Size=1 - 4XL `2321:1207` 829×452
+  - COMPONENT Image Position=Top, Image Size=1 - 4XL `2321:1237` 829×735
+  - COMPONENT Image Position=Bottom, Image Size=1 - 4XL `2415:3134` 829×735
+  - COMPONENT Image Position=Right, Image Size=1 - 3XL `2319:4891` 829×452
+  - COMPONENT Image Position=Top, Image Size=Fill `2286:2953` 1115×1185
+  - COMPONENT Image Position=Bottom, Image Size=Fill `2378:4800` 1115×1174
+  - COMPONENT Image Position=Top, Image Size=2 - 3XL `2321:1447` 835×632
+  - COMPONENT Image Position=Bottom, Image Size=2 - 3XL `2415:3468` 835×632
+  - COMPONENT Image Position=Left, Image Size=2 - 3XL `2321:1456` 829×686
+  - COMPONENT Image Position=Right, Image Size=2 - 3XL `2321:1465` 829×686
+  - COMPONENT Image Position=Top, Image Size=2 - 4XL `2321:1535` 829×692
+  - COMPONENT Image Position=Bottom, Image Size=2 - 4XL `2415:3493` 829×692
+  - COMPONENT Image Position=Left, Image Size=2 - 4XL `2321:1544` 829×506
+  - COMPONENT Image Position=Right, Image Size=2 - 4XL `2321:1553` 829×506
+  - COMPONENT Image Position=Top, Image Size=2 - 5XL `2321:1624` 835×772
+  - COMPONENT Image Position=Bottom, Image Size=2 - 5XL `2415:3443` 835×772
+  - COMPONENT Image Position=Left, Image Size=2 - 5XL `2321:1633` 909×506
+  - COMPONENT Image Position=Right, Image Size=2 - 5XL `2321:1642` 829×506
+  - COMPONENT Image Position=Top, Image Size=4 - 5XL `2326:3345` 829×772
+  - COMPONENT Image Position=Bottom, Image Size=4 - 5XL `2415:3593` 829×772
+  - COMPONENT Image Position=Left, Image Size=4 - 5XL `2326:3354` 1115×506
+  - COMPONENT Image Position=Right, Image Size=4 - 5XL `2326:3363` 1115×506
+  - COMPONENT Image Position=Top, Image Size=4 - 6XL `2326:3433` 829×872
+  - COMPONENT Image Position=Bottom, Image Size=4 - 6XL `2415:3618` 829×872
+  - COMPONENT Image Position=Left, Image Size=4 - 6XL `2326:3442` 1115×543
+  - COMPONENT Image Position=Right, Image Size=4 - 6XL `2326:3451` 1115×543
+  - COMPONENT Image Position=Top, Image Size=4 - 7XL `2326:4260` 829×1132
+  - COMPONENT Image Position=Bottom, Image Size=4 - 7XL `2415:3643` 829×1132
+  - COMPONENT Image Position=Left, Image Size=4 - 7XL `2326:4269` 1115×829
+  - COMPONENT Image Position=Right, Image Size=4 - 7XL `2326:4278` 1115×829
+  - COMPONENT Image Position=Top, Image Size=6 - 6XL `2326:4357` 829×872
+  - COMPONENT Image Position=Bottom, Image Size=6 - 6XL `2415:3743` 829×872
+  - COMPONENT Image Position=Left, Image Size=6 - 6XL `2326:4384` 1401×543
+  - COMPONENT Image Position=Right, Image Size=6 - 6XL `2326:4411` 1401×543
+  - COMPONENT Image Position=Top, Image Size=6 - 7XL `2326:4610` 829×992
+  - COMPONENT Image Position=Bottom, Image Size=6 - 7XL `2415:3718` 829×992
+  - COMPONENT Image Position=Left, Image Size=6 - 7XL `2326:4619` 1401×686
+  - COMPONENT Image Position=Right, Image Size=6 - 7XL `2326:4628` 1401×686
+  - COMPONENT Image Position=Top, Image Size=6 - 8XL `2326:4698` 829×1132
+  - COMPONENT Image Position=Bottom, Image Size=6 - 8XL `2415:3693` 829×1132
+  - COMPONENT Image Position=Left, Image Size=6 - 8XL `2326:4707` 1401×829
+  - COMPONENT Image Position=Right, Image Size=6 - 8XL `2326:4716` 1401×829
+  - COMPONENT Image Position=Top, Image Size=3 - 4XL `2328:2861` 829×692
+  - COMPONENT Image Position=Bottom, Image Size=3 - 4XL `2415:3518` 829×692
+  - COMPONENT Image Position=Top, Image Size=3 - 5XL `2328:2870` 829×772
+  - COMPONENT Image Position=Bottom, Image Size=3 - 5XL `2415:3543` 829×772
+  - COMPONENT Image Position=Left, Image Size=3 - 4XL `2328:2888` 829×616
+  - COMPONENT Image Position=Left, Image Size=3 - 5XL `2328:2897` 829×616
+  - COMPONENT Image Position=Right, Image Size=3 - 4XL `2328:2915` 829×616
+  - COMPONENT Image Position=Right, Image Size=3 - 5XL `2328:2924` 829×616
+  - COMPONENT Image Position=Top, Image Size=3 - 6XL `2328:3116` 829×872
+  - COMPONENT Image Position=Bottom, Image Size=3 - 6XL `2415:3418` 829×872
+  - COMPONENT Image Position=Left, Image Size=3 - 6XL `2328:3125` 857×616
+  - COMPONENT Image Position=Right, Image Size=3 - 6XL `2328:3134` 829×616
+  - COMPONENT Image Position=Top, Image Size=3 - 7XL `2328:3204` 829×992
+  - COMPONENT Image Position=Bottom, Image Size=3 - 7XL `2415:3393` 829×992
+  - COMPONENT Image Position=Left, Image Size=3 - 7XL `2328:3213` 829×686
+  - COMPONENT Image Position=Right, Image Size=3 - 7XL `2328:3222` 829×686
+  - COMPONENT Image Position=Top, Image Size=4 - 4XL `2328:3292` 829×692
+  - COMPONENT Image Position=Bottom, Image Size=4 - 4XL `2415:3568` 829×692
+  - COMPONENT Image Position=Left, Image Size=4 - 4XL `2328:3301` 1115×506
+  - COMPONENT Image Position=Right, Image Size=4 - 4XL `2328:3310` 1115×506
+  - COMPONENT Image Position=Top, Image Size=6 - 5XL `2328:3380` 829×772
+  - COMPONENT Image Position=Bottom, Image Size=6 - 5XL `2415:3768` 829×772
+  - COMPONENT Image Position=Left, Image Size=6 - 5XL `2328:3389` 1401×506
+  - COMPONENT Image Position=Right, Image Size=6 - 5XL `2328:3398` 1401×506
+  - COMPONENT Image Position=Top, Image Size=8 - 6XL `2328:3477` 1011×872
+  - COMPONENT Image Position=Bottom, Image Size=8 - 6XL `2415:3793` 1011×872
+  - COMPONENT Image Position=Right, Image Size=8 - 6XL `2328:3486` 1672×543
+  - COMPONENT Image Position=Top, Image Size=6 - 9XL `2328:3556` 829×1292
+  - COMPONENT Image Position=Bottom, Image Size=6 - 9XL `2415:3668` 829×1292
+  - COMPONENT Image Position=Left, Image Size=6 - 9XL `2328:3565` 1401×972
+  - COMPONENT Image Position=Right, Image Size=6 - 9XL `2328:3574` 1401×972
+  - COMPONENT Image Position=Left, Image Size=8 - 7XL `2328:3644` 1672×686
+  - COMPONENT Image Position=Top, Image Size=8 - 7XL `2328:3653` 1011×992
+  - COMPONENT Image Position=Bottom, Image Size=8 - 7XL `2415:3843` 1011×992
+  - COMPONENT Image Position=Right, Image Size=8 - 7XL `2328:3662` 1672×686
+  - COMPONENT Image Position=Left, Image Size=8 - 8XL `2331:2301` 1672×829
+  - COMPONENT Image Position=Top, Image Size=8 - 8XL `2331:2310` 1011×1132
+  - COMPONENT Image Position=Bottom, Image Size=8 - 8XL `2415:3918` 1011×1132
+  - COMPONENT Image Position=Right, Image Size=8 - 8XL `2331:2319` 1672×829
+  - COMPONENT Image Position=Left, Image Size=8 - 9XL `2331:2389` 1672×972
+  - COMPONENT Image Position=Top, Image Size=8 - 9XL `2331:2398` 1011×1292
+  - COMPONENT Image Position=Bottom, Image Size=8 - 9XL `2415:3943` 1011×1292
+  - COMPONENT Image Position=Right, Image Size=8 - 9XL `2331:2407` 1672×972
+  - COMPONENT Image Position=Right, Image Size=9 - 6XL `2332:5126` 1687×616
+  - COMPONENT Image Position=Top, Image Size=9 - 6XL `2332:5135` 1142×872
+  - COMPONENT Image Position=Bottom, Image Size=9 - 6XL `2415:3818` 1142×872
+  - COMPONENT Image Position=Left, Image Size=9 - 7XL `2332:5965` 1687×686
+  - COMPONENT Image Position=Right, Image Size=9 - 7XL `2332:5974` 1687×686
+  - COMPONENT Image Position=Top, Image Size=9 - 7XL `2332:5983` 1142×992
+  - COMPONENT Image Position=Bottom, Image Size=9 - 7XL `2415:3868` 1142×992
+  - COMPONENT Image Position=Left, Image Size=9 - 8XL `2332:6053` 1687×829
+  - COMPONENT Image Position=Right, Image Size=9 - 8XL `2332:6062` 1687×829
+  - COMPONENT Image Position=Top, Image Size=9 - 8XL `2332:6071` 1142×1132
+  - COMPONENT Image Position=Bottom, Image Size=9 - 8XL `2415:3893` 1142×1132
+  - COMPONENT Image Position=Left, Image Size=9 - 9XL `2332:6141` 1687×972
+  - COMPONENT Image Position=Right, Image Size=9 - 9XL `2332:6150` 1687×972
+  - COMPONENT Image Position=Top, Image Size=9 - 9XL `2332:6159` 1142×1292
+  - COMPONENT Image Position=Bottom, Image Size=9 - 9XL `2415:3968` 1142×1292
+  - COMPONENT Image Position=Left, Image Size=Fill `2286:2891` 1115×845
+  - COMPONENT Image Position=Right, Image Size=Fill `2286:2922` 1115×801
+  - COMPONENT Image Position=Left, Image Size=1 - 3XL `2285:1920` 829×452
+  - COMPONENT Image Position=Left, Image Size=8 - 6XL `2328:3468` 1672×543
+  - COMPONENT Image Position=Left, Image Size=9 - 6XL `2332:5117` 1687×616
+- LINE **Line 1** `2321:1623` 41271×0
+- LINE **Line 6** `2328:3114` 41271×0
+- LINE **Line 3** `2326:3634` 41271×0
+- LINE **Line 2** `2321:1712` 41271×0
+- LINE **Line 5** `2326:4170` 41271×0
+- LINE **Line 7** `2328:3732` 41271×0
+- LINE **Line 8** `2332:2222` 41271×0
+- COMPONENT_SET **.ContentImage** `2286:5668` 818×4124
+  - COMPONENT Size=M `2286:5672` 748×30
+  - COMPONENT Size=L `2286:5674` 748×40
+  - COMPONENT Size=XL `2286:5676` 748×60
+  - COMPONENT Size=2XL `2286:5678` 748×80
+  - COMPONENT Size=3XL `2286:5680` 748×120
+  - COMPONENT Size=4XL `2286:5682` 748×180
+  - COMPONENT Size=5XL `2286:5684` 748×260
+  - COMPONENT Size=6XL `2286:5686` 748×360
+  - COMPONENT Size=7XL `2286:5688` 748×480
+  - COMPONENT Size=8XL `2286:5690` 748×620
+- COMPONENT_SET **.ContentVideo** `2348:31548` 818×4124
+  - COMPONENT Size=5XL `2348:31561` 748×260
+  - COMPONENT Size=6XL `2348:31563` 748×360
+  - COMPONENT Size=7XL `2348:31565` 748×480
+  - COMPONENT Size=8XL `2348:31567` 748×620
+
+## Date Picker (`2961:3110`)
+
+- COMPONENT_SET **Date Picker** `2961:3111` 1737×1271
+  - COMPONENT State=Default `2961:3112` 600×85
+  - COMPONENT State=Open `2961:3128` 600×85
+  - COMPONENT State=Selected `2961:3145` 600×85
+
+## Divider (C) (`57:12`)
+
+- COMPONENT_SET **Divider** `57:20` 340×108
+  - COMPONENT Type=Default `57:21` 300×0
+  - COMPONENT Type=Text Left `57:23` 300×0
+  - COMPONENT Type=Text Center `57:60` 300×0
+  - COMPONENT Type=Icon `57:27` 300×0
+
+## Dropdown Menu (`2105:589`)
+
+- COMPONENT_SET **.DropdownMenuItem** `2105:590` 254×425
+  - COMPONENT State=Default, Type=Item - Stretched `2105:606` 200×47
+  - COMPONENT State=Hover, Type=Item - Stretched `2105:611` 200×47
+  - COMPONENT State=Active, Type=Item - Stretched `2105:616` 200×47
+- COMPONENT **.DropdownMenu** `2105:660` 200×329
+  - INSTANCE ITEM 1 `2105:661` 200×47
+  - INSTANCE ITEM 2 `2105:662` 200×47
+  - INSTANCE ITEM 3 `2105:663` 200×47
+  - INSTANCE ITEM 4 `2105:664` 200×47
+  - INSTANCE ITEM 5 `2105:665` 200×47
+  - INSTANCE ITEM 6 `2105:666` 200×47
+  - INSTANCE ITEM 7 `2105:667` 200×47
+- COMPONENT_SET **Dropdown Menu** `2907:6203` 258×555
+  - COMPONENT Open=Yes `2907:6186` 97×47
+  - COMPONENT Open=No `2907:6204` 97×47
+
+## Frame (`7:687`)
+
+- COMPONENT_SET **Frame** `2031:5748` 6201×2317
+  - COMPONENT Size=Desktop, Show Header=No `20:820` 1728×1080
+  - COMPONENT Size=Desktop, Show Header=Yes `5373:21125` 1728×1080
+  - COMPONENT Size=Laptop, Show Header=No `2568:2207` 1728×1080
+  - COMPONENT Size=Laptop, Show Header=Yes `5373:24189` 1728×1080
+  - COMPONENT Size=Tablet, Show Header=No `2568:2205` 880×1080
+  - COMPONENT Size=Tablet, Show Header=Yes `5373:25211` 880×1080
+  - COMPONENT Size=Mobile, Show Header=No `20:821` 375×812
+  - COMPONENT Size=Mobile, Show Header=Yes `5373:25212` 375×812
+
+## Footer (C) (`2351:38081`)
+
+- COMPONENT_SET **.FooterLogo** `2351:38082` 700×118
+  - COMPONENT Size=S `2351:38083` 60×60
+  - COMPONENT Size=M `2351:38085` 120×60
+  - COMPONENT Size=L `2351:38087` 180×60
+- COMPONENT_SET **Footer** `2352:40121` 1831×6377
+  - COMPONENT Width=12 `2352:40070` 1728×789
+  - COMPONENT Width=10 `2401:2603` 1728×789
+  - COMPONENT Width=8 `2401:3092` 1728×1181
+  - COMPONENT Width=Mobile `2662:30620` 1728×2402
+- COMPONENT_SET **.FooterNewsletter** `2400:6793` 2023×1377
+  - COMPONENT Layout=Vertical, Width=12 `2400:6772` 1728×315
+  - COMPONENT Layout=Horizontal, Width=12 `2400:6836` 1728×208
+  - COMPONENT Layout=Horizontal, Width=10 `2400:6879` 1728×208
+  - COMPONENT Layout=Horizontal, Width=8 `2400:6922` 1728×230
+- COMPONENT_SET **.FooterColumn** `2681:1643` 629×388
+  - COMPONENT Type=Default `2675:4343` 200×316
+
+## Form (C) (`2355:48485`)
+
+- COMPONENT_SET **.FormRow** `2355:48797` 788×937
+  - COMPONENT Layout=1 — Auto `2355:48773` 748×84
+  - COMPONENT Layout=2 — Auto `2355:48798` 748×84
+  - COMPONENT Layout=2 — 75 / 25 `3011:22996` 748×88
+  - COMPONENT Layout=2 — 25 / 75 `3011:23096` 748×88
+  - COMPONENT Layout=3 — Auto `2355:48958` 748×84
+  - COMPONENT Layout=3 — 25 / 25 / 50 `3011:23405` 748×84
+  - COMPONENT Layout=3 — 50 / 25 / 25 `3011:23173` 748×84
+  - COMPONENT Layout=4 — Auto `3011:22842` 748×84
+- FRAME **Form** `2967:23083` 1321×1482
+  - COMPONENT Form `2355:49091` 1011×1122
+
+## Header (C) (`2310:2682`)
+
+- COMPONENT_SET **Header** `2310:2905` 1793×2178
+  - COMPONENT Size=Desktop - Full, Layout=1 `2350:31660` 1728×80
+  - COMPONENT Size=Desktop - Full, Layout=3 `5397:12229` 1728×80
+  - COMPONENT Size=Desktop - 12 Col, Layout=3 `5397:13640` 1728×80
+  - COMPONENT Size=Desktop - 10 Col, Layout=3 `5397:14062` 1728×80
+  - COMPONENT Size=Tablet, Layout=1 `5395:9887` 1728×80
+  - COMPONENT Size=Mobile, Layout=1 `5397:20478` 1728×80
+  - COMPONENT Size=Mobile, Layout=3 `5397:12249` 1728×80
+  - COMPONENT Size=Tablet, Layout=3 `5397:21489` 1728×80
+  - COMPONENT Size=Desktop - Full, Layout=2 `5391:66202` 1728×80
+  - COMPONENT Size=Mobile, Layout=2 `5391:69665` 1728×80
+  - COMPONENT Size=Tablet, Layout=2 `5397:20611` 1728×80
+  - COMPONENT Size=Desktop - 12 Col, Layout=2 `5391:68821` 1728×80
+  - COMPONENT Size=Desktop - 10 Col, Layout=2 `5391:69243` 1728×80
+  - COMPONENT Size=Desktop - 12 Col, Layout=1 `5391:64816` 1728×80
+  - COMPONENT Size=Desktop - 10 Col, Layout=1 `5391:65278` 1728×80
+- COMPONENT_SET **.HeaderLogo** `2350:31620` 459×489
+  - COMPONENT Size=S `2350:31628` 60×60
+  - COMPONENT Size=M `2350:31648` 120×60
+  - COMPONENT Size=L `2350:31650` 180×60
+- COMPONENT_SET **.MenColCenterItem** `2092:9138` 140×238
+  - COMPONENT State=Default `2092:9135` 79×47
+  - COMPONENT State=Hover `2092:9139` 79×47
+  - COMPONENT State=Active `2092:9161` 79×47
+- COMPONENT_SET **.MenuColLeftItem** `2108:3373` 248×238
+  - COMPONENT State=Default `2108:3389` 200×47
+  - COMPONENT State=Hover `2108:3394` 200×47
+  - COMPONENT State=Active `2108:3399` 200×47
+- COMPONENT_SET **.Menu** `2092:9742` 981×2416
+  - COMPONENT Layout=Desktop Center `2092:9743` 200×359
+  - COMPONENT Layout=Desktop Left `2092:11319` 200×359
+  - COMPONENT Layout=Mobile Left `2108:2415` 381×469
+  - COMPONENT Layout=Mobile Center `2108:2437` 376×469
+- COMPONENT_SET **.MenMobileLeftItem** `2108:2361` 221×284
+  - COMPONENT State=Default `2108:2362` 177×67
+  - COMPONENT State=Hover `2108:2366` 177×67
+  - COMPONENT State=Active `2108:2370` 177×67
+- COMPONENT_SET **.MenuMobileCenterItem** `2108:3211` 333×284
+  - COMPONENT State=Default `2108:3224` 200×67
+  - COMPONENT State=Hover `2108:3227` 200×67
+  - COMPONENT State=Active `2108:3230` 200×67
+- COMPONENT_SET **.MenuBarItem** `2109:1041` 979×546
+  - COMPONENT State=Default `5391:61046` 98×47
+  - COMPONENT State=Hover `5391:61139` 98×47
+  - COMPONENT State=Open `5391:61194` 98×47
+  - COMPONENT State=Active `5391:61249` 98×47
+- COMPONENT_SET **.MenuColLeftItemType** `2230:1796` 240×238
+  - COMPONENT Type=Default `2230:1793` 200×47
+  - COMPONENT Type=Title `2230:1797` 200×42
+  - COMPONENT Type=Button `2230:1805` 89×47
+- COMPONENT_SET **.MenColCenterItemType** `2231:814` 129×258
+  - COMPONENT Type=Default `2231:811` 78×47
+  - COMPONENT Type=Title `2231:815` 72×42
+  - COMPONENT Type=Button `2231:822` 89×47
+- COMPONENT_SET **.MenuMobileCenterItemType** `2255:887` 240×284
+  - COMPONENT Type=Default `2255:885` 200×67
+  - COMPONENT Type=Button `2255:888` 165×67
+- COMPONENT_SET **.MenMobileLeftItemType** `2255:2599` 217×284
+  - COMPONENT Type=Button `2255:2596` 165×67
+  - COMPONENT Type=Default `2255:2600` 177×67
+
+## Hero (C) (`2654:1047`)
+
+- COMPONENT_SET **Hero** `5229:9787` 4034×4014
+  - COMPONENT Text Alignment=Center, Content Alignment=Middle `5229:9788` 1728×620
+  - COMPONENT Text Alignment=Center, Content Alignment=Fill `5229:9800` 1728×620
+  - COMPONENT Text Alignment=Center, Content Alignment=12 `5229:9813` 1728×620
+  - COMPONENT Text Alignment=Center, Content Alignment=10 `5229:9826` 1728×620
+  - COMPONENT Text Alignment=Center, Content Alignment=8 `5229:9839` 1728×620
+  - COMPONENT Text Alignment=Left, Content Alignment=Middle `5229:9852` 1728×620
+  - COMPONENT Text Alignment=Left, Content Alignment=Fill `5229:9864` 1728×620
+  - COMPONENT Text Alignment=Left, Content Alignment=12 `5229:9877` 1728×620
+  - COMPONENT Text Alignment=Left, Content Alignment=10 `5229:9890` 1728×620
+  - COMPONENT Text Alignment=Left, Content Alignment=8 `5229:9903` 1728×620
+- COMPONENT_SET **.GraphicContentHero** `5229:9916` 1681×4433
+  - COMPONENT Type=Icon, Size=M `5229:9917` 30×30
+  - COMPONENT Type=Image, Size=M `5229:9920` 748×30
+  - COMPONENT Type=Image, Size=L `5229:9922` 748×40
+  - COMPONENT Type=Image, Size=XL `5229:9924` 748×60
+  - COMPONENT Type=Image, Size=2XL `5229:9926` 748×80
+  - COMPONENT Type=Image, Size=3XL `5229:9928` 748×120
+  - COMPONENT Type=Image, Size=4XL `5229:9930` 748×180
+  - COMPONENT Type=Image, Size=5XL `5229:9932` 748×260
+  - COMPONENT Type=Image, Size=6XL `5229:9934` 748×360
+  - COMPONENT Type=Image, Size=7XL `5229:9936` 748×480
+  - COMPONENT Type=Image, Size=8XL `5229:9938` 748×620
+  - COMPONENT Type=Image, Size=9XL `5229:9940` 748×780
+  - COMPONENT Type=Icon, Size=L `5229:9942` 40×40
+  - COMPONENT Type=Icon, Size=XL `5229:9945` 60×60
+  - COMPONENT Type=Icon, Size=2XL `5229:9948` 80×80
+  - COMPONENT Type=Icon, Size=3XL `5229:9951` 120×120
+  - COMPONENT Type=Icon, Size=4XL `5229:9954` 180×180
+  - COMPONENT Type=Icon, Size=5XL `5229:9957` 260×260
+  - COMPONENT Type=Icon, Size=6XL `5229:9960` 360×360
+  - COMPONENT Type=Icon, Size=7XL `5229:9963` 480×480
+  - COMPONENT Type=Icon, Size=8XL `5229:9966` 617×620
+  - COMPONENT Type=Icon, Size=9XL `5229:9969` 617×780
+
+## Icon (C) (`57:67`)
+
+- COMPONENT_SET **Icon** `59:102` 2574×1053
+  - COMPONENT Size=XS, View=Default, Color=Default `59:106` 15×15
+  - COMPONENT Size=XS, View=Default, Color=Primary `5427:8820` 15×15
+  - COMPONENT Size=XS, View=Stacked, Color=Default `5426:29325` 15×15
+  - COMPONENT Size=XS, View=Stacked, Color=Primary `5427:8822` 15×15
+  - COMPONENT Size=XS, View=Framed, Color=Default `5426:29413` 15×15
+  - COMPONENT Size=XS, View=Framed, Color=Primary `5427:8824` 15×15
+  - COMPONENT Size=S, View=Default, Color=Default `59:109` 20×20
+  - COMPONENT Size=S, View=Default, Color=Primary `5427:8826` 20×20
+  - COMPONENT Size=S, View=Stacked, Color=Default `5426:29327` 20×20
+  - COMPONENT Size=S, View=Stacked, Color=Primary `5427:8828` 20×20
+  - COMPONENT Size=S, View=Framed, Color=Default `5426:29415` 20×20
+  - COMPONENT Size=S, View=Framed, Color=Primary `5427:8830` 20×20
+  - COMPONENT Size=M, View=Default, Color=Default `59:112` 30×30
+  - COMPONENT Size=M, View=Default, Color=Primary `5427:8832` 30×30
+  - COMPONENT Size=M, View=Stacked, Color=Default `5426:29329` 30×30
+  - COMPONENT Size=M, View=Stacked, Color=Primary `5427:8834` 30×30
+  - COMPONENT Size=M, View=Framed, Color=Default `5426:29417` 30×30
+  - COMPONENT Size=M, View=Framed, Color=Primary `5427:8836` 30×30
+  - COMPONENT Size=L, View=Default, Color=Default `59:115` 40×40
+  - COMPONENT Size=L, View=Default, Color=Primary `5427:8838` 40×40
+  - COMPONENT Size=L, View=Stacked, Color=Default `5426:29331` 40×40
+  - COMPONENT Size=L, View=Stacked, Color=Primary `5427:8840` 40×40
+  - COMPONENT Size=L, View=Framed, Color=Default `5426:29419` 40×40
+  - COMPONENT Size=L, View=Framed, Color=Primary `5427:8842` 40×40
+  - COMPONENT Size=XL, View=Default, Color=Default `59:118` 60×60
+  - COMPONENT Size=XL, View=Default, Color=Primary `5427:8844` 60×60
+  - COMPONENT Size=XL, View=Stacked, Color=Default `5426:29333` 60×60
+  - COMPONENT Size=XL, View=Stacked, Color=Primary `5427:8846` 60×60
+  - COMPONENT Size=XL, View=Framed, Color=Default `5426:29421` 60×60
+  - COMPONENT Size=XL, View=Framed, Color=Primary `5427:8848` 60×60
+  - COMPONENT Size=2XL, View=Default, Color=Default `59:121` 80×80
+  - COMPONENT Size=2XL, View=Default, Color=Primary `5427:8850` 80×80
+  - COMPONENT Size=2XL, View=Stacked, Color=Default `5426:29335` 80×80
+  - COMPONENT Size=2XL, View=Stacked, Color=Primary `5427:8852` 80×80
+  - COMPONENT Size=2XL, View=Framed, Color=Default `5426:29423` 80×80
+  - COMPONENT Size=2XL, View=Framed, Color=Primary `5427:8854` 80×80
+  - COMPONENT Size=3XL, View=Default, Color=Default `5365:21847` 120×120
+  - COMPONENT Size=3XL, View=Default, Color=Primary `5427:8856` 120×120
+  - COMPONENT Size=3XL, View=Stacked, Color=Default `5426:29337` 120×120
+  - COMPONENT Size=3XL, View=Stacked, Color=Primary `5427:8858` 120×120
+  - COMPONENT Size=3XL, View=Framed, Color=Default `5426:29425` 120×120
+  - COMPONENT Size=3XL, View=Framed, Color=Primary `5427:8860` 120×120
+  - COMPONENT Size=4XL, View=Default, Color=Default `5365:21850` 180×180
+  - COMPONENT Size=4XL, View=Default, Color=Primary `5427:8862` 180×180
+  - COMPONENT Size=4XL, View=Stacked, Color=Default `5426:29339` 180×180
+  - COMPONENT Size=4XL, View=Stacked, Color=Primary `5427:8864` 180×180
+  - COMPONENT Size=4XL, View=Framed, Color=Default `5426:29427` 180×180
+  - COMPONENT Size=4XL, View=Framed, Color=Primary `5427:8866` 180×180
+  - COMPONENT Size=5XL, View=Default, Color=Default `5365:21853` 260×260
+  - COMPONENT Size=5XL, View=Default, Color=Primary `5427:8868` 260×260
+  - COMPONENT Size=5XL, View=Stacked, Color=Default `5426:29341` 260×260
+  - COMPONENT Size=5XL, View=Stacked, Color=Primary `5427:8870` 260×260
+  - COMPONENT Size=5XL, View=Framed, Color=Default `5426:29429` 260×260
+  - COMPONENT Size=5XL, View=Framed, Color=Primary `5427:8872` 260×260
+
+## Icon Box (C) (`57:146`)
+
+- COMPONENT_SET **Icon Box** `58:38` 2329×2346
+  - COMPONENT Icon Position=Top, Boxed=No `58:37` 558×279
+  - COMPONENT Icon Position=Top Left, Boxed=No `59:483` 558×279
+  - COMPONENT Icon Position=Left, Boxed=No `58:56` 558×189
+  - COMPONENT Icon Position=Right, Boxed=No `58:94` 558×189
+  - COMPONENT Icon Position=Right, Boxed=Yes `58:102` 558×276
+  - COMPONENT Icon Position=Left, Boxed=Yes `58:86` 558×276
+  - COMPONENT Icon Position=Top, Boxed=Yes `58:39` 558×339
+  - COMPONENT Icon Position=Top Left, Boxed=Yes `59:493` 558×339
+
+## Input (`2014:2`)
+
+- COMPONENT_SET **Input** `2015:510` 3136×1985
+  - COMPONENT Type=Textarea, State=Default `2016:953` 938×157
+  - COMPONENT Type=Textarea, State=Typing `5202:20394` 938×157
+  - COMPONENT Type=Textarea, State=Entered `5202:20645` 938×157
+  - COMPONENT Type=Text Field, State=Default `2016:993` 938×84
+  - COMPONENT Type=Search, State=Default `5381:17753` 938×84
+  - COMPONENT Type=Text Field, State=Typing `5202:20407` 938×84
+  - COMPONENT Type=Search, State=Typing `5381:17770` 938×84
+  - COMPONENT Type=Text Field, State=Entered `5202:20630` 938×84
+  - COMPONENT Type=Search, State=Entered `5381:17787` 938×84
+  - COMPONENT Type=File Upload, State=Default `2016:1113` 938×84
+  - COMPONENT Type=File Upload, State=Typing `5202:20437` 938×84
+  - COMPONENT Type=File Upload, State=Entered `5202:20658` 938×84
+  - COMPONENT Type=Password, State=Default `2016:1241` 938×84
+  - COMPONENT Type=Password, State=Typing `5202:20453` 938×84
+  - COMPONENT Type=Password, State=Entered `5202:20615` 938×84
+
+## Image (C) (`60:107`)
+
+- COMPONENT_SET **Image** `2256:1124` 1590×1059
+  - COMPONENT Property 1=Default `2256:1125` 748×543
+
+## Radio (`2150:2259`)
+
+- COMPONENT_SET **.RadioItem** `2150:2274` 402×182
+  - COMPONENT Checked=Off `2096:13458` 281×28
+  - COMPONENT Checked=On `2150:2275` 281×28
+- FRAME **Radio Group** `2886:4845` 377×411
+  - COMPONENT Radio `2886:4814` 276×176
+
+## Select (`2960:886`)
+
+- COMPONENT_SET **.SelectItem** `2960:1879` 191×123
+  - COMPONENT State=Default `2960:1880` 151×32
+  - COMPONENT State=Hover `2960:1882` 151×32
+- COMPONENT **.SelectMenu** `2960:2764` 151×240
+  - INSTANCE .SelectItem `2960:2723` 151×32
+  - INSTANCE .SelectItem `2960:2728` 151×32
+  - INSTANCE .SelectItem `2960:2733` 151×32
+  - INSTANCE .SelectItem `2960:2738` 151×32
+  - INSTANCE .SelectItem `2960:2743` 151×32
+  - INSTANCE .SelectItem `2960:2748` 151×32
+  - INSTANCE .SelectItem `2960:2753` 151×32
+- COMPONENT_SET **Select** `2960:2772` 640×1827
+  - COMPONENT State=Default `2016:1033` 600×85
+  - COMPONENT State=Open `2960:2773` 600×85
+  - COMPONENT State=Selected `2960:2812` 600×85
+
+## Social Icons (C) (`2352:42908`)
+
+- COMPONENT_SET **Social Icons** `2352:43054` 1301×128
+  - COMPONENT Style=Default `2352:42939` 240×30
+  - COMPONENT Style=Framed `2352:43408` 240×30
+
+## Spacer (C) (`60:116`)
+
+- COMPONENT_SET **Spacer** `77:188` 937×1045
+  - COMPONENT Space=2XS `77:189` 897×10
+  - COMPONENT Space=XS `77:190` 897×15
+  - COMPONENT Space=S `77:191` 897×20
+  - COMPONENT Space=M `77:192` 897×30
+  - COMPONENT Space=L `77:193` 897×40
+  - COMPONENT Space=XL `77:194` 897×60
+  - COMPONENT Space=2XL `77:195` 897×80
+  - COMPONENT Space=3XL `77:196` 897×120
+  - COMPONENT Space=4XL `77:197` 897×180
+  - COMPONENT Space=5XL `77:198` 897×260
+
+## Tabs (C) (`60:113`)
+
+- COMPONENT_SET **Tabs** `94:279` 769×604
+  - COMPONENT Direction=Horizontal `93:216` 546×57
+  - COMPONENT Direction=Vertical Center `94:280` 200×399
+  - COMPONENT Direction=Vertical Left `94:301` 200×399
+- COMPONENT_SET **.TabsBarItem ** `2112:5380` 137×267
+  - COMPONENT State=Default `2112:5381` 79×57
+  - COMPONENT State=Hover `2112:5385` 79×57
+  - COMPONENT State=Active `2112:5389` 79×57
+- COMPONENT_SET **.TabsColItem** `2112:5393` 259×267
+  - COMPONENT State=Default `2112:5394` 200×57
+  - COMPONENT State=Hover `2112:5399` 200×57
+  - COMPONENT State=Active `2112:5404` 200×57
+
+## Testimonial (C) (`2174:1689`)
+
+- COMPONENT_SET **Testimonial** `2174:1718` 1389×1050
+  - COMPONENT Alignment=Left, Boxed=No `2174:1717` 544×235
+  - COMPONENT Alignment=Left, Boxed=Yes `2182:626` 544×295
+  - COMPONENT Alignment=Center, Boxed=No `2394:17067` 544×304
+  - COMPONENT Alignment=Center, Boxed=Yes `2182:636` 544×364
+
+## Text (C) (`90:176`)
+
+- COMPONENT_SET **Text** `2383:7087` 2173×1020
+  - COMPONENT Type=Paragraph, Size=M `2383:7290` 421×162
+  - COMPONENT Type=Paragraph, Size=L `2383:7292` 421×217
+  - COMPONENT Type=Paragraph, Size=S `2383:7294` 421×110
+  - COMPONENT Type=Paragraph, Size=XS `2383:7296` 421×68
+  - COMPONENT Type=Heading, Size=XS `2383:7301` 187×31
+  - COMPONENT Type=Heading, Size=M `2383:7303` 291×39
+  - COMPONENT Type=Heading, Size=S `2612:7845` 233×34
+  - COMPONENT Type=Heading, Size=L `2383:7305` 364×48
+  - COMPONENT Type=Heading, Size=XL `2383:7307` 455×55
+  - COMPONENT Type=Heading, Size=2XL `2612:7843` 569×69
+  - COMPONENT Type=Heading, Size=3XL `2383:7309` 711×86
+  - COMPONENT Type=Body, Size=M `5225:25724` 162×27
+  - COMPONENT Type=Body, Size=S `5225:25726` 130×22
+  - COMPONENT Type=Body, Size=XS `5225:25728` 104×17
+  - COMPONENT Type=Body, Size=L `5225:25730` 203×31
+  - COMPONENT Type=Link, Size=M `5225:25738` 105×27
+  - COMPONENT Type=Link, Size=S `5225:25740` 82×22
+  - COMPONENT Type=Link, Size=XS `5225:25742` 66×17
+  - COMPONENT Type=Link, Size=L `5225:25744` 129×31
+
+## Video (C) (`60:112`)
+
+- COMPONENT_SET **Video** `2286:6510` 893×520
+  - COMPONENT Property 1=Default `95:486` 853×480
+
+## --- (`20:823`)
+
+
+## Cover (`97:351`)
+
+- FRAME **Cover** `97:353` 947×529
+  - ELLIPSE Ellipse 2 `5086:14997` 707×707
+  - ELLIPSE Ellipse 3 `5086:14999` 915×707
+  - FRAME Frame 5 `5085:14928` 847×432
+  - INSTANCE Frame 86 `7004:837` 405×189
+
+## Icons Library (`20:964`)
+
+- FRAME **Fontawesome - Solid** `22:6935` 2489×1594
+  - COMPONENT comment-dots `23:12461` 28×28
+  - COMPONENT passport `23:12459` 28×28
+  - COMPONENT socks `23:12455` 28×28
+  - COMPONENT underline `23:12366` 28×28
+  - COMPONENT file-arrow-up `23:12364` 28×28
+  - COMPONENT headphones-simple `23:12362` 28×28
+  - COMPONENT cloud-meatball `23:12457` 28×28
+  - COMPONENT caret-down `23:12453` 28×28
+  - COMPONENT dice-three `23:12451` 28×28
+  - COMPONENT file-zipper `23:12449` 28×28
+  - COMPONENT hand `23:12445` 28×28
+  - COMPONENT toggle-on `23:11829` 28×28
+  - COMPONENT clone `23:11827` 28×28
+  - COMPONENT arrow-rotate-right `23:12448` 28×28
+  - COMPONENT person-digging `23:12442` 28×28
+  - COMPONENT crow `23:12438` 28×28
+  - COMPONENT bars-progress `23:12432` 28×28
+  - COMPONENT right-from-bracket `23:12424` 28×28
+  - COMPONENT plug-circle-check `23:12418` 28×28
+  - COMPONENT bottle-droplet `23:12435` 28×28
+  - COMPONENT pallet `23:12427` 28×28
+  - COMPONENT person-drowning `23:12421` 28×28
+  - COMPONENT eraser `23:12412` 28×28
+  - COMPONENT list-ul `23:12410` 28×28
+  - COMPONENT chart-line `23:12404` 28×28
+  - COMPONENT person-chalkboard `23:12396` 28×28
+  - COMPONENT receipt `23:12388` 28×28
+  - COMPONENT diagram-successor `23:12407` 28×28
+  - COMPONENT money-bill-transfer `23:12399` 28×28
+  - COMPONENT briefcase-medical `23:12391` 28×28
+  - COMPONENT file-circle-exclamation `23:12436` 28×28
+  - COMPONENT right-left `23:12428` 28×28
+  - COMPONENT cash-register `23:12422` 28×28
+  - COMPONENT arrow-down `23:12416` 28×28
+  - COMPONENT money-bill-1-wave `23:12431` 28×28
+  - COMPONENT arrows-turn-right `23:12338` 28×28
+  - COMPONENT campground `23:12336` 28×28
+  - COMPONENT poo `23:12334` 28×28
+  - COMPONENT file-pen `23:12408` 28×28
+  - COMPONENT ghost `23:12400` 28×28
+  - COMPONENT business-time `23:12392` 28×28
+  - COMPONENT list `23:12384` 28×28
+  - COMPONENT volume-off `23:12403` 28×28
+  - COMPONENT house-chimney-window `23:12395` 28×28
+  - COMPONENT users-gear `23:12387` 28×28
+  - COMPONENT house-circle-exclamation `23:12440` 28×28
+  - COMPONENT diagram-next `23:12383` 28×28
+  - COMPONENT neuter `23:12380` 28×28
+  - COMPONENT book-bookmark `23:12376` 28×28
+  - COMPONENT file-excel `23:12372` 28×28
+  - COMPONENT virus `23:12368` 28×28
+  - COMPONENT map-location-dot `23:12379` 28×28
+  - COMPONENT house `23:12375` 28×28
+  - COMPONENT stapler `23:12371` 28×28
+  - COMPONENT prescription `23:12360` 28×28
+  - COMPONENT arrow-down-short-wide `23:12358` 28×28
+  - COMPONENT bed `23:12354` 28×28
+  - COMPONENT stopwatch-20 `23:12350` 28×28
+  - COMPONENT mars-and-venus `23:12346` 28×28
+  - COMPONENT dumpster `23:12357` 28×28
+  - COMPONENT building-shield `23:12353` 28×28
+  - COMPONENT flask-vial `23:12349` 28×28
+  - COMPONENT wind `23:12254` 28×28
+  - COMPONENT person-walking-with-cane `23:12289` 28×28
+  - COMPONENT text-slash `23:12273` 28×28
+  - COMPONENT clapperboard `23:12257` 28×28
+  - COMPONENT subscript `23:12296` 28×28
+  - COMPONENT viruses `23:12280` 28×28
+  - COMPONENT drum-steelpan `23:12264` 28×28
+  - COMPONENT trash-can `23:12295` 28×28
+  - COMPONENT sack-xmark `23:12292` 28×28
+  - COMPONENT face-grin-tongue-wink `23:12276` 28×28
+  - COMPONENT rotate-left `23:12260` 28×28
+  - COMPONENT handshake-slash `23:12291` 28×28
+  - COMPONENT car-rear `23:12275` 28×28
+  - COMPONENT scissors `23:12259` 28×28
+  - COMPONENT plug-circle-exclamation `23:12286` 28×28
+  - COMPONENT section `23:12270` 28×28
+  - COMPONENT earth-americas `23:12343` 28×28
+  - COMPONENT forward-fast `23:12341` 28×28
+  - COMPONENT chalkboard-user `23:12345` 28×28
+  - COMPONENT repeat `23:12310` 28×28
+  - COMPONENT mitten `23:12308` 28×28
+  - COMPONENT pen-nib `23:12306` 28×28
+  - COMPONENT hands-bound `23:12304` 28×28
+  - COMPONENT grip `23:12302` 28×28
+  - COMPONENT money-bills `23:12332` 28×28
+  - COMPONENT house-laptop `23:12330` 28×28
+  - COMPONENT hourglass `23:12326` 28×28
+  - COMPONENT circle-chevron-right `23:12322` 28×28
+  - COMPONENT circle-exclamation `23:12318` 28×28
+  - COMPONENT chess-rook `23:12329` 28×28
+  - COMPONENT up-down `23:12325` 28×28
+  - COMPONENT dice-one `23:12321` 28×28
+  - COMPONENT ban-smoking `23:12209` 28×28
+  - COMPONENT volcano `23:12228` 28×28
+  - COMPONENT reply `23:12220` 28×28
+  - COMPONENT grip-lines `23:12212` 28×28
+  - COMPONENT camera-retro `23:12245` 28×28
+  - COMPONENT toolbox `23:12244` 28×28
+  - COMPONENT envelope-open-text `23:12250` 28×28
+  - COMPONENT mobile-screen `23:12248` 28×28
+  - COMPONENT handshake-simple `23:12231` 28×28
+  - COMPONENT children `23:12223` 28×28
+  - COMPONENT face-grimace `23:12215` 28×28
+  - COMPONENT house-flood-water-circle-arrow-right `23:12230` 28×28
+  - COMPONENT ankh `23:12222` 28×28
+  - COMPONENT cruzeiro-sign `23:12214` 28×28
+  - COMPONENT chess-knight `23:12225` 28×28
+  - COMPONENT mars-stroke-up `23:12217` 28×28
+  - COMPONENT comments-dollar `23:12315` 28×28
+  - COMPONENT spray-can `23:12313` 28×28
+  - COMPONENT user-secret `23:12317` 28×28
+  - COMPONENT person-swimming `23:12241` 28×28
+  - COMPONENT cloud-bolt `23:12239` 28×28
+  - COMPONENT head-side-cough `23:12237` 28×28
+  - COMPONENT umbrella `23:12235` 28×28
+  - COMPONENT user `23:12233` 28×28
+  - COMPONENT earth-europe `23:12279` 28×28
+  - COMPONENT fire-flame-simple `23:12263` 28×28
+  - COMPONENT cart-plus `23:12298` 28×28
+  - COMPONENT id-badge `23:12282` 28×28
+  - COMPONENT temperature-three-quarters `23:12266` 28×28
+  - COMPONENT tenge-sign `23:12301` 28×28
+  - COMPONENT network-wired `23:12285` 28×28
+  - COMPONENT cannabis `23:12269` 28×28
+  - COMPONENT gun `23:12256` 28×28
+  - COMPONENT tape `23:12297` 28×28
+  - COMPONENT hand-holding `23:12281` 28×28
+  - COMPONENT laptop-code `23:12265` 28×28
+  - COMPONENT panorama `23:12294` 28×28
+  - COMPONENT temperature-full `23:12278` 28×28
+  - COMPONENT arrow-right-to-bracket `23:12262` 28×28
+  - COMPONENT arrows-down-to-line `23:12299` 28×28
+  - COMPONENT circle `23:12290` 28×28
+  - COMPONENT temperature-high `23:12274` 28×28
+  - COMPONENT box-tissue `23:12258` 28×28
+  - COMPONENT earth-asia `23:12287` 28×28
+  - COMPONENT arrow-down-up-across-line `23:12271` 28×28
+  - COMPONENT hippo `23:12255` 28×28
+  - COMPONENT person `23:12288` 28×28
+  - COMPONENT arrow-down-up-lock `23:12272` 28×28
+  - COMPONENT table-list `23:12311` 28×28
+  - COMPONENT brazilian-real-sign `23:12309` 28×28
+  - COMPONENT house-medical-flag `23:12307` 28×28
+  - COMPONENT shop `23:12305` 28×28
+  - COMPONENT car-tunnel `23:12303` 28×28
+  - COMPONENT copyright `23:12293` 28×28
+  - COMPONENT vault `23:12277` 28×28
+  - COMPONENT backward-fast `23:12261` 28×28
+  - COMPONENT square-caret-down `23:12323` 28×28
+  - COMPONENT battery-half `23:12319` 28×28
+  - COMPONENT bolt-lightning `23:12328` 28×28
+  - COMPONENT arrows-split-up-and-left `23:12324` 28×28
+  - COMPONENT music `23:12320` 28×28
+  - COMPONENT burst `23:12342` 28×28
+  - COMPONENT wave-square `23:12340` 28×28
+  - COMPONENT sliders `23:12344` 28×28
+  - COMPONENT quote-right `23:12211` 28×28
+  - COMPONENT folder-tree `23:12246` 28×28
+  - COMPONENT chart-gantt `23:12243` 28×28
+  - COMPONENT cow `23:12249` 28×28
+  - COMPONENT user-large `23:12247` 28×28
+  - COMPONENT code-fork `23:12253` 28×28
+  - COMPONENT igloo `23:12252` 28×28
+  - COMPONENT recycle `23:12251` 28×28
+  - COMPONENT temperature-arrow-down `23:12229` 28×28
+  - COMPONENT eject `23:12221` 28×28
+  - COMPONENT cart-shopping `23:12213` 28×28
+  - COMPONENT hand-point-right `23:12226` 28×28
+  - COMPONENT archway `23:12218` 28×28
+  - COMPONENT jug-detergent `23:12210` 28×28
+  - COMPONENT clock-rotate-left `23:12227` 28×28
+  - COMPONENT earth-africa `23:12219` 28×28
+  - COMPONENT chevron-down `23:12242` 28×28
+  - COMPONENT face-laugh `23:12240` 28×28
+  - COMPONENT heading `23:12238` 28×28
+  - COMPONENT money-bill-1 `23:12236` 28×28
+  - COMPONENT hill-avalanche `23:12234` 28×28
+  - COMPONENT strikethrough `23:12232` 28×28
+  - COMPONENT tents `23:12224` 28×28
+  - COMPONENT file-word `23:12216` 28×28
+  - COMPONENT square-virus `23:12283` 28×28
+  - COMPONENT photo-film `23:12267` 28×28
+  - COMPONENT i-cursor `23:12300` 28×28
+  - COMPONENT money-check `23:12284` 28×28
+  - COMPONENT shirt `23:12268` 28×28
+  - COMPONENT door-closed `23:12314` 28×28
+  - COMPONENT compact-disc `23:12312` 28×28
+  - COMPONENT mosquito `23:12316` 28×28
+  - COMPONENT tower-observation `23:12208` 28×28
+  - COMPONENT rotate `23:12207` 28×28
+  - COMPONENT mug-saucer `23:12206` 28×28
+  - COMPONENT ticket `23:12205` 28×28
+  - COMPONENT boxes-packing `23:12204` 28×28
+  - COMPONENT gas-pump `23:12203` 28×28
+  - COMPONENT building-user `23:12202` 28×28
+  - COMPONENT volume-xmark `23:12201` 28×28
+  - COMPONENT arrows-up-down `23:12200` 28×28
+  - COMPONENT chart-diagram `23:12199` 28×28
+  - COMPONENT weight-hanging `23:12198` 28×28
+  - COMPONENT face-grin-tongue `23:12197` 28×28
+  - COMPONENT shrimp `23:12196` 28×28
+  - COMPONENT couch `23:12195` 28×28
+  - COMPONENT church `23:12194` 28×28
+  - COMPONENT crop `23:12193` 28×28
+  - COMPONENT restroom `23:12192` 28×28
+  - COMPONENT object-group `23:12191` 28×28
+  - COMPONENT pen-fancy `23:12190` 28×28
+  - COMPONENT cookie `23:12189` 28×28
+  - COMPONENT tag `23:12188` 28×28
+  - COMPONENT user-tag `23:12187` 28×28
+  - COMPONENT anchor-circle-exclamation `23:12186` 28×28
+  - COMPONENT tablet-screen-button `23:12185` 28×28
+  - COMPONENT file-export `23:12184` 28×28
+  - COMPONENT briefcase `23:12183` 28×28
+  - COMPONENT circle-chevron-down `23:12182` 28×28
+  - COMPONENT circle-left `23:12181` 28×28
+  - COMPONENT dragon `23:12180` 28×28
+  - COMPONENT file-audio `23:12179` 28×28
+  - COMPONENT ellipsis-vertical `23:12178` 28×28
+  - COMPONENT bag-shopping `23:12177` 28×28
+  - COMPONENT hands-holding `23:12176` 28×28
+  - COMPONENT right-to-bracket `23:12175` 28×28
+  - COMPONENT champagne-glasses `23:12174` 28×28
+  - COMPONENT splotch `23:12173` 28×28
+  - COMPONENT location-pin `23:12172` 28×28
+  - COMPONENT shield-halved `23:12171` 28×28
+  - COMPONENT anchor-circle-check `23:12170` 28×28
+  - COMPONENT shower `23:12169` 28×28
+  - COMPONENT square-poll-horizontal `23:12168` 28×28
+  - COMPONENT virus-covid `23:12167` 28×28
+  - COMPONENT teeth-open `23:12166` 28×28
+  - COMPONENT road-spikes `23:12165` 28×28
+  - COMPONENT phone-volume `23:12164` 28×28
+  - COMPONENT mosquito-net `23:12163` 28×28
+  - COMPONENT file-circle-minus `23:12162` 28×28
+  - COMPONENT plane-circle-xmark `23:12161` 28×28
+  - COMPONENT person-skiing-nordic `23:12160` 28×28
+  - COMPONENT headset `23:12159` 28×28
+  - COMPONENT face-meh `23:12158` 28×28
+  - COMPONENT id-card-clip `23:12157` 28×28
+  - COMPONENT carrot `23:12156` 28×28
+  - COMPONENT prescription-bottle `23:12155` 28×28
+  - COMPONENT arrows-to-circle `23:12154` 28×28
+  - COMPONENT map `23:12153` 28×28
+  - COMPONENT inbox `23:12152` 28×28
+  - COMPONENT trowel `23:12151` 28×28
+  - COMPONENT comments `23:12150` 28×28
+  - COMPONENT align-justify `23:12149` 28×28
+  - COMPONENT anchor-lock `23:12148` 28×28
+  - COMPONENT microphone `23:12147` 28×28
+  - COMPONENT feather-pointed `23:12146` 28×28
+  - COMPONENT database `23:12145` 28×28
+  - COMPONENT calendar-day `23:12144` 28×28
+  - COMPONENT angle-down `23:12143` 28×28
+  - COMPONENT pump-soap `23:12142` 28×28
+  - COMPONENT dice-five `23:12141` 28×28
+  - COMPONENT truck-moving `23:12140` 28×28
+  - COMPONENT people-line `23:12139` 28×28
+  - COMPONENT satellite-dish `23:12137` 28×28
+  - COMPONENT text-width `23:12135` 28×28
+  - COMPONENT delete-left `23:12133` 28×28
+  - COMPONENT location-dot `23:12132` 28×28
+  - COMPONENT arrow-down-z-a `23:12131` 28×28
+  - COMPONENT person-falling-burst `23:12130` 28×28
+  - COMPONENT user-xmark `23:12129` 28×28
+  - COMPONENT share-nodes `23:12128` 28×28
+  - COMPONENT user-astronaut `23:12127` 28×28
+  - COMPONENT tornado `23:12126` 28×28
+  - COMPONENT helmet-un `23:12125` 28×28
+  - COMPONENT file-invoice-dollar `23:12124` 28×28
+  - COMPONENT square-caret-right `23:12123` 28×28
+  - COMPONENT truck-field `23:12122` 28×28
+  - COMPONENT file `23:12121` 28×28
+  - COMPONENT heart-circle-exclamation `23:12120` 28×28
+  - COMPONENT building-ngo `23:12119` 28×28
+  - COMPONENT signal `23:12118` 28×28
+  - COMPONENT trash-can-arrow-up `23:12117` 28×28
+  - COMPONENT share-from-square `23:12116` 28×28
+  - COMPONENT glass-water `23:12115` 28×28
+  - COMPONENT handshake-angle `23:12114` 28×28
+  - COMPONENT brain `23:12113` 28×28
+  - COMPONENT wheat-awn-circle-exclamation `23:12112` 28×28
+  - COMPONENT helicopter `23:12111` 28×28
+  - COMPONENT angles-down `23:12110` 28×28
+  - COMPONENT ruler-horizontal `23:12109` 28×28
+  - COMPONENT file-fragment `23:12108` 28×28
+  - COMPONENT paw `23:12107` 28×28
+  - COMPONENT square-root-variable `23:12106` 28×28
+  - COMPONENT chess `23:12105` 28×28
+  - COMPONENT filter-circle-xmark `23:12104` 28×28
+  - COMPONENT voicemail `23:12103` 28×28
+  - COMPONENT trowel-bricks `23:12102` 28×28
+  - COMPONENT rug `23:12101` 28×28
+  - COMPONENT road `23:12100` 28×28
+  - COMPONENT truck-field-un `23:12099` 28×28
+  - COMPONENT text-height `23:12098` 28×28
+  - COMPONENT pen-to-square `23:12097` 28×28
+  - COMPONENT box-open `23:12096` 28×28
+  - COMPONENT terminal `23:12095` 28×28
+  - COMPONENT plant-wilt `23:12094` 28×28
+  - COMPONENT person-harassing `23:12093` 28×28
+  - COMPONENT ranking-star `23:12091` 28×28
+  - COMPONENT person-half-dress `23:12089` 28×28
+  - COMPONENT child-dress `23:12087` 28×28
+  - COMPONENT plus-minus `23:12085` 28×28
+  - COMPONENT maximize `23:12083` 28×28
+  - COMPONENT book-skull `23:12082` 28×28
+  - COMPONENT sack-dollar `23:12081` 28×28
+  - COMPONENT city `23:12080` 28×28
+  - COMPONENT comment-dollar `23:12078` 28×28
+  - COMPONENT chevron-up `23:12076` 28×28
+  - COMPONENT lira-sign `23:12074` 28×28
+  - COMPONENT square-full `23:12072` 28×28
+  - COMPONENT bridge `23:12071` 28×28
+  - COMPONENT person-skiing `23:12069` 28×28
+  - COMPONENT table-cells `23:12067` 28×28
+  - COMPONENT file-video `23:12065` 28×28
+  - COMPONENT table-cells-row-unlock `23:12064` 28×28
+  - COMPONENT mortar-pestle `23:12063` 28×28
+  - COMPONENT folder-open `23:12062` 28×28
+  - COMPONENT droplet `23:12061` 28×28
+  - COMPONENT plane-departure `23:12060` 28×28
+  - COMPONENT cent-sign `23:12059` 28×28
+  - COMPONENT fish-fins `23:12058` 28×28
+  - COMPONENT user-large-slash `23:12057` 28×28
+  - COMPONENT paint-roller `23:12056` 28×28
+  - COMPONENT baht-sign `23:12055` 28×28
+  - COMPONENT keyboard `23:12054` 28×28
+  - COMPONENT turn-up `23:12053` 28×28
+  - COMPONENT x `23:12052` 28×28
+  - COMPONENT 9 `23:12051` 28×28
+  - COMPONENT wine-glass-empty `23:12050` 28×28
+  - COMPONENT staff-snake `23:12049` 28×28
+  - COMPONENT less-than `23:12048` 28×28
+  - COMPONENT angle-up `23:12047` 28×28
+  - COMPONENT bath `23:12046` 28×28
+  - COMPONENT o `23:12045` 28×28
+  - COMPONENT record-vinyl `23:12044` 28×28
+  - COMPONENT tablet-button `23:12043` 28×28
+  - COMPONENT face-grin-squint-tears `23:12042` 28×28
+  - COMPONENT up-right-and-down-left-from-center `23:12041` 28×28
+  - COMPONENT laptop-file `23:12040` 28×28
+  - COMPONENT poo-storm `23:12039` 28×28
+  - COMPONENT question `23:12038` 28×28
+  - COMPONENT face-laugh-wink `23:12037` 28×28
+  - COMPONENT cable-car `23:12036` 28×28
+  - COMPONENT lock `23:12035` 28×28
+  - COMPONENT face-grin-wink `23:12034` 28×28
+  - COMPONENT toilets-portable `23:12033` 28×28
+  - COMPONENT face-rolling-eyes `23:12032` 28×28
+  - COMPONENT person-military-to-person `23:12031` 28×28
+  - COMPONENT x-ray `23:12030` 28×28
+  - COMPONENT fire `23:12029` 28×28
+  - COMPONENT square-person-confined `23:12028` 28×28
+  - COMPONENT ban `23:12027` 28×28
+  - COMPONENT heart-circle-check `23:12026` 28×28
+  - COMPONENT person-dress `23:12025` 28×28
+  - COMPONENT divide `23:12024` 28×28
+  - COMPONENT piggy-bank `23:12023` 28×28
+  - COMPONENT martini-glass `23:12022` 28×28
+  - COMPONENT file-contract `23:12021` 28×28
+  - COMPONENT person-circle-check `23:12020` 28×28
+  - COMPONENT square-parking `23:12019` 28×28
+  - COMPONENT sd-card `23:12018` 28×28
+  - COMPONENT plane-circle-exclamation `23:12017` 28×28
+  - COMPONENT mask-ventilator `23:12016` 28×28
+  - COMPONENT tent-arrow-down-to-line `23:12015` 28×28
+  - COMPONENT bacterium `23:12014` 28×28
+  - COMPONENT temperature-half `23:12013` 28×28
+  - COMPONENT money-bill-wheat `23:12012` 28×28
+  - COMPONENT pen `23:12011` 28×28
+  - COMPONENT user-pen `23:12010` 28×28
+  - COMPONENT arrow-up-long `23:12009` 28×28
+  - COMPONENT drumstick-bite `23:12008` 28×28
+  - COMPONENT plane `23:12007` 28×28
+  - COMPONENT chevron-right `23:12006` 28×28
+  - COMPONENT republican `23:12005` 28×28
+  - COMPONENT arrow-up-wide-short `23:12004` 28×28
+  - COMPONENT tarp-droplet `23:12003` 28×28
+  - COMPONENT clipboard `23:12002` 28×28
+  - COMPONENT mars `23:12070` 28×28
+  - COMPONENT circle-question `23:12068` 28×28
+  - COMPONENT venus-mars `23:12066` 28×28
+  - COMPONENT truck-pickup `23:12092` 28×28
+  - COMPONENT life-ring `23:12090` 28×28
+  - COMPONENT link `23:12088` 28×28
+  - COMPONENT tent-arrow-left-right `23:12086` 28×28
+  - COMPONENT certificate `23:12084` 28×28
+  - COMPONENT basket-shopping `23:12138` 28×28
+  - COMPONENT toggle-off `23:12136` 28×28
+  - COMPONENT person-circle-plus `23:12134` 28×28
+  - COMPONENT key `23:12079` 28×28
+  - COMPONENT ferry `23:12077` 28×28
+  - COMPONENT sailboat `23:12075` 28×28
+  - COMPONENT gifts `23:12073` 28×28
+  - COMPONENT code-pull-request `23:12001` 28×28
+  - COMPONENT child-reaching `23:12000` 28×28
+  - COMPONENT kitchen-set `23:11999` 28×28
+  - COMPONENT road-circle-exclamation `23:11998` 28×28
+  - COMPONENT door-open `23:11997` 28×28
+  - COMPONENT locust `23:11996` 28×28
+  - COMPONENT n `23:11995` 28×28
+  - COMPONENT check-to-slot `23:11994` 28×28
+  - COMPONENT book-quran `23:11993` 28×28
+  - COMPONENT cloud-sun `23:11992` 28×28
+  - COMPONENT arrow-right `23:11991` 28×28
+  - COMPONENT store `23:11990` 28×28
+  - COMPONENT greater-than-equal `23:11989` 28×28
+  - COMPONENT 8 `23:11988` 28×28
+  - COMPONENT y `23:11987` 28×28
+  - COMPONENT hamsa `23:11986` 28×28
+  - COMPONENT calendar-plus `23:11985` 28×28
+  - COMPONENT brush `23:11984` 28×28
+  - COMPONENT at `23:11983` 28×28
+  - COMPONENT clover `23:11982` 28×28
+  - COMPONENT hurricane `23:11981` 28×28
+  - COMPONENT phone-slash `23:11980` 28×28
+  - COMPONENT cubes `23:11979` 28×28
+  - COMPONENT user-ninja `23:11978` 28×28
+  - COMPONENT circle-play `23:11977` 28×28
+  - COMPONENT bowl-rice `23:11976` 28×28
+  - COMPONENT arrow-rotate-left `23:11975` 28×28
+  - COMPONENT notdef `23:11974` 28×28
+  - COMPONENT ship `23:11973` 28×28
+  - COMPONENT qrcode `23:11972` 28×28
+  - COMPONENT person-arrow-down-to-line `23:11971` 28×28
+  - COMPONENT worm `23:11970` 28×28
+  - COMPONENT notes-medical `23:11969` 28×28
+  - COMPONENT glass-water-droplet `23:11968` 28×28
+  - COMPONENT user-clock `23:11967` 28×28
+  - COMPONENT calendar-check `23:11966` 28×28
+  - COMPONENT l `23:11965` 28×28
+  - COMPONENT square-pen `23:11964` 28×28
+  - COMPONENT table-cells-large `23:11963` 28×28
+  - COMPONENT stopwatch `23:11962` 28×28
+  - COMPONENT minimize `23:11961` 28×28
+  - COMPONENT border-all `23:11960` 28×28
+  - COMPONENT arrow-up-from-water-pump `23:11959` 28×28
+  - COMPONENT yen-sign `23:11958` 28×28
+  - COMPONENT spray-can-sparkles `23:11957` 28×28
+  - COMPONENT heart-circle-plus `23:11956` 28×28
+  - COMPONENT calendar-week `23:11955` 28×28
+  - COMPONENT jet-fighter `23:11954` 28×28
+  - COMPONENT pizza-slice `23:11953` 28×28
+  - COMPONENT thumbs-down `23:11952` 28×28
+  - COMPONENT user-gear `23:11951` 28×28
+  - COMPONENT comment-medical `23:11950` 28×28
+  - COMPONENT compress `23:11949` 28×28
+  - COMPONENT arrow-down-long `23:11948` 28×28
+  - COMPONENT person-skating `23:11947` 28×28
+  - COMPONENT envelope `23:11946` 28×28
+  - COMPONENT microphone-lines-slash `23:11945` 28×28
+  - COMPONENT utensils `23:11944` 28×28
+  - COMPONENT person-booth `23:11943` 28×28
+  - COMPONENT droplet-slash `23:11942` 28×28
+  - COMPONENT colon-sign `23:11941` 28×28
+  - COMPONENT caret-up `23:11940` 28×28
+  - COMPONENT mobile-retro `23:11939` 28×28
+  - COMPONENT square-h `23:11938` 28×28
+  - COMPONENT hand-point-left `23:11937` 28×28
+  - COMPONENT building-circle-arrow-right `23:11936` 28×28
+  - COMPONENT map-location `23:11935` 28×28
+  - COMPONENT location-arrow `23:11934` 28×28
+  - COMPONENT face-grin-beam-sweat `23:11933` 28×28
+  - COMPONENT magnet `23:11932` 28×28
+  - COMPONENT school `23:11931` 28×28
+  - COMPONENT table-tennis-paddle-ball `23:11930` 28×28
+  - COMPONENT clipboard-question `23:11929` 28×28
+  - COMPONENT ruler-vertical `23:11928` 28×28
+  - COMPONENT shield `23:11927` 28×28
+  - COMPONENT desktop `23:11926` 28×28
+  - COMPONENT download `23:11925` 28×28
+  - COMPONENT helicopter-symbol `23:11924` 28×28
+  - COMPONENT hand-lizard `23:11923` 28×28
+  - COMPONENT jet-fighter-up `23:11922` 28×28
+  - COMPONENT expand `23:11921` 28×28
+  - COMPONENT building-flag `23:11920` 28×28
+  - COMPONENT child-combatant `23:11919` 28×28
+  - COMPONENT bugs `23:11918` 28×28
+  - COMPONENT weight-scale `23:11917` 28×28
+  - COMPONENT arrow-up-a-z `23:11916` 28×28
+  - COMPONENT bandage `23:11915` 28×28
+  - COMPONENT khanda `23:11914` 28×28
+  - COMPONENT square-check `23:11913` 28×28
+  - COMPONENT shield-cat `23:11912` 28×28
+  - COMPONENT teeth `23:11911` 28×28
+  - COMPONENT face-frown-open `23:11910` 28×28
+  - COMPONENT hand-scissors `23:11909` 28×28
+  - COMPONENT vihara `23:11908` 28×28
+  - COMPONENT franc-sign `23:11907` 28×28
+  - COMPONENT battery-three-quarters `23:11906` 28×28
+  - COMPONENT book-open `23:11905` 28×28
+  - COMPONENT spaghetti-monster-flying `23:11904` 28×28
+  - COMPONENT hourglass-start `23:11903` 28×28
+  - COMPONENT comment-slash `23:11902` 28×28
+  - COMPONENT hand-holding-droplet `23:11901` 28×28
+  - COMPONENT jar `23:11900` 28×28
+  - COMPONENT bug-slash `23:11899` 28×28
+  - COMPONENT file-import `23:11898` 28×28
+  - COMPONENT face-meh-blank `23:11897` 28×28
+  - COMPONENT litecoin-sign `23:11896` 28×28
+  - COMPONENT disease `23:11895` 28×28
+  - COMPONENT hand-point-up `23:11894` 28×28
+  - COMPONENT server `23:11893` 28×28
+  - COMPONENT bolt `23:11892` 28×28
+  - COMPONENT tv `23:11891` 28×28
+  - COMPONENT person-praying `23:11890` 28×28
+  - COMPONENT m `23:11889` 28×28
+  - COMPONENT democrat `23:11888` 28×28
+  - COMPONENT house-medical `23:11887` 28×28
+  - COMPONENT hand-holding-medical `23:11886` 28×28
+  - COMPONENT z `23:11885` 28×28
+  - COMPONENT user-plus `23:11884` 28×28
+  - COMPONENT plug-circle-plus `23:11883` 28×28
+  - COMPONENT file-shield `23:11882` 28×28
+  - COMPONENT hands-clapping `23:11881` 28×28
+  - COMPONENT square-rss `23:11880` 28×28
+  - COMPONENT star-and-crescent `23:11879` 28×28
+  - COMPONENT shapes `23:11878` 28×28
+  - COMPONENT solar-panel `23:11877` 28×28
+  - COMPONENT mosque `23:11876` 28×28
+  - COMPONENT satellite `23:11875` 28×28
+  - COMPONENT file-circle-xmark `23:11874` 28×28
+  - COMPONENT arrow-down-9-1 `23:11873` 28×28
+  - COMPONENT i `23:11872` 28×28
+  - COMPONENT indent `23:11871` 28×28
+  - COMPONENT circle-arrow-left `23:11870` 28×28
+  - COMPONENT link-slash `23:11869` 28×28
+  - COMPONENT cloud-arrow-up `23:11868` 28×28
+  - COMPONENT users-rectangle `23:11867` 28×28
+  - COMPONENT dna `23:11866` 28×28
+  - COMPONENT slash `23:11865` 28×28
+  - COMPONENT hands-holding-child `23:11864` 28×28
+  - COMPONENT radio `23:11863` 28×28
+  - COMPONENT taxi `23:11862` 28×28
+  - COMPONENT book `23:11861` 28×28
+  - COMPONENT camera-rotate `23:11860` 28×28
+  - COMPONENT filter-circle-dollar `23:11859` 28×28
+  - COMPONENT hotdog `23:11858` 28×28
+  - COMPONENT house-medical-circle-xmark `23:11857` 28×28
+  - COMPONENT hotel `23:11856` 28×28
+  - COMPONENT comment-sms `23:11855` 28×28
+  - COMPONENT plane-slash `23:12444` 28×28
+  - COMPONENT object-ungroup `23:12415` 28×28
+  - COMPONENT skull `23:12414` 28×28
+  - COMPONENT paragraph `23:12413` 28×28
+  - COMPONENT plug `23:12411` 28×28
+  - COMPONENT road-circle-check `23:12405` 28×28
+  - COMPONENT train `23:11854` 28×28
+  - COMPONENT house-circle-check `23:11853` 28×28
+  - COMPONENT chess-board `23:11852` 28×28
+  - COMPONENT user-minus `23:11851` 28×28
+  - COMPONENT wallet `23:11850` 28×28
+  - COMPONENT person-shelter `23:11849` 28×28
+  - COMPONENT circle-check `23:11848` 28×28
+  - COMPONENT house-chimney-user `23:11847` 28×28
+  - COMPONENT file-image `23:11846` 28×28
+  - COMPONENT building-circle-check `23:11845` 28×28
+  - COMPONENT bell `23:11844` 28×28
+  - COMPONENT earth-oceania `23:11843` 28×28
+  - COMPONENT arrow-down-1-9 `23:11842` 28×28
+  - COMPONENT code `23:11841` 28×28
+  - COMPONENT dolly `23:11840` 28×28
+  - COMPONENT user-lock `23:11839` 28×28
+  - COMPONENT oil-well `23:11838` 28×28
+  - COMPONENT turn-down `23:11837` 28×28
+  - COMPONENT truck-plane `23:11836` 28×28
+  - COMPONENT cloud-moon-rain `23:11835` 28×28
+  - COMPONENT users-between-lines `23:11834` 28×28
+  - COMPONENT thermometer `23:11833` 28×28
+  - COMPONENT spider `23:11832` 28×28
+  - COMPONENT gears `23:11831` 28×28
+  - COMPONENT hands-bubbles `23:12460` 28×28
+  - COMPONENT hand-sparkles `23:12456` 28×28
+  - COMPONENT flag `23:12367` 28×28
+  - COMPONENT gauge-high `23:12365` 28×28
+  - COMPONENT magnifying-glass-minus `23:12363` 28×28
+  - COMPONENT podcast `23:12361` 28×28
+  - COMPONENT hand-peace `23:12359` 28×28
+  - COMPONENT people-roof `23:12355` 28×28
+  - COMPONENT table-cells-row-lock `23:12450` 28×28
+  - COMPONENT up-right-from-square `23:12446` 28×28
+  - COMPONENT chess-king `23:11830` 28×28
+  - COMPONENT stop `23:11828` 28×28
+  - COMPONENT newspaper `23:12447` 28×28
+  - COMPONENT snowflake `23:12464` 28×28
+  - COMPONENT cube `23:12463` 28×28
+  - COMPONENT bomb `23:12462` 28×28
+  - COMPONENT tower-broadcast `23:12425` 28×28
+  - COMPONENT file-medical `23:12419` 28×28
+  - COMPONENT crop-simple `23:12434` 28×28
+  - COMPONENT right-long `23:12426` 28×28
+  - COMPONENT plane-lock `23:12420` 28×28
+  - COMPONENT clipboard-user `23:12458` 28×28
+  - COMPONENT h `23:12454` 28×28
+  - COMPONENT star-half `23:12452` 28×28
+  - COMPONENT bridge-lock `23:12397` 28×28
+  - COMPONENT house-chimney `23:12389` 28×28
+  - COMPONENT arrows-up-to-line `23:12406` 28×28
+  - COMPONENT ruler `23:12398` 28×28
+  - COMPONENT truck-monster `23:12390` 28×28
+  - COMPONENT money-bill-trend-up `23:12443` 28×28
+  - COMPONENT building-lock `23:12439` 28×28
+  - COMPONENT outdent `23:12433` 28×28
+  - COMPONENT person-pregnant `23:12417` 28×28
+  - COMPONENT clipboard-list `23:12430` 28×28
+  - COMPONENT fax `23:12339` 28×28
+  - COMPONENT biohazard `23:12337` 28×28
+  - COMPONENT money-check-dollar `23:12335` 28×28
+  - COMPONENT j `23:12333` 28×28
+  - COMPONENT diagram-predecessor `23:12331` 28×28
+  - COMPONENT caret-right `23:12327` 28×28
+  - COMPONENT user-graduate `23:12385` 28×28
+  - COMPONENT smog `23:12402` 28×28
+  - COMPONENT bold `23:12394` 28×28
+  - COMPONENT square-share-nodes `23:12386` 28×28
+  - COMPONENT temperature-empty `23:12441` 28×28
+  - COMPONENT bridge-circle-xmark `23:12437` 28×28
+  - COMPONENT arrows-to-eye `23:12429` 28×28
+  - COMPONENT tablets `23:12423` 28×28
+  - COMPONENT bridge-water `23:12373` 28×28
+  - COMPONENT envelope-open `23:12369` 28×28
+  - COMPONENT trophy `23:12378` 28×28
+  - COMPONENT battery-full `23:12374` 28×28
+  - COMPONENT equals `23:12370` 28×28
+  - COMPONENT arrow-up-from-ground-water `23:12409` 28×28
+  - COMPONENT plus `23:12401` 28×28
+  - COMPONENT wand-magic `23:12393` 28×28
+  - COMPONENT scale-balanced `23:12351` 28×28
+  - COMPONENT check `23:12347` 28×28
+  - COMPONENT seedling `23:12356` 28×28
+  - COMPONENT face-frown `23:12352` 28×28
+  - COMPONENT left-long `23:12348` 28×28
+  - COMPONENT star-of-david `23:12382` 28×28
+  - COMPONENT ruler-combined `23:12381` 28×28
+  - COMPONENT beer-mug-empty `23:12377` 28×28
+  - COMPONENT heart-crack `23:11826` 28×28
+  - COMPONENT hard-drive `23:11824` 28×28
+  - COMPONENT tent `23:11822` 28×28
+  - COMPONENT trademark `23:11820` 28×28
+  - COMPONENT kaaba `23:11818` 28×28
+  - COMPONENT bridge-circle-exclamation `23:11816` 28×28
+  - COMPONENT smoking `23:11814` 28×28
+  - COMPONENT scale-unbalanced-flip `23:11812` 28×28
+  - COMPONENT plug-circle-bolt `23:11810` 28×28
+  - COMPONENT hospital `23:11808` 28×28
+  - COMPONENT arrow-right-to-city `23:11806` 28×28
+  - COMPONENT flask `23:11804` 28×28
+  - COMPONENT headphones `23:11802` 28×28
+  - COMPONENT hand-holding-hand `23:11800` 28×28
+  - COMPONENT people-carry-box `23:11798` 28×28
+  - COMPONENT arrow-right-arrow-left `23:11796` 28×28
+  - COMPONENT horse-head `23:11794` 28×28
+  - COMPONENT mobile-button `23:11792` 28×28
+  - COMPONENT rss `23:11790` 28×28
+  - COMPONENT horse `23:11788` 28×28
+  - COMPONENT person-walking-arrow-loop-left `23:11786` 28×28
+  - COMPONENT landmark `23:11784` 28×28
+  - COMPONENT wifi `23:11782` 28×28
+  - COMPONENT arrow-right-long `23:11780` 28×28
+  - COMPONENT face-grin-tongue-squint `23:11778` 28×28
+  - COMPONENT heart-circle-bolt `23:11776` 28×28
+  - COMPONENT shield-heart `23:11774` 28×28
+  - COMPONENT building-un `23:11772` 28×28
+  - COMPONENT face-smile-wink `23:11770` 28×28
+  - COMPONENT person-through-window `23:11768` 28×28
+  - COMPONENT angle-right `23:11766` 28×28
+  - COMPONENT peso-sign `23:11764` 28×28
+  - COMPONENT venus `23:11762` 28×28
+  - COMPONENT mug-hot `23:11760` 28×28
+  - COMPONENT info `23:11758` 28×28
+  - COMPONENT face-dizzy `23:11756` 28×28
+  - COMPONENT bowl-food `23:11754` 28×28
+  - COMPONENT school-circle-xmark `23:11752` 28×28
+  - COMPONENT mound `23:11750` 28×28
+  - COMPONENT bullhorn `23:11748` 28×28
+  - COMPONENT arrows-turn-to-dots `23:11746` 28×28
+  - COMPONENT bread-slice `23:11744` 28×28
+  - COMPONENT dog `23:11742` 28×28
+  - COMPONENT user-nurse `23:11740` 28×28
+  - COMPONENT fan `23:11738` 28×28
+  - COMPONENT palette `23:11736` 28×28
+  - COMPONENT spoon `23:11734` 28×28
+  - COMPONENT k `23:11732` 28×28
+  - COMPONENT cart-arrow-down `23:11730` 28×28
+  - COMPONENT gear `23:11728` 28×28
+  - COMPONENT truck-fast `23:11726` 28×28
+  - COMPONENT om `23:11724` 28×28
+  - COMPONENT hourglass-half `23:11722` 28×28
+  - COMPONENT lungs-virus `23:11720` 28×28
+  - COMPONENT manat-sign `23:11718` 28×28
+  - COMPONENT face-sad-tear `23:11716` 28×28
+  - COMPONENT holly-berry `23:11714` 28×28
+  - COMPONENT volleyball `23:11712` 28×28
+  - COMPONENT code-commit `23:11710` 28×28
+  - COMPONENT prescription-bottle-medical `23:11708` 28×28
+  - COMPONENT flag-usa `23:11706` 28×28
+  - COMPONENT handcuffs `23:11704` 28×28
+  - COMPONENT plug-circle-minus `23:11702` 28×28
+  - COMPONENT kip-sign `23:11700` 28×28
+  - COMPONENT arrows-up-down-left-right `23:11698` 28×28
+  - COMPONENT f `23:11696` 28×28
+  - COMPONENT q `23:11694` 28×28
+  - COMPONENT 0 `23:11692` 28×28
+  - COMPONENT cubes-stacked `23:11690` 28×28
+  - COMPONENT folder-plus `23:11688` 28×28
+  - COMPONENT pen-ruler `23:11686` 28×28
+  - COMPONENT hat-cowboy `23:11684` 28×28
+  - COMPONENT sign-hanging `23:11682` 28×28
+  - COMPONENT calendar-xmark `23:11680` 28×28
+  - COMPONENT virus-slash `23:11678` 28×28
+  - COMPONENT user-doctor `23:11676` 28×28
+  - COMPONENT hat-cowboy-side `23:11674` 28×28
+  - COMPONENT rainbow `23:11672` 28×28
+  - COMPONENT cookie-bite `23:11670` 28×28
+  - COMPONENT sheet-plastic `23:11668` 28×28
+  - COMPONENT suitcase-medical `23:11666` 28×28
+  - COMPONENT copy `23:11664` 28×28
+  - COMPONENT masks-theater `23:11662` 28×28
+  - COMPONENT fish `23:11660` 28×28
+  - COMPONENT martini-glass-citrus `23:11658` 28×28
+  - COMPONENT circle-chevron-up `23:11656` 28×28
+  - COMPONENT file-half-dashed `23:11654` 28×28
+  - COMPONENT file-lines `23:11652` 28×28
+  - COMPONENT signature `23:11650` 28×28
+  - COMPONENT not-equal `23:11648` 28×28
+  - COMPONENT burger `23:11646` 28×28
+  - COMPONENT square-poll-vertical `23:11644` 28×28
+  - COMPONENT glasses `23:11642` 28×28
+  - COMPONENT coins `23:11640` 28×28
+  - COMPONENT closed-captioning `23:11638` 28×28
+  - COMPONENT sink `23:11636` 28×28
+  - COMPONENT monument `23:11634` 28×28
+  - COMPONENT hat-wizard `23:11632` 28×28
+  - COMPONENT person-hiking `23:11630` 28×28
+  - COMPONENT unlock-keyhole `23:11628` 28×28
+  - COMPONENT arrow-right-from-bracket `23:11626` 28×28
+  - COMPONENT less-than-equal `23:11624` 28×28
+  - COMPONENT xmarks-lines `23:11622` 28×28
+  - COMPONENT code-compare `23:11620` 28×28
+  - COMPONENT wand-sparkles `23:11618` 28×28
+  - COMPONENT caravan `23:11616` 28×28
+  - COMPONENT industry `23:11614` 28×28
+  - COMPONENT square-xmark `23:11612` 28×28
+  - COMPONENT child `23:11610` 28×28
+  - COMPONENT font-awesome `23:11608` 28×28
+  - COMPONENT fire-extinguisher `23:11606` 28×28
+  - COMPONENT marker `23:11604` 28×28
+  - COMPONENT align-right `23:11602` 28×28
+  - COMPONENT image `23:11600` 28×28
+  - COMPONENT hand-point-down `23:11598` 28×28
+  - COMPONENT vector-square `23:11596` 28×28
+  - COMPONENT lightbulb `23:11594` 28×28
+  - COMPONENT person-circle-question `23:11592` 28×28
+  - COMPONENT face-grin-stars `23:11590` 28×28
+  - COMPONENT images `23:11588` 28×28
+  - COMPONENT house-chimney-crack `23:11586` 28×28
+  - COMPONENT pager `23:11584` 28×28
+  - COMPONENT turkish-lira-sign `23:11582` 28×28
+  - COMPONENT shield-virus `23:11580` 28×28
+  - COMPONENT bus-simple `23:11578` 28×28
+  - COMPONENT mountain-sun `23:11576` 28×28
+  - COMPONENT landmark-flag `23:11574` 28×28
+  - COMPONENT magnifying-glass-chart `23:11572` 28×28
+  - COMPONENT 1 `23:11570` 28×28
+  - COMPONENT users-rays `23:11568` 28×28
+  - COMPONENT p `23:11566` 28×28
+  - COMPONENT rectangle-xmark `23:11564` 28×28
+  - COMPONENT face-grin-squint `23:11562` 28×28
+  - COMPONENT circle-up `23:11560` 28×28
+  - COMPONENT code-merge `23:11558` 28×28
+  - COMPONENT g `23:11556` 28×28
+  - COMPONENT code-branch `23:11554` 28×28
+  - COMPONENT house-chimney-medical `23:11552` 28×28
+  - COMPONENT vr-cardboard `23:11550` 28×28
+  - COMPONENT eye-dropper `23:11548` 28×28
+  - COMPONENT envelopes-bulk `23:11546` 28×28
+  - COMPONENT person-biking `23:11544` 28×28
+  - COMPONENT arrows-left-right-to-line `23:11542` 28×28
+  - COMPONENT dice-d6 `23:11540` 28×28
+  - COMPONENT person-rays `23:11538` 28×28
+  - COMPONENT gauge-simple `23:11536` 28×28
+  - COMPONENT tachograph-digital `23:11534` 28×28
+  - COMPONENT e `23:11532` 28×28
+  - COMPONENT paperclip `23:11530` 28×28
+  - COMPONENT handshake-simple-slash `23:11528` 28×28
+  - COMPONENT hand-back-fist `23:11526` 28×28
+  - COMPONENT computer-mouse `23:11524` 28×28
+  - COMPONENT r `23:11522` 28×28
+  - COMPONENT 3 `23:11520` 28×28
+  - COMPONENT backward-step `23:11518` 28×28
+  - COMPONENT location-crosshairs `23:11516` 28×28
+  - COMPONENT square-up-right `23:11514` 28×28
+  - COMPONENT street-view `23:11512` 28×28
+  - COMPONENT location-pin-lock `23:11510` 28×28
+  - COMPONENT temperature-quarter `23:11508` 28×28
+  - COMPONENT trailer `23:11506` 28×28
+  - COMPONENT syringe `23:11504` 28×28
+  - COMPONENT trash-arrow-up `23:11502` 28×28
+  - COMPONENT message `23:11500` 28×28
+  - COMPONENT car-battery `23:11498` 28×28
+  - COMPONENT award `23:11496` 28×28
+  - COMPONENT toilet-portable `23:11494` 28×28
+  - COMPONENT baby-carriage `23:11492` 28×28
+  - COMPONENT box `23:11490` 28×28
+  - COMPONENT thumbs-up `23:11488` 28×28
+  - COMPONENT superscript `23:11486` 28×28
+  - COMPONENT person-circle-xmark `23:11484` 28×28
+  - COMPONENT mask `23:11482` 28×28
+  - COMPONENT hexagon-nodes-bolt `23:11480` 28×28
+  - COMPONENT peace `23:11478` 28×28
+  - COMPONENT percent `23:11476` 28×28
+  - COMPONENT heart-circle-xmark `23:11474` 28×28
+  - COMPONENT guarani-sign `23:11473` 28×28
+  - COMPONENT face-smile `23:11472` 28×28
+  - COMPONENT dong-sign `23:11471` 28×28
+  - COMPONENT tree-city `23:11469` 28×28
+  - COMPONENT square `23:11467` 28×28
+  - COMPONENT crown `23:11465` 28×28
+  - COMPONENT broom `23:11463` 28×28
+  - COMPONENT stethoscope `23:11461` 28×28
+  - COMPONENT virus-covid-slash `23:11459` 28×28
+  - COMPONENT book-atlas `23:11457` 28×28
+  - COMPONENT eye-slash `23:11455` 28×28
+  - COMPONENT candy-cane `23:11453` 28×28
+  - COMPONENT play `23:11451` 28×28
+  - COMPONENT backward `23:11449` 28×28
+  - COMPONENT paper-plane `23:11447` 28×28
+  - COMPONENT hands-praying `23:11446` 28×28
+  - COMPONENT cake-candles `23:11445` 28×28
+  - COMPONENT greater-than `23:11444` 28×28
+  - COMPONENT face-grin-hearts `23:11443` 28×28
+  - COMPONENT users-viewfinder `23:11442` 28×28
+  - COMPONENT explosion `23:11441` 28×28
+  - COMPONENT martini-glass-empty `23:11440` 28×28
+  - COMPONENT dungeon `23:11439` 28×28
+  - COMPONENT helmet-safety `23:11438` 28×28
+  - COMPONENT table `23:11437` 28×28
+  - COMPONENT person-falling `23:11436` 28×28
+  - COMPONENT barcode `23:11435` 28×28
+  - COMPONENT thumbtack `23:11434` 28×28
+  - COMPONENT temperature-arrow-up `23:11433` 28×28
+  - COMPONENT house-fire `23:11432` 28×28
+  - COMPONENT hourglass-end `23:11431` 28×28
+  - COMPONENT scroll `23:11430` 28×28
+  - COMPONENT flag-checkered `23:11429` 28×28
+  - COMPONENT mars-stroke-right `23:11428` 28×28
+  - COMPONENT people-pulling `23:11427` 28×28
+  - COMPONENT box-archive `23:11426` 28×28
+  - COMPONENT cloud-showers-water `23:11425` 28×28
+  - COMPONENT chalkboard `23:11424` 28×28
+  - COMPONENT indian-rupee-sign `23:11423` 28×28
+  - COMPONENT radiation `23:11422` 28×28
+  - COMPONENT house-lock `23:11420` 28×28
+  - COMPONENT plane-up `23:11418` 28×28
+  - COMPONENT baby `23:11416` 28×28
+  - COMPONENT 2 `23:11415` 28×28
+  - COMPONENT s `23:11414` 28×28
+  - COMPONENT shekel-sign `23:11413` 28×28
+  - COMPONENT d `23:11412` 28×28
+  - COMPONENT battery-empty `23:11411` 28×28
+  - COMPONENT star-of-life `23:11410` 28×28
+  - COMPONENT camera `23:11409` 28×28
+  - COMPONENT square-phone-flip `23:11408` 28×28
+  - COMPONENT baseball-bat-ball `23:11407` 28×28
+  - COMPONENT circle-right `23:11406` 28×28
+  - COMPONENT users-slash `23:11405` 28×28
+  - COMPONENT floppy-disk `23:11404` 28×28
+  - COMPONENT circle-nodes `23:11403` 28×28
+  - COMPONENT file-powerpoint `23:11402` 28×28
+  - COMPONENT folder-minus `23:11401` 28×28
+  - COMPONENT otter `23:11400` 28×28
+  - COMPONENT sun-plant-wilt `23:11399` 28×28
+  - COMPONENT sim-card `23:11398` 28×28
+  - COMPONENT truck `23:11397` 28×28
+  - COMPONENT book-open-reader `23:11396` 28×28
+  - COMPONENT note-sticky `23:11395` 28×28
+  - COMPONENT fire-flame-curved `23:11394` 28×28
+  - COMPONENT oil-can `23:11393` 28×28
+  - COMPONENT w `23:11392` 28×28
+  - COMPONENT 6 `23:11391` 28×28
+  - COMPONENT fire-burner `23:11390` 28×28
+  - COMPONENT blender `23:11389` 28×28
+  - COMPONENT bridge-circle-check `23:11388` 28×28
+  - COMPONENT person-cane `23:11387` 28×28
+  - COMPONENT magnifying-glass-dollar `23:11386` 28×28
+  - COMPONENT bottle-water `23:11385` 28×28
+  - COMPONENT wine-glass `23:11384` 28×28
+  - COMPONENT hand-spock `23:11383` 28×28
+  - COMPONENT hands-holding-circle `23:11382` 28×28
+  - COMPONENT hand-holding-dollar `23:11381` 28×28
+  - COMPONENT faucet-drip `23:11380` 28×28
+  - COMPONENT arrow-up-right-from-square `23:11379` 28×28
+  - COMPONENT circle-arrow-right `23:11378` 28×28
+  - COMPONENT toilet-paper `23:11377` 28×28
+  - COMPONENT magnifying-glass-location `23:11376` 28×28
+  - COMPONENT angles-right `23:11375` 28×28
+  - COMPONENT bucket `23:11374` 28×28
+  - COMPONENT circle-info `23:11373` 28×28
+  - COMPONENT head-side-virus `23:11372` 28×28
+  - COMPONENT egg `23:11371` 28×28
+  - COMPONENT up-long `23:11370` 28×28
+  - COMPONENT scroll-torah `23:11369` 28×28
+  - COMPONENT hand-fist `23:11368` 28×28
+  - COMPONENT circle-radiation `23:11367` 28×28
+  - COMPONENT bullseye `23:11366` 28×28
+  - COMPONENT bus `23:11365` 28×28
+  - COMPONENT person-dress-burst `23:11364` 28×28
+  - COMPONENT mercury `23:11363` 28×28
+  - COMPONENT infinity `23:11362` 28×28
+  - COMPONENT xmark `23:11361` 28×28
+  - COMPONENT bacteria `23:11360` 28×28
+  - COMPONENT gem `23:11359` 28×28
+  - COMPONENT table-columns `23:11358` 28×28
+  - COMPONENT audio-description `23:11357` 28×28
+  - COMPONENT skull-crossbones `23:11356` 28×28
+  - COMPONENT feather `23:11355` 28×28
+  - COMPONENT trash `23:11354` 28×28
+  - COMPONENT chart-bar `23:11353` 28×28
+  - COMPONENT transgender `23:11352` 28×28
+  - COMPONENT person-running `23:11351` 28×28
+  - COMPONENT dumpster-fire `23:11350` 28×28
+  - COMPONENT toilet `23:11349` 28×28
+  - COMPONENT leaf `23:11348` 28×28
+  - COMPONENT paste `23:11347` 28×28
+  - COMPONENT window-maximize `23:11346` 28×28
+  - COMPONENT magnifying-glass-plus `23:11345` 28×28
+  - COMPONENT arrow-up-z-a `23:11344` 28×28
+  - COMPONENT gopuram `23:11343` 28×28
+  - COMPONENT sterling-sign `23:11342` 28×28
+  - COMPONENT address-book `23:11341` 28×28
+  - COMPONENT memory `23:11340` 28×28
+  - COMPONENT stairs `23:11339` 28×28
+  - COMPONENT dollar-sign `23:11338` 28×28
+  - COMPONENT truck-front `23:11337` 28×28
+  - COMPONENT circle-plus `23:11336` 28×28
+  - COMPONENT arrow-turn-up `23:11335` 28×28
+  - COMPONENT graduation-cap `23:11334` 28×28
+  - COMPONENT kiwi-bird `23:11333` 28×28
+  - COMPONENT train-tram `23:11332` 28×28
+  - COMPONENT house-tsunami `23:11331` 28×28
+  - COMPONENT fill-drip `23:11330` 28×28
+  - COMPONENT hashtag `23:11329` 28×28
+  - COMPONENT rectangle-list `23:11328` 28×28
+  - COMPONENT guitar `23:11327` 28×28
+  - COMPONENT bong `23:11326` 28×28
+  - COMPONENT star `23:11325` 28×28
+  - COMPONENT border-top-left `23:11324` 28×28
+  - COMPONENT a `23:11323` 28×28
+  - COMPONENT school-circle-check `23:11322` 28×28
+  - COMPONENT person-military-rifle `23:11321` 28×28
+  - COMPONENT 7 `23:11320` 28×28
+  - COMPONENT euro-sign `23:11319` 28×28
+  - COMPONENT v `23:11318` 28×28
+  - COMPONENT sun `23:11317` 28×28
+  - COMPONENT wrench `23:11316` 28×28
+  - COMPONENT lines-leaning `23:11315` 28×28
+  - COMPONENT arrow-up-from-bracket `23:11314` 28×28
+  - COMPONENT gauge `23:11313` 28×28
+  - COMPONENT house-medical-circle-check `23:11312` 28×28
+  - COMPONENT circle-notch `23:11311` 28×28
+  - COMPONENT chart-column `23:11310` 28×28
+  - COMPONENT van-shuttle `23:11309` 28×28
+  - COMPONENT shoe-prints `23:11308` 28×28
+  - COMPONENT t `23:11307` 28×28
+  - COMPONENT 5 `23:11306` 28×28
+  - COMPONENT c `23:11305` 28×28
+  - COMPONENT soap `23:11304` 28×28
+  - COMPONENT bacon `23:11303` 28×28
+  - COMPONENT rectangle-ad `23:11302` 28×28
+  - COMPONENT plane-arrival `23:11301` 28×28
+  - COMPONENT bone `23:11300` 28×28
+  - COMPONENT florin-sign `23:11299` 28×28
+  - COMPONENT book-journal-whills `23:11298` 28×28
+  - COMPONENT crutch `23:11297` 28×28
+  - COMPONENT anchor `23:11296` 28×28
+  - COMPONENT jedi `23:11295` 28×28
+  - COMPONENT group-arrows-rotate `23:11294` 28×28
+  - COMPONENT head-side-cough-slash `23:11293` 28×28
+  - COMPONENT hammer `23:11292` 28×28
+  - COMPONENT comment-nodes `23:11291` 28×28
+  - COMPONENT highlighter `23:11290` 28×28
+  - COMPONENT water-ladder `23:11289` 28×28
+  - COMPONENT square-arrow-up-right `23:11288` 28×28
+  - COMPONENT file-circle-check `23:11287` 28×28
+  - COMPONENT head-side-mask `23:11286` 28×28
+  - COMPONENT address-card `23:11285` 28×28
+  - COMPONENT wheelchair `23:11284` 28×28
+  - COMPONENT scale-unbalanced `23:11283` 28×28
+  - COMPONENT circle-stop `23:11282` 28×28
+  - COMPONENT chart-pie `23:11281` 28×28
+  - COMPONENT boxes-stacked `23:11280` 28×28
+  - COMPONENT arrows-left-right `23:11279` 28×28
+  - COMPONENT cloud-arrow-down `23:11278` 28×28
+  - COMPONENT broom-ball `23:11277` 28×28
+  - COMPONENT magnifying-glass-arrow-right `23:11276` 28×28
+  - COMPONENT wand-magic-sparkles `23:11275` 28×28
+  - COMPONENT circle-xmark `23:11274` 28×28
+  - COMPONENT lemon `23:11273` 28×28
+  - COMPONENT house-flag `23:11272` 28×28
+  - COMPONENT building-circle-xmark `23:11271` 28×28
+  - COMPONENT place-of-worship `23:11270` 28×28
+  - COMPONENT road-circle-xmark `23:11269` 28×28
+  - COMPONENT house-circle-xmark `23:11268` 28×28
+  - COMPONENT file-circle-question `23:11267` 28×28
+  - COMPONENT bug `23:11266` 28×28
+  - COMPONENT volume-high `23:11265` 28×28
+  - COMPONENT road-barrier `23:11264` 28×28
+  - COMPONENT cedi-sign `23:11263` 28×28
+  - COMPONENT spinner `23:11262` 28×28
+  - COMPONENT lari-sign `23:11261` 28×28
+  - COMPONENT unlock `23:11260` 28×28
+  - COMPONENT jar-wheat `23:11259` 28×28
+  - COMPONENT wheelchair-move `23:11258` 28×28
+  - COMPONENT person-military-pointing `23:11257` 28×28
+  - COMPONENT file-arrow-down `23:11256` 28×28
+  - COMPONENT hand-holding-heart `23:11255` 28×28
+  - COMPONENT compass `23:11254` 28×28
+  - COMPONENT meteor `23:11253` 28×28
+  - COMPONENT faucet `23:11252` 28×28
+  - COMPONENT thumbtack-slash `23:11251` 28×28
+  - COMPONENT face-surprise `23:11250` 28×28
+  - COMPONENT traffic-light `23:11249` 28×28
+  - COMPONENT bicycle `23:11248` 28×28
+  - COMPONENT person-dots-from-line `23:11247` 28×28
+  - COMPONENT menorah `23:11246` 28×28
+  - COMPONENT hospital-user `23:11245` 28×28
+  - COMPONENT cloud-moon `23:11244` 28×28
+  - COMPONENT warehouse `23:11243` 28×28
+  - COMPONENT arrow-up-short-wide `23:11242` 28×28
+  - COMPONENT hryvnia-sign `23:11241` 28×28
+  - COMPONENT credit-card `23:11240` 28×28
+  - COMPONENT circle-arrow-down `23:11239` 28×28
+  - COMPONENT joint `23:11238` 28×28
+  - COMPONENT user-tie `23:11237` 28×28
+  - COMPONENT snowman `23:11236` 28×28
+  - COMPONENT truck-droplet `23:11235` 28×28
+  - COMPONENT computer `23:11234` 28×28
+  - COMPONENT b `23:11233` 28×28
+  - COMPONENT forward-step `23:11232` 28×28
+  - COMPONENT person-rifle `23:11231` 28×28
+  - COMPONENT circle-half-stroke `23:11230` 28×28
+  - COMPONENT vial `23:11229` 28×28
+  - COMPONENT 4 `23:11228` 28×28
+  - COMPONENT u `23:11227` 28×28
+  - COMPONENT shop-slash `23:11226` 28×28
+  - COMPONENT reply-all `23:11225` 28×28
+  - COMPONENT truck-medical `23:11224` 28×28
+  - COMPONENT pencil `23:11223` 28×28
+  - COMPONENT phone-flip `23:11222` 28×28
+  - COMPONENT diagram-project `23:11221` 28×28
+  - COMPONENT language `23:11220` 28×28
+  - COMPONENT cloud-rain `23:11219` 28×28
+  - COMPONENT mars-stroke `23:11218` 28×28
+  - COMPONENT venus-double `23:11217` 28×28
+  - COMPONENT naira-sign `23:11216` 28×28
+  - COMPONENT user-group `23:11215` 28×28
+  - COMPONENT person-walking-dashed-line-arrow-right `23:11214` 28×28
+  - COMPONENT pen-clip `23:11213` 28×28
+  - COMPONENT vest `23:11212` 28×28
+  - COMPONENT person-snowboarding `23:11211` 28×28
+  - COMPONENT golf-ball-tee `23:11210` 28×28
+  - COMPONENT circle-user `23:11209` 28×28
+  - COMPONENT vest-patches `23:11208` 28×28
+  - COMPONENT sitemap `23:11207` 28×28
+  - COMPONENT crosshairs `23:11206` 28×28
+  - COMPONENT mill-sign `23:11205` 28×28
+  - COMPONENT basketball `23:11204` 28×28
+  - COMPONENT poop `23:11203` 28×28
+  - COMPONENT land-mine-on `23:11202` 28×28
+  - COMPONENT diamond `23:11201` 28×28
+  - COMPONENT clock `23:11200` 28×28
+  - COMPONENT window-minimize `23:11199` 28×28
+  - COMPONENT retweet `23:11198` 28×28
+  - COMPONENT phone `23:11197` 28×28
+  - COMPONENT football `23:11196` 28×28
+  - COMPONENT toilet-paper-slash `23:11195` 28×28
+  - COMPONENT person-circle-minus `23:11194` 28×28
+  - COMPONENT person-circle-exclamation `23:11193` 28×28
+  - COMPONENT people-robbery `23:11192` 28×28
+  - COMPONENT table-cells-column-lock `23:11191` 28×28
+  - COMPONENT lungs `23:11190` 28×28
+  - COMPONENT house-user `23:11189` 28×28
+  - COMPONENT heart-circle-minus `23:11188` 28×28
+  - COMPONENT arrow-down-a-z `23:11187` 28×28
+  - COMPONENT dumbbell `23:11185` 28×28
+  - COMPONENT wine-bottle `23:11183` 28×28
+  - COMPONENT tractor `23:11181` 28×28
+  - COMPONENT folder-closed `23:11179` 28×28
+  - COMPONENT eye `23:11177` 28×28
+  - COMPONENT car-burst `23:11175` 28×28
+  - COMPONENT mobile `23:11173` 28×28
+  - COMPONENT person-arrow-up-from-line `23:11171` 28×28
+  - COMPONENT universal-access `23:11169` 28×28
+  - COMPONENT arrow-turn-down `23:11167` 28×28
+  - COMPONENT car-on `23:11165` 28×28
+  - COMPONENT user-injured `23:11163` 28×28
+  - COMPONENT book-medical `23:11161` 28×28
+  - COMPONENT square-caret-up `23:11159` 28×28
+  - COMPONENT vial-virus `23:11157` 28×28
+  - COMPONENT bangladeshi-taka-sign `23:11155` 28×28
+  - COMPONENT square-envelope `23:11153` 28×28
+  - COMPONENT austral-sign `23:11151` 28×28
+  - COMPONENT dove `23:11149` 28×28
+  - COMPONENT car-side `23:11147` 28×28
+  - COMPONENT shield-dog `23:11145` 28×28
+  - COMPONENT square-plus `23:11143` 28×28
+  - COMPONENT bahai `23:11141` 28×28
+  - COMPONENT truck-ramp-box `23:11139` 28×28
+  - COMPONENT gift `23:11138` 28×28
+  - COMPONENT person-breastfeeding `23:11137` 28×28
+  - COMPONENT gauge-simple-high `23:11136` 28×28
+  - COMPONENT car `23:11134` 28×28
+  - COMPONENT tarp `23:11132` 28×28
+  - COMPONENT kit-medical `23:11130` 28×28
+  - COMPONENT registered `23:11128` 28×28
+  - COMPONENT face-kiss-wink-heart `23:11126` 28×28
+  - COMPONENT file-invoice `23:11124` 28×28
+  - COMPONENT truck-arrow-right `23:11122` 28×28
+  - COMPONENT ear-listen `23:11120` 28×28
+  - COMPONENT draw-polygon `23:11118` 28×28
+  - COMPONENT battery-quarter `23:11116` 28×28
+  - COMPONENT mountain-city `23:11114` 28×28
+  - COMPONENT layer-group `23:11112` 28×28
+  - COMPONENT baseball `23:11110` 28×28
+  - COMPONENT share `23:11108` 28×28
+  - COMPONENT ticket-simple `23:11106` 28×28
+  - COMPONENT tags `23:11104` 28×28
+  - COMPONENT people-arrows `23:11102` 28×28
+  - COMPONENT plug-circle-xmark `23:11100` 28×28
+  - COMPONENT vials `23:11098` 28×28
+  - COMPONENT signs-post `23:11096` 28×28
+  - COMPONENT arrow-up `23:11094` 28×28
+  - COMPONENT down-left-and-up-right-to-center `23:11092` 28×28
+  - COMPONENT microscope `23:11090` 28×28
+  - COMPONENT face-sad-cry `23:11088` 28×28
+  - COMPONENT drum `23:11086` 28×28
+  - COMPONENT sort `23:11084` 28×28
+  - COMPONENT school-flag `23:11082` 28×28
+  - COMPONENT angles-up `23:11080` 28×28
+  - COMPONENT calendar-minus `23:11078` 28×28
+  - COMPONENT ethernet `23:11076` 28×28
+  - COMPONENT tent-arrows-down `23:11074` 28×28
+  - COMPONENT people-group `23:11072` 28×28
+  - COMPONENT video `23:11070` 28×28
+  - COMPONENT users-line `23:11068` 28×28
+  - COMPONENT compass-drafting `23:11066` 28×28
+  - COMPONENT arrow-up-right-dots `23:11064` 28×28
+  - COMPONENT bitcoin-sign `23:11180` 28×28
+  - COMPONENT robot `23:11178` 28×28
+  - COMPONENT pepper-hot `23:11176` 28×28
+  - COMPONENT circle-dollar-to-slot `23:11174` 28×28
+  - COMPONENT tree `23:11172` 28×28
+  - COMPONENT id-card `23:11077` 28×28
+  - COMPONENT arrow-left-long `23:11075` 28×28
+  - COMPONENT pills `23:11073` 28×28
+  - COMPONENT triangle-exclamation `23:11164` 28×28
+  - COMPONENT puzzle-piece `23:11162` 28×28
+  - COMPONENT map-pin `23:11160` 28×28
+  - COMPONENT shop-lock `23:11158` 28×28
+  - COMPONENT filter `23:11156` 28×28
+  - COMPONENT suitcase-rolling `23:11186` 28×28
+  - COMPONENT water `23:11184` 28×28
+  - COMPONENT eye-low-vision `23:11182` 28×28
+  - COMPONENT house-flood-water `23:11148` 28×28
+  - COMPONENT cloud-showers-heavy `23:11146` 28×28
+  - COMPONENT chess-pawn `23:11144` 28×28
+  - COMPONENT umbrella-beach `23:11142` 28×28
+  - COMPONENT check-double `23:11140` 28×28
+  - COMPONENT file-signature `23:11170` 28×28
+  - COMPONENT italic `23:11168` 28×28
+  - COMPONENT face-smile-beam `23:11166` 28×28
+  - COMPONENT bell-slash `23:11135` 28×28
+  - COMPONENT handshake `23:11133` 28×28
+  - COMPONENT money-bill `23:11131` 28×28
+  - COMPONENT medal `23:11129` 28×28
+  - COMPONENT mars-double `23:11127` 28×28
+  - COMPONENT square-binary `23:11154` 28×28
+  - COMPONENT won-sign `23:11152` 28×28
+  - COMPONENT microphone-lines `23:11150` 28×28
+  - COMPONENT comment `23:11119` 28×28
+  - COMPONENT timeline `23:11117` 28×28
+  - COMPONENT torii-gate `23:11115` 28×28
+  - COMPONENT video-slash `23:11113` 28×28
+  - COMPONENT calendar `23:11111` 28×28
+  - COMPONENT arrow-trend-up `23:11777` 28×28
+  - COMPONENT arrows-rotate `23:11775` 28×28
+  - COMPONENT globe `23:11773` 28×28
+  - COMPONENT arrow-left `23:11103` 28×28
+  - COMPONENT paintbrush `23:11101` 28×28
+  - COMPONENT align-center `23:11099` 28×28
+  - COMPONENT cross `23:11097` 28×28
+  - COMPONENT square-minus `23:11095` 28×28
+  - COMPONENT blog `23:11125` 28×28
+  - COMPONENT route `23:11123` 28×28
+  - COMPONENT circle-arrow-up `23:11121` 28×28
+  - COMPONENT magnifying-glass `23:11087` 28×28
+  - COMPONENT bowling-ball `23:11085` 28×28
+  - COMPONENT ellipsis `23:11083` 28×28
+  - COMPONENT face-tired `23:11081` 28×28
+  - COMPONENT grip-lines-vertical `23:11079` 28×28
+  - COMPONENT microchip `23:11109` 28×28
+  - COMPONENT frog `23:11107` 28×28
+  - COMPONENT hands-asl-interpreting `23:11105` 28×28
+  - COMPONENT laptop `23:11071` 28×28
+  - COMPONENT power-off `23:11069` 28×28
+  - COMPONENT chart-area `23:11067` 28×28
+  - COMPONENT display `23:11065` 28×28
+  - COMPONENT quote-left `23:11063` 28×28
+  - COMPONENT file-prescription `23:11093` 28×28
+  - COMPONENT face-grin `23:11091` 28×28
+  - COMPONENT mountain `23:11089` 28×28
+  - COMPONENT microphone-slash `23:11819` 28×28
+  - COMPONENT mars-and-venus-burst `23:11817` 28×28
+  - COMPONENT caret-left `23:11815` 28×28
+  - COMPONENT dice-two `23:11813` 28×28
+  - COMPONENT file-circle-plus `23:11811` 28×28
+  - COMPONENT tooth `23:11713` 28×28
+  - COMPONENT volume-low `23:11711` 28×28
+  - COMPONENT chess-queen `23:11709` 28×28
+  - COMPONENT file-code `23:11803` 28×28
+  - COMPONENT rupiah-sign `23:11801` 28×28
+  - COMPONENT file-csv `23:11799` 28×28
+  - COMPONENT building-wheat `23:11797` 28×28
+  - COMPONENT tent-arrow-turn-left `23:11795` 28×28
+  - COMPONENT road-bridge `23:11825` 28×28
+  - COMPONENT dice-six `23:11823` 28×28
+  - COMPONENT plate-wheat `23:11821` 28×28
+  - COMPONENT house-crack `23:11787` 28×28
+  - COMPONENT cloud `23:11785` 28×28
+  - COMPONENT hockey-puck `23:11783` 28×28
+  - COMPONENT tty `23:11781` 28×28
+  - COMPONENT shuffle `23:11779` 28×28
+  - COMPONENT square-nfi `23:11809` 28×28
+  - COMPONENT building-circle-exclamation `23:11807` 28×28
+  - COMPONENT grip-vertical `23:11805` 28×28
+  - COMPONENT arrows-spin `23:11771` 28×28
+  - COMPONENT futbol `23:11769` 28×28
+  - COMPONENT cheese `23:11767` 28×28
+  - COMPONENT dice `23:11765` 28×28
+  - COMPONENT bars `23:11763` 28×28
+  - COMPONENT mask-face `23:11793` 28×28
+  - COMPONENT bezier-curve `23:11791` 28×28
+  - COMPONENT chair `23:11789` 28×28
+  - COMPONENT dice-d20 `23:11755` 28×28
+  - COMPONENT road-lock `23:11753` 28×28
+  - COMPONENT suitcase `23:11751` 28×28
+  - COMPONENT list-check `23:11749` 28×28
+  - COMPONENT motorcycle `23:11747` 28×28
+  - COMPONENT upload `23:11649` 28×28
+  - COMPONENT store-slash `23:11647` 28×28
+  - COMPONENT face-flushed `23:11645` 28×28
+  - COMPONENT mobile-screen-button `23:11739` 28×28
+  - COMPONENT cart-flatbed `23:11737` 28×28
+  - COMPONENT pause `23:11735` 28×28
+  - COMPONENT plane-circle-check `23:11733` 28×28
+  - COMPONENT face-kiss `23:11731` 28×28
+  - COMPONENT forward `23:11761` 28×28
+  - COMPONENT icons `23:11759` 28×28
+  - COMPONENT dice-four `23:11757` 28×28
+  - COMPONENT circle-minus `23:11723` 28×28
+  - COMPONENT bookmark `23:11721` 28×28
+  - COMPONENT braille `23:11719` 28×28
+  - COMPONENT angles-left `23:11717` 28×28
+  - COMPONENT rocket `23:11715` 28×28
+  - COMPONENT icicles `23:11745` 28×28
+  - COMPONENT circle-dot `23:11743` 28×28
+  - COMPONENT blender-phone `23:11741` 28×28
+  - COMPONENT asterisk `23:11707` 28×28
+  - COMPONENT rotate-right `23:11705` 28×28
+  - COMPONENT user-check `23:11703` 28×28
+  - COMPONENT image-portrait `23:11701` 28×28
+  - COMPONENT hand-pointer `23:11699` 28×28
+  - COMPONENT cloud-sun-rain `23:11729` 28×28
+  - COMPONENT rupee-sign `23:11727` 28×28
+  - COMPONENT sleigh `23:11725` 28×28
+  - COMPONENT tablet `23:11691` 28×28
+  - COMPONENT peseta-sign `23:11689` 28×28
+  - COMPONENT book-tanakh `23:11687` 28×28
+  - COMPONENT elevator `23:11685` 28×28
+  - COMPONENT star-half-stroke `23:11683` 28×28
+  - COMPONENT whiskey-glass `23:11585` 28×28
+  - COMPONENT envelope-circle-check `23:11583` 28×28
+  - COMPONENT list-ol `23:11581` 28×28
+  - COMPONENT tower-cell `23:11675` 28×28
+  - COMPONENT screwdriver-wrench `23:11673` 28×28
+  - COMPONENT face-grin-beam `23:11671` 28×28
+  - COMPONENT web-awesome `23:11669` 28×28
+  - COMPONENT bars-staggered `23:11667` 28×28
+  - COMPONENT diamond-turn-right `23:11697` 28×28
+  - COMPONENT square-phone `23:11695` 28×28
+  - COMPONENT spell-check `23:11693` 28×28
+  - COMPONENT face-grin-wide `23:11659` 28×28
+  - COMPONENT laptop-medical `23:11657` 28×28
+  - COMPONENT shuttle-space `23:11655` 28×28
+  - COMPONENT ruble-sign `23:11653` 28×28
+  - COMPONENT circle-h `23:11651` 28×28
+  - COMPONENT lock-open `23:11681` 28×28
+  - COMPONENT atom `23:11679` 28×28
+  - COMPONENT cat `23:11677` 28×28
+  - COMPONENT yin-yang `23:11643` 28×28
+  - COMPONENT train-subway `23:11641` 28×28
+  - COMPONENT ice-cream `23:11639` 28×28
+  - COMPONENT ring `23:11637` 28×28
+  - COMPONENT building-columns `23:11635` 28×28
+  - COMPONENT face-grin-tears `23:11665` 28×28
+  - COMPONENT snowplow `23:11663` 28×28
+  - COMPONENT face-laugh-beam `23:11661` 28×28
+  - COMPONENT angle-left `23:11627` 28×28
+  - COMPONENT face-kiss-beam `23:11625` 28×28
+  - COMPONENT face-angry `23:11623` 28×28
+  - COMPONENT arrows-down-to-people `23:11621` 28×28
+  - COMPONENT parachute-box `23:11619` 28×28
+  - COMPONENT spa `23:11521` 28×28
+  - COMPONENT sort-down `23:11519` 28×28
+  - COMPONENT calculator `23:11517` 28×28
+  - COMPONENT window-restore `23:11611` 28×28
+  - COMPONENT user-slash `23:11609` 28×28
+  - COMPONENT circle-chevron-left `23:11607` 28×28
+  - COMPONENT cart-flatbed-suitcase `23:11605` 28×28
+  - COMPONENT screwdriver `23:11603` 28×28
+  - COMPONENT circle-pause `23:11633` 28×28
+  - COMPONENT money-bill-wave `23:11631` 28×28
+  - COMPONENT hand-middle-finger `23:11629` 28×28
+  - COMPONENT chess-bishop `23:11595` 28×28
+  - COMPONENT dharmachakra `23:11593` 28×28
+  - COMPONENT bed-pulse `23:11591` 28×28
+  - COMPONENT bore-hole `23:11589` 28×28
+  - COMPONENT person-walking `23:11587` 28×28
+  - COMPONENT charging-station `23:11617` 28×28
+  - COMPONENT circle-down `23:11615` 28×28
+  - COMPONENT building `23:11613` 28×28
+  - COMPONENT wheat-awn `23:11579` 28×28
+  - COMPONENT house-medical-circle-exclamation `23:11577` 28×28
+  - COMPONENT binoculars `23:11575` 28×28
+  - COMPONENT genderless `23:11573` 28×28
+  - COMPONENT gavel `23:11571` 28×28
+  - COMPONENT folder `23:11601` 28×28
+  - COMPONENT down-long `23:11599` 28×28
+  - COMPONENT school-circle-exclamation `23:11597` 28×28
+  - COMPONENT person-walking-luggage `23:11563` 28×28
+  - COMPONENT pump-medical `23:11561` 28×28
+  - COMPONENT hand-dots `23:11559` 28×28
+  - COMPONENT users `23:11557` 28×28
+  - COMPONENT chart-simple `23:11555` 28×28
+  - COMPONENT hill-rockslide `23:11460` 28×28
+  - COMPONENT hands `23:11458` 28×28
+  - COMPONENT fingerprint `23:11456` 28×28
+  - COMPONENT fill `23:11547` 28×28
+  - COMPONENT hanukiah `23:11545` 28×28
+  - COMPONENT synagogue `23:11543` 28×28
+  - COMPONENT file-pdf `23:11541` 28×28
+  - COMPONENT arrow-up-1-9 `23:11539` 28×28
+  - COMPONENT gamepad `23:11569` 28×28
+  - COMPONENT clipboard-check `23:11567` 28×28
+  - COMPONENT minus `23:11565` 28×28
+  - COMPONENT heart-pulse `23:11531` 28×28
+  - COMPONENT arrows-to-dot `23:11529` 28×28
+  - COMPONENT up-down-left-right `23:11527` 28×28
+  - COMPONENT ear-deaf `23:11525` 28×28
+  - COMPONENT chevron-left `23:11523` 28×28
+  - COMPONENT hexagon-nodes `23:11553` 28×28
+  - COMPONENT hot-tub-person `23:11551` 28×28
+  - COMPONENT mattress-pillow `23:11549` 28×28
+  - COMPONENT film `23:11515` 28×28
+  - COMPONENT print `23:11513` 28×28
+  - COMPONENT moon `23:11511` 28×28
+  - COMPONENT stroopwafel `23:11509` 28×28
+  - COMPONENT walkie-talkie `23:11507` 28×28
+  - COMPONENT exclamation `23:11537` 28×28
+  - COMPONENT bell-concierge `23:11535` 28×28
+  - COMPONENT capsules `23:11533` 28×28
+  - COMPONENT vial-circle-check `23:11499` 28×28
+  - COMPONENT person-burst `23:11497` 28×28
+  - COMPONENT school-lock `23:11495` 28×28
+  - COMPONENT arrow-pointer `23:11493` 28×28
+  - COMPONENT border-none `23:11491` 28×28
+  - COMPONENT book-bible `23:11421` 28×28
+  - COMPONENT user-shield `23:11419` 28×28
+  - COMPONENT house-signal `23:11417` 28×28
+  - COMPONENT face-laugh-squint `23:11483` 28×28
+  - COMPONENT left-right `23:11481` 28×28
+  - COMPONENT anchor-circle-xmark `23:11479` 28×28
+  - COMPONENT ribbon `23:11477` 28×28
+  - COMPONENT arrow-down-wide-short `23:11475` 28×28
+  - COMPONENT swatchbook `23:11505` 28×28
+  - COMPONENT apple-whole `23:11503` 28×28
+  - COMPONENT stamp `23:11501` 28×28
+  - COMPONENT landmark-dome `23:11470` 28×28
+  - COMPONENT square-caret-left `23:11468` 28×28
+  - COMPONENT sort-up `23:11466` 28×28
+  - COMPONENT file-waveform `23:11464` 28×28
+  - COMPONENT calendar-days `23:11462` 28×28
+  - COMPONENT align-left `23:11489` 28×28
+  - COMPONENT temperature-low `23:11487` 28×28
+  - COMPONENT person-walking-arrow-right `23:11485` 28×28
+  - COMPONENT heart `23:11454` 28×28
+  - COMPONENT arrow-trend-down `23:11452` 28×28
+  - COMPONENT font `23:11450` 28×28
+  - COMPONENT arrow-up-9-1 `23:11448` 28×28
+  - COMPONENT caret-up-down `2017:991` 28×28
+- FRAME **Fontawesome - Regular** `22:9740` 2374×490
+  - COMPONENT comment-dots `23:12560` 28×28
+  - COMPONENT file-zipper `23:12558` 28×28
+  - COMPONENT hand `23:12556` 28×28
+  - COMPONENT clone `23:12554` 28×28
+  - COMPONENT file-excel `23:12625` 28×28
+  - COMPONENT trash-can `23:12624` 28×28
+  - COMPONENT face-grin-tongue-wink `23:12621` 28×28
+  - COMPONENT hourglass `23:12620` 28×28
+  - COMPONENT chess-rook `23:12619` 28×28
+  - COMPONENT face-grimace `23:12618` 28×28
+  - COMPONENT chess-knight `23:12617` 28×28
+  - COMPONENT user `23:12616` 28×28
+  - COMPONENT id-badge `23:12614` 28×28
+  - COMPONENT circle `23:12612` 28×28
+  - COMPONENT copyright `23:12611` 28×28
+  - COMPONENT square-caret-down `23:12610` 28×28
+  - COMPONENT hand-point-right `23:12609` 28×28
+  - COMPONENT face-laugh `23:12608` 28×28
+  - COMPONENT money-bill-1 `23:12607` 28×28
+  - COMPONENT file-word `23:12606` 28×28
+  - COMPONENT face-grin-tongue `23:12615` 28×28
+  - COMPONENT object-group `23:12605` 28×28
+  - COMPONENT circle-left `23:12603` 28×28
+  - COMPONENT file-audio `23:12601` 28×28
+  - COMPONENT face-meh `23:12599` 28×28
+  - COMPONENT map `23:12597` 28×28
+  - COMPONENT comments `23:12627` 28×28
+  - COMPONENT square-caret-right `23:12623` 28×28
+  - COMPONENT file `23:12595` 28×28
+  - COMPONENT share-from-square `23:12594` 28×28
+  - COMPONENT pen-to-square `23:12592` 28×28
+  - COMPONENT square-full `23:12590` 28×28
+  - COMPONENT file-video `23:12588` 28×28
+  - COMPONENT folder-open `23:12587` 28×28
+  - COMPONENT keyboard `23:12586` 28×28
+  - COMPONENT face-grin-squint-tears `23:12585` 28×28
+  - COMPONENT face-laugh-wink `23:12604` 28×28
+  - COMPONENT face-grin-wink `23:12602` 28×28
+  - COMPONENT face-rolling-eyes `23:12600` 28×28
+  - COMPONENT clipboard `23:12598` 28×28
+  - COMPONENT circle-question `23:12596` 28×28
+  - COMPONENT life-ring `23:12626` 28×28
+  - COMPONENT calendar-plus `23:12622` 28×28
+  - COMPONENT circle-play `23:12613` 28×28
+  - COMPONENT calendar-check `23:12593` 28×28
+  - COMPONENT thumbs-down `23:12591` 28×28
+  - COMPONENT hand-point-left `23:12589` 28×28
+  - COMPONENT envelope `23:12584` 28×28
+  - COMPONENT face-grin-beam-sweat `23:12583` 28×28
+  - COMPONENT hand-lizard `23:12582` 28×28
+  - COMPONENT square-check `23:12581` 28×28
+  - COMPONENT face-frown-open `23:12580` 28×28
+  - COMPONENT hand-scissors `23:12579` 28×28
+  - COMPONENT face-meh-blank `23:12578` 28×28
+  - COMPONENT hand-point-up `23:12577` 28×28
+  - COMPONENT object-ungroup `23:12576` 28×28
+  - COMPONENT circle-check `23:12575` 28×28
+  - COMPONENT file-image `23:12574` 28×28
+  - COMPONENT bell `23:12573` 28×28
+  - COMPONENT flag `23:12572` 28×28
+  - COMPONENT hand-peace `23:12571` 28×28
+  - COMPONENT chess-king `23:12570` 28×28
+  - COMPONENT newspaper `23:12569` 28×28
+  - COMPONENT snowflake `23:12568` 28×28
+  - COMPONENT star-half `23:12567` 28×28
+  - COMPONENT envelope-open `23:12566` 28×28
+  - COMPONENT face-frown `23:12565` 28×28
+  - COMPONENT hard-drive `23:12564` 28×28
+  - COMPONENT hospital `23:12563` 28×28
+  - COMPONENT face-grin-tongue-squint `23:12562` 28×28
+  - COMPONENT face-smile-wink `23:12561` 28×28
+  - COMPONENT face-dizzy `23:12559` 28×28
+  - COMPONENT hourglass-half `23:12557` 28×28
+  - COMPONENT face-sad-tear `23:12555` 28×28
+  - COMPONENT calendar-xmark `23:12553` 28×28
+  - COMPONENT copy `23:12552` 28×28
+  - COMPONENT file-lines `23:12551` 28×28
+  - COMPONENT closed-captioning `23:12550` 28×28
+  - COMPONENT font-awesome `23:12549` 28×28
+  - COMPONENT image `23:12548` 28×28
+  - COMPONENT hand-point-down `23:12547` 28×28
+  - COMPONENT lightbulb `23:12546` 28×28
+  - COMPONENT face-grin-stars `23:12545` 28×28
+  - COMPONENT images `23:12544` 28×28
+  - COMPONENT rectangle-xmark `23:12543` 28×28
+  - COMPONENT face-grin-squint `23:12542` 28×28
+  - COMPONENT circle-up `23:12541` 28×28
+  - COMPONENT hand-back-fist `23:12540` 28×28
+  - COMPONENT message `23:12539` 28×28
+  - COMPONENT thumbs-up `23:12538` 28×28
+  - COMPONENT face-smile `23:12537` 28×28
+  - COMPONENT square `23:12536` 28×28
+  - COMPONENT eye-slash `23:12535` 28×28
+  - COMPONENT paper-plane `23:12534` 28×28
+  - COMPONENT face-grin-hearts `23:12533` 28×28
+  - COMPONENT circle-right `23:12532` 28×28
+  - COMPONENT floppy-disk `23:12531` 28×28
+  - COMPONENT file-powerpoint `23:12530` 28×28
+  - COMPONENT note-sticky `23:12529` 28×28
+  - COMPONENT hand-spock `23:12528` 28×28
+  - COMPONENT gem `23:12527` 28×28
+  - COMPONENT chart-bar `23:12526` 28×28
+  - COMPONENT paste `23:12525` 28×28
+  - COMPONENT window-maximize `23:12524` 28×28
+  - COMPONENT address-book `23:12523` 28×28
+  - COMPONENT rectangle-list `23:12522` 28×28
+  - COMPONENT star `23:12521` 28×28
+  - COMPONENT sun `23:12520` 28×28
+  - COMPONENT address-card `23:12519` 28×28
+  - COMPONENT circle-stop `23:12518` 28×28
+  - COMPONENT circle-xmark `23:12517` 28×28
+  - COMPONENT lemon `23:12516` 28×28
+  - COMPONENT compass `23:12515` 28×28
+  - COMPONENT face-surprise `23:12514` 28×28
+  - COMPONENT credit-card `23:12513` 28×28
+  - COMPONENT circle-user `23:12512` 28×28
+  - COMPONENT clock `23:12511` 28×28
+  - COMPONENT window-minimize `23:12510` 28×28
+  - COMPONENT folder-closed `23:12509` 28×28
+  - COMPONENT eye `23:12508` 28×28
+  - COMPONENT square-caret-up `23:12507` 28×28
+  - COMPONENT square-plus `23:12506` 28×28
+  - COMPONENT registered `23:12505` 28×28
+  - COMPONENT face-kiss-wink-heart `23:12504` 28×28
+  - COMPONENT face-sad-cry `23:12503` 28×28
+  - COMPONENT calendar-minus `23:12502` 28×28
+  - COMPONENT id-card `23:12501` 28×28
+  - COMPONENT chess-pawn `23:12500` 28×28
+  - COMPONENT face-smile-beam `23:12499` 28×28
+  - COMPONENT bell-slash `23:12498` 28×28
+  - COMPONENT handshake `23:12497` 28×28
+  - COMPONENT comment `23:12496` 28×28
+  - COMPONENT calendar `23:12495` 28×28
+  - COMPONENT square-minus `23:12494` 28×28
+  - COMPONENT face-tired `23:12493` 28×28
+  - COMPONENT face-grin `23:12492` 28×28
+  - COMPONENT chess-queen `23:12491` 28×28
+  - COMPONENT file-code `23:12490` 28×28
+  - COMPONENT futbol `23:12489` 28×28
+  - COMPONENT face-flushed `23:12488` 28×28
+  - COMPONENT face-kiss `23:12487` 28×28
+  - COMPONENT bookmark `23:12486` 28×28
+  - COMPONENT circle-dot `23:12485` 28×28
+  - COMPONENT hand-pointer `23:12484` 28×28
+  - COMPONENT star-half-stroke `23:12483` 28×28
+  - COMPONENT face-grin-beam `23:12482` 28×28
+  - COMPONENT face-grin-wide `23:12481` 28×28
+  - COMPONENT face-grin-tears `23:12480` 28×28
+  - COMPONENT face-laugh-beam `23:12479` 28×28
+  - COMPONENT face-kiss-beam `23:12478` 28×28
+  - COMPONENT face-angry `23:12477` 28×28
+  - COMPONENT window-restore `23:12476` 28×28
+  - COMPONENT circle-pause `23:12475` 28×28
+  - COMPONENT chess-bishop `23:12474` 28×28
+  - COMPONENT circle-down `23:12473` 28×28
+  - COMPONENT building `23:12472` 28×28
+  - COMPONENT folder `23:12471` 28×28
+  - COMPONENT file-pdf `23:12470` 28×28
+  - COMPONENT moon `23:12469` 28×28
+  - COMPONENT face-laugh-squint `23:12468` 28×28
+  - COMPONENT square-caret-left `23:12467` 28×28
+  - COMPONENT calendar-days `23:12466` 28×28
+  - COMPONENT heart `23:12465` 28×28
+- FRAME **Fontawesome - Brands** `22:10067` 2254×640
+  - COMPONENT supple `23:13105` 28×28
+  - COMPONENT x-twitter `23:13101` 28×28
+  - COMPONENT bootstrap `23:13097` 28×28
+  - COMPONENT weixin `23:13121` 28×28
+  - COMPONENT connectdevelop `23:13120` 28×28
+  - COMPONENT medium `23:13118` 28×28
+  - COMPONENT square-facebook `23:13116` 28×28
+  - COMPONENT ioxhost `23:13114` 28×28
+  - COMPONENT fonticons `23:13087` 28×28
+  - COMPONENT figma `23:13079` 28×28
+  - COMPONENT reddit-alien `23:13073` 28×28
+  - COMPONENT angrycreative `23:13112` 28×28
+  - COMPONENT imdb `23:13110` 28×28
+  - COMPONENT steam `23:13108` 28×28
+  - COMPONENT square-xing `23:13104` 28×28
+  - COMPONENT d-and-d-beyond `23:13100` 28×28
+  - COMPONENT tumblr `23:13063` 28×28
+  - COMPONENT bandcamp `23:13057` 28×28
+  - COMPONENT red-river `23:13049` 28×28
+  - COMPONENT square-lastfm `23:13096` 28×28
+  - COMPONENT stackpath `23:13094` 28×28
+  - COMPONENT square-hacker-news `23:13090` 28×28
+  - COMPONENT strava `23:13082` 28×28
+  - COMPONENT dropbox `23:13076` 28×28
+  - COMPONENT meta `23:12932` 28×28
+  - COMPONENT microsoft `23:12930` 28×28
+  - COMPONENT creative-commons-nd `23:12928` 28×28
+  - COMPONENT square-tumblr `23:13069` 28×28
+  - COMPONENT dyalog `23:13068` 28×28
+  - COMPONENT squarespace `23:12989` 28×28
+  - COMPONENT accusoft `23:13060` 28×28
+  - COMPONENT lastfm `23:13052` 28×28
+  - COMPONENT phoenix-squadron `23:13053` 28×28
+  - COMPONENT square-snapchat `23:13045` 28×28
+  - COMPONENT yelp `23:13041` 28×28
+  - COMPONENT cloudflare `23:13092` 28×28
+  - COMPONENT deviantart `23:13086` 28×28
+  - COMPONENT airbnb `23:13078` 28×28
+  - COMPONENT usps `23:13072` 28×28
+  - COMPONENT envira `23:13083` 28×28
+  - COMPONENT fulcrum `23:13033` 28×28
+  - COMPONENT linux `23:13029` 28×28
+  - COMPONENT foursquare `23:13025` 28×28
+  - COMPONENT bilibili `23:13066` 28×28
+  - COMPONENT drupal `23:13062` 28×28
+  - COMPONENT cc-stripe `23:13056` 28×28
+  - COMPONENT square-youtube `23:13048` 28×28
+  - COMPONENT edge-legacy `23:13044` 28×28
+  - COMPONENT dev `23:13011` 28×28
+  - COMPONENT speakap `23:13007` 28×28
+  - COMPONENT android `23:13003` 28×28
+  - COMPONENT ethereum `23:13039` 28×28
+  - COMPONENT shirtsinbulk `23:13038` 28×28
+  - COMPONENT black-tie `23:13036` 28×28
+  - COMPONENT odnoklassniki `23:13032` 28×28
+  - COMPONENT fonticons-fi `23:13028` 28×28
+  - COMPONENT cc-amex `23:13024` 28×28
+  - COMPONENT js `23:13022` 28×28
+  - COMPONENT galactic-senate `23:13020` 28×28
+  - COMPONENT reacteurope `23:13018` 28×28
+  - COMPONENT openid `23:13016` 28×28
+  - COMPONENT gitlab `23:13014` 28×28
+  - COMPONENT sourcetree `23:13010` 28×28
+  - COMPONENT gg `23:13006` 28×28
+  - COMPONENT joget `23:13002` 28×28
+  - COMPONENT weibo `23:13000` 28×28
+  - COMPONENT aws `23:12998` 28×28
+  - COMPONENT sass `23:12996` 28×28
+  - COMPONENT cc-paypal `23:12994` 28×28
+  - COMPONENT superpowers `23:12992` 28×28
+  - COMPONENT rust `23:12988` 28×28
+  - COMPONENT sellcast `23:12986` 28×28
+  - COMPONENT java `23:12984` 28×28
+  - COMPONENT orcid `23:12982` 28×28
+  - COMPONENT tencent-weibo `23:12980` 28×28
+  - COMPONENT trade-federation `23:12978` 28×28
+  - COMPONENT viber `23:12976` 28×28
+  - COMPONENT ello `23:12974` 28×28
+  - COMPONENT wix `23:12972` 28×28
+  - COMPONENT mizuni `23:12970` 28×28
+  - COMPONENT leanpub `23:12945` 28×28
+  - COMPONENT bitbucket `23:12941` 28×28
+  - COMPONENT pagelines `23:12937` 28×28
+  - COMPONENT creative-commons `23:12967` 28×28
+  - COMPONENT github `23:12966` 28×28
+  - COMPONENT viacoin `23:12964` 28×28
+  - COMPONENT freebsd `23:12962` 28×28
+  - COMPONENT rebel `23:12960` 28×28
+  - COMPONENT square-steam `23:12958` 28×28
+  - COMPONENT fedex `23:12956` 28×28
+  - COMPONENT usb `23:12954` 28×28
+  - COMPONENT empire `23:12952` 28×28
+  - COMPONENT simplybuilt `23:12950` 28×28
+  - COMPONENT google-drive `23:12948` 28×28
+  - COMPONENT microblog `23:12944` 28×28
+  - COMPONENT etsy `23:12940` 28×28
+  - COMPONENT bimobject `23:12990` 28×28
+  - COMPONENT app-store-ios `23:13059` 28×28
+  - COMPONENT gripfire `23:13051` 28×28
+  - COMPONENT 500px `23:13064` 28×28
+  - COMPONENT speaker-deck `23:13058` 28×28
+  - COMPONENT deskpro `23:13050` 28×28
+  - COMPONENT critical-role `23:13095` 28×28
+  - COMPONENT square-github `23:13093` 28×28
+  - COMPONENT vimeo-v `23:12936` 28×28
+  - COMPONENT stripe-s `23:12935` 28×28
+  - COMPONENT keybase `23:12934` 28×28
+  - COMPONENT yandex-international `23:12933` 28×28
+  - COMPONENT umbraco `23:12931` 28×28
+  - COMPONENT joomla `23:12929` 28×28
+  - COMPONENT google-play `23:13070` 28×28
+  - COMPONENT uniregistry `23:13067` 28×28
+  - COMPONENT d-and-d `23:12927` 28×28
+  - COMPONENT kaggle `23:12926` 28×28
+  - COMPONENT hubspot `23:12925` 28×28
+  - COMPONENT confluence `23:12924` 28×28
+  - COMPONENT square-gitlab `23:12923` 28×28
+  - COMPONENT servicestack `23:12922` 28×28
+  - COMPONENT npm `23:12921` 28×28
+  - COMPONENT square-font-awesome `23:12920` 28×28
+  - COMPONENT square-whatsapp `23:12919` 28×28
+  - COMPONENT creative-commons-nc `23:12918` 28×28
+  - COMPONENT galactic-republic `23:12917` 28×28
+  - COMPONENT square-instagram `23:12916` 28×28
+  - COMPONENT raspberry-pi `23:12915` 28×28
+  - COMPONENT mastodon `23:12914` 28×28
+  - COMPONENT letterboxd `23:12913` 28×28
+  - COMPONENT square-git `23:12912` 28×28
+  - COMPONENT 42-group `23:13013` 28×28
+  - COMPONENT angular `23:13009` 28×28
+  - COMPONENT untappd `23:13005` 28×28
+  - COMPONENT apper `23:13012` 28×28
+  - COMPONENT git-alt `23:13008` 28×28
+  - COMPONENT sitrox `23:13004` 28×28
+  - COMPONENT vk `23:13040` 28×28
+  - COMPONENT vimeo `23:13037` 28×28
+  - COMPONENT discourse `23:13117` 28×28
+  - COMPONENT hotjar `23:13115` 28×28
+  - COMPONENT symfony `23:13113` 28×28
+  - COMPONENT square-odnoklassniki `23:13023` 28×28
+  - COMPONENT skyatlas `23:13021` 28×28
+  - COMPONENT hacker-news `23:13019` 28×28
+  - COMPONENT files-pinwheel `23:13017` 28×28
+  - COMPONENT flutter `23:13015` 28×28
+  - COMPONENT instagram `23:13107` 28×28
+  - COMPONENT y-combinator `23:13103` 28×28
+  - COMPONENT shopify `23:13099` 28×28
+  - COMPONENT webflow `23:13106` 28×28
+  - COMPONENT mendeley `23:13102` 28×28
+  - COMPONENT odysee `23:13098` 28×28
+  - COMPONENT wodu `23:13122` 28×28
+  - COMPONENT fort-awesome-alt `23:13119` 28×28
+  - COMPONENT threads `23:13089` 28×28
+  - COMPONENT r-project `23:13081` 28×28
+  - COMPONENT edge `23:13075` 28×28
+  - COMPONENT yammer `23:13088` 28×28
+  - COMPONENT bots `23:13080` 28×28
+  - COMPONENT fly `23:13074` 28×28
+  - COMPONENT safari `23:13111` 28×28
+  - COMPONENT square-behance `23:13109` 28×28
+  - COMPONENT pied-piper-hat `23:12947` 28×28
+  - COMPONENT audible `23:12943` 28×28
+  - COMPONENT yoast `23:12939` 28×28
+  - COMPONENT fort-awesome `23:12946` 28×28
+  - COMPONENT square-dribbble `23:12942` 28×28
+  - COMPONENT python `23:12938` 28×28
+  - COMPONENT pix `23:12968` 28×28
+  - COMPONENT cc-apple-pay `23:12965` 28×28
+  - COMPONENT docker `23:13077` 28×28
+  - COMPONENT git `23:13071` 28×28
+  - COMPONENT blogger `23:13084` 28×28
+  - COMPONENT itch-io `23:12957` 28×28
+  - COMPONENT opensuse `23:12955` 28×28
+  - COMPONENT nfc-symbol `23:12953` 28×28
+  - COMPONENT creative-commons-nc-eu `23:12951` 28×28
+  - COMPONENT schlix `23:12949` 28×28
+  - COMPONENT mailchimp `23:13055` 28×28
+  - COMPONENT neos `23:13047` 28×28
+  - COMPONENT creative-commons-pd `23:13043` 28×28
+  - COMPONENT pinterest-p `23:13054` 28×28
+  - COMPONENT square-letterboxd `23:13046` 28×28
+  - COMPONENT digg `23:13042` 28×28
+  - COMPONENT bitcoin `23:13091` 28×28
+  - COMPONENT whmcs `23:13085` 28×28
+  - COMPONENT delicious `23:13035` 28×28
+  - COMPONENT bluesky `23:13031` 28×28
+  - COMPONENT hackerrank `23:13027` 28×28
+  - COMPONENT telegram `23:13034` 28×28
+  - COMPONENT cc-discover `23:13030` 28×28
+  - COMPONENT centercode `23:13026` 28×28
+  - COMPONENT erlang `23:13065` 28×28
+  - COMPONENT medrt `23:13061` 28×28
+  - COMPONENT salesforce `23:12911` 28×28
+  - COMPONENT meetup `23:12910` 28×28
+  - COMPONENT square-vimeo `23:12909` 28×28
+  - COMPONENT wizards-of-the-coast `23:12908` 28×28
+  - COMPONENT markdown `23:12907` 28×28
+  - COMPONENT instalod `23:12906` 28×28
+  - COMPONENT padlet `23:12905` 28×28
+  - COMPONENT goodreads `23:12904` 28×28
+  - COMPONENT unity `23:12991` 28×28
+  - COMPONENT creative-commons-sampling-plus `23:12987` 28×28
+  - COMPONENT invision `23:12985` 28×28
+  - COMPONENT mix `23:12903` 28×28
+  - COMPONENT square-x-twitter `23:12902` 28×28
+  - COMPONENT gratipay `23:12901` 28×28
+  - COMPONENT magento `23:12900` 28×28
+  - COMPONENT bluetooth `23:12899` 28×28
+  - COMPONENT houzz `23:12973` 28×28
+  - COMPONENT expeditedssl `23:12971` 28×28
+  - COMPONENT the-red-yeti `23:12969` 28×28
+  - COMPONENT canadian-maple-leaf `23:13001` 28×28
+  - COMPONENT sith `23:12999` 28×28
+  - COMPONENT algolia `23:12997` 28×28
+  - COMPONENT ussunnah `23:12995` 28×28
+  - COMPONENT sellsy `23:12993` 28×28
+  - COMPONENT jira `23:12963` 28×28
+  - COMPONENT spotify `23:12961` 28×28
+  - COMPONENT intercom `23:12959` 28×28
+  - COMPONENT wolf-pack-battalion `23:12983` 28×28
+  - COMPONENT square-twitter `23:12981` 28×28
+  - COMPONENT flipboard `23:12979` 28×28
+  - COMPONENT google-wallet `23:12977` 28×28
+  - COMPONENT shopware `23:12975` 28×28
+  - COMPONENT jxl `23:12898` 28×28
+  - COMPONENT phoenix-framework `23:12896` 28×28
+  - COMPONENT wirsindhandwerk `23:12894` 28×28
+  - COMPONENT kickstarter-k `23:12892` 28×28
+  - COMPONENT cc-jcb `23:12890` 28×28
+  - COMPONENT researchgate `23:12888` 28×28
+  - COMPONENT lyft `23:12886` 28×28
+  - COMPONENT wpressr `23:12884` 28×28
+  - COMPONENT octopus-deploy `23:12882` 28×28
+  - COMPONENT periscope `23:12880` 28×28
+  - COMPONENT modx `23:12878` 28×28
+  - COMPONENT kickstarter `23:12876` 28×28
+  - COMPONENT slideshare `23:12874` 28×28
+  - COMPONENT snapchat `23:12872` 28×28
+  - COMPONENT font-awesome `23:12870` 28×28
+  - COMPONENT buy-n-large `23:12868` 28×28
+  - COMPONENT readme `23:12866` 28×28
+  - COMPONENT creative-commons-nc-jp `23:12865` 28×28
+  - COMPONENT themeisle `23:12864` 28×28
+  - COMPONENT html5 `23:12863` 28×28
+  - COMPONENT replyd `23:12862` 28×28
+  - COMPONENT cuttlefish `23:12861` 28×28
+  - COMPONENT rockrms `23:12859` 28×28
+  - COMPONENT ravelry `23:12857` 28×28
+  - COMPONENT stubber `23:12855` 28×28
+  - COMPONENT quora `23:12854` 28×28
+  - COMPONENT monero `23:12853` 28×28
+  - COMPONENT hire-a-helper `23:12852` 28×28
+  - COMPONENT github-alt `23:12851` 28×28
+  - COMPONENT creative-commons-share `23:12850` 28×28
+  - COMPONENT yarn `23:12849` 28×28
+  - COMPONENT cc-visa `23:12848` 28×28
+  - COMPONENT dochub `23:12847` 28×28
+  - COMPONENT laravel `23:12846` 28×28
+  - COMPONENT digital-ocean `23:12845` 28×28
+  - COMPONENT earlybirds `23:12844` 28×28
+  - COMPONENT centos `23:12843` 28×28
+  - COMPONENT bluetooth-b `23:12842` 28×28
+  - COMPONENT teamspeak `23:12840` 28×28
+  - COMPONENT square-google-plus `23:12838` 28×28
+  - COMPONENT wpexplorer `23:12836` 28×28
+  - COMPONENT first-order-alt `23:12835` 28×28
+  - COMPONENT ubuntu `23:12834` 28×28
+  - COMPONENT opencart `23:12833` 28×28
+  - COMPONENT pied-piper `23:12832` 28×28
+  - COMPONENT paypal `23:12831` 28×28
+  - COMPONENT suse `23:12830` 28×28
+  - COMPONENT wpbeginner `23:12829` 28×28
+  - COMPONENT deezer `23:12828` 28×28
+  - COMPONENT blogger-b `23:12826` 28×28
+  - COMPONENT rocketchat `23:12824` 28×28
+  - COMPONENT unsplash `23:12822` 28×28
+  - COMPONENT draft2digital `23:12820` 28×28
+  - COMPONENT playstation `23:12818` 28×28
+  - COMPONENT facebook `23:12817` 28×28
+  - COMPONENT amazon-pay `23:12816` 28×28
+  - COMPONENT square-font-awesome-stroke `23:12815` 28×28
+  - COMPONENT amazon `23:12813` 28×28
+  - COMPONENT quinscape `23:12811` 28×28
+  - COMPONENT free-code-camp `23:12809` 28×28
+  - COMPONENT vine `23:12807` 28×28
+  - COMPONENT pinterest `23:12805` 28×28
+  - COMPONENT creative-commons-sa `23:12803` 28×28
+  - COMPONENT css `23:12801` 28×28
+  - COMPONENT creative-commons-pd-alt `23:12799` 28×28
+  - COMPONENT stack-overflow `23:12798` 28×28
+  - COMPONENT page4 `23:12797` 28×28
+  - COMPONENT mdb `23:12796` 28×28
+  - COMPONENT osi `23:12795` 28×28
+  - COMPONENT yandex `23:12794` 28×28
+  - COMPONENT whatsapp `23:12793` 28×28
+  - COMPONENT google `23:12792` 28×28
+  - COMPONENT chromecast `23:12791` 28×28
+  - COMPONENT line `23:12790` 28×28
+  - COMPONENT battle-net `23:12789` 28×28
+  - COMPONENT affiliatetheme `23:12788` 28×28
+  - COMPONENT brave `23:12787` 28×28
+  - COMPONENT atlassian `23:12786` 28×28
+  - COMPONENT aviato `23:12785` 28×28
+  - COMPONENT bity `23:12784` 28×28
+  - COMPONENT php `23:12783` 28×28
+  - COMPONENT stumbleupon-circle `23:12781` 28×28
+  - COMPONENT stripe `23:12779` 28×28
+  - COMPONENT jedi-order `23:12777` 28×28
+  - COMPONENT think-peaks `23:12775` 28×28
+  - COMPONENT buromobelexperte `23:12773` 28×28
+  - COMPONENT phabricator `23:12772` 28×28
+  - COMPONENT apple-pay `23:12771` 28×28
+  - COMPONENT artstation `23:12770` 28×28
+  - COMPONENT scribd `23:12768` 28×28
+  - COMPONENT stack-exchange `23:12766` 28×28
+  - COMPONENT fedora `23:12765` 28×28
+  - COMPONENT jenkins `23:12764` 28×28
+  - COMPONENT studiovinari `23:12763` 28×28
+  - COMPONENT glide `23:12761` 28×28
+  - COMPONENT adn `23:12759` 28×28
+  - COMPONENT square-web-awesome `23:12757` 28×28
+  - COMPONENT css3-alt `23:12756` 28×28
+  - COMPONENT xing `23:12755` 28×28
+  - COMPONENT medapps `23:12754` 28×28
+  - COMPONENT redhat `23:12753` 28×28
+  - COMPONENT uncharted `23:12752` 28×28
+  - COMPONENT fantasy-flight-games `23:12751` 28×28
+  - COMPONENT facebook-f `23:12750` 28×28
+  - COMPONENT perbyte `23:12749` 28×28
+  - COMPONENT hips `23:12748` 28×28
+  - COMPONENT google-pay `23:12747` 28×28
+  - COMPONENT twitch `23:12746` 28×28
+  - COMPONENT cc-diners-club `23:12745` 28×28
+  - COMPONENT windows `23:12744` 28×28
+  - COMPONENT rev `23:12743` 28×28
+  - COMPONENT btc `23:12742` 28×28
+  - COMPONENT creative-commons-zero `23:12741` 28×28
+  - COMPONENT elementor `23:12740` 28×28
+  - COMPONENT shoelace `23:12739` 28×28
+  - COMPONENT square-pied-piper `23:12738` 28×28
+  - COMPONENT mintbit `23:12737` 28×28
+  - COMPONENT youtube `23:12736` 28×28
+  - COMPONENT accessible-icon `23:12735` 28×28
+  - COMPONENT gg-circle `23:12734` 28×28
+  - COMPONENT app-store `23:12733` 28×28
+  - COMPONENT codiepie `23:12732` 28×28
+  - COMPONENT stumbleupon `23:12731` 28×28
+  - COMPONENT nutritionix `23:12730` 28×28
+  - COMPONENT linkedin-in `23:12729` 28×28
+  - COMPONENT jsfiddle `23:12728` 28×28
+  - COMPONENT yahoo `23:12727` 28×28
+  - COMPONENT grav `23:12726` 28×28
+  - COMPONENT firefox-browser `23:12804` 28×28
+  - COMPONENT sticker-mule `23:12802` 28×28
+  - COMPONENT goodreads-g `23:12800` 28×28
+  - COMPONENT uber `23:12827` 28×28
+  - COMPONENT sketch `23:12825` 28×28
+  - COMPONENT creative-commons-remix `23:12823` 28×28
+  - COMPONENT itunes-note `23:12821` 28×28
+  - COMPONENT gulp `23:12819` 28×28
+  - COMPONENT keycdn `23:12887` 28×28
+  - COMPONENT diaspora `23:12885` 28×28
+  - COMPONENT cotton-bureau `23:12883` 28×28
+  - COMPONENT reddit `23:12814` 28×28
+  - COMPONENT alipay `23:12812` 28×28
+  - COMPONENT google-scholar `23:12810` 28×28
+  - COMPONENT cloudscale `23:12808` 28×28
+  - COMPONENT buysellads `23:12806` 28×28
+  - COMPONENT steam-symbol `23:12871` 28×28
+  - COMPONENT asymmetrik `23:12869` 28×28
+  - COMPONENT angellist `23:12867` 28×28
+  - COMPONENT wpforms `23:12897` 28×28
+  - COMPONENT linode `23:12895` 28×28
+  - COMPONENT guilded `23:12893` 28×28
+  - COMPONENT avianex `23:12891` 28×28
+  - COMPONENT evernote `23:12889` 28×28
+  - COMPONENT codepen `23:12860` 28×28
+  - COMPONENT dribbble `23:12858` 28×28
+  - COMPONENT cc-amazon-pay `23:12856` 28×28
+  - COMPONENT xbox `23:12881` 28×28
+  - COMPONENT trello `23:12879` 28×28
+  - COMPONENT adversal `23:12877` 28×28
+  - COMPONENT dhl `23:12875` 28×28
+  - COMPONENT hornbill `23:12873` 28×28
+  - COMPONENT square-bluesky `23:12762` 28×28
+  - COMPONENT themeco `23:12760` 28×28
+  - COMPONENT google-plus `23:12758` 28×28
+  - COMPONENT contao `23:12782` 28×28
+  - COMPONENT linkedin `23:12780` 28×28
+  - COMPONENT ideal `23:12778` 28×28
+  - COMPONENT mandalorian `23:12776` 28×28
+  - COMPONENT hashnode `23:12774` 28×28
+  - COMPONENT old-republic `23:12841` 28×28
+  - COMPONENT qq `23:12839` 28×28
+  - COMPONENT vaadin `23:12837` 28×28
+  - COMPONENT uikit `23:12769` 28×28
+  - COMPONENT react `23:12767` 28×28
+  - COMPONENT creative-commons-by `23:12725` 28×28
+  - COMPONENT square-pinterest `23:12724` 28×28
+  - COMPONENT watchman-monitoring `23:12723` 28×28
+  - COMPONENT optin-monster `23:12722` 28×28
+  - COMPONENT twitter `23:12721` 28×28
+  - COMPONENT less `23:12720` 28×28
+  - COMPONENT dailymotion `23:12719` 28×28
+  - COMPONENT patreon `23:12718` 28×28
+  - COMPONENT swift `23:12717` 28×28
+  - COMPONENT discord `23:12716` 28×28
+  - COMPONENT opera `23:12715` 28×28
+  - COMPONENT gitter `23:12714` 28×28
+  - COMPONENT buffer `23:12713` 28×28
+  - COMPONENT css3 `23:12712` 28×28
+  - COMPONENT renren `23:12711` 28×28
+  - COMPONENT square-reddit `23:12710` 28×28
+  - COMPONENT ns8 `23:12709` 28×28
+  - COMPONENT sistrix `23:12708` 28×28
+  - COMPONENT vuejs `23:12707` 28×28
+  - COMPONENT debian `23:12706` 28×28
+  - COMPONENT mixcloud `23:12705` 28×28
+  - COMPONENT firstdraft `23:12704` 28×28
+  - COMPONENT slack `23:12703` 28×28
+  - COMPONENT zhihu `23:12702` 28×28
+  - COMPONENT soundcloud `23:12701` 28×28
+  - COMPONENT product-hunt `23:12700` 28×28
+  - COMPONENT wikipedia-w `23:12699` 28×28
+  - COMPONENT space-awesome `23:12698` 28×28
+  - COMPONENT pied-piper-pp `23:12697` 28×28
+  - COMPONENT creative-commons-sampling `23:12696` 28×28
+  - COMPONENT hooli `23:12695` 28×28
+  - COMPONENT first-order `23:12694` 28×28
+  - COMPONENT glide-g `23:12693` 28×28
+  - COMPONENT ember `23:12692` 28×28
+  - COMPONENT gitkraken `23:12691` 28×28
+  - COMPONENT dart-lang `23:12690` 28×28
+  - COMPONENT square-threads `23:12689` 28×28
+  - COMPONENT skype `23:12688` 28×28
+  - COMPONENT gofore `23:12687` 28×28
+  - COMPONENT ebay `23:12686` 28×28
+  - COMPONENT cpanel `23:12685` 28×28
+  - COMPONENT wordpress `23:12684` 28×28
+  - COMPONENT square-upwork `23:12683` 28×28
+  - COMPONENT korvue `23:12682` 28×28
+  - COMPONENT cloudversify `23:12681` 28×28
+  - COMPONENT square-web-awesome-stroke `23:12680` 28×28
+  - COMPONENT web-awesome `23:12679` 28×28
+  - COMPONENT grunt `23:12678` 28×28
+  - COMPONENT viadeo `23:12677` 28×28
+  - COMPONENT wordpress-simple `23:12676` 28×28
+  - COMPONENT blackberry `23:12675` 28×28
+  - COMPONENT facebook-messenger `23:12674` 28×28
+  - COMPONENT pushed `23:12673` 28×28
+  - COMPONENT hive `23:12672` 28×28
+  - COMPONENT amilia `23:12671` 28×28
+  - COMPONENT pied-piper-alt `23:12670` 28×28
+  - COMPONENT nfc-directional `23:12669` 28×28
+  - COMPONENT cloudsmith `23:12668` 28×28
+  - COMPONENT chrome `23:12667` 28×28
+  - COMPONENT forumbee `23:12666` 28×28
+  - COMPONENT node-js `23:12665` 28×28
+  - COMPONENT maxcdn `23:12664` 28×28
+  - COMPONENT apple `23:12663` 28×28
+  - COMPONENT pixiv `23:12662` 28×28
+  - COMPONENT napster `23:12661` 28×28
+  - COMPONENT nimblr `23:12660` 28×28
+  - COMPONENT vnv `23:12659` 28×28
+  - COMPONENT waze `23:12658` 28×28
+  - COMPONENT google-plus-g `23:12657` 28×28
+  - COMPONENT palfed `23:12656` 28×28
+  - COMPONENT screenpal `23:12655` 28×28
+  - COMPONENT weebly `23:12654` 28×28
+  - COMPONENT autoprefixer `23:12653` 28×28
+  - COMPONENT searchengin `23:12652` 28×28
+  - COMPONENT square-viadeo `23:12651` 28×28
+  - COMPONENT brave-reverse `23:12650` 28×28
+  - COMPONENT megaport `23:12649` 28×28
+  - COMPONENT typo3 `23:12648` 28×28
+  - COMPONENT deploydog `23:12647` 28×28
+  - COMPONENT node `23:12646` 28×28
+  - COMPONENT cc-mastercard `23:12645` 28×28
+  - COMPONENT tiktok `23:12644` 28×28
+  - COMPONENT dashcube `23:12643` 28×28
+  - COMPONENT get-pocket `23:12642` 28×28
+  - COMPONENT golang `23:12641` 28×28
+  - COMPONENT ups `23:12640` 28×28
+  - COMPONENT behance `23:12639` 28×28
+  - COMPONENT resolving `23:12638` 28×28
+  - COMPONENT internet-explorer `23:12637` 28×28
+  - COMPONENT signal-messenger `23:12636` 28×28
+  - COMPONENT staylinked `23:12635` 28×28
+  - COMPONENT cmplid `23:12634` 28×28
+  - COMPONENT firefox `23:12633` 28×28
+  - COMPONENT flickr `23:12632` 28×28
+  - COMPONENT mixer `23:12631` 28×28
+  - COMPONENT square-js `23:12630` 28×28
+  - COMPONENT upwork `23:12629` 28×28
+  - COMPONENT itunes `23:12628` 28×28
+
+## Deprecated (`2029:5743`)
+
+
+## Utopia Link (`0:1`)
+
+- TEXT **https://utopia.fyi/space/calculator?c=375,16,1.2,1400,20,1.25,9,2,920&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6%7C9%7C13%7C18%7C24%7C31%7C39,s-l&g=s,l,3xl,12** `2634:2` 1411×27
+
+## --- (`63:69`)
+
+
+## Slots (`2752:9683`)
+
+- COMPONENT **.Flow breathing room** `2343:13337` 258×10
+- COMPONENT **.Slot** `2356:51098` 258×42
+  - TEXT REPLACE `2356:51099` 52×12
+- COMPONENT_SET **Row** `3011:24513` 699×441
+  - COMPONENT Layout=1 — Auto `3011:24512` 659×42
+  - COMPONENT Layout=2 — Auto `3011:24514` 659×42
+  - COMPONENT Layout=3 — Auto `3011:24674` 659×42
+  - COMPONENT Layout=4 — Auto `3011:24706` 659×42
+  - COMPONENT Layout=3 — 25 / 25 / 50 `3011:24698` 659×42
+  - COMPONENT Layout=3 — 50 / 25 / 25 `3011:24682` 659×42
+- COMPONENT **Slots** `3011:24759` 659×302
+  - INSTANCE Row `3011:24751` 659×42
+  - INSTANCE Row `3011:24754` 659×42
+  - INSTANCE Row `3011:24768` 659×42
+  - INSTANCE Row `3011:24772` 659×42
+  - INSTANCE Row `3011:24776` 659×42
+  - INSTANCE Row `3011:24780` 659×42
+
+## v1.0 (`2635:1569`)
+

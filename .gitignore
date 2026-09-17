@@ -2,3 +2,5 @@ node_modules/
 graphify-out/
 .DS_Store
 *.zip
+docs/figma/raw/
+docs/figma/png/

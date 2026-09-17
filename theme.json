@@ -1,42 +1,157 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/theme.json",
-  "version": 3,
-  "settings": {
-    "appearanceTools": true,
-    "layout": {
-      "contentSize": "760px",
-      "wideSize": "1280px"
-    },
-    "color": {
-      "palette": [
-        { "name": "Ink", "slug": "ink", "color": "#0f172a" },
-        { "name": "Canvas", "slug": "canvas", "color": "#ffffff" },
-        { "name": "Blue", "slug": "blue", "color": "#5166ec" },
-        { "name": "Yellow", "slug": "yellow", "color": "#f9de42" },
-        { "name": "Slate", "slug": "slate", "color": "#64748b" }
-      ]
-    },
-    "typography": {
-      "fontFamilies": [
-        {
-          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
-          "name": "System",
-          "slug": "system"
-        }
-      ]
-    }
-  },
-  "styles": {
-    "color": {
-      "background": "var(--wp--preset--color--canvas)",
-      "text": "var(--wp--preset--color--ink)"
-    },
-    "elements": {
-      "link": {
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 3,
+    "settings": {
+        "appearanceTools": true,
+        "layout": {
+            "contentSize": "820px",
+            "wideSize": "1252px"
+        },
         "color": {
-          "text": "var(--wp--preset--color--blue)"
+            "defaultPalette": false,
+            "defaultGradients": false,
+            "defaultDuotone": false,
+            "palette": [
+                {
+                    "name": "White",
+                    "slug": "white",
+                    "color": "#ffffff"
+                },
+                {
+                    "name": "Red",
+                    "slug": "red",
+                    "color": "#e73728"
+                },
+                {
+                    "name": "Red dark",
+                    "slug": "red-dark",
+                    "color": "#a4271c"
+                },
+                {
+                    "name": "Red deep",
+                    "slug": "red-deep",
+                    "color": "#611711"
+                },
+                {
+                    "name": "Black",
+                    "slug": "black",
+                    "color": "#151414"
+                },
+                {
+                    "name": "Ink",
+                    "slug": "ink",
+                    "color": "#1b1a1a"
+                },
+                {
+                    "name": "Charcoal",
+                    "slug": "charcoal",
+                    "color": "#232122"
+                },
+                {
+                    "name": "Slate",
+                    "slug": "slate",
+                    "color": "#312f30"
+                },
+                {
+                    "name": "Gray",
+                    "slug": "gray",
+                    "color": "#d9d9d9"
+                },
+                {
+                    "name": "Gray light",
+                    "slug": "gray-light",
+                    "color": "#eaeaea"
+                },
+                {
+                    "name": "Sky",
+                    "slug": "sky",
+                    "color": "#a5d9e4"
+                }
+            ],
+            "gradients": [
+                {
+                    "name": "Dark to red",
+                    "slug": "dark-red",
+                    "gradient": "linear-gradient(180deg, #232122 0%, #5f1a14 100%)"
+                },
+                {
+                    "name": "Dark radial",
+                    "slug": "dark-radial",
+                    "gradient": "radial-gradient(circle at 50% 50%, #312f30 0%, #151414 100%)"
+                }
+            ]
+        },
+        "typography": {
+            "fontFamilies": [
+                {
+                    "name": "DM Sans",
+                    "slug": "dm-sans",
+                    "fontFamily": "\"DM Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "DM Sans",
+                            "fontStyle": "normal",
+                            "fontWeight": "100 1000",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/dm-sans-variable-latin.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "DM Sans",
+                            "fontStyle": "italic",
+                            "fontWeight": "100 1000",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/dm-sans-variable-italic-latin.woff2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "DM Serif Text",
+                    "slug": "dm-serif-text",
+                    "fontFamily": "\"DM Serif Text\", Georgia, \"Times New Roman\", serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "DM Serif Text",
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/dm-serif-text-latin.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "DM Serif Text",
+                            "fontStyle": "italic",
+                            "fontWeight": "400",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/dm-serif-text-italic-latin.woff2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "System",
+                    "slug": "system",
+                    "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+                }
+            ]
         }
-      }
+    },
+    "styles": {
+        "color": {
+            "background": "var(--wp--preset--color--white)",
+            "text": "var(--wp--preset--color--ink)"
+        },
+        "elements": {
+            "link": {
+                "color": {
+                    "text": "var(--wp--preset--color--red)"
+                }
+            }
+        }
     }
-  }
 }
