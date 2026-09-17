@@ -102,5 +102,13 @@
     "form.captcha_failed": {
         "es": "No pudimos verificar que sos humano. Intentá de nuevo.",
         "en": "We couldn't verify you're human. Please try again."
+    },
+    "nav.menu_toggle_label": {
+        "es": "Abrir menú",
+        "en": "Open menu"
+    },
+    "cta.icon_label": {
+        "es": "Contáctanos",
+        "en": "Contact us"
     }
 }

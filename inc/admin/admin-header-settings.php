@@ -66,7 +66,9 @@ function intelindev_header_color_matrix(): array {
     return [
         'menu' => [
             'bg_color'                 => ['label' => __('Fondo del header', 'intelindev'),               'var' => '--intelindev-header-bg'],
+            'nav_bg_color'             => ['label' => __('Fondo de la barra del menú', 'intelindev'),     'var' => '--intelindev-header-nav-bg'],
             'link_color'               => ['label' => __('Color de los links', 'intelindev'),             'var' => '--intelindev-header-link-color'],
+            'active_dot_color'         => ['label' => __('Punto del ítem activo', 'intelindev'),          'var' => '--intelindev-header-active-dot'],
             'submenu_bg_color'         => ['label' => __('Fondo del submenú', 'intelindev'),              'var' => '--intelindev-header-submenu-bg'],
             'submenu_link_color'       => ['label' => __('Color de los links del submenú', 'intelindev'), 'var' => '--intelindev-header-submenu-link-color'],
             'submenu_hover_bg_color'   => ['label' => __('Fondo del submenú (hover)', 'intelindev'),      'var' => '--intelindev-header-submenu-hover-bg'],
@@ -114,7 +116,7 @@ function intelindev_get_header_cta_text($lang = null): string {
  * modal_title y modal_content (ya con do_shortcode). type 'none' = no imprimir.
  */
 function intelindev_get_header_cta($lang = null): array {
-    $none = ['type' => 'none', 'href' => '', 'text' => '', 'modal_title' => '', 'modal_content' => ''];
+    $none = ['type' => 'none', 'href' => '', 'text' => '', 'modal_title' => '', 'modal_content' => '', 'style' => 'text'];
 
     $type = (string) intelindev_get_header_setting('cta_type', 'none');
     $text = intelindev_get_header_cta_text($lang);
@@ -155,11 +157,17 @@ function intelindev_get_header_cta($lang = null): array {
             return $none;
     }
 
+    // Estilo 'icon' (botón cuadrado con ícono, como en el diseño): el texto pasa a
+    // ser la etiqueta accesible y puede venir vacío.
+    $style = (string) intelindev_get_header_setting('cta_style', 'text') === 'icon' ? 'icon' : 'text';
+    if ($text === '' && $style === 'icon') {
+        $text = idml_t('cta.icon_label', $lang);
+    }
     if ($text === '') {
         return $none;
     }
 
-    return compact('type', 'href', 'text', 'modal_title', 'modal_content');
+    return compact('type', 'href', 'text', 'modal_title', 'modal_content', 'style');
 }
 
 /**
@@ -331,6 +339,7 @@ function intelindev_header_settings_sanitize($input) {
     // --- CTA ---
     $type = sanitize_key((string) ($input['cta_type'] ?? 'none'));
     $out['cta_type'] = in_array($type, ['page', 'url', 'modal'], true) ? $type : 'none';
+    $out['cta_style'] = (string) ($input['cta_style'] ?? 'text') === 'icon' ? 'icon' : 'text';
 
     $page_id = (int) ($input['cta_page_id'] ?? 0);
     if ($page_id > 0 && get_post_type($page_id) === 'page') {
@@ -525,8 +534,16 @@ function intelindev_header_settings_page_html() {
                             </td>
                         </tr>
 
+                        <tr data-show-if="<?php echo esc_attr($cta_if); ?>!=none">
+                            <th scope="row"><?php esc_html_e('Estilo del botón', 'intelindev'); ?></th>
+                            <td>
+                                <?php $cta_style = (string) ($opts['cta_style'] ?? 'text'); ?>
+                                <label style="margin-right:16px;"><input type="radio" name="intelindev_header_settings[cta_style]" value="text"<?php checked($cta_style, 'text'); ?> /> <?php esc_html_e('Píldora con texto', 'intelindev'); ?></label>
+                                <label><input type="radio" name="intelindev_header_settings[cta_style]" value="icon"<?php checked($cta_style, 'icon'); ?> /> <?php esc_html_e('Cuadrado con ícono (el texto queda como etiqueta accesible)', 'intelindev'); ?></label>
+                            </td>
+                        </tr>
                         <?php
-                        intelindev_admin_lang_text_fields($option, 'cta_text', __('Texto del botón (%s)', 'intelindev'), $opts, __('Si un idioma queda vacío se usa el del idioma por defecto. Con tipo "página", vacío = título de la página.', 'intelindev'), $cta_if . '!=none');
+                        intelindev_admin_lang_text_fields($option, 'cta_text', __('Texto del botón (%s)', 'intelindev'), $opts, __('Si un idioma queda vacío se usa el del idioma por defecto. Con tipo "página", vacío = título de la página; con estilo ícono, vacío = "Contáctanos" (clave cta.icon_label).', 'intelindev'), $cta_if . '!=none');
                         intelindev_admin_lang_text_fields($option, 'cta_modal_title', __('Título del modal (%s)', 'intelindev'), $opts, '', $cta_if . '=modal');
                         ?>
                         <tr data-show-if="<?php echo esc_attr($cta_if); ?>=modal">

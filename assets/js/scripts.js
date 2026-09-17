@@ -27,6 +27,21 @@
     applyScrolled();
   }
 
+  // Menú móvil: .site-nav-toggle abre/cierra la navegación (< 992px, ver CSS).
+  var navToggle = document.querySelector('.site-nav-toggle');
+  if (navToggle) {
+    var setNavOpen = function (open) {
+      document.body.classList.toggle('nav-open', open);
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    navToggle.addEventListener('click', function () {
+      setNavOpen(!document.body.classList.contains('nav-open'));
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && document.body.classList.contains('nav-open')) setNavOpen(false);
+    });
+  }
+
   // Modal del CTA (<dialog> nativo). El contenido (formulario, script de CRM,
   // HTML, shortcode) NO viene en la página: se pide al endpoint REST
   // (data-cta-modal-src) en el primer clic y se inyecta re-creando los <script>

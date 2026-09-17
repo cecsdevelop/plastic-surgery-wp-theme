@@ -73,21 +73,28 @@
   /* Header (Apariencia → Intelindev Header): estos son los defaults. Se
      sobreescriben en <head> solo si el admin configura algo — ver
      intelindev_print_header_style_overrides() en inc/admin/admin-header-settings.php. */
-  --intelindev-header-bg: var(--intelindev-color-white);
-  --intelindev-header-link-color: var(--intelindev-color-ink);
-  --intelindev-header-submenu-bg: var(--intelindev-color-white);
-  --intelindev-header-submenu-link-color: var(--intelindev-color-ink);
-  --intelindev-header-submenu-hover-bg: rgba(231, 55, 40, 0.08);
-  --intelindev-header-submenu-hover-link-color: var(--intelindev-accent);
-  --intelindev-header-cta-bg: var(--intelindev-accent);
+  --intelindev-header-bg: var(--intelindev-color-red-deep);
+  --intelindev-header-nav-bg: var(--intelindev-color-red-dark);
+  --intelindev-header-link-color: var(--intelindev-color-white);
+  --intelindev-header-active-dot: var(--intelindev-color-sky);
+  --intelindev-header-submenu-bg: var(--intelindev-color-red-dark);
+  --intelindev-header-submenu-link-color: var(--intelindev-color-white);
+  --intelindev-header-submenu-hover-bg: rgba(255, 255, 255, 0.12);
+  --intelindev-header-submenu-hover-link-color: var(--intelindev-color-white);
+  --intelindev-header-cta-bg: var(--intelindev-color-red-dark);
   --intelindev-header-cta-text-color: var(--intelindev-color-white);
-  --intelindev-header-cta-hover-bg: var(--intelindev-accent-hover);
+  --intelindev-header-cta-hover-bg: var(--intelindev-accent);
   --intelindev-header-cta-hover-text-color: var(--intelindev-color-white);
+  --intelindev-header-padding-x: clamp(16px, 6.5vw, 94px); /* 94 = margen del diseño a 1440 */
+  --intelindev-header-padding-y: clamp(16px, 2.5vw, 35px);
+  --intelindev-header-radius: 20px;
 
   /* Estado sticky (.is-scrolled): cada variable cae a su equivalente normal, así
      el admin solo define las que quiere distintas. */
   --intelindev-header-sticky-bg: var(--intelindev-header-bg);
+  --intelindev-header-sticky-nav-bg: var(--intelindev-header-nav-bg);
   --intelindev-header-sticky-link-color: var(--intelindev-header-link-color);
+  --intelindev-header-sticky-active-dot: var(--intelindev-header-active-dot);
   --intelindev-header-sticky-submenu-bg: var(--intelindev-header-submenu-bg);
   --intelindev-header-sticky-submenu-link-color: var(--intelindev-header-submenu-link-color);
   --intelindev-header-sticky-submenu-hover-bg: var(--intelindev-header-submenu-hover-bg);
@@ -99,15 +106,15 @@
 
   /* Footer (Apariencia → Intelindev Footer): defaults, se sobreescriben en <head>
      solo lo configurado — ver intelindev_print_footer_style_overrides(). */
-  --intelindev-footer-bg: var(--intelindev-color-ink);
-  --intelindev-footer-text-color: rgba(255, 255, 255, 0.8);
+  --intelindev-footer-bg: var(--intelindev-color-red-deep);
+  --intelindev-footer-text-color: var(--intelindev-color-white);
   --intelindev-footer-heading-color: var(--intelindev-color-white);
-  --intelindev-footer-link-color: var(--intelindev-color-white);
-  --intelindev-footer-link-hover-color: var(--intelindev-accent);
-  --intelindev-footer-padding-top: 56px;
-  --intelindev-footer-padding-bottom: 56px;
-  --intelindev-footer-padding-x: 24px;
-  --intelindev-footer-gap: 32px;
+  --intelindev-footer-link-color: rgba(255, 255, 255, 0.85);
+  --intelindev-footer-link-hover-color: var(--intelindev-color-white);
+  --intelindev-footer-padding-top: 80px;
+  --intelindev-footer-padding-bottom: 80px;
+  --intelindev-footer-padding-x: clamp(16px, 6.5vw, 94px);
+  --intelindev-footer-gap: 40px;
   --intelindev-footer-max-width: var(--intelindev-content-max);
   --intelindev-footer-bar-bg: rgba(0, 0, 0, 0.25);
   --intelindev-footer-bar-text-color: rgba(255, 255, 255, 0.7);
@@ -266,7 +273,10 @@ h1 em, h2 em, h3 em, h4 em,
 }
 
 /**********************
-* Header
+* Header (diseño V1: banda rojo oscuro, logo a la izquierda, menú en una barra
+* roja redondeada al centro con punto celeste en el ítem activo, CTA a la
+* derecha como píldora o cuadrado con ícono). Colores desde Apariencia →
+* Intelindev Header; menú móvil por .site-nav-toggle (< 992px).
 ***********************/
 .site-header {
   position: relative;
@@ -275,10 +285,10 @@ h1 em, h2 em, h3 em, h4 em,
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 16px 24px;
+  padding: var(--intelindev-header-padding-y) var(--intelindev-header-padding-x);
   background: var(--intelindev-header-bg);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  transition: background-color .2s ease;
+  color: var(--intelindev-header-link-color);
+  transition: background-color .2s ease, padding .2s ease;
 }
 /* Sticky: la clase la imprime header.php solo si está activado en Apariencia → Intelindev Header */
 .site-header--sticky {
@@ -290,11 +300,11 @@ h1 em, h2 em, h3 em, h4 em,
   font-weight: 700;
   font-size: 20px;
   text-decoration: none;
-  color: var(--intelindev-color-ink);
+  color: var(--intelindev-header-link-color);
 }
 .site-branding img.custom-logo,
 .site-logo__img {
-  max-height: 40px;
+  max-height: 60px;
   width: auto;
   display: block;
 }
@@ -316,21 +326,41 @@ h1 em, h2 em, h3 em, h4 em,
   flex: 1;
   display: flex;
   justify-content: center;
+  min-width: 0;
 }
 .nav-list {
   display: flex;
-  gap: 24px;
+  align-items: center;
+  gap: clamp(20px, 5.8vw, 84px);
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 40px;
+  min-height: 89px;
+  border-radius: var(--intelindev-header-radius);
+  background: var(--intelindev-header-nav-bg);
 }
 .nav-list > li {
   position: relative;
 }
 .nav-list > li > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   color: var(--intelindev-header-link-color);
-  font-weight: 500;
+  font-weight: 400;
+  white-space: nowrap;
+}
+/* Ítem activo: punto celeste delante del texto */
+.nav-list > li.current-menu-item > a::before,
+.nav-list > li.current_page_item > a::before,
+.nav-list > li.current-menu-ancestor > a::before,
+.nav-list > li.current-menu-parent > a::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--intelindev-header-active-dot);
 }
 
 .nav-list .sub-menu {
@@ -338,13 +368,13 @@ h1 em, h2 em, h3 em, h4 em,
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 200px;
+  min-width: 220px;
   background: var(--intelindev-header-submenu-bg);
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, .12);
+  border-radius: var(--intelindev-header-radius);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
   list-style: none;
   margin: 8px 0 0;
-  padding: 8px 0;
+  padding: 10px 0;
   z-index: 60;
 }
 .nav-list > li:hover > .sub-menu,
@@ -353,7 +383,7 @@ h1 em, h2 em, h3 em, h4 em,
 }
 .nav-list .sub-menu a {
   display: block;
-  padding: 8px 16px;
+  padding: 10px 20px;
   text-decoration: none;
   color: var(--intelindev-header-submenu-link-color);
 }
@@ -361,6 +391,15 @@ h1 em, h2 em, h3 em, h4 em,
 .nav-list .sub-menu a:focus {
   background: var(--intelindev-header-submenu-hover-bg);
   color: var(--intelindev-header-submenu-hover-link-color);
+}
+.idml-submenu-toggle {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
 }
 
 .header-cta {
@@ -370,14 +409,20 @@ h1 em, h2 em, h3 em, h4 em,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 0 30px;
+  min-height: 56px;
+  border-radius: var(--intelindev-radius-pill);
   background: var(--intelindev-header-cta-bg);
   color: var(--intelindev-header-cta-text-color);
   text-decoration: none;
-  font-weight: 600;
   white-space: nowrap;
   transition: background-color .2s ease, color .2s ease;
+}
+.header-cta--icon {
+  width: 85px;
+  min-height: 89px;
+  padding: 0;
+  border-radius: var(--intelindev-header-radius);
 }
 .header-cta:hover,
 .header-cta:focus {
@@ -385,12 +430,103 @@ h1 em, h2 em, h3 em, h4 em,
   color: var(--intelindev-header-cta-hover-text-color);
 }
 
+/* Toggle del menú móvil (hamburguesa): oculto en escritorio */
+.site-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 48px;
+  height: 48px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--intelindev-header-nav-bg);
+  cursor: pointer;
+}
+.site-nav-toggle__bar {
+  display: block;
+  height: 2px;
+  background: var(--intelindev-header-link-color);
+  transition: transform .2s ease, opacity .2s ease;
+}
+body.nav-open .site-nav-toggle__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+body.nav-open .site-nav-toggle__bar:nth-child(2) { opacity: 0; }
+body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 991.98px) {
+  .site-nav-toggle {
+    display: flex;
+    order: 3;
+  }
+  .site-nav {
+    display: none;
+    position: absolute;
+    left: var(--intelindev-header-padding-x);
+    right: var(--intelindev-header-padding-x);
+    top: calc(100% - 8px);
+  }
+  body.nav-open .site-nav {
+    display: block;
+  }
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 0;
+    min-height: 0;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+  }
+  .nav-list > li > a {
+    padding: 12px 24px;
+  }
+  .nav-list .sub-menu {
+    position: static;
+    box-shadow: none;
+    margin: 0;
+    padding: 0 0 8px 24px;
+    background: transparent;
+  }
+  .nav-list > li.menu-item-has-children > .sub-menu {
+    display: block;
+  }
+  .header-cta {
+    order: 2;
+  }
+  .header-cta--icon {
+    width: 48px;
+    min-height: 48px;
+    border-radius: 12px;
+  }
+  .header-cta__icon {
+    width: 22px;
+    height: 22px;
+  }
+  .site-branding img.custom-logo,
+  .site-logo__img {
+    max-height: 44px;
+  }
+}
+
 /* --- Estado sticky: .is-scrolled la agrega scripts.js al pasar el umbral de scroll --- */
 .site-header.is-scrolled {
   background: var(--intelindev-header-sticky-bg);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
+}
+.site-header.is-scrolled .nav-list {
+  background: var(--intelindev-header-sticky-nav-bg);
+  min-height: 64px;
 }
 .site-header.is-scrolled .nav-list > li > a {
   color: var(--intelindev-header-sticky-link-color);
+}
+.site-header.is-scrolled .nav-list > li.current-menu-item > a::before,
+.site-header.is-scrolled .nav-list > li.current_page_item > a::before,
+.site-header.is-scrolled .nav-list > li.current-menu-ancestor > a::before,
+.site-header.is-scrolled .nav-list > li.current-menu-parent > a::before {
+  background: var(--intelindev-header-sticky-active-dot);
 }
 .site-header.is-scrolled .nav-list .sub-menu {
   background: var(--intelindev-header-sticky-submenu-bg);
@@ -407,12 +543,18 @@ h1 em, h2 em, h3 em, h4 em,
   background: var(--intelindev-header-sticky-cta-bg);
   color: var(--intelindev-header-sticky-cta-text-color);
 }
+.site-header.is-scrolled .header-cta--icon {
+  min-height: 64px;
+}
 .site-header.is-scrolled .header-cta:hover,
 .site-header.is-scrolled .header-cta:focus {
   background: var(--intelindev-header-sticky-cta-hover-bg);
   color: var(--intelindev-header-sticky-cta-hover-text-color);
 }
-
+.site-header.is-scrolled .site-logo__img,
+.site-header.is-scrolled .site-branding img.custom-logo {
+  max-height: 44px;
+}
 /**********************
 * Modal del CTA (<dialog> nativo; lo abre scripts.js)
 ***********************/
@@ -494,11 +636,22 @@ h1 em, h2 em, h3 em, h4 em,
 .footer-widget + .footer-widget {
   margin-top: 24px;
 }
-.footer-widget__title {
-  margin: 0 0 12px;
-  font-size: 16px;
-  font-weight: 600;
+.footer-widget__title,
+.footer-widget .wp-block-heading {
+  margin: 0 0 16px;
+  font-family: var(--intelindev-font-body);
+  font-size: var(--intelindev-text-md);
+  font-weight: 700;
+  line-height: 1.3;
   color: var(--intelindev-footer-heading-color);
+}
+.footer-widget,
+.footer-col > * {
+  font-weight: 300;
+}
+.footer-col img {
+  max-height: 60px;
+  width: auto;
 }
 .footer-widget p:first-child { margin-top: 0; }
 .footer-widget p:last-child { margin-bottom: 0; }
@@ -507,8 +660,14 @@ h1 em, h2 em, h3 em, h4 em,
   padding: 0;
   list-style: none;
 }
-.footer-widget li + li {
-  margin-top: 8px;
+.footer-widget li + li,
+.footer-col li + li {
+  margin-top: 10px;
+}
+.footer-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .site-footer__bar {
