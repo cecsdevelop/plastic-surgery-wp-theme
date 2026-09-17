@@ -6,6 +6,14 @@
   --intelindev-color-yellow: #f9de42;
   --intelindev-color-slate: #64748b;
 
+  /* Tipografía (Apariencia → Intelindev Settings → Tipografía): defaults.
+     --wp--preset--font-family--* las imprime WP desde theme.json y la Biblioteca
+     de fuentes; los overrides van en <head> (admin-typography.php). */
+  --intelindev-font-body: var(--wp--preset--font-family--system, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  --intelindev-font-heading: var(--intelindev-font-body);
+  --intelindev-font-size-base: 16px;
+  --intelindev-font-weight-heading: 700;
+
   /* Header (Apariencia → Intelindev Header): estos son los defaults. Se
      sobreescriben en <head> solo si el admin configura algo — ver
      intelindev_print_header_style_overrides() en inc/admin/admin-header-settings.php. */
@@ -49,6 +57,22 @@
   --intelindev-footer-bar-text-color: rgba(255, 255, 255, 0.7);
   --intelindev-footer-bar-link-color: var(--intelindev-color-canvas);
   --intelindev-footer-bar-padding: 16px;
+}
+
+/**********************
+* Tipografía base
+***********************/
+body {
+  margin: 0;
+  font-family: var(--intelindev-font-body);
+  font-size: var(--intelindev-font-size-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--intelindev-font-heading);
+  font-weight: var(--intelindev-font-weight-heading);
+  line-height: 1.2;
 }
 
 /**********************

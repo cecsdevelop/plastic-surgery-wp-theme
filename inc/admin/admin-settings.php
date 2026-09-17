@@ -398,6 +398,9 @@ function intelindev_settings_sanitize($input) {
   $set_text('gtm_container_id');
   $set_text('ga4_measurement_id');
 
+  // Pestañas registradas desde otros archivos (ej. admin-typography.php).
+  $out = apply_filters('intelindev_settings_sanitize', $out, $input);
+
   // Content
   $out['featured_default']   = !empty($input['featured_default']) ? 1 : 0;
   $out['archive_thumbs']     = !empty($input['archive_thumbs']) ? 1 : 0;
@@ -449,6 +452,7 @@ function intelindev_settings_page_html() {
 
   $tabs = [
     'general'     => ['⚙️',  __('General', 'intelindev')],
+    'typography'  => ['🔤', __('Tipografía', 'intelindev')],
     'seo'         => ['🔍', __('SEO & Meta', 'intelindev')],
     'analytics'   => ['📊', __('Analytics', 'intelindev')],
     'content'     => ['📝', __('Content', 'intelindev')],

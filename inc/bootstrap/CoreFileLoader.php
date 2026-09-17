@@ -22,6 +22,7 @@ class CoreFileLoader
             '/inc/admin/admin-languages.php',
             '/inc/admin/admin-translations.php',
             '/inc/admin/admin-settings.php',
+            '/inc/admin/admin-typography.php',
             '/inc/admin/admin-fields.php',
             '/inc/admin/admin-header-settings.php',
             '/inc/admin/admin-footer-settings.php',
