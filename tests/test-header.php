@@ -34,7 +34,7 @@ try {
     update_option('intelindev_header_settings', $out);
 
     echo "3) HTML (curl)\n";
-    $h = $curl('/contactanos/');
+    $h = $curl('/contacto/');
     check('header sticky con umbral, toggle móvil con etiqueta del diccionario', strpos($h, 'class="site-header site-header--sticky" data-scroll-threshold="80"') !== false && strpos($h, 'class="site-nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú"') !== false && strpos($h, '<nav id="site-nav" class="site-nav"') !== false);
     check('CTA ícono: enlace con clase --icon, texto solo para lectores de pantalla y SVG', preg_match('#<a href="https://example.com/x" class="header-cta header-cta--icon"><span class="screen-reader-text">Contáctanos</span><svg class="header-cta__icon"#', $h) === 1);
     check('overrides de la matriz en <head> (barra del menú y punto activo)', strpos($h, '--intelindev-header-nav-bg:#a4271c') !== false && strpos($h, '--intelindev-header-active-dot:rgba(165, 217, 228, 1)') !== false);

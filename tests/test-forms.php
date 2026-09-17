@@ -71,7 +71,7 @@ try {
     check('formulario y borrador creados', $form_id > 0 && $draft_id > 0);
 
     echo "3) render (curl ES/EN)\n";
-    $es = $curl('/contactanos/'); $en = $curl('/en/contact-us/');
+    $es = $curl('/contacto/'); $en = $curl('/en/contact-us/');
     check('ES: form con action REST, data-success y _lang', preg_match('#<form class="intelindev-form" method="post" action="http://localhost:8888/Intelindev/wp-json/intelindev/v1/form/' . $form_id . '" data-intelindev-form="' . $form_id . '" data-success="Gracias, te respondemos pronto."#', $es) === 1 && strpos($es, 'name="_lang" value="es"') !== false);
     check('ES: nombre col-md-6 required + placeholder; textarea; select con opciones ES', strpos($es, '<div class="col-12 col-md-6 intelindev-form__field intelindev-form__field--text">') !== false && preg_match('/<input type="text" id="f' . $form_id . '-nombre" name="nombre" placeholder="Tu nombre" required>/', $es) === 1 && strpos($es, '<textarea id="f' . $form_id . '-mensaje" name="mensaje" rows="5" placeholder="" required>') !== false && strpos($es, '<option value="Ventas">Ventas</option>') !== false && strpos($es, '<option value="">Elegí…</option>') !== false);
     check('ES: checkbox con link, hidden, honeypot, token, botón', strpos($es, 'Acepto la <a href="/privacidad/">política</a> <span class="intelindev-form__req"') !== false && strpos($es, '<input type="hidden" name="origen" value="web">') !== false && strpos($es, 'name="_website"') !== false && preg_match('/name="_sig" value="[a-f0-9]{64}"/', $es) === 1 && strpos($es, '<button type="submit" class="intelindev-form__submit">Enviar consulta</button>') !== false);
@@ -80,7 +80,7 @@ try {
 
     echo "4) envíos por REST\n";
     $ts = time() - 5; $sig = R::sign($form_id, $ts);
-    $valid = ['_lang' => 'es', '_ts' => $ts, '_sig' => $sig, '_page' => 'http://localhost:8888/Intelindev/contactanos/', 'nombre' => 'Ana', 'email' => 'ana@example.com', 'telefono' => '+57 300 123 4567', 'asunto' => 'Ventas', 'mensaje' => "Hola\nQuiero info", 'acepto' => '1', 'origen' => 'web'];
+    $valid = ['_lang' => 'es', '_ts' => $ts, '_sig' => $sig, '_page' => 'http://localhost:8888/Intelindev/contacto/', 'nombre' => 'Ana', 'email' => 'ana@example.com', 'telefono' => '+57 300 123 4567', 'asunto' => 'Ventas', 'mensaje' => "Hola\nQuiero info", 'acepto' => '1', 'origen' => 'web'];
     [$c, $b] = $send($form_id, array_merge($valid, ['_sig' => 'x']));
     check('firma inválida → 400', $c === 400 && $b['ok'] === false);
     [$c, $b] = $send($form_id, array_merge($valid, ['_ts' => time(), '_sig' => R::sign($form_id, time())]));
@@ -97,7 +97,7 @@ try {
     $entries = get_posts(['post_type' => S::POST_TYPE, 'posts_per_page' => 1, 'orderby' => 'ID', 'order' => 'DESC']);
     $entry = $entries[0] ?? null; $data = $entry ? get_post_meta($entry->ID, S::META_DATA, true) : []; $ctx = $entry ? get_post_meta($entry->ID, S::META_CONTEXT, true) : [];
     check('envío guardado con datos limpios y título "Contacto · Ana"', $entry && $entry->post_title === 'Contacto · Ana' && $data['email'] === 'ana@example.com' && $data['acepto'] === '1' && $data['origen'] === 'web' && $data['mensaje'] === "Hola\nQuiero info" && (int) get_post_meta($entry->ID, S::META_FORM, true) === $form_id);
-    check('contexto: lang, página, resultado del correo registrado (bool)', ($ctx['lang'] ?? '') === 'es' && ($ctx['page'] ?? '') === 'http://localhost:8888/Intelindev/contactanos/' && isset($ctx['mail']['sent']) && is_bool($ctx['mail']['sent']) && ($ctx['mail']['to'] ?? '') === 'ventas@example.com');
+    check('contexto: lang, página, resultado del correo registrado (bool)', ($ctx['lang'] ?? '') === 'es' && ($ctx['page'] ?? '') === 'http://localhost:8888/Intelindev/contacto/' && isset($ctx['mail']['sent']) && is_bool($ctx['mail']['sent']) && ($ctx['mail']['to'] ?? '') === 'ventas@example.com');
     $received = file_exists($hook_log) ? json_decode((string) file_get_contents($hook_log), true) : null;
     check('webhook: POST JSON recibido (form, lang, fields) y HTTP 200 registrado', ($ctx['webhook']['status'] ?? 0) === 200 && is_array($received) && $received['form']['slug'] === 'contacto' && $received['lang'] === 'es' && $received['fields']['nombre'] === 'Ana' && $received['fields']['asunto'] === 'Ventas');
     for ($n = 0; $n < 3; $n++) $send($form_id, $valid); // 2 previos + 1 + 3 = 6 intentos válidos

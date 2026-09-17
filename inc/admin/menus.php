@@ -6,10 +6,11 @@
  * Las locations se registran en setup.php ('primary', 'footer'). Los ítems
  * que apuntan a un Post/Page real ya llegan traducidos (título vía
  * 'the_title', URL vía 'post_link'/'page_link' — ver
- * admin-post-translation-settings.php); acá solo se tocan los ítems custom
- * (links externos, anchors, URLs internas cargadas a mano). Los de taxonomía
- * (categorías) no se tocan todavía: el módulo de categorías aún no traduce
- * nombre/URL en frontend.
+ * admin-post-translation-settings.php); acá se tocan los ítems custom (links
+ * externos, anchors, URLs internas cargadas a mano) y los de archivo de CPT
+ * (post_type_archive: URL /{lang}/{base}/ y nombre plural del idioma). Los de
+ * taxonomía (categorías) no se tocan todavía: el módulo de categorías aún no
+ * traduce nombre/URL en frontend.
  *
  * @package intelindev
  */
@@ -57,17 +58,30 @@ add_filter('nav_menu_css_class', function($classes, $item, $args, $depth) {
         return $classes;
     }
 
-    // Fuera de singular/portada no hay ítem "actual": la URL traducida cae al
-    // home y marcaría el ítem de inicio en búsquedas, archivos y 404.
-    if (!is_singular() && !is_front_page()) {
-        return $classes;
+    // En un single, el ítem del archivo de su tipo (Servicios, Portafolio) o la
+    // página del blog (posts) quedan como "padre": el header les pinta el punto.
+    if (is_singular()) {
+        $queried = get_queried_object();
+        $type    = $queried instanceof WP_Post ? $queried->post_type : '';
+        $is_parent = ($item->type === 'post_type_archive' && $item->object === $type)
+            || ($type === 'post' && $item->type === 'post_type' && $item->object === 'page' && (int) $item->object_id === (int) get_option('page_for_posts'));
+        if ($is_parent) {
+            $classes[] = 'current-menu-parent';
+            $classes[] = 'current-menu-ancestor';
+        }
+    }
+
+    // Fuera de singular/portada/archivo de CPT/blog no hay ítem "actual": la URL
+    // traducida cae al home y marcaría el ítem de inicio en búsquedas y 404.
+    if (!is_singular() && !is_front_page() && !is_post_type_archive() && !is_home()) {
+        return array_values(array_unique($classes));
     }
 
     $current_url = idml_normalize_menu_url(id_get_translated_current_url(idml_get_current_language()));
     $item_url    = idml_normalize_menu_url($item->url);
 
     if ($current_url === '' || $item_url === '') {
-        return $classes;
+        return array_values(array_unique($classes));
     }
 
     if ($current_url === $item_url) {
@@ -108,6 +122,22 @@ add_filter('wp_nav_menu_objects', function($items, $args) {
     $current_lang = idml_get_current_language();
 
     foreach ($items as $item) {
+        // Archivo de un CPT (ítem "Servicios"/"Portafolio" de tipo post_type_archive):
+        // URL /{lang}/{base}/ y nombre plural del idioma, salvo título personalizado.
+        if ($item->type === 'post_type_archive' && function_exists('intelindev_get_post_type_archive_url')) {
+            $url = intelindev_get_post_type_archive_url((string) $item->object, $current_lang);
+            if ($url !== '') {
+                $item->url = $url;
+            }
+            $labels  = apply_filters('intelindev_post_type_lang_labels', []);
+            $default = (string) ($labels[$item->object][idml_get_default_language()] ?? '');
+            $label   = (string) ($labels[$item->object][$current_lang] ?? '');
+            if ($label !== '' && ($item->post_title === '' || $item->post_title === $default)) {
+                $item->title = $label;
+            }
+            continue;
+        }
+
         if ($item->type !== 'custom') {
             continue;
         }
@@ -223,11 +253,16 @@ if (!function_exists('id_get_translated_current_url')) {
         }
 
         $translatable = function_exists('intelindev_translatable_post_types') ? intelindev_translatable_post_types() : ['post', 'page'];
-        if (!is_singular($translatable)) {
+        $posts_page   = (int) get_option('page_for_posts');
+
+        if (is_home() && !is_front_page() && $posts_page > 0) {
+            $current_post = get_post($posts_page); // página del blog: se traduce como cualquier page
+        } elseif (is_singular($translatable)) {
+            $current_post = get_queried_object();
+        } else {
             return $fallback;
         }
 
-        $current_post = get_queried_object();
         if (!($current_post instanceof WP_Post)) {
             return $fallback;
         }

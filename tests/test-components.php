@@ -50,17 +50,17 @@ try {
     check('gallery (conflicto) y borrador NO', !in_array('gallery', $tags, true) && !in_array('borrador', $tags, true));
     check('gallery sigue siendo el de WP', $sub('global $shortcode_tags; echo is_string($shortcode_tags["gallery"]) ? $shortcode_tags["gallery"] : "closure";') === 'gallery_shortcode');
 
-    echo "3) render en ES y EN (bloques por idioma de Contactanos)\n";
+    echo "3) render en ES y EN (bloques por idioma de Contacto)\n";
     $blocks = is_array($orig_blocks) ? $orig_blocks : [];
     $blocks['es'] = ['[hero subtitle="Hablemos de tu proyecto" cta="Escribinos"]<p>Cuerpo ES</p>[/hero]', '[loop]', '[borrador]'];
     $blocks['en'] = ['[hero subtitle="Let&#039;s talk" cta_url="https://x.com/?a=1&b=2"]<p>Body EN</p>[/hero]', '[hero subtitle="<b>x</b>"]'];
     update_post_meta($PAGE, $META, $blocks);
     $grab = function (string $h): string { preg_match('/<div class="entry-content">(.*?)<\/div>\s*<\/article>/s', $h, $m); return $m[1] ?? ''; };
-    $ces = $grab($curl('/contactanos/')); $cen = $grab($curl('/en/contact-us/'));
+    $ces = $grab($curl('/contacto/')); $cen = $grab($curl('/en/contact-us/'));
     $img = wp_get_attachment_image_url($att, 'medium');
-    check('ES: título traducido + atributos + default cta_url', strpos($ces, '<h1>Contactanos</h1>') !== false && strpos($ces, '<p class="sub">Hablemos de tu proyecto</p>') !== false && strpos($ces, '<a class="btn" href="#contacto">Escribinos</a>') !== false);
-    check('ES: imagen destacada medium + lang + site + permalink', strpos($ces, 'url(' . $img . ')') !== false && strpos($ces, 'data-lang="es"') !== false && strpos($ces, '<span class="site">Intelindev</span>') !== false && strpos($ces, '<span class="link">http://localhost:8888/Intelindev/contactanos/</span>') !== false);
-    check('ES: diccionario {t:} + contenido envolvente + componente anidado', strpos($ces, '<span class="dict">Anteriores</span>') !== false && strpos($ces, '<div class="body"><p>Cuerpo ES</p></div>') !== false && strpos($ces, '<em class="inner">inner:Contactanos</em>') !== false);
+    check('ES: título traducido + atributos + default cta_url', strpos($ces, '<h1>Contacto</h1>') !== false && strpos($ces, '<p class="sub">Hablemos de tu proyecto</p>') !== false && strpos($ces, '<a class="btn" href="#contacto">Escribinos</a>') !== false);
+    check('ES: imagen destacada medium + lang + site + permalink', strpos($ces, 'url(' . $img . ')') !== false && strpos($ces, 'data-lang="es"') !== false && strpos($ces, '<span class="site">Intelindev</span>') !== false && strpos($ces, '<span class="link">http://localhost:8888/Intelindev/contacto/</span>') !== false);
+    check('ES: diccionario {t:} + contenido envolvente + componente anidado', strpos($ces, '<span class="dict">Anteriores</span>') !== false && strpos($ces, '<div class="body"><p>Cuerpo ES</p></div>') !== false && strpos($ces, '<em class="inner">inner:Contacto</em>') !== false);
     check('ES: recursión cortada (un solo loop) y borrador sin registrar', substr_count($ces, '<i class="loop">loop</i>') === 1 && strpos($ces, '[borrador]') !== false && strpos($ces, 'NO DEBE VERSE') === false);
     check('EN: título/permalink traducidos + default cta + url escapada', strpos($cen, '<h1>Contact us</h1>') !== false && strpos($cen, '<span class="link">http://localhost:8888/Intelindev/en/contact-us/</span>') !== false && strpos($cen, '<a class="btn" href="https://x.com/?a=1&amp;b=2">Contactanos</a>') !== false);
     check('EN: atributo con entidad + diccionario en inglés + lang', strpos($cen, '<p class="sub">Let&#039;s talk</p>') !== false && strpos($cen, '<span class="dict">Previous</span>') !== false && strpos($cen, 'data-lang="en"') !== false);

@@ -73,7 +73,13 @@ try {
     check('slug de otro tipo no resuelve en esta base (404)', strpos($curl('/en/services/nexito-en/'), '<title>Page not found') !== false && strpos($curl('/en/portfolio/nexito-en/'), '<title>Néxito') !== false);
     $arch_es = $curl('/servicios/'); $arch_en = $curl('/en/services/');
     check('archivo ES y EN: títulos traducidos, ambos ítems, switcher entre archivos', strpos($arch_es, '<title>Servicios &#8211;') !== false && strpos($arch_en, '<title>Services &#8211;') !== false && strpos($arch_en, 'Software Development') !== false && strpos($arch_en, 'SEO & Technical Marketing') !== false && strpos($arch_en, 'href="http://localhost:8888/Intelindev/servicios/" hreflang="es"') !== false && strpos($arch_es, 'href="http://localhost:8888/Intelindev/en/services/" hreflang="en"') !== false);
-    check('pages y posts siguen igual', strpos($curl('/en/contact-us/'), '<title>Contact us') !== false && strpos($curl('/contactanos/'), 'href="http://localhost:8888/Intelindev/en/contact-us/" hreflang="en"') !== false);
+    $blog_page = (int) get_option('page_for_posts');
+    if ($blog_page > 0) {
+        $tmp_post = $mk('post', 'Entrada temporal de prueba', 'entrada-temporal-prueba', [INTELINDEV_POST_TRANSLATED_TITLE_META => ['en' => 'Temporary test post']]);
+        $blog_en  = $curl('/en/' . intelindev_get_post_slug_for_lang(get_post($blog_page), 'en') . '/');
+        check('página del blog en EN: lista posts (no pages) con título traducido', strpos($blog_en, 'class="blog') !== false && strpos($blog_en, 'Temporary test post') !== false && preg_match('/entry-title[^>]*>[^<]*(<a[^>]*>)?About us</', $blog_en) === 0);
+    }
+    check('pages y posts siguen igual', strpos($curl('/en/contact-us/'), '<title>Contact us') !== false && strpos($curl('/contacto/'), 'href="http://localhost:8888/Intelindev/en/contact-us/" hreflang="en"') !== false);
 
     echo "4) admin\n";
     ob_start(); $portfolio->render_meta_box(get_post($prj)); intelindev_render_post_translation_metabox(get_post($prj)); $html = ob_get_clean();

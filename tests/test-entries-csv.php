@@ -21,7 +21,7 @@ try {
     update_post_meta($forms['a'], F::META_FIELDS, F::sanitize_fields([['name' => 'nombre', 'type' => 'text', 'label' => ['es' => 'Nombre', 'en' => 'Name']], ['name' => 'email', 'type' => 'email', 'label' => ['es' => 'Email']], ['name' => 'acepto', 'type' => 'checkbox', 'label' => ['es' => 'Acepto la <a href="/p/">política</a>']]]));
     $forms['b'] = wp_insert_post(['post_type' => F::POST_TYPE, 'post_title' => 'Newsletter', 'post_name' => 'csv-b', 'post_status' => 'publish']);
     update_post_meta($forms['b'], F::META_FIELDS, F::sanitize_fields([['name' => 'email', 'type' => 'email', 'label' => ['es' => 'Correo']], ['name' => 'ciudad', 'type' => 'text', 'label' => ['es' => 'Ciudad']]]));
-    $ctx = ['lang' => 'es', 'page' => 'http://localhost:8888/Intelindev/contactanos/', 'ip' => '127.0.0.1', 'user_agent' => 'test', 'mail' => ['sent' => true, 'to' => 'x@y.com'], 'webhook' => ['status' => 200, 'error' => '']];
+    $ctx = ['lang' => 'es', 'page' => 'http://localhost:8888/Intelindev/contacto/', 'ip' => '127.0.0.1', 'user_agent' => 'test', 'mail' => ['sent' => true, 'to' => 'x@y.com'], 'webhook' => ['status' => 200, 'error' => '']];
     $e1 = S::store(get_post($forms['a']), ['nombre' => 'Ana, "la" Pérez', 'email' => 'ana@example.com', 'acepto' => '1'], $ctx);
     $e2 = S::store(get_post($forms['a']), ['nombre' => '=HYPERLINK("http://evil")', 'email' => 'bob@example.com', 'acepto' => ''], array_merge($ctx, ['lang' => 'en', 'mail' => ['sent' => false, 'to' => 'x@y.com'], 'webhook' => null]));
     $e3 = S::store(get_post($forms['b']), ['email' => 'c@example.com', 'ciudad' => 'Bogotá'], $ctx);
@@ -30,7 +30,7 @@ try {
     $rows = $parse(S::build_csv($forms['a']));
     check('BOM + cabecera fija + etiquetas de campos (sin HTML)', strpos(S::build_csv($forms['a']), "\xEF\xBB\xBF") === 0 && $rows[0] === ['ID', 'Fecha', 'Formulario', 'Idioma', 'Página', 'IP', 'Correo enviado', 'Webhook', 'Nombre', 'Email', 'Acepto la política']);
     check('2 filas, más reciente primero, valores con coma y comillas intactos', count($rows) === 3 && (int) $rows[1][0] === $e2 && (int) $rows[2][0] === $e1 && $rows[2][8] === 'Ana, "la" Pérez' && $rows[2][9] === 'ana@example.com' && $rows[2][10] === '1');
-    check('contexto: idioma, página, correo sí/no, webhook', $rows[2][3] === 'ES' && $rows[2][4] === 'http://localhost:8888/Intelindev/contactanos/' && $rows[2][6] === 'sí' && $rows[2][7] === '200' && $rows[1][3] === 'EN' && $rows[1][6] === 'no' && $rows[1][7] === '');
+    check('contexto: idioma, página, correo sí/no, webhook', $rows[2][3] === 'ES' && $rows[2][4] === 'http://localhost:8888/Intelindev/contacto/' && $rows[2][6] === 'sí' && $rows[2][7] === '200' && $rows[1][3] === 'EN' && $rows[1][6] === 'no' && $rows[1][7] === '');
     check('inyección de fórmula neutralizada', $rows[1][8] === "'=HYPERLINK(\"http://evil\")");
     check('sin envíos del otro formulario', !in_array('Bogotá', array_merge(...$rows), true));
 

@@ -45,10 +45,10 @@ try {
 
     echo "3) render\n";
     $blocks = is_array($orig_blocks) ? $orig_blocks : []; $blocks['es'] = ['[form slug="con-captcha"]', '[form slug="sin-captcha"]']; update_post_meta($PAGE, $META, $blocks);
-    $html = $curl('/contactanos/');
+    $html = $curl('/contacto/');
     check('sin claves: ni widget ni script aunque el form lo pida', strpos($html, 'cf-turnstile') === false && strpos($html, 'challenges.cloudflare.com') === false);
     update_option(F::OPTION, ['turnstile_site_key' => $PASS_SITE, 'turnstile_secret' => $PASS_SECRET]);
-    $html = $curl('/contactanos/');
+    $html = $curl('/contacto/');
     check('con claves: widget con sitekey e idioma solo en el form protegido', substr_count($html, 'class="cf-turnstile"') === 1 && strpos($html, 'data-sitekey="' . $PASS_SITE . '" data-language="es"') !== false && strpos($html, 'data-error-for="_captcha"') !== false);
     check('script de Cloudflare con render explícito, una vez', substr_count($html, 'challenges.cloudflare.com/turnstile/v0/api.js?onload=intelindevTurnstileRender&render=explicit') === 1);
     check('página sin formularios protegidos no carga el script', strpos($curl('/'), 'challenges.cloudflare.com') === false);

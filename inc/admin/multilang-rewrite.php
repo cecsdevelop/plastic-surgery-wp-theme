@@ -238,6 +238,12 @@ add_filter('request', function($query_vars) {
         // is_single()/is_singular('post') en vez de is_page(), y la plantilla de
         // página nunca se activa, sin ningún error visible. 'page_id' es la unica
         // query var que efectivamente resuelve a is_page() = true.
+        // La página del blog (page_for_posts) es la home de posts: WP ignora page_id
+        // en el WHERE y lista lo que diga post_type, así que no se fija 'page'.
+        if ((int) get_option('page_for_posts') === (int) $resolved['id']) {
+            return ['page_id' => $resolved['id']];
+        }
+
         return ['page_id' => $resolved['id'], 'post_type' => 'page'];
     }
 
