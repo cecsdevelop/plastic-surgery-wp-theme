@@ -1,0 +1,158 @@
+# Portafolio (7064:2266) 1440×2901
+
+Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía · color} "texto"
+
+- FRAME "Portafolio" 7064:2266 1440×2901 bg #ffffff
+  - RECTANGLE "Rectangle 44" 7064:2267 1440×160 bg #611711
+  - RECTANGLE "intelindev 1" 7064:2268 1441×389 bg image
+  - FRAME "Frame 16" 7064:2269 716×57 [column gap 20 main center]
+    - TEXT "Portafolio" 7064:2270 716×57 {DM Sans 400 · 60px · lh 57px · center · #ffffff} "Portafolio"
+  - RECTANGLE "Rectangle 45" 7064:2271 820×89 bg #a4271c radius 20
+  - RECTANGLE "Rectangle 46" 7064:2272 85×89 bg #a4271c radius 20
+  - FRAME "Frame 38" 7064:2273 740×21 [row gap 84 main space_between cross center]
+    - FRAME "Frame 36" 7064:2274 44×21 [row gap 10 cross center]
+      - TEXT "Home" 7064:2275 44×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Home"
+    - FRAME "Frame 37" 7064:2276 68×21 [row gap 10 cross center]
+      - TEXT "Nosotros" 7064:2277 68×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Nosotros"
+    - FRAME "Frame 38" 7064:2278 67×21 [row gap 10 cross center]
+      - TEXT "Servicios" 7064:2279 67×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Servicios"
+    - FRAME "Frame 39" 7064:2280 97×21 [row gap 10 cross center]
+      - ELLIPSE "Ellipse 3" 7064:2281 16×16 bg #a5d9e4
+      - TEXT "Portafolio" 7064:2282 71×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Portafolio"
+    - FRAME "Frame 42" 7064:2283 32×21 [row gap 10 cross center]
+      - TEXT "Blog" 7064:2284 32×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Blog"
+    - FRAME "Frame 41" 7064:2285 70×21 [row gap 10 cross center]
+      - TEXT "Contacto" 7064:2286 70×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Contacto"
+  - GROUP "Group 33" 7064:2287 48×48
+    - FRAME "solar:menu-dots-square-outline" 7064:2288 48×48
+      - VECTOR "Vector" 7064:2289 20×4 bg #a5d9e4
+      - VECTOR "Vector" 7064:2290 43×43 bg #a5d9e4
+  - GROUP "Group 63" 7064:2291 1440×300
+    - RECTANGLE "Rectangle 65" 7064:2292 1440×300 bg #611711
+    - FRAME "Frame 85" 7064:2293 200×212 [column gap 40]
+      - FRAME "Frame 83" 7064:2294 152×60 [column gap 15.199999809265137 cross center]
+        - GROUP "Group 31" 7064:2295 26×34
+          - VECTOR "Vector" 7064:2296 14×25 bg #ffffff
+          - VECTOR "Vector" 7064:2297 14×25 bg #ffffff
+        - GROUP "Group 32" 7064:2298 152×11
+          - VECTOR "Vector" 7064:2299 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2300 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2301 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2302 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2303 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2304 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2305 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2306 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2307 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2308 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2309 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2310 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2311 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2312 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2313 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2314 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2315 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2316 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2317 6×10 bg #ffffff
+          - VECTOR "Vector" 7064:2318 6×11 bg #ffffff
+      - TEXT "Software Development & SEO Services" 7064:2319 200×42 {DM Sans 700 · 16px · lh 21px · #ffffff} "Software Development & SEO Services"
+      - VECTOR "Vector" 7064:2320 30×30 bg #ffffff
+    - FRAME "Frame 96" 7064:2321 1020×157 [row gap 10]
+      - GROUP "Group 64" 7064:2322 190×157
+        - TEXT "Nosotros" 7064:2323 190×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Nosotros"
+        - FRAME "Frame 22" 7064:2324 190×114 [column gap 10 main center]
+          - TEXT "Misión Visión" 7064:2325 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Misión Visión"
+          - TEXT "Filosofía" 7064:2326 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Filosofía"
+          - TEXT "Marco de trabajo" 7064:2327 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Marco de trabajo"
+          - TEXT "Equipo" 7064:2328 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Equipo"
+      - GROUP "Group 65" 7064:2329 200×126
+        - TEXT "Servicios" 7064:2330 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Servicios"
+        - FRAME "Frame 23" 7064:2331 190×83 [column gap 10 main center]
+          - TEXT "Metodología de trabajo" 7064:2332 190×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Metodología de trabajo"
+          - TEXT "Servicios" 7064:2333 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Servicios"
+          - TEXT "Desarrollo" 7064:2334 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Desarrollo"
+      - GROUP "Group 66" 7064:2335 200×23
+        - TEXT "Portafolio" 7064:2336 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Portafolio"
+      - GROUP "Group 67" 7064:2337 200×23
+        - TEXT "Blog" 7064:2338 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Blog"
+      - TEXT "Contacto" 7064:2339 190×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Contacto"
+  - INSTANCE "Frame 86" 7064:2340 172×80 [column gap 10 pad 10/10/10/10] <instance 7004:39>
+    - FRAME "Frame 35" I7064:2340;88:2 152×60 [column gap 15.199999809265137 cross center]
+      - GROUP "Group 31" I7064:2340;88:3 26×34
+        - VECTOR "Vector" I7064:2340;88:4 14×25 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:5 14×25 bg #ffffff
+      - GROUP "Group 32" I7064:2340;88:6 152×11
+        - VECTOR "Vector" I7064:2340;88:7 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:8 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:9 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:10 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:11 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:12 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:13 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:14 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:15 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:16 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:17 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:18 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:19 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:20 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:21 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:22 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:23 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:24 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:25 6×10 bg #ffffff
+        - VECTOR "Vector" I7064:2340;88:26 6×11 bg #ffffff
+  - GROUP "Group 75" 7064:2341 1440×637
+    - GROUP "Group 74" 7064:2342 1440×637
+      - RECTANGLE "Rectangle 86" 7064:2343 1440×637 bg #611711
+      - RECTANGLE "Rectangle 87" 7064:2344 710×635 bg #d9d9d9
+      - FRAME "Frame 95" 7064:2345 610×324 [column gap 40]
+        - TEXT "Construyamos juntos tu próxima gran solución digital" 7064:2346 610×144 {DM Serif Text 400 · 50px · lh 48px · #ffffff} "Construyamos juntos tu próxima gran solución digital"
+        - TEXT "Impulsa tu crecimiento con tecnología moderna, desarrollos escalables y un equipo experto que te acompaña en cada etapa." 7064:2347 610×42 {DM Sans 400 · 16px · lh 21px · #ffffff} "Impulsa tu crecimiento con tecnología moderna, desarrollos escalables y un equipo experto que te acompaña en cada etapa."
+        - FRAME "Frame 43" 7064:2348 226×58 [column gap 10 pad 10/30/10/30] bg #e73728 radius 50 shadow
+          - FRAME "Frame 42" 7064:2349 166×38 [row gap 10 cross center]
+            - TEXT "Contáctanos" 7064:2350 118×23 {DM Sans 300 · 20px · lh 23px · #ffffff} "Contáctanos"
+            - FRAME "solar:arrow-right-up-outline" 7064:2351 38×38
+              - VECTOR "Vector" 7064:2352 21×21 bg #ffffff
+  - RECTANGLE "Rectangle 71" 7064:2353 400×496 bg image radius 40
+  - RECTANGLE "Rectangle 83" 7064:2354 400×496 bg image radius 40
+  - RECTANGLE "Rectangle 99" 7064:2355 400×496 bg image radius 40
+  - RECTANGLE "Rectangle 86" 7064:2356 400×496 bg image radius 40
+  - RECTANGLE "Rectangle 96" 7064:2357 400×496 bg image radius 40
+  - RECTANGLE "Rectangle 89" 7064:2358 400×496 bg image radius 40
+  - RECTANGLE "Rectangle 82" 7064:2359 85×52 bg #ffffff radius 10
+  - RECTANGLE "Rectangle 81" 7064:2360 284×106 bg #312f30 radius 0/20/20/0
+  - FRAME "solar:arrow-right-up-outline" 7064:2361 30×30
+    - VECTOR "Vector" 7064:2362 17×17 bg #e73728
+  - TEXT "Néxito Plataforma inteligente para formar emprendedores" 7064:2363 239×49 {DM Sans 300 · 30px · lh 29px · #ffffff} "Néxito Plataforma inteligente para formar emprendedores"
+  - RECTANGLE "Rectangle 84" 7064:2364 85×52 bg #ffffff radius 10
+  - RECTANGLE "Rectangle 85" 7064:2365 284×106 bg #312f30 radius 0/20/20/0
+  - FRAME "solar:arrow-right-up-outline" 7064:2366 30×30
+    - VECTOR "Vector" 7064:2367 17×17 bg #e73728
+  - TEXT "Sana Sana Programa de salud con beneficios exclusivos" 7064:2368 239×49 {DM Sans 300 · 30px · lh 29px · #ffffff} "Sana Sana Programa de salud con beneficios exclusivos"
+  - RECTANGLE "Rectangle 88" 7064:2369 284×106 bg #312f30 radius 0/20/20/0
+  - TEXT "Four Winds Group Sistema integral de gestión empresarial" 7064:2370 239×49 {DM Sans 300 · 30px · lh 29px · #ffffff} "Four Winds Group Sistema integral de gestión empresarial"
+  - RECTANGLE "Rectangle 98" 7064:2371 85×52 bg #ffffff radius 10
+  - RECTANGLE "Rectangle 97" 7064:2372 284×106 bg #312f30 radius 0/20/20/0
+  - TEXT "Soluciones digitales construidas para transformar organizaciones" 7064:2373 1030×97 {DM Sans 300 · 50px · lh 48px · center · #312f30} "Soluciones digitales construidas para transformar organizaciones"
+  - TEXT "Four Winds Group Sistema integral de gestión empresarial" 7064:2374 239×49 {DM Sans 300 · 30px · lh 29px · #ffffff} "Four Winds Group Sistema integral de gestión empresarial"
+  - RECTANGLE "Rectangle 92" 7064:2375 85×52 bg #ffffff radius 10
+  - RECTANGLE "Rectangle 93" 7064:2376 284×106 bg #312f30 radius 0/20/20/0
+  - FRAME "solar:arrow-right-up-outline" 7064:2377 30×30
+    - VECTOR "Vector" 7064:2378 17×17 bg #e73728
+  - TEXT "Dhisve Ecommerce especializado en productos médicos" 7064:2379 239×49 {DM Sans 300 · 30px · lh 29px · #ffffff} "Dhisve Ecommerce especializado en productos médicos"
+  - RECTANGLE "Rectangle 94" 7064:2380 85×52 bg #ffffff radius 10
+  - RECTANGLE "Rectangle 95" 7064:2381 284×106 bg #312f30 radius 0/20/20/0
+  - RECTANGLE "Rectangle 87" 7064:2382 85×52 bg #ffffff radius 10
+  - FRAME "solar:arrow-right-up-outline" 7064:2383 30×30
+    - VECTOR "Vector" 7064:2384 17×17 bg #e73728
+  - FRAME "solar:arrow-right-up-outline" 7064:2385 30×30
+    - VECTOR "Vector" 7064:2386 17×17 bg #e73728
+  - TEXT "Sana Sana Programa de salud con beneficios exclusivos" 7064:2387 239×49 {DM Sans 300 · 30px · lh 29px · #ffffff} "Sana Sana Programa de salud con beneficios exclusivos"
+  - FRAME "Frame 44" 7064:2388 190×41 [column gap 10 pad 10/10/10/10] border 1px #e73728 radius 10
+    - FRAME "Frame 39" 7064:2389 170×21 [row gap 10 main center cross center]
+      - ELLIPSE "Ellipse 3" 7064:2390 16×16 bg #a5d9e4
+      - TEXT "Proyectos" 7064:2391 74×21 {DM Sans 400 · 16px · lh 21px · #312f30} "Proyectos"
+  - FRAME "solar:arrow-right-up-outline" 7064:2392 30×30
+    - VECTOR "Vector" 7064:2393 17×17 bg #e73728
+  - RECTANGLE "concepto-de-control-de-calidad-estandar-m 1" 7064:2394 710×639 bg image

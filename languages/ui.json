@@ -110,5 +110,29 @@
     "cta.icon_label": {
         "es": "Contáctanos",
         "en": "Contact us"
+    },
+    "about.eyebrow": {
+        "es": "¿Qué hacemos?",
+        "en": "What we do"
+    },
+    "contact.eyebrow": {
+        "es": "Contacto",
+        "en": "Contact"
+    },
+    "newsletter.title": {
+        "es": "Súmate a nuestras novedades",
+        "en": "Join our newsletter"
+    },
+    "newsletter.text": {
+        "es": "Te contamos qué estamos construyendo y por qué importa.",
+        "en": "We tell you what we are building and why it matters."
+    },
+    "newsletter.placeholder": {
+        "es": "Ingresa tu correo electrónico",
+        "en": "Enter your email address"
+    },
+    "newsletter.button": {
+        "es": "Suscribirme",
+        "en": "Subscribe"
     }
 }

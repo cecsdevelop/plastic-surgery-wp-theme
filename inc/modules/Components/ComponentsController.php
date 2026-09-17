@@ -15,9 +15,15 @@
  *   {title} {excerpt} {permalink} {site_name} {lang}
  *   {featured_image} / {featured_image:large}   URL de la imagen destacada
  *   {nombre} / {nombre|default}                atributo del shortcode (escapado)
+ *   {nombre:html}   atributo con HTML inline permitido (em/strong/br/a/span) y
+ *                   *texto* → <em>texto</em>: para acentos en títulos
+ *   {nombre:url}    atributo como URL (esc_url)
+ *   {nombre:icon}   atributo como ícono: URL, o nombre de assets/img/icons/{nombre}.svg
  *   {t:clave}                                  texto de Apariencia → Traducciones
  *   {content}                                  contenido envolvente [hero]…[/hero]
+
  *
+
  * Los shortcodes que haya dentro de la plantilla también se procesan (un
  * componente puede usar otro); hay guardia anti-recursión. Un slug que
  * coincide con un shortcode ya existente (ej. gallery) no lo pisa: el listado
@@ -226,11 +232,15 @@ class ComponentsController extends BaseController
         $post = $this->context_post();
         $lang = $this->get_current_lang();
 
-        $pattern = '/\{(t:[a-z0-9_.\-]+|featured_image(?::[a-z0-9_\-]+)?|[a-z0-9_]+)(?:\|([^{}]*))?\}/i';
+        // El default admite un placeholder anidado ({title:html|{title}}, {eyebrow|{t:clave}}).
+        $pattern = '/\{(t:[a-z0-9_.\-]+|featured_image(?::[a-z0-9_\-]+)?|[a-z0-9_]+(?::(?:html|url|icon))?)(?:\|((?:[^{}]|\{[^{}]*\})*))?\}/i';
 
         return (string) preg_replace_callback($pattern, function ($m) use ($post, $lang, $atts, $content) {
             $token   = strtolower($m[1]);
             $default = $m[2] ?? '';
+            if ($default !== '' && strpos($default, '{') !== false) {
+                $default = $this->render_template($default, $atts, $content);
+            }
 
             if (strpos($token, 't:') === 0) {
                 $key  = substr($token, 2);
@@ -263,22 +273,59 @@ class ComponentsController extends BaseController
                     return $content !== '' ? do_shortcode($content) : $default;
             }
 
-            // Atributo del shortcode (WP los pasa en minúsculas).
-            if (array_key_exists($token, $atts) && (string) $atts[$token] !== '') {
-                return esc_html((string) $atts[$token]);
+            // Atributo del shortcode (WP los pasa en minúsculas), con modificador opcional.
+            $modifier = '';
+            if (strpos($token, ':') !== false) {
+                [$token, $modifier] = explode(':', $token, 2);
             }
-            return $default;
+            $value = array_key_exists($token, $atts) ? (string) $atts[$token] : '';
+            if ($value === '') {
+                // Default: crudo si era un placeholder anidado (ya viene resuelto/escapado);
+                // si no, se trata como valor del modificador (nombre de ícono, URL, HTML).
+                $nested = isset($m[2]) && strpos($m[2], '{') !== false;
+                return $modifier !== '' && !$nested ? self::format_attribute($default, $modifier) : $default;
+            }
+            return self::format_attribute($value, $modifier);
         }, $template);
+    }
+
+    /** Escapa/convierte el valor de un atributo según su modificador. */
+    public static function format_attribute(string $value, string $modifier): string
+    {
+        switch ($modifier) {
+            case 'html':
+                $value = preg_replace('/\*([^*]+)\*/', '<em>$1</em>', $value);
+                return wp_kses($value, ['em' => [], 'strong' => [], 'br' => [], 'span' => ['class' => []], 'a' => ['href' => [], 'class' => [], 'target' => [], 'rel' => []]]);
+            case 'url':
+                return esc_url($value);
+            case 'icon':
+                if (preg_match('#^(https?:)?//|^/#', $value)) {
+                    return esc_url($value);
+                }
+                $name = sanitize_key($value);
+                return $name !== '' ? esc_url(get_template_directory_uri() . '/assets/img/icons/' . $name . '.svg') : '';
+            default:
+                return esc_html($value);
+        }
     }
 
     /** Atributos que acepta una plantilla (placeholders no reservados), ordenados. */
     public function template_attributes(string $template): array
     {
-        preg_match_all('/\{([a-z0-9_]+)(?:\|[^{}]*)?\}/i', $template, $m);
-        $attrs = array_unique(array_map('strtolower', $m[1]));
-        $attrs = array_diff($attrs, self::RESERVED_PLACEHOLDERS);
+        // Con modificador ({title:html}) siempre es atributo, aunque el nombre
+        // coincida con un placeholder de contexto ({title} = título del post).
+        preg_match_all('/\{([a-z0-9_]+)(:(?:html|url|icon))?(?:\|(?:[^{}]|\{[^{}]*\})*)?\}/i', $template, $m, PREG_SET_ORDER);
+        $attrs = [];
+        foreach ($m as $match) {
+            $name = strtolower($match[1]);
+            if (empty($match[2]) && in_array($name, self::RESERVED_PLACEHOLDERS, true)) {
+                continue;
+            }
+            $attrs[$name] = true;
+        }
+        $attrs = array_keys($attrs);
         sort($attrs);
-        return array_values($attrs);
+        return $attrs;
     }
 
     /** Ejemplo de uso listo para copiar: [slug attr="" …]. */

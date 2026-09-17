@@ -7,7 +7,7 @@
  *   node scripts/figma-pull.js pages [--depth 3]        páginas y frames de primer nivel → docs/figma/index.md
  *   node scripts/figma-pull.js tree  <id> [--depth 4]   árbol resumido de un nodo (tipo, nombre, id, tamaño)
  *   node scripts/figma-pull.js spec  <id>...            spec compacto (layout, colores, tipografía, textos) → docs/figma/spec/
- *   node scripts/figma-pull.js png   <id>... [--scale 2] exporta PNG → docs/figma/png/
+ *   node scripts/figma-pull.js png   <id>... [--scale 2] [--format svg] [--out dir --name base] exporta PNG/SVG → docs/figma/png/ (o --out, relativo al theme)
  *   node scripts/figma-pull.js tokens <id>...           tipografías, colores, radios y gaps de una pantalla, por frecuencia → docs/figma/spec/
  *   node scripts/figma-pull.js styles                   estilos locales del archivo (color, texto, efectos)
  *
@@ -195,18 +195,27 @@ const commands = {
   async png() {
     if (!ids.length) throw new Error('falta el id del nodo');
     const scale = Number(opts.scale || 1);
+    const format = opts.format === 'svg' ? 'svg' : 'png';
     const apiIds = ids.map(toApiId);
     const [images, meta] = await Promise.all([
-      api(`/images/${fileKey}?ids=${apiIds.join(',')}&format=png&scale=${scale}`),
+      api(`/images/${fileKey}?ids=${apiIds.join(',')}&format=${format}${format === 'png' ? '&scale=' + scale : ''}`),
       api(`/files/${fileKey}/nodes?ids=${apiIds.join(',')}&depth=1`),
     ]);
     for (const id of apiIds) {
       const url = images.images[id];
       if (!url) { console.log(`${id}: sin imagen (${images.err || 'nodo no exportable'})`); continue; }
       const name = meta.nodes[id]?.document?.name || 'node';
-      const rel = `png/${slug(name)}-${fileId(id)}${scale !== 1 ? '@' + scale + 'x' : ''}.png`;
+      const base = opts.name && apiIds.length === 1 ? String(opts.name) : `${slug(name)}-${fileId(id)}${format === 'png' && scale !== 1 ? '@' + scale + 'x' : ''}`;
       const buf = Buffer.from(await (await fetch(url)).arrayBuffer());
-      const out = save(rel, buf);
+      let out;
+      if (opts.out) { // carpeta destino explícita (ej. assets/img/icons), relativa al theme
+        const file = path.resolve(path.join(__dirname, '..'), String(opts.out), base + '.' + format);
+        fs.mkdirSync(path.dirname(file), { recursive: true });
+        fs.writeFileSync(file, buf);
+        out = path.relative(process.cwd(), file);
+      } else {
+        out = save(`png/${base}.${format}`, buf);
+      }
       console.log(`${name} ${id} → ${out} (${Math.round(buf.length / 1024)} KB)`);
     }
   },

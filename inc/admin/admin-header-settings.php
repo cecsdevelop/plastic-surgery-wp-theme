@@ -240,6 +240,13 @@ function intelindev_render_header_logo(string $home_url): void {
         return;
     }
 
+    // Sin logo configurado: el del diseño, que viene en el theme (assets/img/logo.svg, blanco).
+    $theme_logo = get_theme_file_path('assets/img/logo.svg');
+    if (file_exists($theme_logo)) {
+        echo '<a class="site-logo" href="' . esc_url($home_url) . '" rel="home"><img class="site-logo__img site-logo__img--default" src="' . esc_url(get_theme_file_uri('assets/img/logo.svg')) . '" alt="' . esc_attr($site_name) . '" width="172" height="81" loading="eager" fetchpriority="high"></a>';
+        return;
+    }
+
     echo '<a class="site-title" href="' . esc_url($home_url) . '" rel="home">' . esc_html($site_name) . '</a>';
 }
 

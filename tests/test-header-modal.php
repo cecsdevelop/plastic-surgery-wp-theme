@@ -35,7 +35,7 @@ try {
 
     echo "1) la página no lleva el contenido del modal\n";
     $es = $curl('/'); $en = $curl('/en/');
-    check('sin <template> ni formulario ni script del CRM en el HTML', strpos($es, 'header-cta-modal-template') === false && strpos($es, 'intelindev-form') === false && strpos($es, 'window.__crm') === false);
+    check('sin <template> ni formulario ni script del CRM en el HTML', strpos($es, 'header-cta-modal-template') === false && strpos($es, 'intro') === false && strpos($es, 'contacto-modal') === false && strpos($es, 'window.__crm') === false);
     check('botón y dialog vacío con data-cta-modal-src por idioma', strpos($es, '>Hablemos</button>') !== false && preg_match('#<dialog id="header-cta-modal"[^>]* data-cta-modal-src="http://localhost:8888/Intelindev/wp-json/intelindev/v1/modal\?lang=es"#', $es) === 1 && preg_match('#data-cta-modal-src="[^"]*lang=en"#', $en) === 1);
     check('textos de estado por idioma', strpos($es, 'data-loading="Cargando…"') !== false && strpos($en, 'data-error="Could not load. Please try again."') !== false);
     check('contenedor de contenido vacío', preg_match('#<div class="header-cta-modal__content" data-cta-modal-content></div>#', $es) === 1);

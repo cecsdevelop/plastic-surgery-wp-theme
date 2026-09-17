@@ -1,0 +1,140 @@
+# Servicios_Detalle (7064:2395) 1440×1716
+
+Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía · color} "texto"
+
+- FRAME "Servicios_Detalle" 7064:2395 1440×1716 bg #ffffff
+  - RECTANGLE "Rectangle 44" 7064:2396 1440×160 bg #611711
+  - RECTANGLE "intelindev 1" 7064:2397 1441×389 bg image
+  - FRAME "Frame 16" 7064:2398 716×57 [column gap 20 main center]
+    - TEXT "Desarrollo de Software" 7064:2399 716×57 {DM Sans 400 · 60px · lh 57px · center · #ffffff} "Desarrollo de Software"
+  - RECTANGLE "Rectangle 45" 7064:2400 820×89 bg #a4271c radius 20
+  - RECTANGLE "Rectangle 46" 7064:2401 85×89 bg #a4271c radius 20
+  - FRAME "Frame 38" 7064:2402 740×21 [row gap 84 main space_between cross center]
+    - FRAME "Frame 36" 7064:2403 44×21 [row gap 10 cross center]
+      - TEXT "Home" 7064:2404 44×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Home"
+    - FRAME "Frame 37" 7064:2405 68×21 [row gap 10 cross center]
+      - TEXT "Nosotros" 7064:2406 68×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Nosotros"
+    - FRAME "Frame 38" 7064:2407 93×21 [row gap 10 cross center]
+      - ELLIPSE "Ellipse 3" 7064:2408 16×16 bg #a5d9e4
+      - TEXT "Servicios" 7064:2409 67×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Servicios"
+    - FRAME "Frame 39" 7064:2410 71×21 [row gap 10 cross center]
+      - TEXT "Portafolio" 7064:2411 71×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Portafolio"
+    - FRAME "Frame 42" 7064:2412 32×21 [row gap 10 cross center]
+      - TEXT "Blog" 7064:2413 32×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Blog"
+    - FRAME "Frame 41" 7064:2414 70×21 [row gap 10 cross center]
+      - TEXT "Contacto" 7064:2415 70×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Contacto"
+  - GROUP "Group 33" 7064:2416 48×48
+    - FRAME "solar:menu-dots-square-outline" 7064:2417 48×48
+      - VECTOR "Vector" 7064:2418 20×4 bg #a5d9e4
+      - VECTOR "Vector" 7064:2419 43×43 bg #a5d9e4
+  - GROUP "Group 63" 7064:2420 1440×300
+    - RECTANGLE "Rectangle 65" 7064:2421 1440×300 bg #611711
+    - FRAME "Frame 85" 7064:2422 200×212 [column gap 40]
+      - FRAME "Frame 83" 7064:2423 152×60 [column gap 15.199999809265137 cross center]
+        - GROUP "Group 31" 7064:2424 26×34
+          - VECTOR "Vector" 7064:2425 14×25 bg #ffffff
+          - VECTOR "Vector" 7064:2426 14×25 bg #ffffff
+        - GROUP "Group 32" 7064:2427 152×11
+          - VECTOR "Vector" 7064:2428 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2429 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2430 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2431 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2432 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2433 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2434 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2435 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2436 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2437 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2438 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2439 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2440 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2441 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2442 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2443 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2444 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2445 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2446 6×10 bg #ffffff
+          - VECTOR "Vector" 7064:2447 6×11 bg #ffffff
+      - TEXT "Software Development & SEO Services" 7064:2448 200×42 {DM Sans 700 · 16px · lh 21px · #ffffff} "Software Development & SEO Services"
+      - VECTOR "Vector" 7064:2449 30×30 bg #ffffff
+    - FRAME "Frame 96" 7064:2450 1020×157 [row gap 10]
+      - GROUP "Group 64" 7064:2451 190×157
+        - TEXT "Nosotros" 7064:2452 190×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Nosotros"
+        - FRAME "Frame 22" 7064:2453 190×114 [column gap 10 main center]
+          - TEXT "Misión Visión" 7064:2454 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Misión Visión"
+          - TEXT "Filosofía" 7064:2455 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Filosofía"
+          - TEXT "Marco de trabajo" 7064:2456 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Marco de trabajo"
+          - TEXT "Equipo" 7064:2457 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Equipo"
+      - GROUP "Group 65" 7064:2458 200×126
+        - TEXT "Servicios" 7064:2459 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Servicios"
+        - FRAME "Frame 23" 7064:2460 190×83 [column gap 10 main center]
+          - TEXT "Metodología de trabajo" 7064:2461 190×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Metodología de trabajo"
+          - TEXT "Servicios" 7064:2462 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Servicios"
+          - TEXT "Desarrollo" 7064:2463 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Desarrollo"
+      - GROUP "Group 66" 7064:2464 200×23
+        - TEXT "Portafolio" 7064:2465 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Portafolio"
+      - GROUP "Group 67" 7064:2466 200×23
+        - TEXT "Blog" 7064:2467 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Blog"
+      - TEXT "Contacto" 7064:2468 190×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Contacto"
+  - INSTANCE "Frame 86" 7064:2469 172×80 [column gap 10 pad 10/10/10/10] <instance 7004:39>
+    - FRAME "Frame 35" I7064:2469;88:2 152×60 [column gap 15.199999809265137 cross center]
+      - GROUP "Group 31" I7064:2469;88:3 26×34
+        - VECTOR "Vector" I7064:2469;88:4 14×25 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:5 14×25 bg #ffffff
+      - GROUP "Group 32" I7064:2469;88:6 152×11
+        - VECTOR "Vector" I7064:2469;88:7 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:8 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:9 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:10 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:11 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:12 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:13 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:14 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:15 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:16 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:17 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:18 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:19 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:20 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:21 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:22 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:23 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:24 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:25 6×10 bg #ffffff
+        - VECTOR "Vector" I7064:2469;88:26 6×11 bg #ffffff
+  - FRAME "Frame 107" 7064:2470 715×745 [column gap 40]
+    - TEXT "En Intelindev desarrollamos soluciones de software a medida basadas en arquitecturas modernas, diseñadas para integrarse eficientemente con los ecosistemas tecnológicos existentes de cada organización. Trabajamos con frameworks escalables, patrones de diseño robustos, bases de datos relacionales y no relacionales, microservicios y prácticas de seguridad alineadas a estándares internacionales. Nuestro objetivo es construir sistemas estables, mantenibles y preparados para soportar alto volumen de transacciones y crecimiento sostenido." 7064:2471 715×147 {DM Sans 400 · 16px · lh 21px · #000000} "En Intelindev desarrollamos soluciones de software a medida basadas en arquitecturas modernas, diseñadas para integrarse eficientemente con los ecosistemas tecn"
+    - RECTANGLE "collage-de-fondo-de-programacion 1" 7064:2472 718×392 bg image radius 20
+    - TEXT "Nuestro proceso incluye análisis funcional y técnico, diseño de arquitectura, modelado de datos, desarrollo backend y frontend, automatización de pruebas, integración continua, despliegues en entornos cloud (Azure/AWS) y monitoreo post-implementación. Aplicamos metodologías ágiles (Scrum) para garantizar entregas frecuentes, visibilidad total del avance y capacidad de adaptación ante cambios. El resultado: software confiable, alineado a los objetivos del negocio y con una base tecnológica sólida para su evolución futura." 7064:2473 715×126 {DM Sans 400 · 16px · lh 21px · #000000} "Nuestro proceso incluye análisis funcional y técnico, diseño de arquitectura, modelado de datos, desarrollo backend y frontend, automatización de pruebas, integ"
+  - FRAME "Frame 110" 7064:2474 505×459 [column]
+    - FRAME "Frame 110" 7064:2475 505×95 [row gap 20 pad 20/10/20/10 cross center] border 1px #e73728
+      - INSTANCE "Line Duotone / Network, IT, Programming / Code Square" 7064:2476 55×55 radius 5 <instance 7004:13>
+        - VECTOR "Vector" I7064:2476;3497:19102 5×14 border 1.5px #e73728
+        - VECTOR "Vector" I7064:2476;3497:19103 6×22 border 1.5px #e73728
+        - VECTOR "Vector" I7064:2476;3497:19104 5×14 border 1.5px #e73728
+        - VECTOR "Vector" I7064:2476;3497:19105 46×46 border 1.5px #e73728 radius 5 opacity 50%
+      - TEXT "Outsourcing & Staff Augmentation" 7064:2477 334×26 {DM Sans 600 · 20px · lh 26px · #232122} "Outsourcing & Staff Augmentation"
+    - FRAME "Frame 111" 7064:2478 505×97 [row gap 20 pad 20/10/20/10 cross center] border 1px #e73728
+      - INSTANCE "Linear / Shopping, Ecommerce / Shop" 7064:2479 57×57 <instance 7004:18>
+        - VECTOR "Vector" I7064:2479;3497:21196 40×26 border 1.5px #e73728
+        - VECTOR "Vector" I7064:2479;3497:21197 15×24 border 1.5px #e73728
+        - VECTOR "Vector" I7064:2479;3497:21198 16×24 border 1.5px #e73728
+        - VECTOR "Vector" I7064:2479;3497:21199 16×24 border 1.5px #e73728
+        - VECTOR "Vector" I7064:2479;3497:21200 12×13 border 1.5px #e73728
+      - TEXT "Desarrollo Web & Ecommerce" 7064:2480 289×26 {DM Sans 600 · 20px · lh 26px · #232122} "Desarrollo Web & Ecommerce"
+    - FRAME "Frame 112" 7064:2481 505×97 [row gap 20 pad 20/10/20/10 cross center] border 1px #e73728
+      - INSTANCE "Linear / Text Formatting / Text Underline Circle" 7064:2482 57×57 <instance 7004:24>
+        - VECTOR "Vector" I7064:2482;3497:19942 48×48 border 1.5px #e73728 radius 14
+        - VECTOR "Vector" I7064:2482;3497:19943 19×0 border 1.5px #e73728
+        - VECTOR "Vector" I7064:2482;3497:19944 19×17 border 1.5px #e73728
+      - TEXT "UX/UI & Product Design" 7064:2483 228×26 {DM Sans 600 · 20px · lh 26px · #232122} "UX/UI & Product Design"
+    - FRAME "Frame 113" 7064:2484 505×85 [row gap 20 pad 20/10/20/10 cross center] border 1px #e73728
+      - GROUP "Group 76" 7064:2485 45×45
+        - ELLIPSE "Vector" 7064:2486 43×43 border 1.5px #ec221f
+        - VECTOR "Vector" 7064:2487 8×8 border 1.5px #ec221f
+      - TEXT "SEO & Marketing Técnico" 7064:2488 243×26 {DM Sans 600 · 20px · lh 26px · #232122} "SEO & Marketing Técnico"
+    - FRAME "Frame 114" 7064:2489 505×85 [row gap 20 pad 20/10/20/10 cross center] border 1px #e73728
+      - GROUP "Group 76" 7064:2490 45×45
+        - ELLIPSE "Vector" 7064:2491 43×43 border 1.5px #ec221f
+        - VECTOR "Vector" 7064:2492 8×8 border 1.5px #ec221f
+      - TEXT "Cloud & DevOps" 7064:2493 159×26 {DM Sans 600 · 20px · lh 26px · #232122} "Cloud & DevOps"

@@ -1,0 +1,120 @@
+# Portafolio_Detalle (7064:2494) 1440×2784
+
+Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía · color} "texto"
+
+- FRAME "Portafolio_Detalle" 7064:2494 1440×2784 bg #ffffff
+  - RECTANGLE "Rectangle 44" 7064:2495 1440×160 bg #611711
+  - RECTANGLE "intelindev 1" 7064:2496 1441×389 bg image
+  - FRAME "Frame 16" 7064:2497 716×57 [column gap 20 main center]
+    - TEXT "Sana Sana" 7064:2498 716×57 {DM Sans 400 · 60px · lh 57px · center · #ffffff} "Sana Sana"
+  - RECTANGLE "Rectangle 45" 7064:2499 820×89 bg #a4271c radius 20
+  - RECTANGLE "Rectangle 46" 7064:2500 85×89 bg #a4271c radius 20
+  - FRAME "Frame 38" 7064:2501 740×21 [row gap 84 main space_between cross center]
+    - FRAME "Frame 36" 7064:2502 44×21 [row gap 10 cross center]
+      - TEXT "Home" 7064:2503 44×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Home"
+    - FRAME "Frame 37" 7064:2504 68×21 [row gap 10 cross center]
+      - TEXT "Nosotros" 7064:2505 68×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Nosotros"
+    - FRAME "Frame 38" 7064:2506 93×21 [row gap 10 cross center]
+      - ELLIPSE "Ellipse 3" 7064:2507 16×16 bg #a5d9e4
+      - TEXT "Servicios" 7064:2508 67×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Servicios"
+    - FRAME "Frame 39" 7064:2509 71×21 [row gap 10 cross center]
+      - TEXT "Portafolio" 7064:2510 71×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Portafolio"
+    - FRAME "Frame 42" 7064:2511 32×21 [row gap 10 cross center]
+      - TEXT "Blog" 7064:2512 32×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Blog"
+    - FRAME "Frame 41" 7064:2513 70×21 [row gap 10 cross center]
+      - TEXT "Contacto" 7064:2514 70×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Contacto"
+  - GROUP "Group 33" 7064:2515 48×48
+    - FRAME "solar:menu-dots-square-outline" 7064:2516 48×48
+      - VECTOR "Vector" 7064:2517 20×4 bg #a5d9e4
+      - VECTOR "Vector" 7064:2518 43×43 bg #a5d9e4
+  - GROUP "Group 63" 7064:2519 1440×300
+    - RECTANGLE "Rectangle 65" 7064:2520 1440×300 bg #611711
+    - FRAME "Frame 85" 7064:2521 200×212 [column gap 40]
+      - FRAME "Frame 83" 7064:2522 152×60 [column gap 15.199999809265137 cross center]
+        - GROUP "Group 31" 7064:2523 26×34
+          - VECTOR "Vector" 7064:2524 14×25 bg #ffffff
+          - VECTOR "Vector" 7064:2525 14×25 bg #ffffff
+        - GROUP "Group 32" 7064:2526 152×11
+          - VECTOR "Vector" 7064:2527 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2528 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2529 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2530 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2531 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2532 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2533 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2534 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2535 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2536 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2537 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2538 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2539 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2540 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2541 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2542 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2543 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2544 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2545 6×10 bg #ffffff
+          - VECTOR "Vector" 7064:2546 6×11 bg #ffffff
+      - TEXT "Software Development & SEO Services" 7064:2547 200×42 {DM Sans 700 · 16px · lh 21px · #ffffff} "Software Development & SEO Services"
+      - VECTOR "Vector" 7064:2548 30×30 bg #ffffff
+    - FRAME "Frame 96" 7064:2549 1020×157 [row gap 10]
+      - GROUP "Group 64" 7064:2550 190×157
+        - TEXT "Nosotros" 7064:2551 190×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Nosotros"
+        - FRAME "Frame 22" 7064:2552 190×114 [column gap 10 main center]
+          - TEXT "Misión Visión" 7064:2553 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Misión Visión"
+          - TEXT "Filosofía" 7064:2554 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Filosofía"
+          - TEXT "Marco de trabajo" 7064:2555 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Marco de trabajo"
+          - TEXT "Equipo" 7064:2556 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Equipo"
+      - GROUP "Group 65" 7064:2557 200×126
+        - TEXT "Servicios" 7064:2558 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Servicios"
+        - FRAME "Frame 23" 7064:2559 190×83 [column gap 10 main center]
+          - TEXT "Metodología de trabajo" 7064:2560 190×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Metodología de trabajo"
+          - TEXT "Servicios" 7064:2561 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Servicios"
+          - TEXT "Desarrollo" 7064:2562 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Desarrollo"
+      - GROUP "Group 66" 7064:2563 200×23
+        - TEXT "Portafolio" 7064:2564 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Portafolio"
+      - GROUP "Group 67" 7064:2565 200×23
+        - TEXT "Blog" 7064:2566 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Blog"
+      - TEXT "Contacto" 7064:2567 190×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Contacto"
+  - INSTANCE "Frame 86" 7064:2568 172×80 [column gap 10 pad 10/10/10/10] <instance 7004:39>
+    - FRAME "Frame 35" I7064:2568;88:2 152×60 [column gap 15.199999809265137 cross center]
+      - GROUP "Group 31" I7064:2568;88:3 26×34
+        - VECTOR "Vector" I7064:2568;88:4 14×25 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:5 14×25 bg #ffffff
+      - GROUP "Group 32" I7064:2568;88:6 152×11
+        - VECTOR "Vector" I7064:2568;88:7 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:8 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:9 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:10 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:11 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:12 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:13 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:14 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:15 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:16 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:17 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:18 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:19 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:20 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:21 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:22 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:23 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:24 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:25 6×10 bg #ffffff
+        - VECTOR "Vector" I7064:2568;88:26 6×11 bg #ffffff
+  - FRAME "Frame 118" 7064:2569 1240×1890 [row gap 79]
+    - FRAME "Frame 107" 7064:2570 715×1890 [column gap 40]
+      - RECTANGLE "sanasana1--checker 1" 7064:2571 715×477 bg image radius 20
+      - TEXT "Problema Sana Sana buscaba digitalizar su programa de salud preventiva y crear una plataforma que permitiera a los usuarios afiliarse, gestionar sus programas activos y acceder a beneficios exclusivos, todo desde un entorno fácil de usar. Su operación dependía de procesos manuales, comunicación dispersa y falta de trazabilidad sobre los usuarios y los beneficios utilizados. Solución Desarrollamos una plataforma digital integral de afiliación, donde los usuarios pueden registrarse, visualizar los programas disponibles, acceder a beneficios, gestionar sus dependientes y recibir contenido informativo. Todo bajo una experiencia moderna, intuitiva y pensada para el mercado costarricense. La plataforma centraliza información, automatiza procesos antes manuales y permite al negocio administrar usuarios, programas, reglas de afiliación y métricas clave de uso." 7064:2572 715×326 {DM Sans 400 · 16px · lh 21px · #000000} "Problema Sana Sana buscaba digitalizar su programa de salud preventiva y crear una plataforma que permitiera a los usuarios afiliarse, gestionar sus programas a"
+      - FRAME "Frame 119" 7064:2573 715×392 [row gap 20]
+        - RECTANGLE "Rectangle 95" 7064:2574 356×392 bg #d9d9d9 radius 20
+        - RECTANGLE "Rectangle 100" 7064:2575 339×392 bg image radius 40
+      - TEXT "Qué hicimos Diseño UX/UI completo con lineamientos visuales adaptados al mercado de Costa Rica. Desarrollo de una plataforma web autogestionada para afiliación y administración de programas. Implementación de módulos para ver beneficios, requisitos, fechas, vigencia y contenido educativo. Integración de sistema de dependientes y beneficiarios. Panel de administración para gestionar programas, usuarios, estados y reglas de beneficios. Flujos optimizados para onboarding, activación y seguimiento del usuario. Arquitectura escalable para permitir crecimiento del portafolio de salud. Tecnologías y herramientas Frontend: React / Next.js Base de datos: SQL Server o PostgreSQL Autenticación: Auth0 o JWT Infraestructura: Azure / AWS Diseño: Figma (UX/UI), Design System propio Metodología: Scrum con entregas quincenales Resultados / Impacto Centralización completa del proceso de afiliación y administración de programas. Reducción significativa de tareas manuales operativas. Mejora en la trazabilidad del usuario y uso de beneficios. Experiencia más clara, simple y alineada a la propuesta de valor de la marca. Plataforma lista para incorporar nuevos programas y ampliar la oferta." 7064:2576 715×575 {DM Sans 400 · 16px · lh 21px · #000000} "Qué hicimos Diseño UX/UI completo con lineamientos visuales adaptados al mercado de Costa Rica. Desarrollo de una plataforma web autogestionada para afiliación "
+    - FRAME "Frame 117" 7064:2577 446×300 [row gap 20 cross center]
+      - FRAME "Frame 116" 7064:2578 505×300 [column gap 40]
+        - TEXT "Información del proyecto" 7064:2579 505×96 {DM Serif Text 400 · 50px · lh 48px · #312f30} "Información del proyecto"
+        - FRAME "Frame 115" 7064:2580 505×164 [column gap 20]
+          - TEXT "Año: 2025" 7064:2581 505×26 {DM Sans 400 · 20px · lh 26px · #000000} "Año: 2025"
+          - TEXT "Periodo: 1 año" 7064:2582 505×26 {DM Sans 400 · 20px · lh 26px · #000000} "Periodo: 1 año"
+          - TEXT "Cliente: Sana Sana - Hospital HCAM" 7064:2583 505×26 {DM Sans 400 · 20px · lh 26px · #000000} "Cliente: Sana Sana - Hospital HCAM"
+          - TEXT "Servicio: Desarrollo de Fronend" 7064:2584 505×26 {DM Sans 400 · 20px · lh 26px · #000000} "Servicio: Desarrollo de Fronend"

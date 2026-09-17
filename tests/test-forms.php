@@ -52,7 +52,7 @@ try {
     echo "2) fixtures\n";
     @mkdir($hook_dir, 0755, true);
     file_put_contents($hook_dir . '/hook.php', '<?php file_put_contents(__DIR__ . "/hook.log", file_get_contents("php://input")); header("Content-Type: application/json"); echo "{\"received\":true}";');
-    $form_id = wp_insert_post(['post_type' => F::POST_TYPE, 'post_title' => 'Contacto', 'post_name' => 'contacto', 'post_status' => 'publish']);
+    $form_id = wp_insert_post(['post_type' => F::POST_TYPE, 'post_title' => 'Contacto', 'post_name' => 'contacto-test', 'post_status' => 'publish']);
     update_post_meta($form_id, F::META_FIELDS, F::sanitize_fields([
         ['name' => 'nombre', 'type' => 'text', 'required' => '1', 'width' => 'col-12 col-md-6', 'label' => ['es' => 'Nombre', 'en' => 'Name'], 'placeholder' => ['es' => 'Tu nombre', 'en' => 'Your name']],
         ['name' => 'email', 'type' => 'email', 'required' => '1', 'width' => 'col-12 col-md-6', 'label' => ['es' => 'Email', 'en' => 'Email']],
@@ -65,7 +65,7 @@ try {
     update_post_meta($form_id, F::META_SETTINGS, F::sanitize_settings(['recipients' => 'ventas@example.com', 'subject' => ['es' => 'Contacto desde {site}', 'en' => 'Contact from {site}'], 'button' => ['es' => 'Enviar consulta', 'en' => 'Send inquiry'], 'success' => ['es' => 'Gracias, te respondemos pronto.', 'en' => 'Thanks, we will reply soon.'], 'webhook' => 'http://localhost:8888/_claude-test/hook.php', 'store' => '1']));
     $draft_id = wp_insert_post(['post_type' => F::POST_TYPE, 'post_title' => 'Borrador', 'post_name' => 'borrador', 'post_status' => 'draft']);
     update_post_meta($draft_id, F::META_FIELDS, F::sanitize_fields([['name' => 'a', 'type' => 'text']]));
-    $blocks = is_array($orig_blocks) ? $orig_blocks : []; $blocks['es'] = ['[form slug="contacto"]', '[form slug="borrador"]']; $blocks['en'] = ['[form slug="contacto"]'];
+    $blocks = is_array($orig_blocks) ? $orig_blocks : []; $blocks['es'] = ['[form slug="contacto-test"]', '[form slug="borrador"]']; $blocks['en'] = ['[form slug="contacto-test"]'];
     update_post_meta($PAGE, $META, $blocks);
     $clear_rate_limit();
     check('formulario y borrador creados', $form_id > 0 && $draft_id > 0);
@@ -99,7 +99,7 @@ try {
     check('envío guardado con datos limpios y título "Contacto · Ana"', $entry && $entry->post_title === 'Contacto · Ana' && $data['email'] === 'ana@example.com' && $data['acepto'] === '1' && $data['origen'] === 'web' && $data['mensaje'] === "Hola\nQuiero info" && (int) get_post_meta($entry->ID, S::META_FORM, true) === $form_id);
     check('contexto: lang, página, resultado del correo registrado (bool)', ($ctx['lang'] ?? '') === 'es' && ($ctx['page'] ?? '') === 'http://localhost:8888/Intelindev/contacto/' && isset($ctx['mail']['sent']) && is_bool($ctx['mail']['sent']) && ($ctx['mail']['to'] ?? '') === 'ventas@example.com');
     $received = file_exists($hook_log) ? json_decode((string) file_get_contents($hook_log), true) : null;
-    check('webhook: POST JSON recibido (form, lang, fields) y HTTP 200 registrado', ($ctx['webhook']['status'] ?? 0) === 200 && is_array($received) && $received['form']['slug'] === 'contacto' && $received['lang'] === 'es' && $received['fields']['nombre'] === 'Ana' && $received['fields']['asunto'] === 'Ventas');
+    check('webhook: POST JSON recibido (form, lang, fields) y HTTP 200 registrado', ($ctx['webhook']['status'] ?? 0) === 200 && is_array($received) && $received['form']['slug'] === 'contacto-test' && $received['lang'] === 'es' && $received['fields']['nombre'] === 'Ana' && $received['fields']['asunto'] === 'Ventas');
     for ($n = 0; $n < 3; $n++) $send($form_id, $valid); // 2 previos + 1 + 3 = 6 intentos válidos
     [$c, $b] = $send($form_id, $valid);
     check('límite por IP: 6º envío → 429', $c === 429 && $b['message'] === 'Demasiados intentos, esperá unos minutos.');
@@ -108,7 +108,7 @@ try {
 
     echo "5) admin\n";
     $mb = $sub('ob_start(); (new \IntelindevInit\Forms\FormsController())->render_fields_meta_box(get_post(' . $form_id . ')); echo ob_get_clean();');
-    check('metabox campos: 7 filas + template + shortcode', substr_count($mb, 'class="intelindev-form-field"') === 8 && strpos($mb, '[fields][__i__][name]') !== false && strpos($mb, '<code>[form slug="contacto"]</code>') !== false && strpos($mb, 'value="Tu nombre"') !== false);
+    check('metabox campos: 7 filas + template + shortcode', substr_count($mb, 'class="intelindev-form-field"') === 8 && strpos($mb, '[fields][__i__][name]') !== false && strpos($mb, '<code>[form slug="contacto-test"]</code>') !== false && strpos($mb, 'value="Tu nombre"') !== false);
     $ms = $sub('ob_start(); (new \IntelindevInit\Forms\FormsController())->render_settings_meta_box(get_post(' . $form_id . ')); echo ob_get_clean();');
     check('metabox envío: destinatarios, asunto por idioma, webhook, store', strpos($ms, 'value="ventas@example.com"') !== false && strpos($ms, 'name="intelindev_form[settings][subject][en]" value="Contact from {site}"') !== false && strpos($ms, 'value="http://localhost:8888/_claude-test/hook.php"') !== false && preg_match('/name="intelindev_form\[settings\]\[store\]" value="1"\s*checked/', $ms) === 1);
     $_POST = [F::NONCE_FIELD => wp_create_nonce(F::NONCE_ACTION), F::FIELD => ['fields' => [['name' => 'solo', 'type' => 'email', 'required' => '1', 'width' => 'col-12', 'label' => ['es' => 'Solo', 'en' => '']]], 'settings' => ['recipients' => 'x@y.com', 'store' => '1']]];
@@ -116,7 +116,7 @@ try {
     check('save con nonce: campos y ajustes reemplazados', count(F::get_fields($form_id)) === 1 && F::get_fields($form_id)[0]['name'] === 'solo' && F::get_settings($form_id)['recipients'] === 'x@y.com');
     $col = $sub('ob_start(); do_action("manage_' . F::POST_TYPE . '_posts_custom_column", "intelindev_shortcode", ' . $form_id . '); do_action("manage_' . F::POST_TYPE . '_posts_custom_column", "intelindev_entries", ' . $form_id . '); echo ob_get_clean();');
     $stored = count(get_posts(['post_type' => S::POST_TYPE, 'posts_per_page' => -1, 'fields' => 'ids']));
-    check('columnas: shortcode y conteo de envíos (= DB) con link', strpos($col, '<code>[form slug="contacto"]</code>') !== false && preg_match('/intelindev_form=' . $form_id . '">(\d+)<\/a>/', $col, $m) === 1 && (int) $m[1] === $stored && $stored >= 4);
+    check('columnas: shortcode y conteo de envíos (= DB) con link', strpos($col, '<code>[form slug="contacto-test"]</code>') !== false && preg_match('/intelindev_form=' . $form_id . '">(\d+)<\/a>/', $col, $m) === 1 && (int) $m[1] === $stored && $stored >= 4);
     $emb = $sub('ob_start(); (new \IntelindevInit\Forms\SubmissionsController())->render_meta_box(get_post(' . $entry->ID . ')); echo ob_get_clean();');
     check('detalle del envío: datos + contexto', strpos($emb, '<td>ana@example.com</td>') !== false && strpos($emb, 'Webhook') !== false && strpos($emb, 'HTTP 200') !== false);
 } finally {

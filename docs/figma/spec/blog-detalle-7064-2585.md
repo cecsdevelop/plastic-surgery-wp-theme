@@ -1,0 +1,180 @@
+# Blog_Detalle (7064:2585) 1440×2998
+
+Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía · color} "texto"
+
+- FRAME "Blog_Detalle" 7064:2585 1440×2998 bg #ffffff
+  - RECTANGLE "Rectangle 44" 7064:2586 1440×160 bg #611711
+  - RECTANGLE "intelindev 1" 7064:2587 1441×389 bg image
+  - FRAME "Frame 16" 7064:2588 1030×114 [column gap 20 main center cross center]
+    - TEXT "Tendencias tecnológicas 2025 que están transformando el mercado" 7064:2589 974×114 {DM Sans 400 · 60px · lh 57px · center · #ffffff} "Tendencias tecnológicas 2025 que están transformando el mercado"
+  - RECTANGLE "Rectangle 45" 7064:2590 820×89 bg #a4271c radius 20
+  - RECTANGLE "Rectangle 46" 7064:2591 85×89 bg #a4271c radius 20
+  - FRAME "Frame 38" 7064:2592 740×21 [row gap 84 main space_between cross center]
+    - FRAME "Frame 36" 7064:2593 44×21 [row gap 10 cross center]
+      - TEXT "Home" 7064:2594 44×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Home"
+    - FRAME "Frame 37" 7064:2595 68×21 [row gap 10 cross center]
+      - TEXT "Nosotros" 7064:2596 68×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Nosotros"
+    - FRAME "Frame 38" 7064:2597 93×21 [row gap 10 cross center]
+      - ELLIPSE "Ellipse 3" 7064:2598 16×16 bg #a5d9e4
+      - TEXT "Servicios" 7064:2599 67×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Servicios"
+    - FRAME "Frame 39" 7064:2600 71×21 [row gap 10 cross center]
+      - TEXT "Portafolio" 7064:2601 71×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Portafolio"
+    - FRAME "Frame 42" 7064:2602 32×21 [row gap 10 cross center]
+      - TEXT "Blog" 7064:2603 32×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Blog"
+    - FRAME "Frame 41" 7064:2604 70×21 [row gap 10 cross center]
+      - TEXT "Contacto" 7064:2605 70×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Contacto"
+  - GROUP "Group 33" 7064:2606 48×48
+    - FRAME "solar:menu-dots-square-outline" 7064:2607 48×48
+      - VECTOR "Vector" 7064:2608 20×4 bg #a5d9e4
+      - VECTOR "Vector" 7064:2609 43×43 bg #a5d9e4
+  - GROUP "Group 63" 7064:2610 1440×300
+    - RECTANGLE "Rectangle 65" 7064:2611 1440×300 bg #611711
+    - FRAME "Frame 85" 7064:2612 200×212 [column gap 40]
+      - FRAME "Frame 83" 7064:2613 152×60 [column gap 15.199999809265137 cross center]
+        - GROUP "Group 31" 7064:2614 26×34
+          - VECTOR "Vector" 7064:2615 14×25 bg #ffffff
+          - VECTOR "Vector" 7064:2616 14×25 bg #ffffff
+        - GROUP "Group 32" 7064:2617 152×11
+          - VECTOR "Vector" 7064:2618 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2619 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2620 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2621 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2622 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2623 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2624 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2625 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2626 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2627 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2628 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2629 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2630 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2631 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2632 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2633 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2634 5×10 bg #ffffff
+          - VECTOR "Vector" 7064:2635 6×11 bg #ffffff
+          - VECTOR "Vector" 7064:2636 6×10 bg #ffffff
+          - VECTOR "Vector" 7064:2637 6×11 bg #ffffff
+      - TEXT "Software Development & SEO Services" 7064:2638 200×42 {DM Sans 700 · 16px · lh 21px · #ffffff} "Software Development & SEO Services"
+      - VECTOR "Vector" 7064:2639 30×30 bg #ffffff
+    - FRAME "Frame 96" 7064:2640 1020×157 [row gap 10]
+      - GROUP "Group 64" 7064:2641 190×157
+        - TEXT "Nosotros" 7064:2642 190×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Nosotros"
+        - FRAME "Frame 22" 7064:2643 190×114 [column gap 10 main center]
+          - TEXT "Misión Visión" 7064:2644 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Misión Visión"
+          - TEXT "Filosofía" 7064:2645 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Filosofía"
+          - TEXT "Marco de trabajo" 7064:2646 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Marco de trabajo"
+          - TEXT "Equipo" 7064:2647 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Equipo"
+      - GROUP "Group 65" 7064:2648 200×126
+        - TEXT "Servicios" 7064:2649 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Servicios"
+        - FRAME "Frame 23" 7064:2650 190×83 [column gap 10 main center]
+          - TEXT "Metodología de trabajo" 7064:2651 190×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Metodología de trabajo"
+          - TEXT "Servicios" 7064:2652 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Servicios"
+          - TEXT "Desarrollo" 7064:2653 150×21 {DM Sans 400 · 16px · lh 21px · #ffffff} "Desarrollo"
+      - GROUP "Group 66" 7064:2654 200×23
+        - TEXT "Portafolio" 7064:2655 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Portafolio"
+      - GROUP "Group 67" 7064:2656 200×23
+        - TEXT "Blog" 7064:2657 200×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Blog"
+      - TEXT "Contacto" 7064:2658 190×23 {DM Sans 700 · 18px · lh 23px · #ffffff} "Contacto"
+  - INSTANCE "Frame 86" 7064:2659 172×80 [column gap 10 pad 10/10/10/10] <instance 7004:39>
+    - FRAME "Frame 35" I7064:2659;88:2 152×60 [column gap 15.199999809265137 cross center]
+      - GROUP "Group 31" I7064:2659;88:3 26×34
+        - VECTOR "Vector" I7064:2659;88:4 14×25 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:5 14×25 bg #ffffff
+      - GROUP "Group 32" I7064:2659;88:6 152×11
+        - VECTOR "Vector" I7064:2659;88:7 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:8 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:9 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:10 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:11 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:12 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:13 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:14 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:15 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:16 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:17 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:18 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:19 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:20 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:21 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:22 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:23 5×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:24 6×11 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:25 6×10 bg #ffffff
+        - VECTOR "Vector" I7064:2659;88:26 6×11 bg #ffffff
+  - FRAME "Frame 118" 7064:2660 735×1434 [row gap 79]
+    - FRAME "Frame 107" 7064:2661 715×1434 [column gap 40]
+      - TEXT "Miércoles 3 de diciembre, 2025" 7064:2662 715×21 {DM Sans 700 · 16px · lh 21px · #000000} "Miércoles 3 de diciembre, 2025"
+      - TEXT "Problema Sana Sana buscaba digitalizar su programa de salud preventiva y crear una plataforma que permitiera a los usuarios afiliarse, gestionar sus programas activos y acceder a beneficios exclusivos, todo desde un entorno fácil de usar. Su operación dependía de procesos manuales, comunicación dispersa y falta de trazabilidad sobre los usuarios y los beneficios utilizados. Solución Desarrollamos una plataforma digital integral de afiliación, donde los usuarios pueden registrarse, visualizar los programas disponibles, acceder a beneficios, gestionar sus dependientes y recibir contenido informativo. Todo bajo una experiencia moderna, intuitiva y pensada para el mercado costarricense. La plataforma centraliza información, automatiza procesos antes manuales y permite al negocio administrar usuarios, programas, reglas de afiliación y métricas clave de uso." 7064:2663 715×326 {DM Sans 400 · 16px · lh 21px · #000000} "Problema Sana Sana buscaba digitalizar su programa de salud preventiva y crear una plataforma que permitiera a los usuarios afiliarse, gestionar sus programas a"
+      - FRAME "Frame 119" 7064:2664 715×392 [row gap 20]
+        - RECTANGLE "Rectangle 95" 7064:2665 348×392 bg #d9d9d9 radius 20
+        - RECTANGLE "Rectangle 96" 7064:2666 348×392 bg #d9d9d9 radius 20
+      - TEXT "Qué hicimos Diseño UX/UI completo con lineamientos visuales adaptados al mercado de Costa Rica. Desarrollo de una plataforma web autogestionada para afiliación y administración de programas. Implementación de módulos para ver beneficios, requisitos, fechas, vigencia y contenido educativo. Integración de sistema de dependientes y beneficiarios. Panel de administración para gestionar programas, usuarios, estados y reglas de beneficios. Flujos optimizados para onboarding, activación y seguimiento del usuario. Arquitectura escalable para permitir crecimiento del portafolio de salud. Tecnologías y herramientas Frontend: React / Next.js Base de datos: SQL Server o PostgreSQL Autenticación: Auth0 o JWT Infraestructura: Azure / AWS Diseño: Figma (UX/UI), Design System propio Metodología: Scrum con entregas quincenales Resultados / Impacto Centralización completa del proceso de afiliación y administración de programas. Reducción significativa de tareas manuales operativas. Mejora en la trazabilidad del usuario y uso de beneficios. Experiencia más clara, simple y alineada a la propuesta de valor de la marca. Plataforma lista para incorporar nuevos programas y ampliar la oferta." 7064:2667 715×575 {DM Sans 400 · 16px · lh 21px · #000000} "Qué hicimos Diseño UX/UI completo con lineamientos visuales adaptados al mercado de Costa Rica. Desarrollo de una plataforma web autogestionada para afiliación "
+  - TEXT "Regresar al inicio" 7064:2668 125×21 {DM Sans 400 · 16px · lh 21px · #000000} "Regresar al inicio"
+  - FRAME "Frame 121" 7064:2669 124×24 [row gap 24 cross center]
+    - TEXT "Compartir" 7064:2670 76×21 {DM Sans 400 · 16px · lh 21px · #000000} "Compartir"
+    - FRAME "material-symbols:share" 7064:2671 24×24
+      - VECTOR "Vector" 7064:2672 18×20 bg #000000
+  - FRAME "Frame 123" 7064:2673 715×354 [column gap 40]
+    - FRAME "Frame 122" 7064:2674 715×74 [column gap 14]
+      - TEXT "Deja un comentario" 7064:2675 715×39 {DM Sans 700 · 30px · lh 39px · #000000} "Deja un comentario"
+      - TEXT "Tu dirección de correo electrónico no será publicado." 7064:2676 715×21 {DM Sans 400 · 16px · lh 21px · #000000} "Tu dirección de correo electrónico no será publicado."
+    - FRAME "Frame 80" 7064:2677 621×142 [column gap 40]
+      - FRAME "Frame 79" 7064:2678 621×51 [row gap 20 cross center]
+        - FRAME "Frame 76" 7064:2679 295×51 [column gap 30]
+          - TEXT "NOMBRE" 7064:2680 295×21 {DM Sans 400 · 16px · lh 21px · #000000} "NOMBRE"
+          - LINE "Line 5" 7064:2681 295×0 border 1px #000000
+        - FRAME "Frame 77" 7064:2682 295×51 [column gap 30]
+          - TEXT "CORREO ELECTRÓNICO" 7064:2683 295×21 {DM Sans 400 · 16px · lh 21px · #000000} "CORREO ELECTRÓNICO"
+          - LINE "Line 5" 7064:2684 295×0 border 1px #000000
+      - FRAME "Frame 78" 7064:2685 621×51 [column gap 30]
+        - TEXT "MENSAJE" 7064:2686 621×21 {DM Sans 400 · 16px · lh 21px · #000000} "MENSAJE"
+        - LINE "Line 5" 7064:2687 609×0 border 1px #000000
+    - FRAME "Frame 43" 7064:2688 295×58 [column gap 10 pad 10/30/10/30 main center cross center] bg #e73728 radius 50 shadow
+      - FRAME "Frame 42" 7064:2689 235×38 [row gap 10 main center cross center]
+        - TEXT "Publicar comentario" 7064:2690 184×23 {DM Sans 300 · 20px · lh 23px · #ffffff} "Publicar comentario"
+        - FRAME "solar:arrow-right-up-outline" 7064:2691 38×38
+          - VECTOR "Vector" 7064:2692 21×21 bg #ffffff
+  - RECTANGLE "Rectangle 99" 7064:2693 400×80 border 1px #a09fa0
+  - RECTANGLE "Rectangle 100" 7064:2694 105×80 border 1px #a09fa0
+  - FRAME "iconamoon:search-light" 7064:2695 47×47
+    - VECTOR "Vector" 7064:2696 35×35 border 1.5px #000000
+  - TEXT "Buscar contenido" 7064:2697 161×26 {DM Sans 300 · 20px · lh 26px · #000000} "Buscar contenido"
+  - FRAME "Frame 127" 7064:2698 400×1439 [column gap 40]
+    - FRAME "Frame 124" 7064:2699 160×51 [column gap 12]
+      - TEXT "Categorías" 7064:2700 160×39 {DM Sans 700 · 30px · lh 39px · #000000} "Categorías"
+      - LINE "Line 7" 7064:2701 85×0 border 3px #000000
+    - FRAME "Frame 125" 7064:2702 400×394 [column gap 20]
+      - TEXT "Desarrollo de software" 7064:2703 400×26 {DM Sans 300 · 20px · lh 26px · #000000} "Desarrollo de software"
+      - TEXT "Metodologías ágiles" 7064:2704 400×26 {DM Sans 300 · 20px · lh 26px · #000000} "Metodologías ágiles"
+      - TEXT "UX/UI" 7064:2705 400×26 {DM Sans 300 · 20px · lh 26px · #000000} "UX/UI"
+      - TEXT "Tecnología y tendencias" 7064:2706 220×26 {DM Sans 300 · 20px · lh 26px · #000000} "Tecnología y tendencias"
+      - TEXT "Cloud & DevOps" 7064:2707 153×26 {DM Sans 300 · 20px · lh 26px · #000000} "Cloud & DevOps"
+      - TEXT "Inteligencia de Negocios" 7064:2708 223×26 {DM Sans 300 · 20px · lh 26px · #000000} "Inteligencia de Negocios"
+      - TEXT "Ecommerce & Web" 7064:2709 178×26 {DM Sans 300 · 20px · lh 26px · #000000} "Ecommerce & Web"
+      - TEXT "SEO Técnico" 7064:2710 115×26 {DM Sans 300 · 20px · lh 26px · #000000} "SEO Técnico"
+      - TEXT "Negocio + Tecnología" 7064:2711 193×26 {DM Sans 300 · 20px · lh 26px · #000000} "Negocio + Tecnología"
+    - FRAME "Frame 126" 7064:2712 160×51 [column gap 12]
+      - TEXT "Etiquetas" 7064:2713 160×39 {DM Sans 700 · 30px · lh 39px · #000000} "Etiquetas"
+      - LINE "Line 7" 7064:2714 85×0 border 3px #000000
+    - FRAME "Frame 128" 7064:2715 355×21 [row gap 20 cross center]
+      - TEXT "Negocios" 7064:2716 68×21 {DM Sans 300 · 16px · lh 21px · #000000} "Negocios"
+      - TEXT "Arquitectura de Software" 7064:2717 184×21 {DM Sans 300 · 16px · lh 21px · #000000} "Arquitectura de Software"
+      - TEXT "Backend" 7064:2718 63×21 {DM Sans 300 · 16px · lh 21px · #000000} "Backend"
+    - FRAME "Frame 129" 7064:2719 312×21 [row gap 20 cross center]
+      - TEXT "Frontend" 7064:2720 67×21 {DM Sans 300 · 16px · lh 21px · #000000} "Frontend"
+      - TEXT "Microservicios" 7064:2721 106×21 {DM Sans 300 · 16px · lh 21px · #000000} "Microservicios"
+      - TEXT "Integraciones" 7064:2722 99×21 {DM Sans 300 · 16px · lh 21px · #000000} "Integraciones"
+    - FRAME "Frame 130" 7064:2723 160×51 [column gap 12]
+      - TEXT "Instagram Post" 7064:2724 295×39 {DM Sans 700 · 30px · lh 39px · #000000} "Instagram Post"
+      - LINE "Line 7" 7064:2725 85×0 border 3px #000000
+    - FRAME "Frame 134" 7064:2726 400×610 [column gap 20]
+      - FRAME "Frame 131" 7064:2727 400×190 [row gap 20 cross center]
+        - RECTANGLE "Rectangle 96" 7064:2728 190×190 bg #d9d9d9 radius 20
+        - RECTANGLE "Rectangle 101" 7064:2729 190×190 bg #d9d9d9 radius 20
+      - FRAME "Frame 132" 7064:2730 400×190 [row gap 20 cross center]
+        - RECTANGLE "Rectangle 96" 7064:2731 190×190 bg #d9d9d9 radius 20
+        - RECTANGLE "Rectangle 101" 7064:2732 190×190 bg #d9d9d9 radius 20
+      - FRAME "Frame 133" 7064:2733 400×190 [row gap 20 cross center]
+        - RECTANGLE "Rectangle 96" 7064:2734 190×190 bg #d9d9d9 radius 20
+        - RECTANGLE "Rectangle 101" 7064:2735 190×190 bg #d9d9d9 radius 20

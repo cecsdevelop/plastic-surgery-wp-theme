@@ -1,0 +1,20 @@
+<section class="about section" id="{id|about}">
+  <div class="about__inner container">
+    <div class="about__media">
+      <span class="about__photo about__photo--1"><img src="{image1:url|}" alt="" loading="lazy" decoding="async"></span>
+      <span class="about__photo about__photo--2"><img src="{image2:url|}" alt="" loading="lazy" decoding="async"></span>
+    </div>
+    <div class="about__body">
+      <span class="eyebrow">{eyebrow|{t:about.eyebrow}}</span>
+      <h2 class="about__title">{title:html}</h2>
+      <p class="about__text">{text}</p>
+      <ul class="about__list">
+        <li class="about__item"><img class="about__icon" src="{icon1:icon|code-file}" alt="" width="48" height="48"><p><strong>{item1_title}</strong> {item1_text}</p></li>
+        <li class="about__item"><img class="about__icon" src="{icon2:icon|users-group}" alt="" width="48" height="48"><p><strong>{item2_title}</strong> {item2_text}</p></li>
+        <li class="about__item"><img class="about__icon" src="{icon3:icon|share-circle}" alt="" width="48" height="48"><p><strong>{item3_title}</strong> {item3_text}</p></li>
+      </ul>
+      <a class="btn btn--primary btn--arrow" href="{cta_url:url|}">{cta_text}</a>
+      {content}
+    </div>
+  </div>
+</section>

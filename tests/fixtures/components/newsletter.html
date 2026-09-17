@@ -1,0 +1,14 @@
+<section class="newsletter">
+  <div class="newsletter__inner container">
+    <img class="newsletter__photo" src="{image:url|}" alt="" loading="lazy" decoding="async">
+    <h2 class="newsletter__title">{title:html|{t:newsletter.title}}</h2>
+    <div class="newsletter__body">
+      <p class="newsletter__text">{text|{t:newsletter.text}}</p>
+      <form class="newsletter__form" action="{action:url|#}" method="post">
+        <label class="screen-reader-text" for="newsletter-email">{t:newsletter.placeholder}</label>
+        <input class="newsletter__input" type="email" id="newsletter-email" name="email" placeholder="{placeholder|{t:newsletter.placeholder}}" required>
+        <button class="newsletter__button" type="submit" aria-label="{t:newsletter.button}"><img src="{icon:icon|arrow-up-right}" alt="" width="24" height="24"></button>
+      </form>
+    </div>
+  </div>
+</section>
