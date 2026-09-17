@@ -21,7 +21,7 @@ try {
     echo "1) familias y sanitize (solo theme.json)\n";
     $fam = intelindev_typography_font_families();
     check('familia "system" del theme, sin archivos', isset($fam['system']) && $fam['system']['origin'] === 'theme' && $fam['system']['fontFace'] === []);
-    $out = intelindev_settings_sanitize(['font_body' => 'system', 'font_heading' => 'inter', 'font_size_base' => '30', 'font_weight_heading' => '650', 'font_preload' => '']);
+    $out = intelindev_settings_sanitize(['font_body' => 'system', 'font_heading' => 'no-existe', 'font_size_base' => '30', 'font_weight_heading' => '650', 'font_preload' => '']);
     check('font_body válido, font_heading inexistente fuera, tamaño clamp 22, peso inválido fuera, preload 0', ($out['font_body'] ?? '') === 'system' && !isset($out['font_heading']) && $out['font_size_base'] === 22 && !isset($out['font_weight_heading']) && $out['font_preload'] === 0);
     $out = intelindev_settings_sanitize(['font_size_base' => '', 'font_weight_heading' => '600', 'font_preload' => '1']);
     check('tamaño vacío fuera, peso 600 ok, preload 1', !isset($out['font_size_base']) && $out['font_weight_heading'] === 600 && $out['font_preload'] === 1);
@@ -60,9 +60,10 @@ try {
     ob_start(); intelindev_settings_page_html(); $page = ob_get_clean();
     check('pestaña Tipografía con desplegables que listan theme + Biblioteca', strpos($page, 'id="content-typography"') !== false && preg_match('/<select id="intelindev_font_body"[^>]*>.*?<option value="system"[^>]*>System · sin archivos<\/option>.*?<option value="inter"[^>]*>Inter · Biblioteca<\/option>/s', $page) === 1 && strpos($page, 'Apariencia → Fuentes') !== false);
 } finally {
-    if ($orig_settings === null) delete_option('intelindev_settings'); else update_option('intelindev_settings', $orig_settings);
+    // Primero los estilos globales: el sanitize de la option (register_setting) descarta familias que no existan en ese momento.
     wp_update_post(['ID' => $gs_id, 'post_content' => wp_slash($orig_gs)]);
     WP_Theme_JSON_Resolver::clean_cached_data(); wp_cache_flush();
+    if ($orig_settings === null) delete_option('intelindev_settings'); else update_option('intelindev_settings', $orig_settings);
     echo "   (limpieza: ajustes y estilos globales restaurados)\n";
 }
 echo $fails ? "\nHAY FALLOS ($fails)\n" : "\nTODO OK\n";
