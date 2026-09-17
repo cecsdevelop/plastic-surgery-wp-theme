@@ -74,6 +74,48 @@
     });
   }
 
+  // Galería: input oculto con IDs separados por coma + lista de miniaturas
+  // (campo "gallery" de los CPT de contenido, ver General/ContentTypeController).
+  function initGalleryFields($form) {
+    var i18n = window.intelindevAdminFields || {};
+
+    function syncIds($field) {
+      var ids = $field.find('.intelindev-gallery-list > li').map(function () { return $(this).data('id'); }).get();
+      $field.find('input[type="hidden"]').val(ids.join(','));
+    }
+
+    $form.on('click', '.intelindev-gallery-add', function (e) {
+      e.preventDefault();
+      var $field = $(this).closest('.intelindev-gallery-field');
+      var frame = wp.media({
+        title: i18n.galleryTitle || 'Agregar imágenes',
+        library: { type: 'image' },
+        button: { text: i18n.galleryButton || 'Agregar' },
+        multiple: 'add'
+      });
+      frame.on('select', function () {
+        var $list = $field.find('.intelindev-gallery-list');
+        frame.state().get('selection').each(function (att) {
+          var data = att.toJSON();
+          if ($list.find('li[data-id="' + data.id + '"]').length) {
+            return;
+          }
+          var url = (data.sizes && data.sizes.thumbnail) ? data.sizes.thumbnail.url : data.url;
+          $list.append('<li data-id="' + data.id + '"><img src="' + url + '" alt="" /><button type="button" class="intelindev-gallery-remove" aria-label="' + (i18n.remove || 'Quitar') + '">&times;</button></li>');
+        });
+        syncIds($field);
+      });
+      frame.open();
+    });
+
+    $form.on('click', '.intelindev-gallery-remove', function (e) {
+      e.preventDefault();
+      var $field = $(this).closest('.intelindev-gallery-field');
+      $(this).closest('li').remove();
+      syncIds($field);
+    });
+  }
+
   var RGBA = /^rgba?\(/i;
 
   function initColorInput($input) {
@@ -174,6 +216,7 @@
     applyConditions($form);
 
     initMediaFields($form);
+    initGalleryFields($form);
 
     $form.find('.intelindev-color-input').each(function () {
       initColorInput($(this));

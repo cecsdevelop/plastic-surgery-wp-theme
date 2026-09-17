@@ -26,6 +26,12 @@ class ModuleRegistrar
             // (ver skill wp-theme-cpt-module).
             'IntelindevInit\\Components\\ComponentsController',
             'IntelindevInit\\Forms\\FormsController',
+            // CPTs de contenido (extienden General\ContentTypeController).
+            'IntelindevInit\\Services\\ServicesController',
+            'IntelindevInit\\Portfolio\\PortfolioController',
+            'IntelindevInit\\Testimonials\\TestimonialsController',
+            'IntelindevInit\\Clients\\ClientsController',
+            'IntelindevInit\\Team\\TeamController',
             'IntelindevInit\\Forms\\SubmissionsController',
         ];
     }

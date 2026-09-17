@@ -1,6 +1,15 @@
 <?php
 /**
- * Regular Posts Translation Fields
+ * Contenido traducido de posts, pages y CPTs del theme.
+ *
+ * El post_title/post_name nativos son el idioma por defecto; el resto de
+ * idiomas vive en meta (título, slug, bloques HTML de contenido, excerpt) y se
+ * resuelve con filtros (the_title, the_content, post_link/page_link/
+ * post_type_link). Los tipos cubiertos salen de
+ * intelindev_translatable_post_types(): 'post' y 'page' más lo que agreguen
+ * los módulos CPT por el filtro 'intelindev_translatable_post_types'. Los
+ * CPT públicos declaran además su base de URL por idioma
+ * ('intelindev_post_type_lang_slugs') para armar /{lang}/{base}/{slug}/.
  *
  * @package intelindev
  */
@@ -13,6 +22,90 @@ const INTELINDEV_POST_TRANSLATED_CONTENT_META = '_intelindev_post_translated_con
 const INTELINDEV_POST_TRANSLATED_EXCERPT_META = '_intelindev_post_translated_excerpt';
 const INTELINDEV_POST_TRANSLATED_TITLE_META = '_intelindev_post_translated_title';
 const INTELINDEV_POST_FEATURED_META = '_intelindev_post_is_featured';
+
+/**
+ * Tipos cuyo título/contenido/excerpt (y slug si son públicos) se traducen
+ * con el metabox "Contenido traducido". Los módulos CPT se suman por filtro.
+ */
+function intelindev_translatable_post_types(): array
+{
+    $types = apply_filters('intelindev_translatable_post_types', ['post', 'page']);
+
+    return array_values(array_unique(array_filter(array_map('strval', (array) $types))));
+}
+
+/** Tipos traducibles con URL propia (los que llevan slug por idioma). */
+function intelindev_public_translatable_post_types(): array
+{
+    return array_values(array_filter(intelindev_translatable_post_types(), 'is_post_type_viewable'));
+}
+
+/** Idiomas que llevan campos de traducción: todos menos el por defecto. */
+function intelindev_translation_languages(): array
+{
+    return array_values(array_diff(idml_get_languages(), [idml_get_default_language()]));
+}
+
+/**
+ * Base de URL por idioma de un CPT público ([post_type => [lang => base]],
+ * ej. intelindev_service => [es => servicios, en => services]). Para el idioma
+ * por defecto se usa el slug de rewrite nativo; para los demás, lo declarado
+ * por el módulo o, si falta, el nativo.
+ */
+function intelindev_post_type_lang_slug(string $post_type, string $lang): string
+{
+    $lang = idml_normalize_lang($lang);
+    $map  = apply_filters('intelindev_post_type_lang_slugs', []);
+    $base = (string) ($map[$post_type][$lang] ?? '');
+    if ($base !== '' && $lang !== idml_get_default_language()) {
+        return sanitize_title($base);
+    }
+
+    $object = get_post_type_object($post_type);
+    if (!$object) {
+        return '';
+    }
+    $native = is_array($object->rewrite) && !empty($object->rewrite['slug']) ? $object->rewrite['slug'] : $post_type;
+
+    return sanitize_title((string) $native);
+}
+
+/** Tipo de post cuya base de URL en $lang es $base, o '' si ninguno. */
+function intelindev_post_type_by_lang_slug(string $base, string $lang): string
+{
+    $base = sanitize_title($base);
+    foreach (intelindev_public_translatable_post_types() as $type) {
+        if (in_array($type, ['post', 'page'], true)) {
+            continue;
+        }
+        if ($base !== '' && intelindev_post_type_lang_slug($type, $lang) === $base) {
+            return $type;
+        }
+    }
+
+    return '';
+}
+
+/** URL del archivo de un CPT en un idioma (/{lang}/{base}/ o la nativa en el default). */
+function intelindev_get_post_type_archive_url(string $post_type, $lang = null): string
+{
+    $lang = $lang !== null ? idml_normalize_lang($lang) : idml_get_current_language();
+    if ($lang === '' || $lang === idml_get_default_language()) {
+        return (string) get_post_type_archive_link($post_type);
+    }
+    $base = intelindev_post_type_lang_slug($post_type, $lang);
+
+    return $base !== '' ? home_url('/' . rawurlencode($lang) . '/' . rawurlencode($base) . '/') : idml_get_language_home_url($lang);
+}
+
+/** Etiqueta (nombre plural) de un CPT por idioma, declarada por el módulo; cae al label nativo. */
+add_filter('post_type_archive_title', function ($title, $post_type = '') {
+    $lang = idml_get_current_language();
+    $map  = apply_filters('intelindev_post_type_lang_labels', []);
+    $label = (string) ($map[$post_type][$lang] ?? '');
+
+    return $label !== '' ? $label : $title;
+}, 10, 2);
 
 function intelindev_is_post_featured(WP_Post $post): bool
 {
@@ -43,7 +136,7 @@ function intelindev_get_post_translated_title(WP_Post $post, $lang = null): stri
 }
 
 add_filter('the_title', function ($title, $post_id = 0) {
-    if (is_admin() || !$post_id || !in_array(get_post_type($post_id), ['post', 'page'], true)) {
+    if (is_admin() || !$post_id || !in_array(get_post_type($post_id), intelindev_translatable_post_types(), true)) {
         return $title;
     }
 
@@ -145,14 +238,16 @@ function intelindev_get_post_slug_for_lang(WP_Post $post, string $lang): string
 }
 
 /**
- * Busca entre 'post' y 'page' a la vez (una sola query). Si un Post y una Page
+ * Busca por slug traducido en $post_types (por defecto 'post' y 'page' a la
+ * vez, que comparten el espacio /{lang}/{slug}/; los CPT públicos viven en
+ * /{lang}/{base}/{slug}/ y se consultan por tipo). Si un Post y una Page
  * llegaran a compartir el mismo slug traducido para el mismo idioma, gana el que
  * WP devuelva primero con el orden por defecto (post_date DESC) — no hay
  * desempate explícito ni validación de unicidad al guardar. Caso raro (dos
  * tipos de contenido distintos con el mismo slug en el mismo idioma) que se
  * documenta acá en vez de resolverse, para no sumar alcance no pedido.
  */
-function intelindev_get_post_id_by_translated_slug(string $slug, string $lang): int
+function intelindev_get_post_id_by_translated_slug(string $slug, string $lang, $post_types = null): int
 {
     $slug = sanitize_title($slug);
     $lang = idml_normalize_lang($lang);
@@ -163,7 +258,7 @@ function intelindev_get_post_id_by_translated_slug(string $slug, string $lang): 
     }
 
     $ids = get_posts([
-        'post_type'      => ['post', 'page'],
+        'post_type'      => $post_types !== null ? (array) $post_types : ['post', 'page'],
         'post_status'    => 'publish',
         'posts_per_page' => 1,
         'fields'         => 'ids',
@@ -206,6 +301,18 @@ add_filter('page_link', function ($link, $post_id, $sample) {
     return intelindev_translated_permalink($link, $post);
 }, 10, 3);
 
+/**
+ * CPTs públicos (WP dispara 'post_type_link', no 'post_link'): en idioma
+ * no-default el permalink es /{lang}/{base-del-tipo-en-ese-idioma}/{slug}/.
+ */
+add_filter('post_type_link', function ($url, $post) {
+    if (is_admin() || !($post instanceof WP_Post) || in_array($post->post_type, ['post', 'page'], true) || !in_array($post->post_type, intelindev_public_translatable_post_types(), true)) {
+        return $url;
+    }
+
+    return intelindev_translated_permalink($url, $post);
+}, 10, 2);
+
 function intelindev_translated_permalink(string $url, WP_Post $post): string
 {
     $lang = idml_get_current_language();
@@ -227,6 +334,13 @@ function intelindev_translated_permalink(string $url, WP_Post $post): string
         return $url;
     }
 
+    if (!in_array($post->post_type, ['post', 'page'], true)) {
+        $base = intelindev_post_type_lang_slug($post->post_type, $lang);
+        if ($base !== '') {
+            return home_url('/' . rawurlencode($lang) . '/' . rawurlencode($base) . '/' . rawurlencode($slug) . '/');
+        }
+    }
+
     return home_url('/' . rawurlencode($lang) . '/' . rawurlencode($slug) . '/');
 }
 
@@ -245,7 +359,7 @@ add_filter('the_content', function ($content) {
     }
 
     $post = get_post();
-    if (!($post instanceof WP_Post) || !in_array($post->post_type, ['post', 'page'], true)) {
+    if (!($post instanceof WP_Post) || !in_array($post->post_type, intelindev_translatable_post_types(), true)) {
         return $content;
     }
 
@@ -259,18 +373,20 @@ add_filter('the_content', function ($content) {
 
 add_action('add_meta_boxes', 'intelindev_add_post_translation_metabox');
 add_action('add_meta_boxes', 'intelindev_remove_default_post_excerpt_metabox', 20);
-add_action('init', 'intelindev_remove_default_post_content_editor');
+add_action('init', 'intelindev_remove_default_post_content_editor', 20);
 
 function intelindev_remove_default_post_content_editor(): void
 {
-    remove_post_type_support('post', 'editor');
-    remove_post_type_support('page', 'editor');
+    foreach (intelindev_translatable_post_types() as $type) {
+        remove_post_type_support($type, 'editor');
+    }
 }
 
 function intelindev_remove_default_post_excerpt_metabox(): void
 {
-    remove_meta_box('postexcerpt', 'post', 'normal');
-    remove_meta_box('postexcerpt', 'page', 'normal');
+    foreach (intelindev_translatable_post_types() as $type) {
+        remove_meta_box('postexcerpt', $type, 'normal');
+    }
 }
 
 function intelindev_sanitize_translated_rich_text($raw_value): string
@@ -290,7 +406,7 @@ function intelindev_add_post_translation_metabox(): void
         'intelindev_post_translation_content',
         __('Contenido traducido', 'intelindev'),
         'intelindev_render_post_translation_metabox',
-        ['post', 'page'],
+        intelindev_translatable_post_types(),
         'normal',
         'high'
     );
@@ -312,19 +428,20 @@ function intelindev_render_post_translation_metabox($post): void
 
     $title_translations = get_post_meta($post->ID, INTELINDEV_POST_TRANSLATED_TITLE_META, true);
     $title_translations = is_array($title_translations) ? $title_translations : [];
-    $title_en = (string) ($title_translations['en'] ?? '');
-    $title_pt = (string) ($title_translations['pt'] ?? '');
 
-    $slug_en = (string) get_post_meta($post->ID, intelindev_post_translated_slug_meta_key('en'), true);
-    $slug_pt = (string) get_post_meta($post->ID, intelindev_post_translated_slug_meta_key('pt'), true);
+    $title_by_lang = [];
+    $slug_by_lang  = [];
+    foreach (intelindev_translation_languages() as $lang) {
+        $title_by_lang[$lang] = (string) ($title_translations[$lang] ?? '');
+        $slug_by_lang[$lang]  = (string) get_post_meta($post->ID, intelindev_post_translated_slug_meta_key($lang), true);
+    }
+    $has_url      = is_post_type_viewable($post->post_type);
+    $default_lang = idml_get_default_language();
 
-    $title_by_lang = ['en' => $title_en, 'pt' => $title_pt];
-    $slug_by_lang = ['en' => $slug_en, 'pt' => $slug_pt];
-
-    \IntelindevInit\General\MultilanguageTabsRenderer::render('intelindev_post_translation', function ($lang_code, $lang_label) use ($content, $excerpt, $title_by_lang, $slug_by_lang) {
-        if ($lang_code === 'es') {
+    \IntelindevInit\General\MultilanguageTabsRenderer::render('intelindev_post_translation', function ($lang_code, $lang_label) use ($content, $excerpt, $title_by_lang, $slug_by_lang, $has_url, $default_lang) {
+        if ($lang_code === $default_lang) {
             ?>
-            <p class="description"><?php esc_html_e('El título y el slug nativos del post (arriba, en la edición principal) se usan como título y slug en español.', 'intelindev'); ?></p>
+            <p class="description"><?php echo esc_html($has_url ? __('El título y el slug nativos (arriba, en la edición principal) son los del idioma por defecto.', 'intelindev') : __('El título nativo (arriba) es el del idioma por defecto.', 'intelindev')); ?></p>
             <?php
         } else {
             ?>
@@ -333,11 +450,13 @@ function intelindev_render_post_translation_metabox($post): void
                     <label for="intelindev_post_title_<?php echo esc_attr($lang_code); ?>"><strong><?php echo esc_html(sprintf(__('Título %s', 'intelindev'), $lang_label)); ?></strong></label>
                     <input type="text" id="intelindev_post_title_<?php echo esc_attr($lang_code); ?>" name="intelindev_post_title[<?php echo esc_attr($lang_code); ?>]" class="widefat" value="<?php echo esc_attr($title_by_lang[$lang_code] ?? ''); ?>" />
                 </div>
+                <?php if ($has_url) : ?>
                 <div style="flex:1 1 300px; min-width:240px;">
                     <label for="intelindev_post_slug_<?php echo esc_attr($lang_code); ?>"><strong><?php echo esc_html(sprintf(__('Slug %s', 'intelindev'), $lang_label)); ?></strong></label>
                     <input type="text" id="intelindev_post_slug_<?php echo esc_attr($lang_code); ?>" name="intelindev_post_slug[<?php echo esc_attr($lang_code); ?>]" class="widefat" value="<?php echo esc_attr($slug_by_lang[$lang_code] ?? ''); ?>" />
-                    <span class="description"><?php esc_html_e('Deja en blanco para usar el slug nativo. Cambia la URL a /en|pt/slug/.', 'intelindev'); ?></span>
+                    <span class="description"><?php echo esc_html(sprintf(__('Deja en blanco para usar el slug nativo. Cambia la URL a /%s/…/', 'intelindev'), $lang_code)); ?></span>
                 </div>
+                <?php endif; ?>
             </div>
             <?php
         }
@@ -449,11 +568,14 @@ function intelindev_render_post_translation_metabox($post): void
     <?php
 }
 
-add_action('save_post_post', 'intelindev_save_post_translation_metabox');
-add_action('save_post_page', 'intelindev_save_post_translation_metabox');
+add_action('save_post', 'intelindev_save_post_translation_metabox');
 
 function intelindev_save_post_translation_metabox($post_id): void
 {
+    if (!in_array(get_post_type($post_id), intelindev_translatable_post_types(), true)) {
+        return;
+    }
+
     if (!isset($_POST['intelindev_post_translation_nonce']) || !wp_verify_nonce((string) $_POST['intelindev_post_translation_nonce'], 'intelindev_post_translation_content_save')) {
         return;
     }
@@ -482,7 +604,9 @@ function intelindev_save_post_translation_metabox($post_id): void
         ? $_POST['intelindev_post_slug']
         : [];
 
-    foreach (['en', 'pt'] as $slug_lang) {
+    $languages = intelindev_translation_languages();
+
+    foreach ($languages as $slug_lang) {
         $slug_value = sanitize_title(wp_unslash((string) ($submitted_slug[$slug_lang] ?? '')));
         $meta_key = intelindev_post_translated_slug_meta_key($slug_lang);
 
@@ -497,12 +621,15 @@ function intelindev_save_post_translation_metabox($post_id): void
         ? $_POST['intelindev_post_title']
         : [];
 
-    $sanitized_title = [
-        'en' => sanitize_text_field(wp_unslash((string) ($submitted_title['en'] ?? ''))),
-        'pt' => sanitize_text_field(wp_unslash((string) ($submitted_title['pt'] ?? ''))),
-    ];
+    $sanitized_title = [];
+    foreach ($languages as $title_lang) {
+        $value = sanitize_text_field(wp_unslash((string) ($submitted_title[$title_lang] ?? '')));
+        if ($value !== '') {
+            $sanitized_title[$title_lang] = $value;
+        }
+    }
 
-    if ($sanitized_title['en'] === '' && $sanitized_title['pt'] === '') {
+    if (!$sanitized_title) {
         delete_post_meta($post_id, INTELINDEV_POST_TRANSLATED_TITLE_META);
     } else {
         update_post_meta($post_id, INTELINDEV_POST_TRANSLATED_TITLE_META, $sanitized_title);

@@ -2,19 +2,15 @@
 /**
  * @package General
  * 
- * Clase unificada para inyectar pestañas multilingües (ES, EN, PT)
- * en cualquier Metabox sin repetir código HTML/JS.
+ * Clase unificada para inyectar pestañas multilingües en cualquier Metabox
+ * sin repetir código HTML/JS. Los idiomas son los configurados en
+ * Apariencia → Idiomas (idml_get_languages), el por defecto primero.
  */
 namespace IntelindevInit\General;
 
 if (!class_exists('IntelindevInit\\General\\MultilanguageTabsRenderer')):
 class MultilanguageTabsRenderer
 {
-    private const LANGUAGES = [
-        'es' => 'Español',
-        'en' => 'English',
-        'pt' => 'Português'
-    ];
 
     /**
      * Renderiza el wrapper de idiomas y ejecuta un callback por cada idioma.
@@ -26,7 +22,7 @@ class MultilanguageTabsRenderer
     {
         echo '<h2 class="nav-tab-wrapper">';
         $first = true;
-        foreach (self::LANGUAGES as $code => $label) {
+        foreach (self::get_languages() as $code => $label) {
             $active = $first ? ' nav-tab-active' : '';
             echo '<a href="#" class="nav-tab ' . esc_attr($metabox_id) . '-lang-tab' . $active . '" data-lang="' . esc_attr($code) . '">' . esc_html($label) . '</a>';
             $first = false;
@@ -34,7 +30,7 @@ class MultilanguageTabsRenderer
         echo '</h2>';
 
         $first = true;
-        foreach (self::LANGUAGES as $code => $label) :
+        foreach (self::get_languages() as $code => $label) :
             $display = $first ? 'block' : 'none';
         ?>
         <div id="<?php echo esc_attr($metabox_id); ?>-panel-<?php echo esc_attr($code); ?>" class="<?php echo esc_attr($metabox_id); ?>-lang-panel" style="display:<?php echo $display; ?>; padding:16px 0;">
@@ -48,11 +44,22 @@ class MultilanguageTabsRenderer
     }
 
     /**
-     * Devuelve el array base de idiomas por si la clase que llama necesita iterarlos (e.g. validación).
+     * Idiomas configurados como code => etiqueta, con el por defecto primero
+     * (es la primera pestaña). Sirve también para iterarlos al guardar.
      */
     public static function get_languages(): array
     {
-        return self::LANGUAGES;
+        if (!function_exists('idml_get_languages')) {
+            return ['es' => 'Español', 'en' => 'English'];
+        }
+        $default = idml_get_default_language();
+        $codes   = array_merge([$default], array_diff(idml_get_languages(), [$default]));
+        $out     = [];
+        foreach ($codes as $code) {
+            $label = function_exists('idml_get_language_label') ? (string) idml_get_language_label($code) : '';
+            $out[$code] = $label !== '' ? $label : strtoupper($code);
+        }
+        return $out;
     }
 
     private static function render_js(string $metabox_id)

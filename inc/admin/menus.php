@@ -200,9 +200,9 @@ if (!function_exists('idml_normalize_menu_url')) {
 
 /**
  * URL de la página actual en el idioma objetivo (para el switcher y para
- * detectar el ítem de menú activo). En un Post/Page usa su slug traducido para
- * quedarse en el mismo contenido; en cualquier otra vista (búsqueda, archivo,
- * 404) cae al home del idioma.
+ * detectar el ítem de menú activo). En un contenido traducible (post, page,
+ * CPT) usa su permalink en ese idioma; en el archivo de un CPT, su base
+ * traducida; en cualquier otra vista (búsqueda, 404) cae al home del idioma.
  */
 if (!function_exists('id_get_translated_current_url')) {
     function id_get_translated_current_url($target_lang = 'es') {
@@ -213,7 +213,17 @@ if (!function_exists('id_get_translated_current_url')) {
 
         $fallback = idml_get_language_home_url($target_lang);
 
-        if (!is_singular(['post', 'page'])) {
+        // Archivo de un CPT público: /{lang}/{base-en-ese-idioma}/.
+        if (is_post_type_archive() && function_exists('intelindev_get_post_type_archive_url')) {
+            $type = get_query_var('post_type');
+            $type = is_array($type) ? (string) reset($type) : (string) $type;
+            $url  = $type !== '' ? intelindev_get_post_type_archive_url($type, $target_lang) : '';
+
+            return $url !== '' ? $url : $fallback;
+        }
+
+        $translatable = function_exists('intelindev_translatable_post_types') ? intelindev_translatable_post_types() : ['post', 'page'];
+        if (!is_singular($translatable)) {
             return $fallback;
         }
 
@@ -227,20 +237,22 @@ if (!function_exists('id_get_translated_current_url')) {
             return $fallback;
         }
 
-        $post_slug = function_exists('intelindev_get_post_slug_for_lang')
-            ? intelindev_get_post_slug_for_lang($current_post, $target_lang)
-            : sanitize_title($current_post->post_name);
-        if ($post_slug === '') {
+        // Los filtros post_link / page_link / post_type_link ya arman la URL del
+        // idioma activo (slug traducido, base del CPT): se conmuta el idioma un
+        // instante en vez de duplicar esa lógica acá.
+        $previous_override = $GLOBALS['idml_language_override'] ?? '';
+        idml_set_current_language($target_lang);
+        $url = (string) get_permalink($current_post);
+        $GLOBALS['idml_language_override'] = $previous_override;
+
+        if ($url === '') {
             return $fallback;
         }
-
-        $url = $fallback . rawurlencode($post_slug) . '/';
 
         $request_query = isset($_SERVER['REQUEST_URI']) ? (string) wp_parse_url((string) $_SERVER['REQUEST_URI'], PHP_URL_QUERY) : '';
         if ($request_query !== '') {
             $url .= '?' . $request_query;
         }
-
         return $url;
     }
 }

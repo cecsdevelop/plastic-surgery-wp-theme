@@ -46,6 +46,9 @@ function intelindev_admin_enqueue_field_assets(): void {
     wp_localize_script('intelindev-admin-fields', 'intelindevAdminFields', [
         'mediaTitle'  => __('Seleccionar imagen', 'intelindev'),
         'mediaButton' => __('Usar esta imagen', 'intelindev'),
+        'galleryTitle'  => __('Agregar imágenes', 'intelindev'),
+        'galleryButton' => __('Agregar', 'intelindev'),
+        'remove'        => __('Quitar', 'intelindev'),
     ]);
 }
 

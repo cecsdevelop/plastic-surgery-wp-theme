@@ -55,7 +55,8 @@ add_filter('document_title_parts', function($parts) {
         return $parts;
     }
 
-    if (!is_singular(['post', 'page']) || is_front_page() || $lang === idml_get_default_language()) {
+    $translatable = function_exists('intelindev_translatable_post_types') ? intelindev_translatable_post_types() : ['post', 'page'];
+    if (!is_singular($translatable) || is_front_page() || $lang === idml_get_default_language()) {
         return $parts;
     }
 
@@ -109,12 +110,38 @@ add_action('init', function() {
             'index.php?idml_post_slug=$matches[1]&idml_post_lang=' . $lang,
             'top'
         );
+
+        // CPTs públicos: /{lang}/{base-del-tipo}/{slug}/. La base se resuelve en
+        // el filtro 'request' contra intelindev_post_type_by_lang_slug(), así un
+        // cambio de base no exige flush; el archivo /{lang}/{base}/ cae en la
+        // regla de 2 segmentos de arriba y se distingue ahí.
+        add_rewrite_rule(
+            '^' . preg_quote($lang, '/') . '/([^/]+)/([^/]+)/?$',
+            'index.php?idml_cpt_base=$matches[1]&idml_post_slug=$matches[2]&idml_post_lang=' . $lang,
+            'top'
+        );
     }
 });
+
+/**
+ * Las reglas de arriba se registran en cada request pero WP solo las persiste al
+ * hacer flush. En vez de pedir "guardar Enlaces permanentes" tras cada cambio
+ * del theme, se flushea una sola vez cuando cambia esta versión (subirla al
+ * tocar reglas o registrar un CPT nuevo). Prioridad 99: después de los CPT
+ * (init 5) y de las reglas.
+ */
+const IDML_REWRITE_VERSION = 3;
+add_action('init', function() {
+    if ((int) get_option('idml_rewrite_version', 0) !== IDML_REWRITE_VERSION) {
+        flush_rewrite_rules(false);
+        update_option('idml_rewrite_version', IDML_REWRITE_VERSION);
+    }
+}, 99);
 
 add_filter('query_vars', function($vars) {
     $vars[] = 'idml_post_slug';
     $vars[] = 'idml_post_lang';
+    $vars[] = 'idml_cpt_base';
     return $vars;
 });
 
@@ -135,7 +162,7 @@ add_filter('query_vars', function($vars) {
  * @return array{id:int,post_type:string}|array{} vacío si no resuelve a nada publicado.
  */
 if (!function_exists('idml_resolve_translated_slug')) {
-    function idml_resolve_translated_slug(string $slug, string $lang): array {
+    function idml_resolve_translated_slug(string $slug, string $lang, array $post_types = ['post', 'page']): array {
         $slug = sanitize_title($slug);
         $lang = sanitize_key($lang);
         if ($slug === '' || $lang === '') {
@@ -144,11 +171,11 @@ if (!function_exists('idml_resolve_translated_slug')) {
 
         $resolved_id = 0;
         if (function_exists('intelindev_get_post_id_by_translated_slug')) {
-            $resolved_id = intelindev_get_post_id_by_translated_slug($slug, $lang);
+            $resolved_id = intelindev_get_post_id_by_translated_slug($slug, $lang, $post_types);
         }
 
         if (!$resolved_id) {
-            $native = get_page_by_path($slug, OBJECT, ['post', 'page']);
+            $native = get_page_by_path($slug, OBJECT, $post_types);
             if ($native instanceof WP_Post && $native->post_status === 'publish') {
                 $resolved_id = (int) $native->ID;
             }
@@ -159,7 +186,7 @@ if (!function_exists('idml_resolve_translated_slug')) {
         }
 
         $post_type = get_post_type($resolved_id);
-        if (!in_array($post_type, ['post', 'page'], true)) {
+        if (!in_array($post_type, $post_types, true)) {
             return [];
         }
 
@@ -182,6 +209,23 @@ add_filter('request', function($query_vars) {
 
     if ($slug === '') {
         return $not_found_query;
+    }
+
+    // /{lang}/{base}/{slug}/ → single de un CPT público; base desconocida → 404.
+    if (!empty($query_vars['idml_cpt_base'])) {
+        $type = function_exists('intelindev_post_type_by_lang_slug') ? intelindev_post_type_by_lang_slug((string) $query_vars['idml_cpt_base'], $lang) : '';
+        if ($type === '') {
+            return $not_found_query;
+        }
+        $resolved = idml_resolve_translated_slug($slug, $lang, [$type]);
+
+        return empty($resolved) ? ['name' => $slug, 'post_type' => $type] : ['p' => $resolved['id'], 'post_type' => $type];
+    }
+
+    // /{lang}/{base}/ → archivo del CPT cuya base en ese idioma es {base}.
+    $archive_type = function_exists('intelindev_post_type_by_lang_slug') ? intelindev_post_type_by_lang_slug($slug, $lang) : '';
+    if ($archive_type !== '') {
+        return ['post_type' => $archive_type];
     }
 
     $resolved = idml_resolve_translated_slug($slug, $lang);
