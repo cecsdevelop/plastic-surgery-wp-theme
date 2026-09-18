@@ -198,7 +198,7 @@ abstract class ContentTypeController extends BaseController
             'post_type'        => $this->post_type(),
             'post_status'      => 'publish',
             'numberposts'      => -1,
-            'orderby'          => (string) $this->cfg('orderby', 'menu_order title'),
+            'orderby'          => $this->cfg('orderby', 'menu_order title'), // string o array [campo => ASC|DESC]
             'order'            => (string) $this->cfg('order', 'ASC'),
             'suppress_filters' => false,
         ], $args);

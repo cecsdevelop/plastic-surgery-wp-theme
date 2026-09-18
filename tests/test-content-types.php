@@ -31,7 +31,7 @@ $front = fn(string $code) => trim((string) shell_exec(PHP_BINARY . ' -r ' . esca
 $services = new ServicesController(); $portfolio = new PortfolioController(); $team = new TeamController();
 $created = [];
 $mk = function (string $type, string $title, string $slug, array $meta = []) use (&$created): int {
-    $id = wp_insert_post(['post_type' => $type, 'post_title' => $title, 'post_name' => $slug, 'post_status' => 'publish', 'menu_order' => count($created)]);
+    $id = wp_insert_post(['post_type' => $type, 'post_title' => $title, 'post_name' => $slug, 'post_status' => 'publish', 'menu_order' => -100 + count($created)]);
     foreach ($meta as $k => $v) update_post_meta($id, $k, $v);
     $created[] = $id;
     return $id;
@@ -48,29 +48,29 @@ try {
 
     echo "2) campos propios: sanitize y lectura\n";
     check('lang_text/url/number/gallery/media/select', $portfolio->sanitize_field('lang_text', ['es' => ' Salud ', 'en' => 'Health', 'xx' => 'no']) === ['es' => 'Salud', 'en' => 'Health'] && $portfolio->sanitize_field('url', 'javascript:alert(1)') === '' && $portfolio->sanitize_field('url', ' https://nexito.app ') === 'https://nexito.app' && $portfolio->sanitize_field('number', '-3') === 0 && $portfolio->sanitize_field('gallery', '12, 0, x, 7') === [12, 7] && $portfolio->sanitize_field('media', '9') === 9 && $portfolio->sanitize_field('select', 'b', ['options' => ['a' => 'A']]) === '');
-    $svc1 = $mk(ServicesController::POST_TYPE, 'Desarrollo de Software', 'desarrollo-de-software', [
+    $svc1 = $mk(ServicesController::POST_TYPE, 'Desarrollo de Software', 'test-desarrollo-software', [
         INTELINDEV_POST_TRANSLATED_TITLE_META => ['en' => 'Software Development'],
-        intelindev_post_translated_slug_meta_key('en') => 'software-development',
+        intelindev_post_translated_slug_meta_key('en') => 'test-software-development',
         INTELINDEV_POST_TRANSLATED_CONTENT_META => ['es' => ['<p>Creamos sistemas a medida.</p>'], 'en' => ['<p>We build custom systems.</p>']],
         INTELINDEV_POST_TRANSLATED_EXCERPT_META => ['es' => 'Sistemas a medida', 'en' => 'Custom systems'],
     ]);
-    $svc2 = $mk(ServicesController::POST_TYPE, 'SEO & Marketing Técnico', 'seo-marketing', [INTELINDEV_POST_TRANSLATED_TITLE_META => ['en' => 'SEO & Technical Marketing']]);
-    $prj  = $mk(PortfolioController::POST_TYPE, 'Néxito', 'nexito', [
+    $svc2 = $mk(ServicesController::POST_TYPE, 'SEO & Marketing Técnico', 'test-seo-marketing', [INTELINDEV_POST_TRANSLATED_TITLE_META => ['en' => 'SEO & Technical Marketing']]);
+    $prj  = $mk(PortfolioController::POST_TYPE, 'Néxito', 'test-nexito', [
         $portfolio->meta_key('client') => 'Néxito Inc.', $portfolio->meta_key('sector') => ['es' => 'Educación', 'en' => 'Education'], $portfolio->meta_key('year') => 2025, $portfolio->meta_key('gallery') => [1, 2],
-        intelindev_post_translated_slug_meta_key('en') => 'nexito-en',
+        intelindev_post_translated_slug_meta_key('en') => 'test-nexito-en',
     ]);
     $mem  = $mk(TeamController::POST_TYPE, 'Adrián Alcántara', 'adrian', [$team->meta_key('role') => ['es' => 'CEO', 'en' => 'CEO']]);
     check('get_field resuelve por idioma con fallback; number/gallery tipados', $portfolio->get_field($prj, 'sector', 'en') === 'Education' && $portfolio->get_field($prj, 'sector', 'es') === 'Educación' && $portfolio->get_field($prj, 'year') === 2025 && $portfolio->get_field($prj, 'gallery') === [1, 2] && $portfolio->get_field($prj, 'url') === '' && $team->get_field($mem, 'role', 'en') === 'CEO');
-    $items = $services->get_items();
+    $items = array_values(array_filter($services->get_items(), fn($p) => in_array($p->ID, [$svc1, $svc2], true))); // puede haber servicios reales
     check('get_items: publicados en orden de menu_order', count($items) === 2 && $items[0]->ID === $svc1 && $items[1]->ID === $svc2);
 
     echo "3) URLs y contenido por idioma (curl)\n";
-    $es = $curl('/servicios/desarrollo-de-software/');
-    $en = $curl('/en/services/software-development/');
-    check('single ES: título, contenido y switcher a /en/services/…', strpos($es, '<title>Desarrollo de Software') !== false && strpos($es, 'Creamos sistemas a medida.') !== false && strpos($es, 'href="http://localhost:8888/Intelindev/en/services/software-development/" hreflang="en"') !== false);
-    check('single EN por slug traducido: título, contenido y switcher a /servicios/…', strpos($en, '<title>Software Development') !== false && strpos($en, 'We build custom systems.') !== false && strpos($en, 'href="http://localhost:8888/Intelindev/servicios/desarrollo-de-software/" hreflang="es"') !== false);
-    check('single EN por slug nativo (sin traducción de slug) y permalink en EN', strpos($curl('/en/services/seo-marketing/'), '<title>SEO &#038; Technical Marketing') !== false && $front('idml_set_current_language("en"); echo get_permalink(' . $svc2 . ');') === 'http://localhost:8888/Intelindev/en/services/seo-marketing/');
-    check('slug de otro tipo no resuelve en esta base (404)', strpos($curl('/en/services/nexito-en/'), '<title>Page not found') !== false && strpos($curl('/en/portfolio/nexito-en/'), '<title>Néxito') !== false);
+    $es = $curl('/servicios/test-desarrollo-software/');
+    $en = $curl('/en/services/test-software-development/');
+    check('single ES: título, contenido y switcher a /en/services/…', strpos($es, '<title>Desarrollo de Software') !== false && strpos($es, 'Creamos sistemas a medida.') !== false && strpos($es, 'href="http://localhost:8888/Intelindev/en/services/test-software-development/" hreflang="en"') !== false);
+    check('single EN por slug traducido: título, contenido y switcher a /servicios/…', strpos($en, '<title>Software Development') !== false && strpos($en, 'We build custom systems.') !== false && strpos($en, 'href="http://localhost:8888/Intelindev/servicios/test-desarrollo-software/" hreflang="es"') !== false);
+    check('single EN por slug nativo (sin traducción de slug) y permalink en EN', strpos($curl('/en/services/test-seo-marketing/'), '<title>SEO &#038; Technical Marketing') !== false && $front('idml_set_current_language("en"); echo get_permalink(' . $svc2 . ');') === 'http://localhost:8888/Intelindev/en/services/test-seo-marketing/');
+    check('slug de otro tipo no resuelve en esta base (404)', strpos($curl('/en/services/test-nexito-en/'), '<title>Page not found') !== false && strpos($curl('/en/portfolio/test-nexito-en/'), '<title>Néxito') !== false);
     $arch_es = $curl('/servicios/'); $arch_en = $curl('/en/services/');
     check('archivo ES y EN: títulos traducidos, ambos ítems, switcher entre archivos', strpos($arch_es, '<title>Servicios &#8211;') !== false && strpos($arch_en, '<title>Services &#8211;') !== false && strpos($arch_en, 'Software Development') !== false && strpos($arch_en, 'SEO & Technical Marketing') !== false && strpos($arch_en, 'href="http://localhost:8888/Intelindev/servicios/" hreflang="es"') !== false && strpos($arch_es, 'href="http://localhost:8888/Intelindev/en/services/" hreflang="en"') !== false);
     $blog_page = (int) get_option('page_for_posts');

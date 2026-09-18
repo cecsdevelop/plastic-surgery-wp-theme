@@ -27,6 +27,19 @@
     applyScrolled();
   }
 
+  // Scrollers horizontales (proyectos, testimonios): las flechas [data-scroll-prev|next]
+  // de la misma sección desplazan la lista [data-scroller] una tarjeta; el resto es CSS (scroll-snap).
+  document.addEventListener('click', function (event) {
+    var arrow = event.target.closest('[data-scroll-prev], [data-scroll-next]');
+    if (!arrow) return;
+    var section = arrow.closest('section');
+    var list = section && section.querySelector('[data-scroller]');
+    if (!list) return;
+    var card = list.firstElementChild;
+    var step = card ? card.getBoundingClientRect().width + 30 : list.clientWidth * 0.8;
+    list.scrollBy({ left: arrow.hasAttribute('data-scroll-prev') ? -step : step, behavior: 'smooth' });
+  });
+
   // Menú móvil: .site-nav-toggle abre/cierra la navegación (< 992px, ver CSS).
   var navToggle = document.querySelector('.site-nav-toggle');
   if (navToggle) {

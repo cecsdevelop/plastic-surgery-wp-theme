@@ -142,5 +142,13 @@
     "clients.eyebrow": {
         "es": "Confían en nosotros",
         "en": "They trust us"
+    },
+    "services.more": {
+        "es": "Conocer más",
+        "en": "Learn more"
+    },
+    "posts.read_more": {
+        "es": "Leer más",
+        "en": "Read more"
     }
 }

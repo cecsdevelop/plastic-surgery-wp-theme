@@ -70,10 +70,31 @@ try {
     $clients = $render('[clients eyebrow="Confían" title="Nuestros *clientes*"]', 'en');
     check('clients: cabecera con acento, lista con logo enlazado', strpos($clients, '<section class="clients">') !== false && strpos($clients, '<h2 class="clients__title">Nuestros <em>clientes</em></h2>') !== false && strpos($clients, 'aria-label="They trust us"') !== false && preg_match('#<li class="clients__item"><a href="https://cliente\.test/" target="_blank" rel="noopener"><img[^>]*alt="Cliente Test"#', $clients) === 1);
 
-    echo "5) CSS e íconos\n";
+    echo "5) [services] [projects] [latest_posts] [testimonials]\n";
+    $svc = wp_insert_post(['post_type' => 'intelindev_service', 'post_title' => 'Servicio Test', 'post_name' => 'servicio-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
+    update_post_meta($svc, INTELINDEV_POST_TRANSLATED_EXCERPT_META, ['es' => 'Resumen test', 'en' => 'Test summary']); update_post_meta($svc, INTELINDEV_POST_TRANSLATED_TITLE_META, ['en' => 'Test Service']);
+    $prj = wp_insert_post(['post_type' => 'intelindev_project', 'post_title' => 'Proyecto Test', 'post_name' => 'proyecto-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
+    update_post_meta($prj, INTELINDEV_POST_TRANSLATED_EXCERPT_META, ['es' => 'Excerpt proyecto']);
+    $pst = wp_insert_post(['post_type' => 'post', 'post_title' => 'Entrada Test Secciones', 'post_name' => 'entrada-test-sections', 'post_status' => 'publish']);
+    update_post_meta($pst, INTELINDEV_POST_TRANSLATED_EXCERPT_META, ['es' => 'Excerpt entrada']);
+    $tst = wp_insert_post(['post_type' => 'intelindev_testimony', 'post_title' => 'Ana Test', 'post_name' => 'ana-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
+    update_post_meta($tst, INTELINDEV_POST_TRANSLATED_CONTENT_META, ['es' => ['<p>Cita de prueba.</p>'], 'en' => ['<p>Test quote.</p>']]); update_post_meta($tst, '_intelindev_testimony_role', ['es' => 'CEO']); update_post_meta($tst, '_intelindev_testimony_company', 'Acme');
+    array_push($created, $svc, $prj, $pst, $tst);
+    $sv = $render('[services eyebrow="Nuestros servicios" title="Soluciones *para escalar*" limit="1"]');
+    check('services: cabecera centrada, tarjeta con ícono del theme, título, excerpt y "Conocer más"', strpos($sv, '<h2 class="services__title">Soluciones <em>para escalar</em></h2>') !== false && strpos($sv, '/assets/img/icons/code.svg') !== false && strpos($sv, '>Servicio Test</a></h3><p class="services__excerpt">Resumen test</p>') !== false && strpos($sv, 'class="services__more" href="http://localhost:8888/Intelindev/servicios/servicio-test-sections/">Conocer más') !== false);
+    check('services EN: título y "Learn more" traducidos', strpos($render('[services limit="1"]', 'en'), '>Test Service</a>') !== false && strpos($render('[services limit="1"]', 'en'), 'Learn more<') !== false);
+    $pj = $render('[projects title="Proyectos" limit="1"]');
+    check('projects: scroller con flechas y tarjeta con nombre + excerpt', strpos($pj, 'data-scroll-prev') !== false && strpos($pj, '<ul class="projects__list" data-scroller>') !== false && strpos($pj, '<span class="projects__name">Proyecto Test</span><span class="projects__excerpt">Excerpt proyecto</span>') !== false);
+    $lp = $render('[latest_posts title="Visión digital" limit="1"]');
+    check('latest_posts: título serif, ítem con toggle vertical, tarjeta con fecha, excerpt y "Leer más"', strpos($lp, '<h2 class="posts__title accent">Visión digital</h2>') !== false && strpos($lp, '<span class="posts__vertical">Entrada Test Secciones</span>') !== false && strpos($lp, '<time class="posts__date"') !== false && strpos($lp, '<p class="posts__excerpt">Excerpt entrada</p>') !== false && strpos($lp, 'posts__more" href="http://localhost:8888/Intelindev/entrada-test-sections/">Leer más</a>') !== false);
+    $tm = $render('[testimonials eyebrow="Clientes" value="+25" label="clientes" limit="1"]');
+    check('testimonials: cifra, etiqueta, flechas y tarjeta con cita y autor · cargo · empresa', strpos($tm, '<p class="testimonials__value">+25</p><p class="testimonials__label">clientes</p>') !== false && strpos($tm, 'scroller-arrow--on-dark') !== false && strpos($tm, '<blockquote class="testimonials__quote"><p>Cita de prueba.</p></blockquote><figcaption class="testimonials__author"><strong>Ana Test</strong><span>CEO · Acme</span></figcaption>') !== false);
+    check('testimonials EN: cita traducida', strpos($render('[testimonials limit="1"]', 'en'), '<p>Test quote.</p>') !== false);
+
+    echo "6) CSS e íconos\n";
     $css = file_get_contents(dirname(__DIR__) . '/assets/css/styles.css');
-    check('estilos de las secciones y botones :empty ocultos', strpos($css, '.hero {') !== false && strpos($css, '.clients__list {') !== false && strpos($css, '.about__inner {') !== false && strpos($css, '.stats__inner {') !== false && strpos($css, '.cta__inner {') !== false && strpos($css, '.contact {') !== false && strpos($css, '.newsletter__form {') !== false && strpos($css, '.btn:empty { display: none; }') !== false);
-    check('17 íconos SVG del diseño en assets/img/icons + logo', count(glob(dirname(__DIR__) . '/assets/img/icons/*.svg')) === 17 && file_exists(dirname(__DIR__) . '/assets/img/logo.svg'));
+    check('estilos de las secciones y botones :empty ocultos', strpos($css, '.hero {') !== false && strpos($css, '.clients__list {') !== false && strpos($css, '.about__inner {') !== false && strpos($css, '.stats__inner {') !== false && strpos($css, '.cta__inner {') !== false && strpos($css, '.contact {') !== false && strpos($css, '.newsletter__form {') !== false && strpos($css, '.services__grid {') !== false && strpos($css, '.projects__card {') !== false && strpos($css, '.posts__list {') !== false && strpos($css, '.testimonials__card {') !== false && strpos($css, '.btn:empty { display: none; }') !== false);
+    check('23 íconos SVG del diseño en assets/img/icons + logo', count(glob(dirname(__DIR__) . '/assets/img/icons/*.svg')) === 23 && file_exists(dirname(__DIR__) . '/assets/img/logo.svg'));
 } finally {
     foreach ($created as $id) { if (get_post_type($id) === 'attachment') wp_delete_attachment($id, true); else wp_delete_post($id, true); }
     delete_transient(C::TRANSIENT);

@@ -32,8 +32,7 @@ class PortfolioController extends ContentTypeController
             'slugs'         => ['es' => 'portafolio', 'en' => 'portfolio'],
             'menu_icon'     => 'dashicons-portfolio',
             'menu_position' => 27,
-            'orderby'       => 'menu_order date',
-            'order'         => 'DESC',
+            'orderby'       => ['menu_order' => 'ASC', 'date' => 'DESC'], // orden manual y, a igual orden, el más nuevo primero
             'fields'        => [
                 'client'  => ['label' => __('Cliente', 'intelindev'), 'type' => 'text', 'column' => true],
                 'sector'  => ['label' => __('Sector', 'intelindev'), 'type' => 'lang_text', 'column' => true],
