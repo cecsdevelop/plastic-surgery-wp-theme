@@ -134,5 +134,13 @@
     "newsletter.button": {
         "es": "Suscribirme",
         "en": "Subscribe"
+    },
+    "newsletter.label": {
+        "es": "Correo electrónico",
+        "en": "Email"
+    },
+    "clients.eyebrow": {
+        "es": "Confían en nosotros",
+        "en": "They trust us"
     }
 }

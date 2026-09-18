@@ -1,35 +1,42 @@
 /**********************
-* Design tokens — Figma "Website - DS Intelindev", sección Wireframes V1
-* (valores medidos con scripts/figma-pull.js tokens; ver docs/figma/spec/).
+* Design tokens — Figma "Website - DS Intelindev", sección "Versión Final
+* Aprobada" (diseño claro, 1728 px). Valores medidos con scripts/figma-pull.js
+* tokens --offline; ver docs/figma/spec/tokens-home-7351-8836.md.
 * Los colores también viven en theme.json (paleta del editor).
 ***********************/
 :root {
   /* Color */
   --intelindev-color-white: #ffffff;
-  --intelindev-color-red: #e73728;        /* acento principal */
-  --intelindev-color-red-alt: #ec221f;
-  --intelindev-color-red-dark: #a4271c;   /* hover / fondos rojos */
-  --intelindev-color-red-deep: #611711;   /* secciones rojo oscuro */
-  --intelindev-color-black: #151414;
-  --intelindev-color-ink: #1b1a1a;        /* texto sobre claro */
-  --intelindev-color-charcoal: #232122;   /* superficies oscuras */
-  --intelindev-color-graphite: #2d2b2c;
-  --intelindev-color-slate: #312f30;      /* tarjetas oscuras, texto secundario */
-  --intelindev-color-gray: #d9d9d9;
-  --intelindev-color-gray-mid: #bfbfbf;
-  --intelindev-color-gray-light: #eaeaea;
-  --intelindev-color-sky: #a5d9e4;        /* decorativo (íconos) */
-  --intelindev-gradient-dark-red: linear-gradient(180deg, #232122 0%, #5f1a14 100%);
-  --intelindev-gradient-dark-radial: radial-gradient(circle at 50% 50%, #312f30 0%, #151414 100%);
+  --intelindev-color-gray-100: #f5f3f3;   /* franjas y tarjetas claras */
+  --intelindev-color-gray-200: #ebe6e6;   /* ítem activo, chips */
+  --intelindev-color-gray-300: #d8cfce;   /* bordes */
+  --intelindev-color-gray-400: #b09f9d;   /* texto atenuado sobre claro */
+  --intelindev-color-gray-500: #a1a1a1;   /* bordes de campos */
+  --intelindev-color-gray-600: #5b5a5a;   /* placeholders */
+  --intelindev-color-graphite: #383737;   /* bandas oscuras (cifras, testimonios) */
+  --intelindev-color-ink: #151414;        /* descripciones, footer */
+  --intelindev-color-black: #080808;      /* texto principal, socket */
+  --intelindev-color-red: #e73728;        /* acento */
+  --intelindev-color-red-dark: #a4271c;   /* hover del acento */
+  --intelindev-color-maroon: #3a0e0a;     /* texto de botones secundarios */
+  --intelindev-color-cocoa: #613e3b;      /* newsletter */
+  --intelindev-color-slate-blue: #37474f; /* íconos */
+  --intelindev-gradient-dark: linear-gradient(180deg, #000000 0%, #666666 100%);
 
   /* Alias semánticos: lo que usan las secciones; cambiar aquí recolorea el sitio */
   --intelindev-bg: var(--intelindev-color-white);
-  --intelindev-text: var(--intelindev-color-ink);
-  --intelindev-text-muted: var(--intelindev-color-slate);
+  --intelindev-surface: var(--intelindev-color-gray-100);
+  --intelindev-surface-2: var(--intelindev-color-gray-200);
+  --intelindev-border: var(--intelindev-color-gray-300);
+  --intelindev-text: var(--intelindev-color-black);
+  --intelindev-text-2: var(--intelindev-color-ink);
+  --intelindev-text-muted: var(--intelindev-color-gray-600);
   --intelindev-accent: var(--intelindev-color-red);
   --intelindev-accent-hover: var(--intelindev-color-red-dark);
-  --intelindev-surface-dark: var(--intelindev-color-charcoal);
+  --intelindev-accent-text: var(--intelindev-color-maroon);
+  --intelindev-surface-dark: var(--intelindev-color-graphite);
   --intelindev-text-on-dark: var(--intelindev-color-white);
+  --intelindev-icon: var(--intelindev-color-slate-blue);
 
   /* Tipografía (Apariencia → Intelindev Settings → Tipografía): defaults.
      --wp--preset--font-family--* las imprime WP desde theme.json (DM Sans y
@@ -38,55 +45,69 @@
   --intelindev-font-body: var(--wp--preset--font-family--dm-sans, "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
   --intelindev-font-heading: var(--intelindev-font-body);
   --intelindev-font-accent: var(--wp--preset--font-family--dm-serif-text, "DM Serif Text", Georgia, serif);
-  --intelindev-font-size-base: 16px;
-  --intelindev-font-weight-heading: 300;
+  --intelindev-font-size-base: var(--intelindev-text-0);
+  --intelindev-font-weight-heading: 600;
 
-  /* Escala tipográfica: tamaño del diseño a 1440 px, fluida hacia móvil */
-  --intelindev-text-xs: 14px;
-  --intelindev-text-sm: var(--intelindev-font-size-base);
-  --intelindev-text-md: 18px;
-  --intelindev-text-lg: clamp(18px, 1.4vw, 20px);
-  --intelindev-text-xl: clamp(24px, 2.1vw, 30px);
-  --intelindev-text-2xl: clamp(32px, 3.5vw, 50px);
-  --intelindev-text-3xl: clamp(38px, 4.2vw, 60px);
-  --intelindev-text-4xl: clamp(48px, 4.9vw, 70px);
+  /* Escala tipográfica fluida (Utopia del DS): 375 px base 16 ratio 1.2 →
+     1728 px base 18 ratio 1.25. Pasos -1…6 = 14.4 / 18 / 22.5 / 28 / 35 / 44 / 55 / 69 en escritorio. */
+  --intelindev-text--1: clamp(13.33px, calc(13.04px + 0.079vw), 14.4px);
+  --intelindev-text-0: clamp(16px, calc(15.45px + 0.148vw), 18px);
+  --intelindev-text-1: clamp(19.2px, calc(18.29px + 0.244vw), 22.5px);
+  --intelindev-text-2: clamp(23.04px, calc(21.63px + 0.376vw), 28.13px);
+  --intelindev-text-3: clamp(27.65px, calc(25.57px + 0.555vw), 35.16px);
+  --intelindev-text-4: clamp(33.18px, calc(30.19px + 0.796vw), 43.95px);
+  --intelindev-text-5: clamp(39.81px, calc(35.62px + 1.117vw), 54.93px);
+  --intelindev-text-6: clamp(47.78px, calc(41.99px + 1.544vw), 68.66px);
   --intelindev-text-display: clamp(80px, 10.4vw, 150px);
-  --intelindev-leading-tight: 0.96;   /* títulos: 48/50, 57/60 */
-  --intelindev-leading-body: 1.3;     /* cuerpo: 21/16 */
+  /* Alias por uso (los usan las secciones y el resto de este archivo) */
+  --intelindev-text-xs: var(--intelindev-text--1);
+  --intelindev-text-sm: var(--intelindev-text-0);
+  --intelindev-text-md: var(--intelindev-text-1);
+  --intelindev-text-lg: var(--intelindev-text-2);
+  --intelindev-text-xl: var(--intelindev-text-3);
+  --intelindev-text-2xl: var(--intelindev-text-5);
+  --intelindev-text-3xl: var(--intelindev-text-6);
+  --intelindev-text-4xl: var(--intelindev-text-6);
+  --intelindev-leading-tight: 1;      /* títulos: 69/68.66, 55/54.93 */
+  --intelindev-leading-body: 1.5;     /* cuerpo: 27/18 */
 
   /* Forma y espacio */
-  --intelindev-radius-sm: 5px;
-  --intelindev-radius-md: 10px;
-  --intelindev-radius-lg: 20px;
+  --intelindev-radius-sm: 10px;
+  --intelindev-radius-md: 15px;       /* botones, imágenes */
+  --intelindev-radius-lg: 20px;       /* header, tarjetas */
   --intelindev-radius-xl: 30px;
   --intelindev-radius-2xl: 40px;
   --intelindev-radius-3xl: 50px;
-  --intelindev-radius-pill: 100px;
+  --intelindev-radius-pill: 999px;
   --intelindev-space-1: 10px;
   --intelindev-space-2: 20px;
   --intelindev-space-3: 30px;
   --intelindev-space-4: 40px;
   --intelindev-space-6: 60px;
-  --intelindev-section-py: clamp(60px, 7vw, 100px); /* separación vertical entre secciones */
-  --intelindev-content-max: 1252px;                 /* ancho interior del diseño (1440 − 2×94) */
+  --intelindev-section-py: clamp(48px, 4.6vw, 80px); /* padding vertical de sección (80 en el diseño) */
+  --intelindev-gutter: clamp(16px, 5.55vw, 96px);    /* margen lateral (96 a 1728) */
+  --intelindev-content-max: 1536px;                  /* ancho interior del diseño (1728 − 2×96) */
 
   /* Header (Apariencia → Intelindev Header): estos son los defaults. Se
      sobreescriben en <head> solo si el admin configura algo — ver
      intelindev_print_header_style_overrides() en inc/admin/admin-header-settings.php. */
-  --intelindev-header-bg: var(--intelindev-color-red-deep);
-  --intelindev-header-nav-bg: var(--intelindev-color-red-dark);
+  --intelindev-header-bg: rgba(0, 0, 0, 0.71);            /* barra flotante */
+  --intelindev-header-nav-bg: transparent;
   --intelindev-header-link-color: var(--intelindev-color-white);
-  --intelindev-header-active-dot: var(--intelindev-color-sky);
-  --intelindev-header-submenu-bg: var(--intelindev-color-red-dark);
-  --intelindev-header-submenu-link-color: var(--intelindev-color-white);
-  --intelindev-header-submenu-hover-bg: rgba(255, 255, 255, 0.12);
-  --intelindev-header-submenu-hover-link-color: var(--intelindev-color-white);
-  --intelindev-header-cta-bg: var(--intelindev-color-red-dark);
+  --intelindev-header-active-bg: var(--intelindev-surface-2); /* chip del ítem activo */
+  --intelindev-header-active-color: var(--intelindev-color-black);
+  --intelindev-header-submenu-bg: var(--intelindev-color-white);
+  --intelindev-header-submenu-link-color: var(--intelindev-color-black);
+  --intelindev-header-submenu-hover-bg: var(--intelindev-surface);
+  --intelindev-header-submenu-hover-link-color: var(--intelindev-color-black);
+  --intelindev-header-cta-bg: var(--intelindev-accent);
   --intelindev-header-cta-text-color: var(--intelindev-color-white);
-  --intelindev-header-cta-hover-bg: var(--intelindev-accent);
+  --intelindev-header-cta-hover-bg: var(--intelindev-accent-hover);
   --intelindev-header-cta-hover-text-color: var(--intelindev-color-white);
-  --intelindev-header-padding-x: clamp(16px, 6.5vw, 94px); /* 94 = margen del diseño a 1440 */
-  --intelindev-header-padding-y: clamp(16px, 2.5vw, 35px);
+  --intelindev-header-top: clamp(12px, 2vw, 36px);        /* separación de la barra al borde superior */
+  --intelindev-header-height: 80px;
+  --intelindev-header-offset: calc(var(--intelindev-header-top) * 2 + var(--intelindev-header-height)); /* hueco que deja <main> */
+  --intelindev-header-padding-x: var(--intelindev-gutter);
   --intelindev-header-radius: 20px;
 
   /* Estado sticky (.is-scrolled): cada variable cae a su equivalente normal, así
@@ -94,7 +115,8 @@
   --intelindev-header-sticky-bg: var(--intelindev-header-bg);
   --intelindev-header-sticky-nav-bg: var(--intelindev-header-nav-bg);
   --intelindev-header-sticky-link-color: var(--intelindev-header-link-color);
-  --intelindev-header-sticky-active-dot: var(--intelindev-header-active-dot);
+  --intelindev-header-sticky-active-bg: var(--intelindev-header-active-bg);
+  --intelindev-header-sticky-active-color: var(--intelindev-header-active-color);
   --intelindev-header-sticky-submenu-bg: var(--intelindev-header-submenu-bg);
   --intelindev-header-sticky-submenu-link-color: var(--intelindev-header-submenu-link-color);
   --intelindev-header-sticky-submenu-hover-bg: var(--intelindev-header-submenu-hover-bg);
@@ -106,20 +128,20 @@
 
   /* Footer (Apariencia → Intelindev Footer): defaults, se sobreescriben en <head>
      solo lo configurado — ver intelindev_print_footer_style_overrides(). */
-  --intelindev-footer-bg: var(--intelindev-color-red-deep);
+  --intelindev-footer-bg: var(--intelindev-color-ink);
   --intelindev-footer-text-color: var(--intelindev-color-white);
-  --intelindev-footer-heading-color: var(--intelindev-color-white);
-  --intelindev-footer-link-color: rgba(255, 255, 255, 0.85);
-  --intelindev-footer-link-hover-color: var(--intelindev-color-white);
+  --intelindev-footer-heading-color: var(--intelindev-color-gray-400);
+  --intelindev-footer-link-color: var(--intelindev-color-white);
+  --intelindev-footer-link-hover-color: var(--intelindev-accent);
   --intelindev-footer-padding-top: 80px;
   --intelindev-footer-padding-bottom: 80px;
-  --intelindev-footer-padding-x: clamp(16px, 6.5vw, 94px);
-  --intelindev-footer-gap: 40px;
+  --intelindev-footer-padding-x: var(--intelindev-gutter);
+  --intelindev-footer-gap: 30px;
   --intelindev-footer-max-width: var(--intelindev-content-max);
-  --intelindev-footer-bar-bg: rgba(0, 0, 0, 0.25);
-  --intelindev-footer-bar-text-color: rgba(255, 255, 255, 0.7);
+  --intelindev-footer-bar-bg: var(--intelindev-color-black);
+  --intelindev-footer-bar-text-color: var(--intelindev-surface-2);
   --intelindev-footer-bar-link-color: var(--intelindev-color-white);
-  --intelindev-footer-bar-padding: 16px;
+  --intelindev-footer-bar-padding: 20px;
 }
 
 /**********************
@@ -148,8 +170,8 @@ p {
   margin: 0 0 1em;
 }
 
-/* Títulos: DM Sans light con acentos en serif itálica (<em>), como en el diseño:
-   <h2>Servicios que convierten tus ideas en <em>productos reales</em></h2> */
+/* Títulos: DM Sans semibold; los acentos en serif van en <em>:
+   <h2>Soluciones tecnológicas <em>diseñadas para escalar</em></h2> */
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 .5em;
   font-family: var(--intelindev-font-heading);
@@ -158,12 +180,12 @@ h1, h2, h3, h4, h5, h6 {
 h1, h2, h3 {
   font-weight: var(--intelindev-font-weight-heading);
 }
-h1 { font-size: var(--intelindev-text-3xl); }
-h2 { font-size: var(--intelindev-text-2xl); }
-h3 { font-size: var(--intelindev-text-xl); }
-h4 { font-size: var(--intelindev-text-lg); font-weight: 600; line-height: 1.3; }
-h5 { font-size: var(--intelindev-text-md); font-weight: 700; line-height: 1.3; }
-h6 { font-size: var(--intelindev-text-sm); font-weight: 700; line-height: 1.3; }
+h1 { font-size: var(--intelindev-text-6); }
+h2 { font-size: var(--intelindev-text-5); }
+h3 { font-size: var(--intelindev-text-4); }
+h4 { font-size: var(--intelindev-text-3); font-weight: 600; line-height: 1.1; }
+h5 { font-size: var(--intelindev-text-2); font-weight: 600; line-height: 1.2; }
+h6 { font-size: var(--intelindev-text-1); font-weight: 600; line-height: 1.4; }
 h1 em, h2 em, h3 em, h4 em,
 .accent {
   font-family: var(--intelindev-font-accent);
@@ -171,46 +193,56 @@ h1 em, h2 em, h3 em, h4 em,
   font-weight: 400;
 }
 .text-display { font-size: var(--intelindev-text-display); font-weight: 700; line-height: 0.95; }
-.text-4xl { font-size: var(--intelindev-text-4xl); line-height: var(--intelindev-leading-tight); }
-.lead { font-size: var(--intelindev-text-lg); font-weight: 300; }
-.small { font-size: var(--intelindev-text-xs); }
+.text-4xl { font-size: var(--intelindev-text-6); line-height: var(--intelindev-leading-tight); }
+.lead { font-size: var(--intelindev-text-1); font-weight: 400; line-height: 1.4; }
+.small { font-size: var(--intelindev-text--1); }
 .text-muted { color: var(--intelindev-text-muted); }
 
-/* Etiqueta de sección ("Nuestros servicios"): píldora con punto rojo */
+/* Ancho de contenido del diseño: 1536 px centrados con margen lateral fluido */
+.wrap {
+  width: 100%;
+  max-width: calc(var(--intelindev-content-max) + 2 * var(--intelindev-gutter));
+  margin-inline: auto;
+  padding-inline: var(--intelindev-gutter);
+}
+.content-max {
+  max-width: var(--intelindev-content-max);
+  margin-inline: auto;
+}
+
+/* Etiqueta de sección ("¿Qué te ofrecemos?"): chip gris claro */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border: 1px solid currentColor;
+  gap: 10px;
+  padding: 5px 10px;
   border-radius: var(--intelindev-radius-pill);
-  font-size: var(--intelindev-text-xs);
-  line-height: 1;
+  background: var(--intelindev-surface);
+  color: var(--intelindev-text);
+  font-size: var(--intelindev-text--1);
+  line-height: 1.5;
 }
-.eyebrow::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--intelindev-accent);
+.eyebrow--on-dark {
+  background: rgba(255, 255, 255, .12);
+  color: var(--intelindev-text-on-dark);
 }
 
-/* Botones: píldora (padding 10×30, radio 100) con flecha ↗ opcional */
+/* Botones: 48 px, radio 15, DM Sans 500 18, flecha ↗ opcional */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 10px 30px;
-  min-height: 58px;
+  padding: 10px 20px;
+  min-height: 48px;
   border: 1px solid transparent;
-  border-radius: var(--intelindev-radius-pill);
+  border-radius: var(--intelindev-radius-md);
   background: transparent;
   color: inherit;
   font: inherit;
-  font-size: var(--intelindev-text-lg);
-  font-weight: 300;
-  line-height: 1.15;
+  font-size: var(--intelindev-text-0);
+  font-weight: 500;
+  line-height: 1.5;
   text-decoration: none;
   cursor: pointer;
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
@@ -219,12 +251,24 @@ h1 em, h2 em, h3 em, h4 em,
   background: var(--intelindev-accent);
   border-color: var(--intelindev-accent);
   color: var(--intelindev-color-white);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
 }
 .btn--primary:hover, .btn--primary:focus-visible {
   background: var(--intelindev-accent-hover);
   border-color: var(--intelindev-accent-hover);
   color: var(--intelindev-color-white);
+}
+.btn--secondary,
+.btn--light {
+  background: var(--intelindev-color-white);
+  border-color: var(--intelindev-border);
+  color: var(--intelindev-accent-text);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+}
+.btn--secondary:hover, .btn--secondary:focus-visible,
+.btn--light:hover, .btn--light:focus-visible {
+  background: var(--intelindev-surface);
+  color: var(--intelindev-accent-text);
 }
 .btn--outline {
   border-color: currentColor;
@@ -232,15 +276,7 @@ h1 em, h2 em, h3 em, h4 em,
 .btn--outline:hover, .btn--outline:focus-visible {
   background: color-mix(in srgb, currentColor 12%, transparent);
 }
-.btn--light {
-  background: var(--intelindev-color-white);
-  color: var(--intelindev-color-ink);
-}
-.btn--light:hover, .btn--light:focus-visible {
-  background: var(--intelindev-color-gray);
-  color: var(--intelindev-color-ink);
-}
-/* Flecha ↗ (solar/arrow-right-up) pintada con currentColor vía mask */
+/* Flecha ↗ pintada con currentColor vía mask */
 .btn--arrow::after,
 .icon-arrow::after,
 .contact .intelindev-form__submit::after {
@@ -253,52 +289,52 @@ h1 em, h2 em, h3 em, h4 em,
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17 17 7M8 7h9v9'/></svg>") center / contain no-repeat;
 }
 
-/* Secciones: 100 % de ancho con el contenido acotado a --intelindev-content-max */
+/* Secciones: 100 % de ancho; el contenido se acota con .wrap */
 .section {
   padding-block: var(--intelindev-section-py);
+}
+.section--surface {
+  background: var(--intelindev-surface);
 }
 .section--dark {
   background: var(--intelindev-surface-dark);
   color: var(--intelindev-text-on-dark);
 }
-.section--red {
-  background: var(--intelindev-color-red-deep);
-  color: var(--intelindev-text-on-dark);
-}
-.section--gradient {
-  background: var(--intelindev-gradient-dark-red);
-  color: var(--intelindev-text-on-dark);
-}
-.section--dark a:not(.btn), .section--red a:not(.btn), .section--gradient a:not(.btn) {
+.section--dark a:not(.btn) {
   color: inherit;
-}
-.content-max {
-  max-width: var(--intelindev-content-max);
-  margin-inline: auto;
 }
 
 /**********************
-* Header (diseño V1: banda rojo oscuro, logo a la izquierda, menú en una barra
-* roja redondeada al centro con punto celeste en el ítem activo, CTA a la
-* derecha como píldora o cuadrado con ícono). Colores desde Apariencia →
+* Header (diseño aprobado: barra flotante negra translúcida de 80 px con radio
+* 20 sobre el hero, logo a la izquierda, menú al centro con el ítem activo en
+* un chip claro, CTA rojo a la derecha). Colores desde Apariencia →
 * Intelindev Header; menú móvil por .site-nav-toggle (< 992px).
+* La barra es absoluta: <main> deja el hueco (--intelindev-header-offset) y
+* los heros lo anulan con margen negativo para quedar debajo de la barra.
 ***********************/
 .site-header {
-  position: relative;
+  position: absolute;
+  top: var(--intelindev-header-top);
+  left: var(--intelindev-gutter);
+  right: var(--intelindev-gutter);
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: var(--intelindev-header-padding-y) var(--intelindev-header-padding-x);
+  min-height: var(--intelindev-header-height);
+  padding: 10px 30px;
+  border-radius: var(--intelindev-header-radius);
   background: var(--intelindev-header-bg);
   color: var(--intelindev-header-link-color);
-  transition: background-color .2s ease, padding .2s ease;
+  transition: background-color .2s ease, box-shadow .2s ease;
 }
 /* Sticky: la clase la imprime header.php solo si está activado en Apariencia → Intelindev Header */
 .site-header--sticky {
-  position: sticky;
-  top: 0;
+  position: fixed;
+}
+.site-main {
+  padding-top: var(--intelindev-header-offset);
 }
 
 .site-branding .site-title {
@@ -309,7 +345,7 @@ h1 em, h2 em, h3 em, h4 em,
 }
 .site-branding img.custom-logo,
 .site-logo__img {
-  max-height: 80px; /* logo del diseño: 172×80 */
+  max-height: 60px; /* logo del diseño: 160×60 */
   width: auto;
   display: block;
 }
@@ -336,12 +372,11 @@ h1 em, h2 em, h3 em, h4 em,
 .nav-list {
   display: flex;
   align-items: center;
-  gap: clamp(20px, 5.8vw, 84px);
+  gap: 0;
   list-style: none;
   margin: 0;
-  padding: 0 40px;
-  min-height: 89px;
-  border-radius: var(--intelindev-header-radius);
+  padding: 0 10px;
+  border-radius: var(--intelindev-radius-md);
   background: var(--intelindev-header-nav-bg);
 }
 .nav-list > li {
@@ -350,22 +385,28 @@ h1 em, h2 em, h3 em, h4 em,
 .nav-list > li > a {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
+  padding: 10px 15px;
+  border-radius: var(--intelindev-radius-md);
   text-decoration: none;
   color: var(--intelindev-header-link-color);
-  font-weight: 400;
+  font-size: var(--intelindev-text-0);
+  font-weight: 500;
+  line-height: 1.5;
   white-space: nowrap;
+  transition: background-color .2s ease, color .2s ease;
 }
-/* Ítem activo: punto celeste delante del texto */
-.nav-list > li.current-menu-item > a::before,
-.nav-list > li.current_page_item > a::before,
-.nav-list > li.current-menu-ancestor > a::before,
-.nav-list > li.current-menu-parent > a::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--intelindev-header-active-dot);
+.nav-list > li > a:hover,
+.nav-list > li > a:focus-visible {
+  background: rgba(255, 255, 255, .12);
+}
+/* Ítem activo: chip claro con texto oscuro */
+.nav-list > li.current-menu-item > a,
+.nav-list > li.current_page_item > a,
+.nav-list > li.current-menu-ancestor > a,
+.nav-list > li.current-menu-parent > a {
+  background: var(--intelindev-header-active-bg);
+  color: var(--intelindev-header-active-color);
 }
 
 .nav-list .sub-menu {
@@ -373,13 +414,14 @@ h1 em, h2 em, h3 em, h4 em,
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 220px;
+  min-width: 200px;
   background: var(--intelindev-header-submenu-bg);
+  border: 1px solid var(--intelindev-border);
   border-radius: var(--intelindev-header-radius);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .18);
   list-style: none;
   margin: 8px 0 0;
-  padding: 10px 0;
+  padding: 10px;
   z-index: 60;
 }
 .nav-list > li:hover > .sub-menu,
@@ -388,9 +430,11 @@ h1 em, h2 em, h3 em, h4 em,
 }
 .nav-list .sub-menu a {
   display: block;
-  padding: 10px 20px;
+  padding: 10px 15px;
+  border-radius: var(--intelindev-radius-md);
   text-decoration: none;
   color: var(--intelindev-header-submenu-link-color);
+  font-weight: 500;
 }
 .nav-list .sub-menu a:hover,
 .nav-list .sub-menu a:focus {
@@ -407,6 +451,7 @@ h1 em, h2 em, h3 em, h4 em,
   cursor: pointer;
 }
 
+/* CTA: botón primario del diseño (rojo, radio 15, 48 px) o cuadrado con ícono */
 .header-cta {
   border: 0;
   font: inherit;
@@ -414,20 +459,23 @@ h1 em, h2 em, h3 em, h4 em,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 30px;
-  min-height: 56px;
-  border-radius: var(--intelindev-radius-pill);
+  gap: 10px;
+  padding: 10px 20px;
+  min-height: 48px;
+  border-radius: var(--intelindev-radius-md);
   background: var(--intelindev-header-cta-bg);
   color: var(--intelindev-header-cta-text-color);
+  font-size: var(--intelindev-text-0);
+  font-weight: 500;
+  line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
   transition: background-color .2s ease, color .2s ease;
 }
 .header-cta--icon {
-  width: 85px;
-  min-height: 89px;
+  width: 48px;
   padding: 0;
-  border-radius: var(--intelindev-header-radius);
 }
 .header-cta:hover,
 .header-cta:focus {
@@ -445,8 +493,8 @@ h1 em, h2 em, h3 em, h4 em,
   height: 48px;
   padding: 0 12px;
   border: 0;
-  border-radius: 12px;
-  background: var(--intelindev-header-nav-bg);
+  border-radius: var(--intelindev-radius-md);
+  background: rgba(255, 255, 255, .12);
   cursor: pointer;
 }
 .site-nav-toggle__bar {
@@ -460,6 +508,9 @@ body.nav-open .site-nav-toggle__bar:nth-child(2) { opacity: 0; }
 body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 @media (max-width: 991.98px) {
+  .site-header {
+    padding: 10px 16px;
+  }
   .site-nav-toggle {
     display: flex;
     order: 3;
@@ -467,9 +518,9 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   .site-nav {
     display: none;
     position: absolute;
-    left: var(--intelindev-header-padding-x);
-    right: var(--intelindev-header-padding-x);
-    top: calc(100% - 8px);
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
   }
   body.nav-open .site-nav {
     display: block;
@@ -477,19 +528,26 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   .nav-list {
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
-    padding: 12px 0;
-    min-height: 0;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+    gap: 4px;
+    padding: 10px;
+    background: var(--intelindev-header-submenu-bg);
+    border: 1px solid var(--intelindev-border);
+    border-radius: var(--intelindev-header-radius);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .18);
   }
   .nav-list > li > a {
-    padding: 12px 24px;
+    color: var(--intelindev-header-submenu-link-color);
+  }
+  .nav-list > li > a:hover,
+  .nav-list > li > a:focus-visible {
+    background: var(--intelindev-header-submenu-hover-bg);
   }
   .nav-list .sub-menu {
     position: static;
     box-shadow: none;
+    border: 0;
     margin: 0;
-    padding: 0 0 8px 24px;
+    padding: 0 0 4px 15px;
     background: transparent;
   }
   .nav-list > li.menu-item-has-children > .sub-menu {
@@ -497,11 +555,6 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   }
   .header-cta {
     order: 2;
-  }
-  .header-cta--icon {
-    width: 48px;
-    min-height: 48px;
-    border-radius: 12px;
   }
   .header-cta__icon {
     width: 22px;
@@ -516,22 +569,20 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 /* --- Estado sticky: .is-scrolled la agrega scripts.js al pasar el umbral de scroll --- */
 .site-header.is-scrolled {
   background: var(--intelindev-header-sticky-bg);
-  padding-top: 12px;
-  padding-bottom: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
 }
 .site-header.is-scrolled .nav-list {
   background: var(--intelindev-header-sticky-nav-bg);
-  min-height: 64px;
 }
 .site-header.is-scrolled .nav-list > li > a {
   color: var(--intelindev-header-sticky-link-color);
 }
-.site-header.is-scrolled .nav-list > li.current-menu-item > a::before,
-.site-header.is-scrolled .nav-list > li.current_page_item > a::before,
-.site-header.is-scrolled .nav-list > li.current-menu-ancestor > a::before,
-.site-header.is-scrolled .nav-list > li.current-menu-parent > a::before {
-  background: var(--intelindev-header-sticky-active-dot);
+.site-header.is-scrolled .nav-list > li.current-menu-item > a,
+.site-header.is-scrolled .nav-list > li.current_page_item > a,
+.site-header.is-scrolled .nav-list > li.current-menu-ancestor > a,
+.site-header.is-scrolled .nav-list > li.current-menu-parent > a {
+  background: var(--intelindev-header-sticky-active-bg);
+  color: var(--intelindev-header-sticky-active-color);
 }
 .site-header.is-scrolled .nav-list .sub-menu {
   background: var(--intelindev-header-sticky-submenu-bg);
@@ -548,18 +599,12 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   background: var(--intelindev-header-sticky-cta-bg);
   color: var(--intelindev-header-sticky-cta-text-color);
 }
-.site-header.is-scrolled .header-cta--icon {
-  min-height: 64px;
-}
 .site-header.is-scrolled .header-cta:hover,
 .site-header.is-scrolled .header-cta:focus {
   background: var(--intelindev-header-sticky-cta-hover-bg);
   color: var(--intelindev-header-sticky-cta-hover-text-color);
 }
-.site-header.is-scrolled .site-logo__img,
-.site-header.is-scrolled .site-branding img.custom-logo {
-  max-height: 44px;
-}
+
 /**********************
 * Modal del CTA (<dialog> nativo; lo abre scripts.js)
 ***********************/
@@ -590,7 +635,7 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--intelindev-color-slate);
+  color: var(--intelindev-color-gray-600);
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
@@ -643,19 +688,29 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 }
 .footer-widget__title,
 .footer-widget .wp-block-heading {
-  margin: 0 0 16px;
+  margin: 0 0 15px;
   font-family: var(--intelindev-font-body);
-  font-size: var(--intelindev-text-md);
-  font-weight: 700;
-  line-height: 1.3;
+  font-size: var(--intelindev-text--1);
+  font-weight: 600;
+  line-height: 1.5;
   color: var(--intelindev-footer-heading-color);
+}
+.footer-widget .wp-block-heading a {
+  color: inherit;
 }
 .footer-widget,
 .footer-col > * {
-  font-weight: 300;
+  font-weight: 400;
+}
+.footer-col .wp-block-paragraph,
+.footer-col p {
+  margin: 0 0 15px;
+}
+.footer-col .footer-tagline {
+  font-size: var(--intelindev-text--1);
 }
 .footer-col img {
-  max-height: 60px;
+  max-height: 93px; /* logo del diseño: 303×93 */
   width: auto;
 }
 .footer-logo {
@@ -666,7 +721,8 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   margin: 0 0 10px;
 }
 .footer-social.wp-block-social-links {
-  gap: 12px;
+  gap: 5px;
+  margin-top: 30px;
 }
 .footer-social .wp-social-link a {
   padding: 0;
@@ -728,37 +784,42 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   }
 }
 /**********************
-* Secciones (componentes del theme en templates/components; medidas del
-* Figma V1 a 1440 px, fluidas hacia móvil con el grid). Un Componente del
-* dashboard con el mismo slug reemplaza la plantilla, no estos estilos.
+* Secciones (diseño aprobado: Componentes del dashboard [home-hero,
+* inner-about, stats, cta, inner-contact, newsletter] + shortcodes del
+* módulo Sections [clients, services, projects, latest_posts, testimonials]).
+* Medidas del Figma a 1728 px, fluidas hacia móvil.
 ***********************/
 /* Enlaces/botones sin texto (atributo vacío) no se pintan */
 .btn:empty { display: none; }
 
-/* --- Hero: foto de fondo, velo oscuro, texto a la izquierda (716 px) --- */
+/* --- Hero: foto a sangre con velo, 900 px incluyendo la barra del header;
+       contenido de 617 px a la izquierda --- */
 .hero {
   position: relative;
   display: flex;
   align-items: center;
-  min-height: clamp(520px, 58.5vw, 842px);
-  background: var(--intelindev-color-charcoal) center / cover no-repeat;
+  min-height: clamp(560px, 52vw, 900px);
+  margin-top: calc(-1 * var(--intelindev-header-offset));
+  padding-top: var(--intelindev-header-offset);
+  background: var(--intelindev-color-graphite) center / cover no-repeat;
   color: var(--intelindev-color-white);
 }
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(21, 20, 20, .55) 0%, rgba(21, 20, 20, .25) 60%, rgba(21, 20, 20, .1) 100%);
+  background: rgba(0, 0, 0, .35);
 }
 .hero__inner {
   position: relative;
   padding-block: var(--intelindev-space-6);
 }
 .hero__content {
-  max-width: 716px;
+  max-width: 617px;
   display: flex;
   flex-direction: column;
   gap: var(--intelindev-space-2);
+  margin-left: clamp(0px, 1.4vw, 24px);
 }
 .hero__title {
   margin: 0;
@@ -766,54 +827,74 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 }
 .hero__text {
   margin: 0;
-  font-size: var(--intelindev-text-lg);
-  font-weight: 300;
-  line-height: 1.15;
+  font-size: var(--intelindev-text-1);
+  line-height: 1.4;
 }
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--intelindev-space-2);
+  margin-top: var(--intelindev-space-2);
 }
 .hero__actions:empty { display: none; }
 .hero--interior {
-  min-height: clamp(320px, 30vw, 440px);
+  min-height: clamp(360px, 36vw, 620px);
 }
 .hero--interior .hero__title {
-  font-size: var(--intelindev-text-2xl);
+  font-size: var(--intelindev-text-5);
 }
 
-/* --- About: collage de 2 fotos + texto con bullets (630 px) --- */
-.about {
-  color: var(--intelindev-color-slate);
+/* --- Clientes: franja gris con tarjetas de logo en scroll horizontal --- */
+.clients {
+  padding-block: var(--intelindev-space-3);
+  background: var(--intelindev-surface);
 }
+.clients__heading {
+  text-align: center;
+  margin-bottom: var(--intelindev-space-2);
+}
+.clients__list {
+  display: flex;
+  gap: var(--intelindev-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.clients__list::-webkit-scrollbar { display: none; }
+.clients__item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 263px;
+  height: 175px;
+  padding: 13px;
+  border-radius: var(--intelindev-radius-lg);
+  scroll-snap-align: start;
+}
+.clients__item a {
+  display: contents;
+}
+.clients__logo {
+  max-width: 200px;
+  max-height: 70px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* --- About: contenido 617 + collage de 3 fotos (819×709) --- */
 .about__inner {
   display: grid;
-  grid-template-columns: minmax(0, 536fr) minmax(0, 630fr);
-  gap: clamp(32px, 5vw, 74px);
+  grid-template-columns: minmax(0, 617fr) minmax(0, 819fr);
+  gap: clamp(32px, 4.6vw, 80px);
   align-items: center;
 }
-.about__media {
-  position: relative;
-  aspect-ratio: 536 / 569;
-}
-.about__photo {
-  position: absolute;
-  width: 62%;
-  aspect-ratio: 333 / 379;
-  overflow: hidden;
-  border-radius: var(--intelindev-radius-xl);
-  background: var(--intelindev-color-gray);
-}
-.about__photo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.about__photo img[src=""] { display: none; }
-.about__photo--1 { top: 0; left: 0; }
-.about__photo--2 { right: 0; bottom: 0; }
 .about__body {
   display: flex;
   flex-direction: column;
@@ -822,39 +903,62 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 }
 .about__title {
   margin: 0;
-  color: inherit;
 }
 .about__text {
   margin: 0;
-  color: var(--intelindev-color-ink);
+  color: var(--intelindev-text-2);
 }
 .about__list {
   display: flex;
   flex-direction: column;
-  gap: var(--intelindev-space-2);
-  margin: 0;
+  gap: var(--intelindev-space-3);
+  margin: var(--intelindev-space-2) 0;
   padding: 0;
   list-style: none;
 }
 .about__item {
   display: flex;
-  align-items: center;
-  gap: var(--intelindev-space-2);
-  color: var(--intelindev-color-ink);
+  align-items: flex-start;
+  gap: 15px;
 }
-.about__item p { margin: 0; }
-.about__item strong { display: block; }
+.about__item p { margin: 0; color: var(--intelindev-color-black); }
+.about__item-title {
+  margin: 0 0 10px;
+  font-size: var(--intelindev-text-2);
+  font-weight: 600;
+  line-height: 1.2;
+}
 .about__icon {
   flex: none;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
 }
+.about__media {
+  position: relative;
+  aspect-ratio: 819 / 709;
+}
+.about__photo {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--intelindev-surface-2);
+}
+.about__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about__photo img[src=""] { display: none; }
+.about__photo--1 { left: 0;    top: 0;    width: 42.7%; height: 66.4%; }
+.about__photo--2 { left: 57.3%; top: 0;   width: 42.7%; height: 66.4%; }
+.about__photo--3 { left: 26.9%; top: 33.6%; width: 53%; height: 66.4%; box-shadow: 0 20px 50px rgba(0, 0, 0, .18); }
 
-/* --- Stats: banda roja con 4 cifras separadas por líneas --- */
+/* --- Stats: banda grafito con 4 cifras separadas por líneas --- */
 .stats {
   padding-block: var(--intelindev-space-4);
-  background: var(--intelindev-accent);
-  color: var(--intelindev-color-white);
+  background: var(--intelindev-surface-dark);
+  color: var(--intelindev-text-on-dark);
   text-align: center;
 }
 .stats__inner {
@@ -865,49 +969,45 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   display: flex;
   flex-direction: column;
   gap: var(--intelindev-space-2);
-  padding: var(--intelindev-space-4) var(--intelindev-space-2);
-  border-left: 2px solid currentColor;
+  padding: var(--intelindev-space-3) var(--intelindev-space-2);
+  border-left: 1px solid rgba(255, 255, 255, .6);
 }
 .stats__item:first-child { border-left: 0; }
 .stats__value {
-  font-size: var(--intelindev-text-4xl);
-  line-height: var(--intelindev-leading-tight);
+  font-size: var(--intelindev-text-6);
+  font-weight: 600;
+  line-height: 1;
 }
 .stats__label {
-  font-weight: 700;
+  font-size: var(--intelindev-text-1);
+  line-height: 1.4;
 }
 
-/* --- CTA reutilizable: texto a la izquierda, imagen a la derecha (50 %) --- */
-.cta {
+/* --- CTA reutilizable (franja gris): texto + imagen --- */
+.cta__inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  min-height: clamp(360px, 44vw, 638px);
-  background: var(--intelindev-color-red-deep);
-  color: var(--intelindev-color-white);
-}
-.cta__body {
-  display: flex;
+  gap: clamp(32px, 4.6vw, 80px);
   align-items: center;
-  justify-content: flex-end;
-  padding: var(--intelindev-section-py) clamp(24px, 4vw, 60px) var(--intelindev-section-py) var(--intelindev-header-padding-x);
 }
 .cta__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--intelindev-space-4);
-  max-width: 610px;
+  gap: var(--intelindev-space-3);
+  max-width: 617px;
 }
 .cta__title {
   margin: 0;
   font-family: var(--intelindev-font-accent);
-  font-style: italic;
   font-weight: 400;
-  color: inherit;
 }
-.cta__text { margin: 0; }
+.cta__text { margin: 0; color: var(--intelindev-text-2); }
 .cta__media {
-  background: var(--intelindev-color-gray);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--intelindev-surface-2);
+  aspect-ratio: 4 / 3;
 }
 .cta__media img {
   display: block;
@@ -917,142 +1017,144 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 }
 .cta__media img[src=""] { display: none; }
 
-/* --- Contact: fondo radial oscuro, contenido centrado (621 px), form de líneas --- */
+/* --- Contacto: texto (610) + formulario (705) sobre marca de agua --- */
 .contact {
-  background: var(--intelindev-gradient-dark-radial);
-  color: var(--intelindev-color-white);
+  position: relative;
+  overflow: hidden;
+  background: var(--intelindev-bg);
+}
+.contact::before {
+  content: attr(data-watermark);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.08em;
+  font-size: clamp(64px, 11.6vw, 200px);
+  font-weight: 700;
+  letter-spacing: .28em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--intelindev-color-black);
+  opacity: .04;
+  pointer-events: none;
+  white-space: nowrap;
 }
 .contact__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 610fr) minmax(0, 705fr);
+  gap: clamp(32px, 7vw, 221px);
+  align-items: start;
+}
+.contact__body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--intelindev-space-2);
-  max-width: 621px;
-  margin-inline: auto;
-  padding-inline: var(--intelindev-header-padding-x);
+  gap: var(--intelindev-space-4);
 }
-.contact__title { margin: 0; color: inherit; }
+.contact__title {
+  margin: 0;
+  font-family: var(--intelindev-font-accent);
+  font-weight: 400;
+}
 .contact__text { margin: 0; }
-.contact__form {
-  width: 100%;
-  margin-top: var(--intelindev-space-2);
-}
 .contact .intelindev-form {
-  --form-border: var(--intelindev-color-white);
+  --form-border: var(--intelindev-color-gray-500);
   --form-focus: var(--intelindev-accent);
 }
 .contact .intelindev-form__label {
-  text-transform: uppercase;
-  font-weight: 400;
-  margin-bottom: 0;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: var(--intelindev-accent-text);
 }
 .contact .intelindev-form input:not([type="checkbox"]),
 .contact .intelindev-form select,
 .contact .intelindev-form textarea {
-  padding: 10px 0;
-  border: 0;
-  border-bottom: 1px solid var(--form-border);
-  border-radius: 0;
-  background: transparent;
-  color: inherit;
+  padding: 10px 15px;
+  border: 1px solid var(--form-border);
+  border-radius: var(--intelindev-radius-sm);
+  background: var(--intelindev-color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+  font-size: var(--intelindev-text-0);
 }
-.contact .intelindev-form input:focus,
-.contact .intelindev-form select,
-.contact .intelindev-form textarea:focus {
-  outline: 0;
-  box-shadow: none;
-  border-bottom-color: var(--form-focus);
+.contact .intelindev-form ::placeholder {
+  color: var(--intelindev-color-gray-600);
+  opacity: .5;
 }
-.contact .intelindev-form select option { color: var(--intelindev-color-ink); }
 .contact .intelindev-form__submit {
   gap: 10px;
-  margin-top: var(--intelindev-space-2);
-  font-size: var(--intelindev-text-lg);
-  font-weight: 300;
-  min-height: 58px;
+  padding: 10px 20px;
+  min-height: 48px;
+  border-radius: var(--intelindev-radius-md);
+  font-size: var(--intelindev-text-0);
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
 }
 
-/* --- Newsletter: foto recortada, título serif, campo con botón rojo --- */
+/* --- Newsletter: franja cacao con título, texto y campo + botón --- */
 .newsletter {
-  padding-block: var(--intelindev-space-4);
-  background: var(--intelindev-gradient-dark-radial);
+  padding-block: var(--intelindev-space-6);
+  background: var(--intelindev-color-cocoa);
   color: var(--intelindev-color-white);
 }
 .newsletter__inner {
   display: grid;
-  grid-template-columns: auto minmax(0, 489fr) minmax(0, 441fr);
-  gap: clamp(24px, 4vw, 56px);
+  grid-template-columns: minmax(0, 617fr) minmax(0, 859fr);
+  gap: var(--intelindev-space-6);
   align-items: center;
-}
-.newsletter__photo {
-  width: clamp(120px, 14vw, 197px);
-  aspect-ratio: 197 / 169;
-  object-fit: cover;
-  border-radius: 0 var(--intelindev-radius-sm) var(--intelindev-radius-pill) var(--intelindev-radius-sm);
-  background: var(--intelindev-color-gray);
-}
-.newsletter__photo[src=""] { visibility: hidden; }
-.newsletter__title {
-  margin: 0;
-  font-family: var(--intelindev-font-accent);
-  font-style: italic;
-  font-weight: 400;
-  font-size: var(--intelindev-text-3xl);
-  color: inherit;
 }
 .newsletter__body {
   display: flex;
   flex-direction: column;
-  gap: var(--intelindev-space-2);
+  gap: 10px;
 }
-.newsletter__text { margin: 0; }
+.newsletter__title {
+  margin: 0;
+  font-size: var(--intelindev-text-2);
+  font-weight: 600;
+  color: inherit;
+}
+.newsletter__text {
+  margin: 0;
+  font-size: var(--intelindev-text--1);
+  color: var(--intelindev-surface-2);
+}
 .newsletter__form {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 5px 5px 20px;
-  background: var(--intelindev-color-white);
-  border-radius: var(--intelindev-radius-md);
+  flex-direction: column;
+  gap: 10px;
+}
+.newsletter__label {
+  font-weight: 500;
+}
+.newsletter__row {
+  display: flex;
+  gap: 15px;
 }
 .newsletter__input {
   flex: 1;
   min-width: 0;
-  border: 0;
-  background: transparent;
-  color: var(--intelindev-color-ink);
+  padding: 10px 15px;
+  border: 1px solid var(--intelindev-border);
+  border-radius: var(--intelindev-radius-md);
+  background: var(--intelindev-color-white);
+  color: var(--intelindev-accent-text);
   font: inherit;
-  font-size: var(--intelindev-text-xs);
-  font-weight: 300;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
 }
-.newsletter__input:focus { outline: 0; }
-.newsletter__button {
-  flex: none;
-  width: 50px;
-  height: 50px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: var(--intelindev-radius-sm);
-  background: var(--intelindev-accent);
-  cursor: pointer;
-}
-.newsletter__button img { filter: brightness(0) invert(1); }
-.newsletter__button:hover { background: var(--intelindev-accent-hover); }
+.newsletter__input::placeholder { color: var(--intelindev-accent-text); opacity: .5; }
+.newsletter__button { flex: none; }
 
 @media (max-width: 991.98px) {
-  .about__inner { grid-template-columns: 1fr; }
-  .about__media { max-width: 480px; }
-  .cta { grid-template-columns: 1fr; }
-  .cta__body { justify-content: flex-start; padding-inline: var(--intelindev-header-padding-x); }
-  .cta__media { min-height: 260px; order: -1; }
-  .newsletter__inner { grid-template-columns: auto minmax(0, 1fr); }
-  .newsletter__body { grid-column: 1 / -1; }
+  .about__inner, .cta__inner, .contact__inner, .newsletter__inner { grid-template-columns: 1fr; }
+  .about__media { max-width: 560px; }
+  .contact::before { font-size: 18vw; }
 }
 @media (max-width: 767.98px) {
   .stats__inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats__item { border-left: 0; padding-block: var(--intelindev-space-2); }
   .hero__actions .btn { width: 100%; }
+  .newsletter__row { flex-direction: column; }
 }
 
 /**********************

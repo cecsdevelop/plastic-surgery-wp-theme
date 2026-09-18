@@ -6,7 +6,7 @@ mobile-first, sin JS. Modelo de caja `border-box` global.
 
 ## Grid
 
-- `container` (540 / 720 / 960 / 1140 / 1276 px según breakpoint; en xxl deja 1252 px de contenido, el ancho interior del diseño de Figma) · `container-fluid`
+- `container` (540 / 720 / 960 / 1140 / 1560 px según breakpoint; en xxl deja 1536 px de contenido, el ancho interior del diseño aprobado de Figma) · `container-fluid`
 - `row` · `row g-0` (sin gutter) · gutter por variable: `style="--grid-gap:40px"`
 - `col-{1..12}` = móvil (alias `col-xs-*`), `col-sm-*` ≥576, `col-md-*` ≥768,
   `col-lg-*` ≥992, `col-xl-*` ≥1200, `col-xxl-*` ≥1400 · `col`/`col-auto`

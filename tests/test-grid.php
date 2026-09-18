@@ -20,7 +20,7 @@ echo "2) reglas clave\n";
 check('border-box global', $has('*,*::before,*::after{box-sizing:border-box}'));
 check('container + gap por variable', $has(':root{--grid-gap:24px}') && $has('.container,.container-fluid{width:100%;margin-right:auto;margin-left:auto;padding-right:calc(var(--grid-gap) * .5)'));
 check('col base + alias xs', $has('.col-6,.col-xs-6{flex:0 0 auto;width:50%}') && $has('.col,.col-xs{flex:1 0 0%}'));
-check('breakpoints y containers Bootstrap 5', $has('@media (min-width:768px){') && $has('.container{max-width:720px}') && $has('@media (min-width:1400px){') && $has('.container{max-width:1276px}')); // xxl = 1252 de contenido + gutter
+check('breakpoints y containers Bootstrap 5', $has('@media (min-width:768px){') && $has('.container{max-width:720px}') && $has('@media (min-width:1400px){') && $has('.container{max-width:1560px}')); // xxl = 1536 de contenido + gutter
 check('col-lg-4, offset-lg-3, order-md-first', $has('.col-lg-4{flex:0 0 auto;width:33.333333%}') && $has('.offset-lg-3{margin-left:25%}') && $has('.order-md-first{order:-1}'));
 check('display y flex responsive', $has('.d-md-none{display:none}') && $has('.d-xxl-flex{display:flex}') && $has('.justify-content-lg-between{justify-content:space-between}') && $has('.align-items-center{align-items:center}'));
 check('espaciado px: py-20, mt-md-60, mx-auto, ms/me', $has('.py-20{padding-top:20px;padding-bottom:20px}') && $has('.mt-md-60{margin-top:60px}') && $has('.mx-auto{margin-left:auto;margin-right:auto}') && $has('.ms-10{margin-left:10px}') && $has('.pe-lg-40{padding-right:40px}'));

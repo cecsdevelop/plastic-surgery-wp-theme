@@ -32,6 +32,8 @@ class ModuleRegistrar
             'IntelindevInit\\Testimonials\\TestimonialsController',
             'IntelindevInit\\Clients\\ClientsController',
             'IntelindevInit\\Team\\TeamController',
+            // Secciones dinámicas (shortcodes que leen los CPT).
+            'IntelindevInit\\Sections\\SectionsController',
             'IntelindevInit\\Forms\\SubmissionsController',
         ];
     }

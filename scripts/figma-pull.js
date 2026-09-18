@@ -8,7 +8,7 @@
  *   node scripts/figma-pull.js tree  <id> [--depth 4]   árbol resumido de un nodo (tipo, nombre, id, tamaño)
  *   node scripts/figma-pull.js spec  <id>...            spec compacto (layout, colores, tipografía, textos) → docs/figma/spec/
  *   node scripts/figma-pull.js png   <id>... [--scale 2] [--format svg] [--out dir --name base] exporta PNG/SVG → docs/figma/png/ (o --out, relativo al theme)
- *   node scripts/figma-pull.js tokens <id>...           tipografías, colores, radios y gaps de una pantalla, por frecuencia → docs/figma/spec/
+ *   node scripts/figma-pull.js tokens <id>... [--offline] tipografías, colores, radios y gaps de una pantalla, por frecuencia → docs/figma/spec/ (--offline: desde docs/figma/raw/*.json ya bajados, sin API)
  *   node scripts/figma-pull.js styles                   estilos locales del archivo (color, texto, efectos)
  *
  * Token: variable FIGMA_TOKEN o archivo ~/.config/figma_token (o --token-file
@@ -223,7 +223,10 @@ const commands = {
   /** Inventario de una pantalla: qué familias/tamaños, colores, radios y gaps usa y cuántas veces. Base para las variables CSS. */
   async tokens() {
     if (!ids.length) throw new Error('falta el id del nodo');
-    const data = await api(`/files/${fileKey}/nodes?ids=${ids.map(toApiId).join(',')}`);
+    const data = opts.offline ? { nodes: Object.fromEntries(ids.map(toApiId).map((id) => {
+      const file = (fs.readdirSync(path.join(OUT_DIR, 'raw')).find((f) => f.endsWith('-' + fileId(id) + '.json')));
+      return [id, file ? JSON.parse(fs.readFileSync(path.join(OUT_DIR, 'raw', file))) : null];
+    })) } : await api(`/files/${fileKey}/nodes?ids=${ids.map(toApiId).join(',')}`);
     const tally = (map, key, example) => { const e = map.get(key) || { n: 0, ex: example }; e.n++; map.set(key, e); };
     const fonts = new Map(), colors = new Map(), radii = new Map(), gaps = new Map(), pads = new Map();
     const visit = (n) => {

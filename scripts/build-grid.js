@@ -21,7 +21,7 @@ const CONFIG = {
   columns: 12,
   gap: '24px',
   breakpoints: { sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400 },
-  containers:  { sm: 540, md: 720, lg: 960, xl: 1140, xxl: 1276 }, // xxl: 1252 de contenido (Figma) + gutter
+  containers:  { sm: 540, md: 720, lg: 960, xl: 1140, xxl: 1560 }, // xxl: 1536 de contenido (Figma aprobado) + gutter
   spacing: [0, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120],
   spacingResponsive: ['md', 'lg'],
   fontSizes: [10, 12, 14, 16, 18, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65],

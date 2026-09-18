@@ -5,7 +5,7 @@
         "appearanceTools": true,
         "layout": {
             "contentSize": "820px",
-            "wideSize": "1252px"
+            "wideSize": "1536px"
         },
         "color": {
             "defaultPalette": false,
@@ -18,6 +18,46 @@
                     "color": "#ffffff"
                 },
                 {
+                    "name": "Gray 100",
+                    "slug": "gray-100",
+                    "color": "#f5f3f3"
+                },
+                {
+                    "name": "Gray 200",
+                    "slug": "gray-200",
+                    "color": "#ebe6e6"
+                },
+                {
+                    "name": "Gray 300",
+                    "slug": "gray-300",
+                    "color": "#d8cfce"
+                },
+                {
+                    "name": "Gray 400",
+                    "slug": "gray-400",
+                    "color": "#b09f9d"
+                },
+                {
+                    "name": "Gray 600",
+                    "slug": "gray-600",
+                    "color": "#5b5a5a"
+                },
+                {
+                    "name": "Graphite",
+                    "slug": "graphite",
+                    "color": "#383737"
+                },
+                {
+                    "name": "Ink",
+                    "slug": "ink",
+                    "color": "#151414"
+                },
+                {
+                    "name": "Black",
+                    "slug": "black",
+                    "color": "#080808"
+                },
+                {
                     "name": "Red",
                     "slug": "red",
                     "color": "#e73728"
@@ -28,56 +68,26 @@
                     "color": "#a4271c"
                 },
                 {
-                    "name": "Red deep",
-                    "slug": "red-deep",
-                    "color": "#611711"
+                    "name": "Maroon",
+                    "slug": "maroon",
+                    "color": "#3a0e0a"
                 },
                 {
-                    "name": "Black",
-                    "slug": "black",
-                    "color": "#151414"
+                    "name": "Cocoa",
+                    "slug": "cocoa",
+                    "color": "#613e3b"
                 },
                 {
-                    "name": "Ink",
-                    "slug": "ink",
-                    "color": "#1b1a1a"
-                },
-                {
-                    "name": "Charcoal",
-                    "slug": "charcoal",
-                    "color": "#232122"
-                },
-                {
-                    "name": "Slate",
-                    "slug": "slate",
-                    "color": "#312f30"
-                },
-                {
-                    "name": "Gray",
-                    "slug": "gray",
-                    "color": "#d9d9d9"
-                },
-                {
-                    "name": "Gray light",
-                    "slug": "gray-light",
-                    "color": "#eaeaea"
-                },
-                {
-                    "name": "Sky",
-                    "slug": "sky",
-                    "color": "#a5d9e4"
+                    "name": "Slate blue",
+                    "slug": "slate-blue",
+                    "color": "#37474f"
                 }
             ],
             "gradients": [
                 {
-                    "name": "Dark to red",
-                    "slug": "dark-red",
-                    "gradient": "linear-gradient(180deg, #232122 0%, #5f1a14 100%)"
-                },
-                {
-                    "name": "Dark radial",
-                    "slug": "dark-radial",
-                    "gradient": "radial-gradient(circle at 50% 50%, #312f30 0%, #151414 100%)"
+                    "name": "Dark",
+                    "slug": "dark",
+                    "gradient": "linear-gradient(180deg, #000000 0%, #666666 100%)"
                 }
             ]
         },
@@ -144,7 +154,7 @@
     "styles": {
         "color": {
             "background": "var(--wp--preset--color--white)",
-            "text": "var(--wp--preset--color--ink)"
+            "text": "var(--wp--preset--color--black)"
         },
         "elements": {
             "link": {

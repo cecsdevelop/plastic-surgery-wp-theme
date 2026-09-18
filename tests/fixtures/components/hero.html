@@ -1,11 +1,11 @@
-<section class="hero hero--{variant|home}" style="background-image:url('{image:url|}')">
-  <div class="hero__inner container">
+<section class="hero hero--{variant|home}" style="background-image:url('{image:url|{featured_image:full}}')">
+  <div class="hero__inner wrap">
     <div class="hero__content">
       <h1 class="hero__title">{title:html|{title}}</h1>
       <p class="hero__text">{text}</p>
       <div class="hero__actions">
         <a class="btn btn--primary btn--arrow" href="{cta_url:url|#contacto}">{cta_text}</a>
-        <a class="btn btn--outline" href="{cta2_url:url|}">{cta2_text}</a>
+        <a class="btn btn--secondary" href="{cta2_url:url|}">{cta2_text}</a>
       </div>
       {content}
     </div>

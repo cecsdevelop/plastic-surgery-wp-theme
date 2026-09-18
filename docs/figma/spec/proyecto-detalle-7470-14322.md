@@ -1,0 +1,722 @@
+# Proyecto Detalle (7470:14322) 1728×3421
+
+Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía · color} "texto"
+
+- FRAME "Proyecto Detalle" 7470:14322 1728×3421 [column main center] bg #f5f3f3
+  - FRAME "Frame 212" 7470:14323 1728×620 [column gap 10]
+    - FRAME "Hero" 7470:14324 1728×620 [column gap 40 pad 120/0/120/0 main center cross center] bg image, image, #000000 73%
+      - INSTANCE ".GraphicContentHero" 7470:14325 617×30 [row gap 10 cross center] <instance 5229:9917> (oculto)
+        - FRAME ".Icon" I7470:14325;5229:9918 30×30
+          - INSTANCE "star" I7470:14325;5365:22061 31×30 <instance 23:11325>
+            - VECTOR "Vector" I7470:14325;5365:22061;22:8833 22×21 bg #ffffff
+      - FRAME "Content" 7470:14326 617×69 [column gap 20 main center cross center]
+        - FRAME "Heading" 7470:14327 617×69 [column gap 10 main center]
+          - TEXT "Description" 7470:14328 617×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ffffff} "Subheading" (oculto)
+          - TEXT "Title" 7470:14329 735×69 {DM Sans 600 · 68.66000366210938px · lh 69px · title · center · #ffffff} "Sana Sana"
+  - FRAME "Frame 196" 7470:14708 1728×2273 [column gap 60 pad 60/0/60/0]
+    - FRAME "Frame 118" 7470:14709 1728×2153 [row gap 40 pad 0/100/0/100]
+      - FRAME "Frame 107" 7470:14710 1004×2153 [column gap 40]
+        - FRAME "Frame 257" 7568:13000 1004×1004 [column gap 40]
+          - INSTANCE "Content" 7470:14711 1004×620 [column gap 60 main center cross center] <instance 2286:2953>
+            - FRAME "Image" I7470:14711;2314:3969 1004×620 [row gap 10]
+              - RECTANGLE "Image" I7470:14711;2314:3979 1004×620 bg image radius 15
+            - FRAME "Content" I7470:14711;2415:2797 748×450 [column gap 20] (oculto)
+              - INSTANCE "BOTTOM ITEM 1" I7470:14711;2415:2798 748×48 [column main center] <instance 2383:7305>
+                - TEXT "Title" I7470:14711;2415:2798;2383:7306 748×48 {DM Sans 300 · 50px · lh 48px · title · #080808} "Problema"
+              - INSTANCE "BOTTOM ITEM 2" I7470:14711;2415:2799 748×135 [column] <instance 2383:7290>
+                - TEXT "Description" I7470:14711;2415:2799;2383:7291 748×135 {DM Sans 400 · 18px · lh 27px · #613e3b} "Sana Sana buscaba digitalizar su programa de salud preventiva y crear una plataforma que permitiera a los usuarios afiliarse, gestionar sus programas activos y "
+              - INSTANCE "BOTTOM ITEM 3" I7470:14711;2415:2800 748×48 [column main center] <instance 2383:7303>
+                - TEXT "Title" I7470:14711;2415:2800;2383:7304 748×48 {DM Sans 300 · 50px · lh 48px · title · #080808} "Solución"
+              - INSTANCE "BOTTOM ITEM 4" I7470:14711;2415:2801 748×162 [column] <instance 2383:7290>
+                - TEXT "Description" I7470:14711;2415:2801;2383:7291 748×162 {DM Sans 400 · 18px · lh 27px · #613e3b} "Desarrollamos una plataforma digital integral de afiliación, donde los usuarios pueden registrarse, visualizar los programas disponibles, acceder a beneficios, "
+              - INSTANCE "BOTTOM ITEM 5" I7470:14711;2415:2802 206×67 [row gap 10 pad 20/0/0/0 cross center] <instance 2190:7815> (oculto)
+                - INSTANCE "Button" I7470:14711;2415:2802;2190:7789 98×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #ffffff border 1px #d8cfce radius 15 shadow <instance 33:46>
+                  - INSTANCE "icons" I7470:14711;2415:2802;2190:7789;33:63 28×28 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14711;2415:2802;2190:7789;33:63;22:9457 19×19 bg #613e3b
+                  - TEXT "ACTION" I7470:14711;2415:2802;2190:7789;33:48 58×27 {DM Sans 500 · 18px · lh 27px · #3a0e0a} "Button"
+                  - INSTANCE "icons" I7470:14711;2415:2802;2190:7789;33:66 28×28 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14711;2415:2802;2190:7789;33:66;22:9457 19×19 bg #613e3b
+                - INSTANCE "Button" I7470:14711;2415:2802;2190:7793 98×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #e73728 radius 15 shadow <instance 33:38>
+                  - INSTANCE "icons" I7470:14711;2415:2802;2190:7793;33:57 28×28 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14711;2415:2802;2190:7793;33:57;22:9457 19×19 bg #ffffff
+                  - TEXT "Label" I7470:14711;2415:2802;2190:7793;33:40 58×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Button"
+                  - INSTANCE "icons" I7470:14711;2415:2802;2190:7793;33:60 28×28 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14711;2415:2802;2190:7793;33:60;22:9457 19×19 bg #ffffff
+          - FRAME "Frame 256" 7568:12966 1004×344 [column gap 40]
+            - FRAME "Frame 251" 7554:12790 1004×131 [column gap 20]
+              - INSTANCE "BOTTOM ITEM 1" 7478:15464 1004×48 [column main center] <instance 2383:7305>
+                - TEXT "Title" I7478:15464;2383:7306 1004×48 {DM Sans 300 · 50px · lh 48px · title · #080808} "Problema"
+              - FRAME "Frame 238" 7478:15463 1004×63 [row gap 10 main center cross center]
+                - TEXT "Sana Sana buscaba digitalizar su programa de salud preventiva y crear una plataforma que permitiera a los usuarios afiliarse, gestionar sus programas activos y acceder a beneficios exclusivos, todo desde un entorno fácil de usar. Su operación dependía de procesos manuales, comunicación dispersa y falta de trazabilidad sobre los usuarios y los beneficios utilizados." 7478:15461 1004×63 {DM Sans 400 · 16px · lh 21px · #000000} "Sana Sana buscaba digitalizar su programa de salud preventiva y crear una plataforma que permitiera a los usuarios afiliarse, gestionar sus programas activos y "
+            - FRAME "Frame 250" 7554:12789 1004×173 [column gap 20]
+              - INSTANCE "BOTTOM ITEM 2" 7478:15466 1004×48 [column main center] <instance 2383:7305>
+                - TEXT "Title" I7478:15466;2383:7306 1004×48 {DM Sans 300 · 50px · lh 48px · title · #080808} "Solución"
+              - FRAME "Frame 239" 7478:15467 1004×105 [row gap 10 main center cross center]
+                - TEXT "Desarrollamos una plataforma digital integral de afiliación, donde los usuarios pueden registrarse, visualizar los programas disponibles, acceder a beneficios, gestionar sus dependientes y recibir contenido informativo. Todo bajo una experiencia moderna, intuitiva y pensada para el mercado costarricense. La plataforma centraliza información, automatiza procesos antes manuales y permite al negocio administrar usuarios, programas, reglas de afiliación y métricas clave de uso." 7478:15468 1004×105 {DM Sans 400 · 16px · lh 21px · #000000} "Desarrollamos una plataforma digital integral de afiliación, donde los usuarios pueden registrarse, visualizar los programas disponibles, acceder a beneficios, "
+        - FRAME "Frame 259" 7568:13039 1004×1109 [column gap 40]
+          - INSTANCE "Content" 7470:14712 1004×620 [column gap 60 main center cross center] <instance 2331:2310>
+            - FRAME "Image" I7470:14712;2331:2311 1011×620 [row gap 10]
+              - RECTANGLE "Image" I7470:14712;2331:2312 1011×620 bg image radius 15
+            - FRAME "Content" I7470:14712;2409:9191 748×452 [column gap 20] (oculto)
+              - INSTANCE "BOTTOM ITEM 1" I7470:14712;2409:9192 748×48 [column main center] <instance 2383:7305>
+                - TEXT "Title" I7470:14712;2409:9192;2383:7306 748×48 {DM Sans 300 · 50px · lh 48px · title · #080808} "Qué hicimos"
+              - INSTANCE "BOTTOM ITEM 2" I7470:14712;2409:9193 748×297 [column] <instance 2383:7290>
+                - TEXT "Description" I7470:14712;2409:9193;2383:7291 748×297 {DM Sans 400 · 18px · lh 27px · #613e3b} "Diseño UX/UI completo con lineamientos visuales adaptados al mercado de Costa Rica. Desarrollo de una plataforma web autogestionada para afiliación y administra"
+              - INSTANCE "BOTTOM ITEM 3" I7470:14712;2409:9194 748×48 [column main center] <instance 2383:7303>
+                - TEXT "Title" I7470:14712;2409:9194;2383:7304 748×48 {DM Sans 300 · 50px · lh 48px · title · #080808} "Tecnología y herramientas"
+              - INSTANCE "BOTTOM ITEM 4" I7470:14712;2409:9195 748×162 [column] <instance 2383:7290>
+                - TEXT "Description" I7470:14712;2409:9195;2383:7291 748×162 {DM Sans 400 · 18px · lh 27px · #613e3b} "Frontend: React / Next.js Base de datos: SQL Server o PostgreSQL Autenticación: Auth0 o JWT Infraestructura: Azure / AWS Diseño: Figma (UX/UI), Design System pr"
+              - INSTANCE "BOTTOM ITEM 5" I7470:14712;2409:9196 206×67 [row gap 10 pad 20/0/0/0 cross center] <instance 2190:7815>
+                - INSTANCE "Button" I7470:14712;2409:9196;2190:7789 98×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #ffffff border 1px #d8cfce radius 15 shadow <instance 33:46>
+                  - INSTANCE "icons" I7470:14712;2409:9196;2190:7789;33:63 28×28 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14712;2409:9196;2190:7789;33:63;22:9457 19×19 bg #613e3b
+                  - TEXT "ACTION" I7470:14712;2409:9196;2190:7789;33:48 58×27 {DM Sans 500 · 18px · lh 27px · #3a0e0a} "Button"
+                  - INSTANCE "icons" I7470:14712;2409:9196;2190:7789;33:66 28×28 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14712;2409:9196;2190:7789;33:66;22:9457 19×19 bg #613e3b
+                - INSTANCE "Button" I7470:14712;2409:9196;2190:7793 98×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #e73728 radius 15 shadow <instance 33:38>
+                  - INSTANCE "icons" I7470:14712;2409:9196;2190:7793;33:57 28×28 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14712;2409:9196;2190:7793;33:57;22:9457 19×19 bg #ffffff
+                  - TEXT "Label" I7470:14712;2409:9196;2190:7793;33:40 58×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Button"
+                  - INSTANCE "icons" I7470:14712;2409:9196;2190:7793;33:60 28×28 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14712;2409:9196;2190:7793;33:60;22:9457 19×19 bg #ffffff
+          - FRAME "Frame 258" 7568:13001 1004×449 [column gap 40]
+            - FRAME "Frame 249" 7554:12788 1004×215 [column gap 20]
+              - INSTANCE "BOTTOM ITEM 3" 7478:15470 1004×48 [column main center] <instance 2383:7305>
+                - TEXT "Title" I7478:15470;2383:7306 1004×48 {DM Sans 300 · 50px · lh 48px · title · #080808} "Qué hicimos"
+              - FRAME "Frame 240" 7478:15471 1004×147 [row gap 10 main center cross center]
+                - TEXT "Diseño UX/UI completo con lineamientos visuales adaptados al mercado de Costa Rica. Desarrollo de una plataforma web autogestionada para afiliación y administración de programas. Implementación de módulos para ver beneficios, requisitos, fechas, vigencia y contenido educativo. Integración de sistema de dependientes y beneficiarios. Panel de administración para gestionar programas, usuarios, estados y reglas de beneficios. Flujos optimizados para onboarding, activación y seguimiento del usuario. Arquitectura escalable para permitir crecimiento del portafolio de salud." 7478:15472 1004×147 {DM Sans 400 · 16px · lh 21px · #000000} "Diseño UX/UI completo con lineamientos visuales adaptados al mercado de Costa Rica. Desarrollo de una plataforma web autogestionada para afiliación y administra"
+            - FRAME "Frame 248" 7554:12787 1004×194 [column gap 20]
+              - INSTANCE "BOTTOM ITEM 4" 7478:15473 1004×48 [column main center] <instance 2383:7305>
+                - TEXT "Title" I7478:15473;2383:7306 1004×48 {DM Sans 300 · 50px · lh 48px · title · #080808} "Solución"
+              - FRAME "Frame 241" 7478:15474 1004×126 [row gap 10 main center cross center]
+                - TEXT "Frontend: React / Next.js Base de datos: SQL Server o PostgreSQL Autenticación: Auth0 o JWT Infraestructura: Azure / AWS Diseño: Figma (UX/UI), Design System propio Metodología: Scrum con entregas quincenales" 7478:15475 1004×126 {DM Sans 400 · 16px · lh 21px · #000000} "Frontend: React / Next.js Base de datos: SQL Server o PostgreSQL Autenticación: Auth0 o JWT Infraestructura: Azure / AWS Diseño: Figma (UX/UI), Design System pr"
+      - FRAME "Frame 117" 7470:14713 484×300 [row gap 20 cross center]
+        - FRAME "Frame 116" 7470:14714 505×300 [column gap 40]
+          - TEXT "Información del proyecto" 7470:14715 505×96 {DM Serif Text 400 · 50px · lh 48px · #312f30} "Información del proyecto"
+          - FRAME "Frame 115" 7470:14716 505×164 [column gap 20]
+            - TEXT "Año: 2025" 7470:14717 505×26 {DM Sans 400 · 20px · lh 26px · #000000} "Año: 2025"
+            - TEXT "Periodo: 1 año" 7470:14718 505×26 {DM Sans 400 · 20px · lh 26px · #000000} "Periodo: 1 año"
+            - TEXT "Cliente: Sana Sana - Hospital HCAM" 7470:14719 505×26 {DM Sans 400 · 20px · lh 26px · #000000} "Cliente: Sana Sana - Hospital HCAM"
+            - TEXT "Servicio: Desarrollo de Fronend" 7470:14720 505×26 {DM Sans 400 · 20px · lh 26px · #000000} "Servicio: Desarrollo de Fronend"
+  - FRAME "Footer" 7470:14360 1728×528 [column main center cross center] bg #151414
+    - INSTANCE "NEWSLETTER" 7470:14361 1728×208 [row gap 60 pad 60/40/60/40 main center cross center] bg #613e3b border 1px #613e3b <instance 2400:6836> (oculto)
+      - FRAME "Container" I7470:14361;2400:6878 1536×88 [row gap 60 cross center]
+        - FRAME "Content" I7470:14361;2400:6837 617×88 [column gap 10]
+          - TEXT "Title" I7470:14361;2400:6838 617×34 {DM Sans 600 · 28.1299991607666px · lh 34px · title · #ffffff} "Heading"
+          - TEXT "Description" I7470:14361;2400:6839 617×44 {DM Sans 400 · 14.399999618530273px · lh 22px · #ebe6e6} "Feugiat fames mattis sit parturient at pharetra, hac mi risus porttitor, auctor morbi fusce viverra sem nascetur, erat vestibulum a porttitor et, netus enim."
+        - INSTANCE "Input" I7470:14361;2400:6840 859×84 [column] <instance 2017:1093>
+          - INSTANCE "Input" I7470:14361;2400:6840;2016:1399 859×84 [column gap 10] <instance 2016:993>
+            - FRAME "Frame 1" I7470:14361;2400:6840;2016:1399;5271:21548 46×27 [row gap 2]
+              - TEXT "Label" I7470:14361;2400:6840;2016:1399;5271:21549 46×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Email"
+              - TEXT "*" I7470:14361;2400:6840;2016:1399;5271:21550 9×27 {DM Sans 500 · 18px · lh 27px · #f04150} "*" (oculto)
+            - FRAME "Frame" I7470:14361;2400:6840;2016:1399;2016:995 859×47 [row gap 15]
+              - FRAME "Field" I7470:14361;2400:6840;2016:1399;2016:996 743×47 [row] bg #ffffff border 1px #d8cfce radius 15 shadow
+                - INSTANCE "Prefix Button ----------" I7470:14361;2400:6840;2016:1399;2016:997 97×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #ffffff border 1px #d8cfce radius 15/0/0/15 shadow <instance 33:46> (oculto)
+                  - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:997;33:63 28×28 <instance 23:11759>
+                    - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:997;33:63;22:9457 19×19 bg #613e3b
+                  - TEXT "ACTION" I7470:14361;2400:6840;2016:1399;2016:997;33:48 57×27 {DM Sans 500 · 18px · lh 27px · center · #3a0e0a} "Button"
+                  - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:997;33:66 28×28 <instance 23:11759>
+                    - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:997;33:66;22:9457 19×19 bg #613e3b
+                - FRAME "Frame" I7470:14361;2400:6840;2016:1399;2016:998 743×47 [row gap 10 pad 10/15/10/15 cross center]
+                  - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:999 24×24 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:999;22:9457 16×16 bg #613e3b
+                  - GROUP "Group" I7470:14361;2400:6840;2016:1399;2018:4068 713×27
+                    - TEXT "Enter text here" I7470:14361;2400:6840;2016:1399;2016:1001 713×27 opacity 50% {DM Sans 400 · 18px · lh 27px · #3a0e0a} "Enter text here"
+                  - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:1003 24×24 <instance 23:11759> (oculto)
+                    - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:1003;22:9457 16×16 bg #896e6c
+                - INSTANCE "Suffix Button ----------" I7470:14361;2400:6840;2016:1399;2016:1005 97×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #ffffff border 1px #d8cfce radius 0/15/15/0 shadow <instance 33:46> (oculto)
+                  - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:1005;33:63 28×28 <instance 23:11759>
+                    - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:1005;33:63;22:9457 19×19 bg #613e3b
+                  - TEXT "ACTION" I7470:14361;2400:6840;2016:1399;2016:1005;33:48 57×27 {DM Sans 500 · 18px · lh 27px · center · #3a0e0a} "Button"
+                  - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:1005;33:66 28×28 <instance 23:11759>
+                    - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:1005;33:66;22:9457 19×19 bg #613e3b
+              - INSTANCE "BUTTON SIDE" I7470:14361;2400:6840;2016:1399;2016:1006 101×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #e73728 radius 15 shadow <instance 33:38>
+                - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:1006;33:57 28×28 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:1006;33:57;22:9457 19×19 bg #ffffff
+                - TEXT "Label" I7470:14361;2400:6840;2016:1399;2016:1006;33:40 61×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Submit"
+                - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:1006;33:60 28×28 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:1006;33:60;22:9457 19×19 bg #ffffff
+            - TEXT "This is a help sentence." I7470:14361;2400:6840;2016:1399;2016:1007 938×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #896e6c} "This is a help sentence." (oculto)
+            - FRAME "Frame" I7470:14361;2400:6840;2016:1399;2016:1008 98×69 [column pad 20/0/0/0] (oculto)
+              - INSTANCE "BUTTON BELOW" I7470:14361;2400:6840;2016:1399;2016:1009 97×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #e73728 radius 15 shadow <instance 33:38>
+                - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:1009;33:57 28×28 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:1009;33:57;22:9457 19×19 bg #ffffff
+                - TEXT "Label" I7470:14361;2400:6840;2016:1399;2016:1009;33:40 57×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Button"
+                - INSTANCE "icons" I7470:14361;2400:6840;2016:1399;2016:1009;33:60 28×28 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14361;2400:6840;2016:1399;2016:1009;33:60;22:9457 19×19 bg #ffffff
+    - FRAME "FOOTER" 7470:14362 1536×446 [row pad 80/0/80/0 main space_between]
+      - FRAME "COLUMN 1" 7470:14363 421×195 [column gap 30]
+        - FRAME "Frame 171" 7470:14364 421×135 [column gap 20]
+          - INSTANCE "LOGO" 7470:14365 303×93 [column gap 15.55555534362793 main center] <instance 2351:38087>
+            - RECTANGLE "Image" I7470:14365;2351:38088 303×93 bg image
+          - INSTANCE "TEXT" 7470:14366 421×22 [column] <instance 2383:7294>
+            - TEXT "Description" I7470:14366;2383:7295 421×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ffffff} "Software Development & SEO Services"
+        - INSTANCE "BUTTON" 7470:14367 97×47 [row gap 10 pad 10/20/10/20 main center cross center] radius 5 <instance 2004:16> (oculto)
+          - INSTANCE "icons" I7470:14367;2004:17 28×28 <instance 23:11759> (oculto)
+            - VECTOR "Vector" I7470:14367;2004:17;22:9457 19×19 bg #ffffff
+          - TEXT "ACTION" I7470:14367;2004:18 58×27 {DM Sans 500 · 18px · lh 27px · center · #ffffff} "Button"
+          - INSTANCE "icons" I7470:14367;2004:19 28×28 <instance 23:11759> (oculto)
+            - VECTOR "Vector" I7470:14367;2004:19;22:9457 19×19 bg #ffffff
+        - INSTANCE "Social Icons" 7470:14368 421×30 [row gap 5 cross center] <instance 2352:42939>
+          - FRAME "Icon" I7470:14368;2352:43317 30×30 [row gap 10 cross center]
+            - INSTANCE "facebook-f" I7470:14368;5428:11149 30×30 <instance 23:12750>
+              - VECTOR "Vector" I7470:14368;5428:11149;22:10723 12×21 bg #ffffff
+          - FRAME "Icon" I7470:14368;2352:43365 30×30 [row gap 10 cross center]
+            - INSTANCE "youtube" I7470:14368;5428:11312 30×30 <instance 23:12736>
+              - VECTOR "Vector" I7470:14368;5428:11312;22:10751 22×15 bg #ffffff
+          - FRAME "Icon" I7470:14368;2352:43357 30×30 [row gap 10 cross center]
+            - INSTANCE "linkedin-in" I7470:14368;5428:11308 30×30 <instance 23:12729>
+              - VECTOR "Vector" I7470:14368;5428:11308;22:10765 18×18 bg #ffffff
+          - FRAME "Icon" I7470:14368;2352:43369 30×30 [row gap 10 cross center]
+            - INSTANCE "instagram" I7470:14368;5428:11306 30×30 <instance 23:13107>
+              - VECTOR "Vector" I7470:14368;5428:11306;22:10357 18×18 bg #ffffff
+          - FRAME "Icon" I7470:14368;2352:43353 30×30 [row gap 10 cross center]
+            - INSTANCE "tiktok" I7470:14368;5428:11304 30×30 <instance 23:12644>
+              - VECTOR "Vector" I7470:14368;5428:11304;22:11025 18×21 bg #ffffff
+          - FRAME "Icon" I7470:14368;2352:43361 30×30 [row gap 10 cross center]
+            - INSTANCE "x-twitter" I7470:14368;5428:11310 30×30 <instance 23:13101>
+              - VECTOR "Vector" I7470:14368;5428:11310;22:10071 18×17 bg #ffffff
+          - FRAME "Icon" I7470:14368;2352:43349 30×30 [row gap 10 cross center]
+            - INSTANCE "mastodon" I7470:14368;5428:11302 30×30 <instance 23:12914>
+              - VECTOR "Vector" I7470:14368;5428:11302;22:10319 17×18 bg #ffffff
+      - FRAME "Frame 204" 7470:14369 1115×286 [row gap 30 main max]
+        - INSTANCE ".FooterColumn" 7470:14370 200×190 [column gap 15 main center] <instance 2675:4343>
+          - TEXT "Title" I7470:14370;2675:4288 63×22 {DM Sans 600 · 14.399999618530273px · lh 22px · #b09f9d} "Nosotros"
+          - FRAME "Frame 5" I7470:14370;3033:9672 200×153 [column gap 15]
+            - FRAME "Item 1" I7470:14370;2681:7430 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14370;2681:7431 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Misión Visión"
+            - FRAME "Item 2" I7470:14370;2681:7434 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14370;2681:7435 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Filosofía"
+            - FRAME "Item 3" I7470:14370;2681:7428 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14370;2681:7429 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Marco de trabajo"
+            - FRAME "Item 4" I7470:14370;2681:7436 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14370;2681:7437 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Equipo"
+            - FRAME "Item 5" I7470:14370;2681:7426 200×27 [column gap 10 main center cross center] (oculto)
+              - TEXT "ACTION" I7470:14370;2681:7427 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Item"
+            - FRAME "Item 6" I7470:14370;2681:7438 200×27 [column gap 10 main center cross center] (oculto)
+              - TEXT "ACTION" I7470:14370;2681:7439 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Item"
+            - FRAME "Item 7" I7470:14370;2681:7432 200×27 [column gap 10 main center cross center] (oculto)
+              - TEXT "ACTION" I7470:14370;2681:7433 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Item"
+        - INSTANCE ".FooterColumn" 7470:14371 200×286 [column gap 15 main center] <instance 2675:4343>
+          - TEXT "Title" I7470:14371;2675:4288 64×22 {DM Sans 600 · 14.399999618530273px · lh 22px · #b09f9d} "Servicios"
+          - FRAME "Frame 5" I7470:14371;3033:9672 200×249 [column gap 15]
+            - FRAME "Item 1" I7470:14371;2681:7430 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14371;2681:7431 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Desarrollo de Software"
+            - FRAME "Item 2" I7470:14371;2681:7434 200×54 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14371;2681:7435 200×54 {DM Sans 400 · 18px · lh 27px · #ffffff} "Desarrollo Web & Ecommerce"
+            - FRAME "Item 3" I7470:14371;2681:7428 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14371;2681:7429 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "UX/UI & Product Design"
+            - FRAME "Item 4" I7470:14371;2681:7436 200×54 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14371;2681:7437 200×54 {DM Sans 400 · 18px · lh 27px · #ffffff} "SEO & Marketing Técnico"
+            - FRAME "Item 5" I7470:14371;2681:7426 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14371;2681:7427 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Cloud & DevOps"
+            - FRAME "Item 6" I7470:14371;2681:7438 200×27 [column gap 10 main center cross center] (oculto)
+              - TEXT "ACTION" I7470:14371;2681:7439 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Item"
+            - FRAME "Item 7" I7470:14371;2681:7432 200×27 [column gap 10 main center cross center] (oculto)
+              - TEXT "ACTION" I7470:14371;2681:7433 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Item"
+        - INSTANCE ".FooterColumn" 7470:14372 200×274 [column gap 15 main center] <instance 2675:4343>
+          - TEXT "Title" I7470:14372;2675:4288 67×22 {DM Sans 600 · 14.399999618530273px · lh 22px · #b09f9d} "Portafolio"
+          - FRAME "Frame 5" I7470:14372;3033:9672 200×237 [column gap 15]
+            - FRAME "Item 1" I7470:14372;2681:7430 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14372;2681:7431 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Néxito"
+            - FRAME "Item 2" I7470:14372;2681:7434 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14372;2681:7435 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Four Winds Group"
+            - FRAME "Item 3" I7470:14372;2681:7428 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14372;2681:7429 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Sana Sana"
+            - FRAME "Item 4" I7470:14372;2681:7436 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14372;2681:7437 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Dhisve"
+            - FRAME "Item 5" I7470:14372;2681:7426 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14372;2681:7427 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Anchor"
+            - FRAME "Item 6" I7470:14372;2681:7438 200×27 [column gap 10 main center cross center]
+              - TEXT "ACTION" I7470:14372;2681:7439 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Skanio"
+            - FRAME "Item 7" I7470:14372;2681:7432 200×27 [column gap 10 main center cross center] (oculto)
+              - TEXT "ACTION" I7470:14372;2681:7433 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "Item"
+        - FRAME ".FooterColumn" 7470:14373 234×202 [column gap 15 main center]
+          - TEXT "Title" 7470:14374 66×22 {DM Sans 600 · 14.399999618530273px · lh 22px · #b09f9d} "Contacto"
+          - FRAME "Frame 5" 7470:14375 234×165 [column gap 15]
+            - FRAME "Item 1" 7470:14376 234×27 [row gap 10 cross center]
+              - FRAME "Frame 205" 7470:14377 24×24 [column gap 10 main center cross center]
+                - GROUP "Group 97" 7470:14378 13×24
+                  - GROUP "Group 94" 7470:14379 13×24
+                    - VECTOR "Vector" 7470:14380 13×24 bg #ffffff
+                    - VECTOR "Vector" 7470:14381 10×18 bg #ffffff
+                    - VECTOR "Vector" 7470:14382 2×0 bg #ffffff
+                    - VECTOR "Vector" 7470:14383 1×1 bg #ffffff
+                    - VECTOR "Vector" 7470:14384 1×0 bg #ffffff
+                    - VECTOR "Vector" 7470:14385 1×0 bg #ffffff
+                    - VECTOR "Vector" 7470:14386 0×0 bg #ffffff
+              - TEXT "ACTION" 7470:14387 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "+593 945 1234589"
+            - FRAME "Item 9" 7470:14388 234×27 [row gap 10]
+              - FRAME "Frame 206" 7470:14389 24×24 [column gap 10 pad 10/10/10/10 main center cross center]
+                - GROUP "Group 98" 7470:14390 24×24
+                  - VECTOR "Vector" 7470:14391 24×24 bg #ffffff
+                  - VECTOR "Vector" 7470:14392 9×9 bg #ffffff
+              - TEXT "ACTION" 7470:14393 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "design@intelindev.com"
+            - FRAME "Item 8" 7470:14394 234×81 [row gap 10]
+              - FRAME "Frame 207" 7470:14395 24×24 [column gap 10 pad 10/10/10/10 main center cross center]
+                - GROUP "Group 96" 7470:14396 25×24
+                  - VECTOR "Vector" 7470:14397 10×14 bg #ffffff
+                  - VECTOR "Vector" 7470:14398 5×5 bg #ffffff
+                  - VECTOR "Vector" 7470:14399 25×2 bg #ffffff
+                  - VECTOR "Vector" 7470:14400 21×16 bg #ffffff
+                  - VECTOR "Vector" 7470:14401 20×14 bg #ffffff
+                  - VECTOR "Vector" 7470:14402 5×8 bg #ffffff
+                  - VECTOR "Vector" 7470:14403 5×8 bg #ffffff
+                  - VECTOR "Vector" 7470:14404 5×3 bg #ffffff
+                  - VECTOR "Vector" 7470:14405 5×3 bg #ffffff
+                  - VECTOR "Vector" 7470:14406 0×8 bg #ffffff
+                  - VECTOR "Vector" 7470:14407 0×8 bg #ffffff
+              - TEXT "ACTION" 7470:14408 200×81 {DM Sans 400 · 18px · lh 27px · #ffffff} "4517 Washington Ave. Manchester, Kentucky 39495"
+    - FRAME "SOCKET" 7470:14409 1728×82 [row gap 105 pad 20/0/20/0 main space_between cross center] bg #080808
+      - FRAME "Container" 7470:14410 1536×42 [row gap 1209 main space_between cross center]
+        - INSTANCE "SOCKET COPY" 7470:14411 748×42 [column pad 10/0/10/0 main center cross center] <instance 20:947>
+          - TEXT "Description" I7470:14411;20:948 748×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ebe6e6} "Intelindev © 2026 All Rights Reserved."
+        - INSTANCE "TEXT" 7470:14412 421×22 [column] <instance 2383:7294>
+          - TEXT "Description" I7470:14412;2383:7295 421×22 {DM Sans 400 · 14.399999618530273px · lh 22px · right · #ffffff} "Terms & Conditions | Privacy Policy"
+  - FRAME "Header" 7470:14413 1536×80 [row pad 10/30/10/30 main center cross center] bg #000000 71% radius 20
+    - FRAME "Frame 3" 7470:14414 1476×60 [row cross center]
+      - FRAME "Frame 19" 7470:14415 160×60 [column gap 10]
+        - INSTANCE ".HeaderLogo" 7470:14416 160×60 [column gap 10 main center] <instance 2350:31648>
+          - RECTANGLE "Image" I7470:14416;2350:31649 160×60 bg image
+      - FRAME "Frame 20" 7470:14417 1128×47 [row pad 0/10/0/10 main center cross center]
+        - INSTANCE ".MenuBarItem" 7470:14418 80×47 [row main center cross center] radius 15 <instance 5391:61046>
+          - FRAME "Item" I7470:14418;5391:61087 80×47 [row gap 5 pad 10/15/10/15 cross center] radius 15
+            - TEXT "Label" I7470:14418;5391:61047 50×27 {DM Sans 500 · 18px · lh 27px · center · #ffffff} "Home"
+            - INSTANCE "caret-down" I7470:14418;5391:61048 24×24 <instance 23:12453> (oculto)
+              - VECTOR "Vector" I7470:14418;5391:61048;22:6951 10×6 bg #613e3b
+          - INSTANCE ".DropdownMenu" I7470:14418;5391:61088 200×329 [column main center] bg #ffffff border 1px #d8cfce radius 20 opacity 0% shadow <instance 2105:660>
+            - INSTANCE "ITEM 1" I7470:14418;5391:61088;2105:661 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14418;5391:61088;2105:661;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14418;5391:61088;2105:661;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14418;5391:61088;2105:661;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14418;5391:61088;2105:661;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14418;5391:61088;2105:661;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14418;5391:61088;2105:661;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 2" I7470:14418;5391:61088;2105:662 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14418;5391:61088;2105:662;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14418;5391:61088;2105:662;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14418;5391:61088;2105:662;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14418;5391:61088;2105:662;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14418;5391:61088;2105:662;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14418;5391:61088;2105:662;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 3" I7470:14418;5391:61088;2105:663 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14418;5391:61088;2105:663;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14418;5391:61088;2105:663;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14418;5391:61088;2105:663;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14418;5391:61088;2105:663;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14418;5391:61088;2105:663;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14418;5391:61088;2105:663;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 4" I7470:14418;5391:61088;2105:664 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14418;5391:61088;2105:664;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14418;5391:61088;2105:664;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14418;5391:61088;2105:664;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14418;5391:61088;2105:664;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14418;5391:61088;2105:664;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14418;5391:61088;2105:664;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 5" I7470:14418;5391:61088;2105:665 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14418;5391:61088;2105:665;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14418;5391:61088;2105:665;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14418;5391:61088;2105:665;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14418;5391:61088;2105:665;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14418;5391:61088;2105:665;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14418;5391:61088;2105:665;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 6" I7470:14418;5391:61088;2105:666 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14418;5391:61088;2105:666;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14418;5391:61088;2105:666;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14418;5391:61088;2105:666;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14418;5391:61088;2105:666;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14418;5391:61088;2105:666;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14418;5391:61088;2105:666;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 7" I7470:14418;5391:61088;2105:667 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14418;5391:61088;2105:667;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14418;5391:61088;2105:667;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14418;5391:61088;2105:667;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14418;5391:61088;2105:667;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14418;5391:61088;2105:667;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14418;5391:61088;2105:667;2105:610;22:7691 8×14 bg #613e3b
+        - INSTANCE ".MenuBarItem" 7470:14419 107×47 [row main center cross center] radius 15 <instance 5391:61046>
+          - FRAME "Item" I7470:14419;5391:61087 107×47 [row gap 5 pad 10/15/10/15 cross center] radius 15
+            - TEXT "Label" I7470:14419;5391:61047 77×27 {DM Sans 500 · 18px · lh 27px · center · #ffffff} "Nosotros"
+            - INSTANCE "caret-down" I7470:14419;5391:61048 24×24 <instance 23:12453> (oculto)
+              - VECTOR "Vector" I7470:14419;5391:61048;22:6951 10×6 bg #613e3b
+          - INSTANCE ".DropdownMenu" I7470:14419;5391:61088 200×329 [column main center] bg #ffffff border 1px #d8cfce radius 20 opacity 0% shadow <instance 2105:660>
+            - INSTANCE "ITEM 1" I7470:14419;5391:61088;2105:661 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14419;5391:61088;2105:661;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14419;5391:61088;2105:661;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14419;5391:61088;2105:661;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14419;5391:61088;2105:661;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14419;5391:61088;2105:661;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14419;5391:61088;2105:661;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 2" I7470:14419;5391:61088;2105:662 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14419;5391:61088;2105:662;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14419;5391:61088;2105:662;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14419;5391:61088;2105:662;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14419;5391:61088;2105:662;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14419;5391:61088;2105:662;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14419;5391:61088;2105:662;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 3" I7470:14419;5391:61088;2105:663 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14419;5391:61088;2105:663;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14419;5391:61088;2105:663;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14419;5391:61088;2105:663;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14419;5391:61088;2105:663;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14419;5391:61088;2105:663;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14419;5391:61088;2105:663;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 4" I7470:14419;5391:61088;2105:664 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14419;5391:61088;2105:664;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14419;5391:61088;2105:664;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14419;5391:61088;2105:664;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14419;5391:61088;2105:664;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14419;5391:61088;2105:664;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14419;5391:61088;2105:664;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 5" I7470:14419;5391:61088;2105:665 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14419;5391:61088;2105:665;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14419;5391:61088;2105:665;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14419;5391:61088;2105:665;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14419;5391:61088;2105:665;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14419;5391:61088;2105:665;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14419;5391:61088;2105:665;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 6" I7470:14419;5391:61088;2105:666 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14419;5391:61088;2105:666;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14419;5391:61088;2105:666;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14419;5391:61088;2105:666;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14419;5391:61088;2105:666;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14419;5391:61088;2105:666;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14419;5391:61088;2105:666;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 7" I7470:14419;5391:61088;2105:667 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14419;5391:61088;2105:667;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14419;5391:61088;2105:667;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14419;5391:61088;2105:667;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14419;5391:61088;2105:667;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14419;5391:61088;2105:667;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14419;5391:61088;2105:667;2105:610;22:7691 8×14 bg #613e3b
+        - INSTANCE ".MenuBarItem" 7470:14420 136×47 [row main center cross center] radius 15 <instance 5391:61249>
+          - FRAME "Item" I7470:14420;5391:61250 136×47 [row gap 5 pad 10/15/10/15 cross center] bg #ebe6e6 radius 15
+            - TEXT "Label" I7470:14420;5391:61251 77×27 {DM Sans 500 · 18px · lh 27px · center · #151414} "Servicios"
+            - INSTANCE "caret-down" I7470:14420;5391:61252 24×24 <instance 23:12453>
+              - VECTOR "Vector" I7470:14420;5391:61252;22:6951 10×6 bg #151414
+          - INSTANCE ".DropdownMenu" I7470:14420;5391:61253 200×329 [column main center] bg #ffffff border 1px #d8cfce radius 20 opacity 0% shadow <instance 2105:660>
+            - INSTANCE "ITEM 1" I7470:14420;5391:61253;2105:661 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14420;5391:61253;2105:661;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14420;5391:61253;2105:661;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14420;5391:61253;2105:661;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14420;5391:61253;2105:661;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14420;5391:61253;2105:661;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14420;5391:61253;2105:661;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 2" I7470:14420;5391:61253;2105:662 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14420;5391:61253;2105:662;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14420;5391:61253;2105:662;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14420;5391:61253;2105:662;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14420;5391:61253;2105:662;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14420;5391:61253;2105:662;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14420;5391:61253;2105:662;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 3" I7470:14420;5391:61253;2105:663 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14420;5391:61253;2105:663;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14420;5391:61253;2105:663;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14420;5391:61253;2105:663;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14420;5391:61253;2105:663;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14420;5391:61253;2105:663;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14420;5391:61253;2105:663;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 4" I7470:14420;5391:61253;2105:664 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14420;5391:61253;2105:664;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14420;5391:61253;2105:664;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14420;5391:61253;2105:664;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14420;5391:61253;2105:664;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14420;5391:61253;2105:664;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14420;5391:61253;2105:664;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 5" I7470:14420;5391:61253;2105:665 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14420;5391:61253;2105:665;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14420;5391:61253;2105:665;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14420;5391:61253;2105:665;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14420;5391:61253;2105:665;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14420;5391:61253;2105:665;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14420;5391:61253;2105:665;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 6" I7470:14420;5391:61253;2105:666 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14420;5391:61253;2105:666;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14420;5391:61253;2105:666;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14420;5391:61253;2105:666;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14420;5391:61253;2105:666;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14420;5391:61253;2105:666;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14420;5391:61253;2105:666;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 7" I7470:14420;5391:61253;2105:667 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14420;5391:61253;2105:667;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14420;5391:61253;2105:667;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14420;5391:61253;2105:667;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14420;5391:61253;2105:667;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14420;5391:61253;2105:667;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14420;5391:61253;2105:667;2105:610;22:7691 8×14 bg #613e3b
+        - INSTANCE ".MenuBarItem" 7470:14421 112×47 [row main center cross center] radius 15 <instance 5391:61046>
+          - FRAME "Item" I7470:14421;5391:61087 112×47 [row gap 5 pad 10/15/10/15 cross center] radius 15
+            - TEXT "Label" I7470:14421;5391:61047 82×27 {DM Sans 500 · 18px · lh 27px · center · #ffffff} "Portafolio"
+            - INSTANCE "caret-down" I7470:14421;5391:61048 24×24 <instance 23:12453> (oculto)
+              - VECTOR "Vector" I7470:14421;5391:61048;22:6951 10×6 bg #613e3b
+          - INSTANCE ".DropdownMenu" I7470:14421;5391:61088 200×329 [column main center] bg #ffffff border 1px #d8cfce radius 20 opacity 0% shadow <instance 2105:660>
+            - INSTANCE "ITEM 1" I7470:14421;5391:61088;2105:661 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14421;5391:61088;2105:661;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14421;5391:61088;2105:661;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14421;5391:61088;2105:661;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14421;5391:61088;2105:661;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14421;5391:61088;2105:661;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14421;5391:61088;2105:661;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 2" I7470:14421;5391:61088;2105:662 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14421;5391:61088;2105:662;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14421;5391:61088;2105:662;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14421;5391:61088;2105:662;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14421;5391:61088;2105:662;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14421;5391:61088;2105:662;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14421;5391:61088;2105:662;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 3" I7470:14421;5391:61088;2105:663 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14421;5391:61088;2105:663;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14421;5391:61088;2105:663;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14421;5391:61088;2105:663;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14421;5391:61088;2105:663;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14421;5391:61088;2105:663;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14421;5391:61088;2105:663;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 4" I7470:14421;5391:61088;2105:664 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14421;5391:61088;2105:664;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14421;5391:61088;2105:664;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14421;5391:61088;2105:664;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14421;5391:61088;2105:664;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14421;5391:61088;2105:664;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14421;5391:61088;2105:664;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 5" I7470:14421;5391:61088;2105:665 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14421;5391:61088;2105:665;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14421;5391:61088;2105:665;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14421;5391:61088;2105:665;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14421;5391:61088;2105:665;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14421;5391:61088;2105:665;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14421;5391:61088;2105:665;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 6" I7470:14421;5391:61088;2105:666 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14421;5391:61088;2105:666;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14421;5391:61088;2105:666;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14421;5391:61088;2105:666;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14421;5391:61088;2105:666;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14421;5391:61088;2105:666;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14421;5391:61088;2105:666;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 7" I7470:14421;5391:61088;2105:667 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14421;5391:61088;2105:667;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14421;5391:61088;2105:667;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14421;5391:61088;2105:667;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14421;5391:61088;2105:667;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14421;5391:61088;2105:667;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14421;5391:61088;2105:667;2105:610;22:7691 8×14 bg #613e3b
+        - INSTANCE ".MenuBarItem" 7470:14422 66×47 [row main center cross center] radius 15 <instance 5391:61046>
+          - FRAME "Item" I7470:14422;5391:61087 66×47 [row gap 5 pad 10/15/10/15 cross center] radius 15
+            - TEXT "Label" I7470:14422;5391:61047 36×27 {DM Sans 500 · 18px · lh 27px · center · #ffffff} "Blog"
+            - INSTANCE "caret-down" I7470:14422;5391:61048 24×24 <instance 23:12453> (oculto)
+              - VECTOR "Vector" I7470:14422;5391:61048;22:6951 10×6 bg #613e3b
+          - INSTANCE ".DropdownMenu" I7470:14422;5391:61088 200×329 [column main center] bg #ffffff border 1px #d8cfce radius 20 opacity 0% shadow <instance 2105:660>
+            - INSTANCE "ITEM 1" I7470:14422;5391:61088;2105:661 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14422;5391:61088;2105:661;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14422;5391:61088;2105:661;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14422;5391:61088;2105:661;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14422;5391:61088;2105:661;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14422;5391:61088;2105:661;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14422;5391:61088;2105:661;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 2" I7470:14422;5391:61088;2105:662 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14422;5391:61088;2105:662;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14422;5391:61088;2105:662;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14422;5391:61088;2105:662;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14422;5391:61088;2105:662;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14422;5391:61088;2105:662;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14422;5391:61088;2105:662;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 3" I7470:14422;5391:61088;2105:663 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14422;5391:61088;2105:663;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14422;5391:61088;2105:663;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14422;5391:61088;2105:663;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14422;5391:61088;2105:663;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14422;5391:61088;2105:663;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14422;5391:61088;2105:663;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 4" I7470:14422;5391:61088;2105:664 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14422;5391:61088;2105:664;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14422;5391:61088;2105:664;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14422;5391:61088;2105:664;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14422;5391:61088;2105:664;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14422;5391:61088;2105:664;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14422;5391:61088;2105:664;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 5" I7470:14422;5391:61088;2105:665 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14422;5391:61088;2105:665;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14422;5391:61088;2105:665;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14422;5391:61088;2105:665;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14422;5391:61088;2105:665;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14422;5391:61088;2105:665;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14422;5391:61088;2105:665;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 6" I7470:14422;5391:61088;2105:666 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14422;5391:61088;2105:666;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14422;5391:61088;2105:666;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14422;5391:61088;2105:666;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14422;5391:61088;2105:666;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14422;5391:61088;2105:666;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14422;5391:61088;2105:666;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 7" I7470:14422;5391:61088;2105:667 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14422;5391:61088;2105:667;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14422;5391:61088;2105:667;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14422;5391:61088;2105:667;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14422;5391:61088;2105:667;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Item"
+              - INSTANCE "chevron-right" I7470:14422;5391:61088;2105:667;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14422;5391:61088;2105:667;2105:610;22:7691 8×14 bg #613e3b
+        - INSTANCE ".MenuBarItem" 7470:14423 98×47 [row main center cross center] radius 15 <instance 5391:61046> (oculto)
+          - FRAME "Item" I7470:14423;5391:61087 98×47 [row gap 5 pad 10/15/10/15 cross center] radius 15
+            - TEXT "Label" I7470:14423;5391:61047 39×27 {DM Sans 500 · 18px · lh 27px · center · #613e3b} "Item"
+            - INSTANCE "caret-down" I7470:14423;5391:61048 24×24 <instance 23:12453>
+              - VECTOR "Vector" I7470:14423;5391:61048;22:6951 10×6 bg #613e3b
+          - INSTANCE ".DropdownMenu" I7470:14423;5391:61088 200×329 [column main center] bg #ffffff border 1px #d8cfce radius 20 opacity 0% shadow <instance 2105:660>
+            - INSTANCE "ITEM 1" I7470:14423;5391:61088;2105:661 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14423;5391:61088;2105:661;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14423;5391:61088;2105:661;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14423;5391:61088;2105:661;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14423;5391:61088;2105:661;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14423;5391:61088;2105:661;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14423;5391:61088;2105:661;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 2" I7470:14423;5391:61088;2105:662 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14423;5391:61088;2105:662;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14423;5391:61088;2105:662;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14423;5391:61088;2105:662;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14423;5391:61088;2105:662;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14423;5391:61088;2105:662;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14423;5391:61088;2105:662;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 3" I7470:14423;5391:61088;2105:663 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14423;5391:61088;2105:663;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14423;5391:61088;2105:663;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14423;5391:61088;2105:663;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14423;5391:61088;2105:663;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14423;5391:61088;2105:663;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14423;5391:61088;2105:663;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 4" I7470:14423;5391:61088;2105:664 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14423;5391:61088;2105:664;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14423;5391:61088;2105:664;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14423;5391:61088;2105:664;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14423;5391:61088;2105:664;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14423;5391:61088;2105:664;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14423;5391:61088;2105:664;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 5" I7470:14423;5391:61088;2105:665 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14423;5391:61088;2105:665;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14423;5391:61088;2105:665;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14423;5391:61088;2105:665;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14423;5391:61088;2105:665;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14423;5391:61088;2105:665;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14423;5391:61088;2105:665;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 6" I7470:14423;5391:61088;2105:666 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14423;5391:61088;2105:666;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14423;5391:61088;2105:666;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14423;5391:61088;2105:666;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14423;5391:61088;2105:666;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14423;5391:61088;2105:666;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14423;5391:61088;2105:666;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 7" I7470:14423;5391:61088;2105:667 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14423;5391:61088;2105:667;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14423;5391:61088;2105:667;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14423;5391:61088;2105:667;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14423;5391:61088;2105:667;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14423;5391:61088;2105:667;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14423;5391:61088;2105:667;2105:610;22:7691 8×14 bg #613e3b
+        - INSTANCE ".MenuBarItem" 7470:14424 98×47 [row main center cross center] radius 15 <instance 5391:61046> (oculto)
+          - FRAME "Item" I7470:14424;5391:61087 98×47 [row gap 5 pad 10/15/10/15 cross center] radius 15
+            - TEXT "Label" I7470:14424;5391:61047 39×27 {DM Sans 500 · 18px · lh 27px · center · #613e3b} "Item"
+            - INSTANCE "caret-down" I7470:14424;5391:61048 24×24 <instance 23:12453>
+              - VECTOR "Vector" I7470:14424;5391:61048;22:6951 10×6 bg #613e3b
+          - INSTANCE ".DropdownMenu" I7470:14424;5391:61088 200×329 [column main center] bg #ffffff border 1px #d8cfce radius 20 opacity 0% shadow <instance 2105:660>
+            - INSTANCE "ITEM 1" I7470:14424;5391:61088;2105:661 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14424;5391:61088;2105:661;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14424;5391:61088;2105:661;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14424;5391:61088;2105:661;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14424;5391:61088;2105:661;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14424;5391:61088;2105:661;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14424;5391:61088;2105:661;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 2" I7470:14424;5391:61088;2105:662 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14424;5391:61088;2105:662;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14424;5391:61088;2105:662;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14424;5391:61088;2105:662;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14424;5391:61088;2105:662;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14424;5391:61088;2105:662;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14424;5391:61088;2105:662;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 3" I7470:14424;5391:61088;2105:663 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14424;5391:61088;2105:663;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14424;5391:61088;2105:663;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14424;5391:61088;2105:663;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14424;5391:61088;2105:663;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14424;5391:61088;2105:663;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14424;5391:61088;2105:663;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 4" I7470:14424;5391:61088;2105:664 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14424;5391:61088;2105:664;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14424;5391:61088;2105:664;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14424;5391:61088;2105:664;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14424;5391:61088;2105:664;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14424;5391:61088;2105:664;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14424;5391:61088;2105:664;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 5" I7470:14424;5391:61088;2105:665 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14424;5391:61088;2105:665;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14424;5391:61088;2105:665;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14424;5391:61088;2105:665;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14424;5391:61088;2105:665;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14424;5391:61088;2105:665;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14424;5391:61088;2105:665;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 6" I7470:14424;5391:61088;2105:666 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14424;5391:61088;2105:666;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14424;5391:61088;2105:666;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14424;5391:61088;2105:666;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14424;5391:61088;2105:666;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14424;5391:61088;2105:666;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14424;5391:61088;2105:666;2105:610;22:7691 8×14 bg #613e3b
+            - INSTANCE "ITEM 7" I7470:14424;5391:61088;2105:667 200×47 [row gap 10 pad 10/15/10/15 cross center] radius 15 <instance 2105:606>
+              - FRAME "Frame 1" I7470:14424;5391:61088;2105:667;2105:607 170×27 [row gap 10 cross center]
+                - INSTANCE "icons" I7470:14424;5391:61088;2105:667;2105:608 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14424;5391:61088;2105:667;2105:608;22:9457 16×16 bg #613e3b
+                - TEXT "ACTION" I7470:14424;5391:61088;2105:667;2105:609 39×27 {DM Sans 500 · 18px · lh 27px · #613e3b} "Item"
+              - INSTANCE "chevron-right" I7470:14424;5391:61088;2105:667;2105:610 24×24 <instance 23:12006> (oculto)
+                - VECTOR "Vector" I7470:14424;5391:61088;2105:667;2105:610;22:7691 8×14 bg #613e3b
+      - FRAME "Frame 23" 7470:14425 188×48 [row gap 10]
+        - INSTANCE "Button" 7470:14426 48×48 [row gap 10 pad 10/10/10/10 main center cross center] radius 15 <instance 5436:32794> (oculto)
+          - INSTANCE "icons" I7470:14426;5436:32795 28×28 <instance 23:11759>
+            - VECTOR "Vector" I7470:14426;5436:32795;22:9457 19×19 bg #613e3b
+        - INSTANCE "Button" 7470:14427 48×48 [row gap 10 pad 10/10/10/10 main center cross center] radius 15 <instance 5436:32794> (oculto)
+          - INSTANCE "icons" I7470:14427;5436:32795 28×28 <instance 23:11759>
+            - VECTOR "Vector" I7470:14427;5436:32795;22:9457 19×19 bg #613e3b
+        - INSTANCE "Button" 7470:14428 48×48 [row gap 10 pad 10/10/10/10 main center cross center] radius 15 <instance 5436:32794> (oculto)
+          - INSTANCE "icons" I7470:14428;5436:32795 28×28 <instance 23:11759>
+            - VECTOR "Vector" I7470:14428;5436:32795;22:9457 19×19 bg #613e3b
+        - INSTANCE "Button" 7470:14429 188×48 [row gap 10 pad 10/20/10/20 main center cross center] bg #e73728 radius 15 shadow <instance 33:38>
+          - INSTANCE "icons" I7470:14429;33:57 28×28 <instance 23:11759> (oculto)
+            - VECTOR "Vector" I7470:14429;33:57;22:9457 19×19 bg #ffffff
+          - TEXT "Label" I7470:14429;33:40 110×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Contáctanos"
+          - INSTANCE "mobile-screen-button" I7470:14429;33:60 28×28 <instance 23:11739>
+            - VECTOR "Vector" I7470:14429;33:60;22:9445 13×19 bg #ffffff
+      - FRAME "Frame 21" 7470:14430 374×47 [column pad 0/10/0/10 main center cross center] (oculto)
+        - INSTANCE "Input" 7470:14431 354×47 [column gap 10] <instance 5381:17753>
+          - FRAME "Frame 1" I7470:14431;5381:17754 46×27 [row gap 2] (oculto)
+            - TEXT "Label" I7470:14431;5381:17755 46×27 {DM Sans 500 · 18px · lh 27px · #3a0e0a} "Label"
+            - TEXT "*" I7470:14431;5381:17756 9×27 {DM Sans 500 · 18px · lh 27px · #f04150} "*" (oculto)
+          - FRAME "Frame" I7470:14431;5381:17757 354×47 [row gap 15]
+            - FRAME "Field" I7470:14431;5381:17758 354×47 [row] bg #ffffff border 1px #d8cfce radius 15 shadow
+              - INSTANCE "PREFIX BUTTON" I7470:14431;5381:17759 98×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #ffffff border 1px #d8cfce radius 15/0/0/15 shadow <instance 33:46> (oculto)
+                - INSTANCE "icons" I7470:14431;5381:17759;33:63 28×28 <instance 23:11759>
+                  - VECTOR "Vector" I7470:14431;5381:17759;33:63;22:9457 19×19 bg #613e3b
+                - TEXT "ACTION" I7470:14431;5381:17759;33:48 58×27 {DM Sans 500 · 18px · lh 27px · center · #3a0e0a} "Button"
+                - INSTANCE "icons" I7470:14431;5381:17759;33:66 28×28 <instance 23:11759>
+                  - VECTOR "Vector" I7470:14431;5381:17759;33:66;22:9457 19×19 bg #613e3b
+              - FRAME "Frame" I7470:14431;5381:17760 354×47 [row gap 10 pad 10/15/10/15 cross center]
+                - INSTANCE "magnifying-glass" I7470:14431;5381:17761 24×24 <instance 23:11087>
+                  - VECTOR "Vector" I7470:14431;5381:17761;22:9333 16×16 bg #613e3b
+                - GROUP "Group" I7470:14431;5381:17762 290×27
+                  - TEXT "Search" I7470:14431;5381:17763 290×27 opacity 50% {DM Sans 400 · 18px · lh 27px · #3a0e0a} "Search"
+                - INSTANCE "icons" I7470:14431;5381:17764 24×24 <instance 23:11759> (oculto)
+                  - VECTOR "Vector" I7470:14431;5381:17764;22:9457 16×16 bg #896e6c
+              - INSTANCE "SUFFIX BUTTON" I7470:14431;5381:17765 98×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #ffffff border 1px #d8cfce radius 0/15/15/0 shadow <instance 33:46> (oculto)
+                - INSTANCE "icons" I7470:14431;5381:17765;33:63 28×28 <instance 23:11759>
+                  - VECTOR "Vector" I7470:14431;5381:17765;33:63;22:9457 19×19 bg #613e3b
+                - TEXT "ACTION" I7470:14431;5381:17765;33:48 58×27 {DM Sans 500 · 18px · lh 27px · center · #3a0e0a} "Button"
+                - INSTANCE "icons" I7470:14431;5381:17765;33:66 28×28 <instance 23:11759>
+                  - VECTOR "Vector" I7470:14431;5381:17765;33:66;22:9457 19×19 bg #613e3b
+            - INSTANCE "BUTTON SIDE" I7470:14431;5381:17766 98×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #e73728 radius 15 shadow <instance 33:38> (oculto)
+              - INSTANCE "icons" I7470:14431;5381:17766;33:57 28×28 <instance 23:11759> (oculto)
+                - VECTOR "Vector" I7470:14431;5381:17766;33:57;22:9457 19×19 bg #ffffff
+              - TEXT "Label" I7470:14431;5381:17766;33:40 58×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Button"
+              - INSTANCE "icons" I7470:14431;5381:17766;33:60 28×28 <instance 23:11759> (oculto)
+                - VECTOR "Vector" I7470:14431;5381:17766;33:60;22:9457 19×19 bg #ffffff
+          - TEXT "This is a help sentence." I7470:14431;5381:17767 938×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #896e6c} "This is a help sentence." (oculto)
+          - FRAME "Frame" I7470:14431;5381:17768 98×69 [column pad 20/0/0/0] (oculto)
+            - INSTANCE "BUTTON BELOW" I7470:14431;5381:17769 98×47 [row gap 10 pad 10/20/10/20 main center cross center] bg #e73728 radius 15 shadow <instance 33:38>
+              - INSTANCE "icons" I7470:14431;5381:17769;33:57 28×28 <instance 23:11759> (oculto)
+                - VECTOR "Vector" I7470:14431;5381:17769;33:57;22:9457 19×19 bg #ffffff
+              - TEXT "Label" I7470:14431;5381:17769;33:40 58×27 {DM Sans 500 · 18px · lh 27px · #ffffff} "Button"
+              - INSTANCE "icons" I7470:14431;5381:17769;33:60 28×28 <instance 23:11759> (oculto)
+                - VECTOR "Vector" I7470:14431;5381:17769;33:60;22:9457 19×19 bg #ffffff
