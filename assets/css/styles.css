@@ -1572,6 +1572,184 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   .projects__top, .posts__top { flex-direction: column; align-items: flex-start; }
 }
 
+/* --- Intro (propósito): título 744 + texto 704 en dos columnas --- */
+.intro__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 744fr) minmax(0, 704fr);
+  gap: var(--intelindev-space-4);
+  align-items: start;
+}
+.intro__title {
+  margin: 0;
+}
+.intro__text {
+  margin: 0;
+  color: var(--intelindev-color-gray-600);
+}
+
+/* --- Proceso ("de la idea a la realidad"): foto 590×681 + pasos 2×2 --- */
+.process__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 590fr) minmax(0, 938fr);
+  gap: var(--intelindev-space-4);
+  align-items: center;
+}
+.process__photo {
+  display: block;
+  aspect-ratio: 590 / 681;
+  border-radius: var(--intelindev-radius-lg);
+  overflow: hidden;
+  background: var(--intelindev-surface-2);
+}
+.process__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.process__photo img[src=""] { display: none; }
+.process__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--intelindev-space-4);
+}
+.process__title {
+  margin: 0;
+  font-style: normal;
+  font-size: 50px;
+  line-height: .96;
+}
+.process__text {
+  margin: -30px 0 0;
+}
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.process__step {
+  padding: 15px 0;
+}
+.process__step p { margin: 0; }
+.process__step-title {
+  margin: 0 0 10px;
+  font-size: var(--intelindev-text-2);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--intelindev-accent-text);
+}
+
+/* --- Pilares: título serif + 6 cajas 516×165 (ícono + texto) --- */
+.pillars__title {
+  margin: 0 0 var(--intelindev-space-3);
+  font-style: normal;
+  font-size: 50px;
+  line-height: .96;
+}
+.pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--intelindev-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pillars__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: var(--intelindev-space-2);
+  border-radius: var(--intelindev-radius-lg);
+  background: var(--intelindev-surface);
+}
+.pillars__item p { margin: 0; }
+.pillars__icon {
+  flex: none;
+  width: 56px;
+  height: 56px;
+}
+.pillars__name {
+  margin: 0 0 10px;
+  font-size: var(--intelindev-text-2);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* --- Equipo: cabecera centrada y tarjetas 380×508 alternadas --- */
+.team__heading {
+  align-items: center;
+  text-align: center;
+  max-width: 1208px;
+  margin: 0 auto var(--intelindev-space-4);
+}
+.team__title.accent {
+  font-family: var(--intelindev-font-accent);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: .96;
+}
+.team__text { margin: 0; }
+.team__list {
+  gap: var(--intelindev-space-3);
+  padding-block: 60px 0;
+}
+.team__item {
+  width: 380px;
+  max-width: 80vw;
+}
+.team__item:nth-child(even) {
+  transform: translateY(60px);
+}
+.team__card {
+  position: relative;
+  margin: 0;
+}
+.team__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 380 / 448;
+  object-fit: cover;
+  border-radius: var(--intelindev-radius-lg);
+  background: var(--intelindev-surface-2);
+}
+.team__label {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: -30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 20px;
+  border-radius: var(--intelindev-radius-sm);
+  background: var(--intelindev-color-white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+}
+.team__name {
+  font-size: var(--intelindev-text-2);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.team__name a { color: inherit; text-decoration: none; }
+.team__list { padding-bottom: 100px; }
+
+@media (max-width: 991.98px) {
+  .intro__inner, .process__inner { grid-template-columns: 1fr; }
+  .process__photo { max-width: 480px; }
+  .pillars__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .team__item:nth-child(even) { transform: none; }
+  .team__list { padding-top: 0; }
+}
+@media (max-width: 767.98px) {
+  .process__steps, .pillars__grid { grid-template-columns: 1fr; }
+  .process__title, .pillars__title, .team__title.accent { font-size: var(--intelindev-text-5); }
+}
+
 /**********************
 * Formularios ([form slug="…"], ver inc/modules/Forms)
 ***********************/

@@ -11,6 +11,7 @@
  *   [projects limit="4"]             proyectos destacados (CPT Portafolio)
  *   [latest_posts limit="3"]         últimas entradas del blog
  *   [testimonials]                   citas de clientes (CPT Testimonios)
+ *   [team]                           personas del equipo (CPT Equipo)
  *
  * Todos aceptan eyebrow="" title="" text="" cta_text="" cta_url="" y
  * marcan el HTML con clases BEM propias (CSS en styles.css, sección
@@ -26,6 +27,7 @@ use IntelindevInit\Clients\ClientsController;
 use IntelindevInit\Services\ServicesController;
 use IntelindevInit\Portfolio\PortfolioController;
 use IntelindevInit\Testimonials\TestimonialsController;
+use IntelindevInit\Team\TeamController;
 use WP_Post;
 
 class SectionsController extends BaseController
@@ -42,6 +44,7 @@ class SectionsController extends BaseController
         add_shortcode('projects', [$this, 'projects']);
         add_shortcode('latest_posts', [$this, 'latest_posts']);
         add_shortcode('testimonials', [$this, 'testimonials']);
+        add_shortcode('team', [$this, 'team']);
     }
 
     /* ------------------------------------------------------------------ */
@@ -259,5 +262,41 @@ class SectionsController extends BaseController
         return '<div class="' . esc_attr($class) . '__arrows scroller-arrows">'
             . '<button type="button" class="scroller-arrow scroller-arrow--prev' . $mod . '" data-scroll-prev aria-label="' . esc_attr(idml_t('nav.prev_page', $lang)) . '"></button>'
             . '<button type="button" class="scroller-arrow scroller-arrow--next' . $mod . '" data-scroll-next aria-label="' . esc_attr(idml_t('nav.next_page', $lang)) . '"></button></div>';
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* [team]                                                               */
+    /* ------------------------------------------------------------------ */
+
+    /**
+     * Equipo: cabecera centrada y tarjetas 380×508 (foto con radio 20 y
+     * etiqueta blanca superpuesta con nombre y cargo), alternando la altura
+     * par/impar como en el diseño, en scroller horizontal.
+     */
+    public function team($atts = []): string
+    {
+        $atts  = shortcode_atts(['eyebrow' => '', 'title' => '', 'text' => '', 'limit' => -1], is_array($atts) ? $atts : [], 'team');
+        $ctrl  = new TeamController();
+        $items = $ctrl->get_items(['numberposts' => (int) $atts['limit']]);
+        if (!$items) {
+            return '';
+        }
+        $lang  = $this->get_current_lang();
+        $cards = '';
+        foreach ($items as $member) {
+            $photo    = has_post_thumbnail($member) ? get_the_post_thumbnail($member, 'medium_large', ['class' => 'team__photo', 'loading' => 'lazy']) : '<span class="team__photo team__photo--empty"></span>';
+            $role     = $ctrl->get_field($member, 'role', $lang);
+            $linkedin = $ctrl->get_field($member, 'linkedin');
+            $name     = esc_html(get_the_title($member));
+            $cards .= '<li class="team__item"><figure class="team__card">' . $photo
+                . '<figcaption class="team__label"><strong class="team__name">' . ($linkedin !== '' ? '<a href="' . esc_url($linkedin) . '" target="_blank" rel="noopener">' . $name . '</a>' : $name) . '</strong>'
+                . ($role !== '' ? '<span class="team__role">' . esc_html($role) . '</span>' : '') . '</figcaption></figure></li>';
+        }
+        if (trim((string) $atts['eyebrow']) === '') {
+            $atts['eyebrow'] = idml_t('team.eyebrow', $lang);
+        }
+
+        return '<section class="team section" id="team"><div class="team__inner wrap">' . $this->heading($atts, 'team', 'h2', true)
+            . '<ul class="team__list" data-scroller>' . $cards . '</ul></div></section>';
     }
 }

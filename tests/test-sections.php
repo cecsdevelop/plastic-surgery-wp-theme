@@ -2,7 +2,8 @@
 /**
  * Secciones estáticas del diseño como Componentes (CPT intelindev_component):
  * modificadores :html/:url/:icon, defaults anidados y render de las 6
- * plantillas (hero, about, stats, cta, contact, newsletter) en ES/EN.
+ * plantillas (hero, about, stats, cta, contact, newsletter, intro, process,
+ * pillars) y de los shortcodes del módulo Sections en ES/EN.
  *
  * Las plantillas viven en el dashboard (Componentes); tests/fixtures/components/
  * guarda una copia de referencia con la que este test crea componentes
@@ -26,7 +27,7 @@ $fixtures = glob(__DIR__ . '/fixtures/components/*.html');
 $created = [];
 try {
     echo "1) fixtures → componentes temporales\n";
-    check('6 plantillas de referencia', count($fixtures) === 6);
+    check('9 plantillas de referencia', count($fixtures) === 9);
     foreach ($fixtures as $file) {
         $slug = 'test-' . basename($file, '.html');
         $id = wp_insert_post(['post_type' => C::POST_TYPE, 'post_title' => $slug, 'post_name' => $slug, 'post_status' => 'publish']);
@@ -91,9 +92,22 @@ try {
     check('testimonials: cifra, etiqueta, flechas y tarjeta con cita y autor · cargo · empresa', strpos($tm, '<p class="testimonials__value">+25</p><p class="testimonials__label">clientes</p>') !== false && strpos($tm, 'scroller-arrow--on-dark') !== false && strpos($tm, '<blockquote class="testimonials__quote"><p>Cita de prueba.</p></blockquote><figcaption class="testimonials__author"><strong>Ana Test</strong><span>CEO · Acme</span></figcaption>') !== false);
     check('testimonials EN: cita traducida', strpos($render('[testimonials limit="1"]', 'en'), '<p>Test quote.</p>') !== false);
 
-    echo "6) CSS e íconos\n";
+    echo "6) Nosotros: intro, process, pillars, [team]\n";
+    $intro = $render('[test-intro title="Nuestro *propósito*" text="Texto"]');
+    check('intro: ancla mission-vision, título con acento y texto', strpos($intro, '<section class="intro section" id="mission-vision">') !== false && strpos($intro, '<h2 class="intro__title">Nuestro <em>propósito</em></h2>') !== false && strpos($intro, '<p class="intro__text">Texto</p>') !== false);
+    $proc = $render('[test-process title="De la idea" step1_title="Descubrimiento" step1_text="Analizamos" cta_text="Contáctanos"]', 'en');
+    check('process: ancla framework, eyebrow del diccionario (EN), pasos y botón', strpos($proc, 'id="framework"') !== false && strpos($proc, '<span class="eyebrow">Work methodology</span>') !== false && strpos($proc, '<h3 class="process__step-title">Descubrimiento</h3><p>Analizamos</p>') !== false && strpos($proc, 'href="#contacto">Contáctanos</a>') !== false);
+    $pil = $render('[test-pillars title="Pilares" item1_title="Excelencia" item1_text="Calidad" item6_title="Acompañamiento" item6_text="Guía"]');
+    check('pillars: ancla philosophy, 6 ítems con íconos del theme', strpos($pil, 'id="philosophy"') !== false && substr_count($pil, 'class="pillars__item"') === 6 && strpos($pil, '/assets/img/icons/mobile-app.svg') !== false && strpos($pil, '<h3 class="pillars__name">Acompañamiento</h3><p>Guía</p>') !== false);
+    $mem = wp_insert_post(['post_type' => 'intelindev_member', 'post_title' => 'Persona Test', 'post_name' => 'persona-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
+    update_post_meta($mem, '_intelindev_member_role', ['es' => 'Cargo ES', 'en' => 'Role EN']); update_post_meta($mem, '_intelindev_member_linkedin', 'https://www.linkedin.com/in/test');
+    $created[] = $mem;
+    $team = $render('[team title="El *talento*" limit="1"]', 'en');
+    check('team: eyebrow del diccionario, título serif, tarjeta con nombre enlazado a LinkedIn y cargo EN', strpos($team, 'id="team"') !== false && strpos($team, '<span class="eyebrow">Our team</span>') !== false && strpos($team, '<h2 class="team__title accent">El <em>talento</em></h2>') !== false && strpos($team, '<a href="https://www.linkedin.com/in/test" target="_blank" rel="noopener">Persona Test</a></strong><span class="team__role">Role EN</span>') !== false);
+
+    echo "7) CSS e íconos\n";
     $css = file_get_contents(dirname(__DIR__) . '/assets/css/styles.css');
-    check('estilos de las secciones y botones :empty ocultos', strpos($css, '.hero {') !== false && strpos($css, '.clients__list {') !== false && strpos($css, '.about__inner {') !== false && strpos($css, '.stats__inner {') !== false && strpos($css, '.cta__inner {') !== false && strpos($css, '.contact {') !== false && strpos($css, '.newsletter__form {') !== false && strpos($css, '.services__grid {') !== false && strpos($css, '.projects__card {') !== false && strpos($css, '.posts__list {') !== false && strpos($css, '.testimonials__card {') !== false && strpos($css, '.btn:empty { display: none; }') !== false);
+    check('estilos de las secciones y botones :empty ocultos', strpos($css, '.hero {') !== false && strpos($css, '.clients__list {') !== false && strpos($css, '.about__inner {') !== false && strpos($css, '.stats__inner {') !== false && strpos($css, '.cta__inner {') !== false && strpos($css, '.contact {') !== false && strpos($css, '.newsletter__form {') !== false && strpos($css, '.services__grid {') !== false && strpos($css, '.projects__card {') !== false && strpos($css, '.posts__list {') !== false && strpos($css, '.testimonials__card {') !== false && strpos($css, '.process__steps {') !== false && strpos($css, '.pillars__grid {') !== false && strpos($css, '.team__label {') !== false && strpos($css, '.btn:empty { display: none; }') !== false);
     check('23 íconos SVG del diseño en assets/img/icons + logo', count(glob(dirname(__DIR__) . '/assets/img/icons/*.svg')) === 23 && file_exists(dirname(__DIR__) . '/assets/img/logo.svg'));
 } finally {
     foreach ($created as $id) { if (get_post_type($id) === 'attachment') wp_delete_attachment($id, true); else wp_delete_post($id, true); }

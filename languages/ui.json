@@ -150,5 +150,13 @@
     "posts.read_more": {
         "es": "Leer más",
         "en": "Read more"
+    },
+    "process.eyebrow": {
+        "es": "Metodología de trabajo",
+        "en": "Work methodology"
+    },
+    "team.eyebrow": {
+        "es": "Nuestro equipo",
+        "en": "Our team"
     }
 }
