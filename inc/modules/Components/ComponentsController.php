@@ -202,6 +202,7 @@ class ComponentsController extends BaseController
         $this->render_stack[] = $id;
         $html = $this->render_template($template, is_array($atts) ? $atts : [], (string) $content);
         $html = do_shortcode($html); // shortcodes dentro de la plantilla (otros componentes)
+        $html = self::strip_empty_background_image($html);
         array_pop($this->render_stack);
 
         return $html;
@@ -287,6 +288,21 @@ class ComponentsController extends BaseController
             }
             return self::format_attribute($value, $modifier);
         }, $template);
+    }
+
+    /**
+     * Un placeholder de imagen sin valor ({image:url|{featured_image}} en una
+     * página sin imagen) dejaría background-image:url('') en el style inline:
+     * fuera la declaración (y el style si queda vacío), no una URL vacía.
+     */
+    public static function strip_empty_background_image(string $html): string
+    {
+        if (strpos($html, 'background-image') === false) {
+            return $html;
+        }
+        $html = (string) preg_replace('#background-image\s*:\s*url\(\s*([\'"]?)\1\s*\)\s*;?\s*#i', '', $html);
+
+        return (string) preg_replace('#\s+style=(["\'])\s*\1#', '', $html);
     }
 
     /** Escapa/convierte el valor de un atributo según su modificador. */

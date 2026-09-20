@@ -183,7 +183,7 @@ function intelindev_render_header_modal_content(string $lang): string {
         return '';
     }
     idml_set_current_language($lang);
-    return do_shortcode($content);
+    return intelindev_resolve_root_relative_urls(do_shortcode($content));
 }
 
 add_action('rest_api_init', function () {

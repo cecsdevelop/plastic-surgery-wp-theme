@@ -39,12 +39,14 @@ class EnqueueController extends BaseController
             );
         }
 
+        // scripts.js es vanilla: sin dependencias, así el frontend no carga
+        // jQuery + jQuery Migrate (~100 KB) que nadie usa.
         $js_path = $this->plugin_path . 'assets/js/scripts.js';
         if (file_exists($js_path)) {
             wp_enqueue_script(
                 'intelindev-scripts',
                 $this->plugin_url . 'assets/js/scripts.js',
-                ['jquery'],
+                [],
                 filemtime($js_path),
                 true
             );

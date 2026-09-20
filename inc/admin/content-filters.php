@@ -1,6 +1,41 @@
 <?php
-// Language switcher como último ítem del menú primario (submenú con los demás idiomas).
+// Filtros de salida del contenido: enlaces relativos a la raíz y language switcher.
 if (!defined('ABSPATH')) exit;
+
+/**
+ * Enlaces relativos a la raíz en contenido editado desde el dashboard
+ * (href="/contacto/", src="/wp-content/…", action="/…"): se escriben siempre
+ * respecto a la raíz del sitio y, si WordPress vive en un subdirectorio (local:
+ * /Intelindev/), se les antepone esa ruta al imprimir. En producción (raíz) no
+ * cambia nada. Así el mismo contenido funciona en local, staging y producción
+ * sin search-replace ni rutas locales que luego dan 404 (el origen del bug de
+ * los enlaces /Intelindev/… en staging). No toca URLs absolutas,
+ * protocol-relative (//) ni las que ya llevan el subdirectorio (idempotente).
+ */
+if (!function_exists('intelindev_resolve_root_relative_urls')) {
+    function intelindev_resolve_root_relative_urls($html) {
+        if (!is_string($html) || $html === '' || (strpos($html, '="/') === false && strpos($html, "='/") === false)) {
+            return $html;
+        }
+        $base = rtrim((string) parse_url(home_url('/'), PHP_URL_PATH), '/'); // '' en raíz, '/Intelindev' en subdirectorio
+        if ($base === '') {
+            return $html;
+        }
+        $already = preg_quote(ltrim($base, '/') . '/', '#');
+
+        return (string) preg_replace_callback(
+            '#\b(href|src|action)=(["\'])/(?!/)(?!' . $already . ')#i',
+            fn($m) => $m[1] . '=' . $m[2] . $base . '/',
+            $html
+        );
+    }
+}
+// Después de do_shortcode (11) y wp_filter_content_tags (12) para cubrir el HTML de los componentes.
+add_filter('the_content', 'intelindev_resolve_root_relative_urls', 13);
+add_filter('widget_block_content', 'intelindev_resolve_root_relative_urls', 13);
+add_filter('widget_text_content', 'intelindev_resolve_root_relative_urls', 13);
+
+// Language switcher como último ítem del menú primario (submenú con los demás idiomas).
 
 add_filter('wp_nav_menu_items', function($items, $args) {
     if (is_admin() || empty($args->theme_location) || $args->theme_location !== 'primary') {
