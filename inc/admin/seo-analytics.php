@@ -1,7 +1,8 @@
 <?php
 /**
  * SEO & Analytics
- * Meta tags, Schema.org, GTM/GA4, custom scripts
+ * Meta tags, resource hints, GTM/GA4, custom scripts. Lee la pestaña SEO y
+ * Analytics de Intelindev Settings.
  *
  * @package intelindev
  */
@@ -34,6 +35,18 @@ add_action('wp_head', function () {
   if ($manifest) echo '<link rel="manifest" href="' . esc_url($manifest) . '">' . PHP_EOL;
   if ($theme_color) echo '<meta name="theme-color" content="' . esc_attr($theme_color) . '">' . PHP_EOL;
 }, 5);
+
+// Preconnect (pestaña SEO → "Preconnect Hosts"): por el mecanismo nativo de
+// resource hints, que el core imprime en wp_head (prioridad 2) y deduplica.
+add_filter('wp_resource_hints', function (array $urls, string $relation): array {
+  if ($relation !== 'preconnect') return $urls;
+  $hosts = intelindev_get_setting('preconnect_hosts', []);
+  foreach ((array) $hosts as $host) {
+    $host = trim((string) $host);
+    if ($host !== '') $urls[] = $host;
+  }
+  return $urls;
+}, 10, 2);
 
 // GTM/GA4 diferidos
 add_action('wp_head', function () {
