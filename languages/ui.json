@@ -158,5 +158,17 @@
     "team.eyebrow": {
         "es": "Nuestro equipo",
         "en": "Our team"
+    },
+    "video.eyebrow": {
+        "es": "¿Por qué elegirnos?",
+        "en": "Why choose us?"
+    },
+    "video.play": {
+        "es": "Reproducir video",
+        "en": "Play video"
+    },
+    "stack.eyebrow": {
+        "es": "Tecnología",
+        "en": "Technology"
     }
 }

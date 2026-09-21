@@ -40,6 +40,22 @@
     list.scrollBy({ left: arrow.hasAttribute('data-scroll-prev') ? -step : step, behavior: 'smooth' });
   });
 
+  // Video ([inner-video]): al pulsar play, el <iframe>/<video> que el componente
+  // dejó en su <template> reemplaza al póster (nada del proveedor carga antes).
+  document.addEventListener('click', function (event) {
+    var play = event.target.closest('.video__play');
+    if (!play) return;
+    var player = play.closest('[data-video]');
+    var template = player && player.querySelector('template');
+    var media = template && template.content.firstElementChild;
+    if (!media) return;
+    media = media.cloneNode(true);
+    if (media.tagName === 'IFRAME') media.src += (media.src.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1';
+    else media.autoplay = true;
+    player.classList.add('is-playing');
+    player.replaceChildren(media);
+  });
+
   // Menú móvil: .site-nav-toggle abre/cierra la navegación (< 992px, ver CSS).
   var navToggle = document.querySelector('.site-nav-toggle');
   if (navToggle) {

@@ -31,11 +31,12 @@ if (!function_exists('intelindev_content_starts_with_hero')) {
 /**
  * Hero interior por defecto para páginas/entradas sin componente hero:
  * título (y subtítulo opcional) sobre la imagen destacada, con el mismo
- * markup que el componente hero para que herede su CSS.
+ * markup que el componente hero para que herede su CSS. $post: null = el
+ * actual; false = sin imagen (archivos sin página asignada).
  */
 if (!function_exists('intelindev_render_interior_hero')) {
-    function intelindev_render_interior_hero(string $title, string $subtitle = '', ?WP_Post $post = null): void {
-        $post  = $post ?: get_post();
+    function intelindev_render_interior_hero(string $title, string $subtitle = '', $post = null): void {
+        $post  = $post === null ? get_post() : $post;
         $image = $post instanceof WP_Post ? (string) get_the_post_thumbnail_url($post, 'full') : '';
         echo '<section class="hero hero--interior"' . ($image !== '' ? ' style="background-image:url(\'' . esc_url($image) . '\')"' : '') . '><div class="hero__inner wrap"><div class="hero__content">';
         echo '<h1 class="hero__title">' . wp_kses($title, ['em' => [], 'strong' => [], 'br' => []]) . '</h1>';
@@ -43,5 +44,44 @@ if (!function_exists('intelindev_render_interior_hero')) {
             echo '<p class="hero__text">' . wp_kses($subtitle, ['em' => [], 'strong' => [], 'a' => ['href' => []]]) . '</p>';
         }
         echo '</div></div></section>';
+    }
+}
+
+/**
+ * Página asignada como cuerpo del archivo de un CPT público (Ajustes →
+ * Lectura, "Página de Servicios"; option page_for_{post_type}), o null.
+ */
+if (!function_exists('intelindev_get_archive_page')) {
+    function intelindev_get_archive_page(string $post_type): ?WP_Post {
+        $id   = (int) get_option('page_for_' . $post_type);
+        $page = $id > 0 ? get_post($id) : null; // get_post(0) devolvería el post global
+
+        return $page instanceof WP_Post && $page->post_type === 'page' && $page->post_status === 'publish' ? $page : null;
+    }
+}
+
+/**
+ * Imprime esa página dentro del archivo: hero interior con su título e imagen
+ * destacada (salvo que sus bloques ya arranquen con un hero) y sus bloques
+ * traducidos del idioma actual pasados por los filtros de the_content
+ * (shortcodes de componentes y listados, enlaces relativos). Se hace fuera del
+ * loop del archivo, así que el post global se apunta a la página mientras tanto.
+ */
+if (!function_exists('intelindev_render_archive_page')) {
+    function intelindev_render_archive_page(WP_Post $page): void {
+        global $post;
+        $previous = $post;
+        $post     = $page;
+        setup_postdata($page);
+
+        if (!intelindev_content_starts_with_hero($page)) {
+            intelindev_render_interior_hero(get_the_title($page), '', $page);
+        }
+        $blocks  = function_exists('intelindev_get_post_translated_content_blocks') ? intelindev_get_post_translated_content_blocks($page) : [];
+        $content = $blocks ? implode("\n\n", $blocks) : $page->post_content;
+        echo '<div class="entry-content">' . apply_filters('the_content', $content) . '</div>';
+
+        wp_reset_postdata();
+        $post = $previous;
     }
 }

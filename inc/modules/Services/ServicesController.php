@@ -5,6 +5,8 @@
  * (Servicios_Detalle del Figma). Título, contenido, excerpt (texto corto de la
  * tarjeta) y slug por idioma vienen del metabox "Contenido traducido"; acá
  * solo se agrega el ícono de la tarjeta. Orden manual con "Atributos → Orden".
+ * Listado: archive-intelindev_service.php con la "Página de Servicios" de
+ * Ajustes → Lectura (ver ContentTypeController); detalle: single-intelindev_service.php.
  *
  * Módulo CPT estándar del theme: ver la skill wp-theme-cpt-module.
  *
@@ -30,6 +32,7 @@ class ServicesController extends ContentTypeController
             'description'   => __('Líneas de servicio: tarjetas de la home y del listado, con página de detalle.', 'intelindev'),
             'public'        => true,
             'slugs'         => ['es' => 'servicios', 'en' => 'services'],
+            'list_shortcode' => 'services layout="cards"',
             'menu_icon'     => 'dashicons-screenoptions',
             'menu_position' => 26,
             'fields'        => [

@@ -289,6 +289,17 @@ h1 em, h2 em, h3 em, h4 em,
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17 17 7M8 7h9v9'/></svg>") center / contain no-repeat;
 }
 
+/* Teléfono (mobile-screen-button) para el botón del stack tecnológico */
+.btn--phone::after {
+  content: "";
+  flex: none;
+  width: 1.2em;
+  height: 1.2em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='6' y='2.5' width='12' height='19' rx='2.5'/><path d='M10.5 17.5h3'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='6' y='2.5' width='12' height='19' rx='2.5'/><path d='M10.5 17.5h3'/></svg>") center / contain no-repeat;
+}
+
 /* Secciones: 100 % de ancho; el contenido se acota con .wrap */
 .section {
   padding-block: var(--intelindev-section-py);
@@ -839,6 +850,14 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 .hero__actions:empty { display: none; }
 .hero--interior {
   min-height: clamp(360px, 36vw, 620px);
+}
+.hero--interior::before {
+  background: rgba(0, 0, 0, .73);
+}
+.hero--interior .hero__content {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
 }
 .hero--interior .hero__title {
   font-size: var(--intelindev-text-5);
@@ -1748,6 +1767,360 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 @media (max-width: 767.98px) {
   .process__steps, .pillars__grid { grid-template-columns: 1fr; }
   .process__title, .pillars__title, .team__title.accent { font-size: var(--intelindev-text-5); }
+}
+
+/**********************
+* Servicios: listado (archive-intelindev_service.php con la "Página de
+* Servicios") y detalle (single-intelindev_service.php). Medidas del Figma
+* Servicios 7466:13032 y Servicios Detalle 7470:12931.
+***********************/
+/* --- [services layout="cards"]: 6 tarjetas 503×609 en 3 columnas, foto a
+       sangre, etiqueta grafito 343×123 con botón rojo; en hover/focus la
+       etiqueta se vuelve blanca y despliega el excerpt --- */
+.services--cards {
+  background: var(--intelindev-color-white);
+}
+.services--cards .services__heading {
+  max-width: 1088px;
+  margin-bottom: var(--intelindev-space-4);
+}
+.services--cards .services__title {
+  font-size: var(--intelindev-text-5);
+  font-weight: 400;
+  line-height: 1.02;
+}
+.services__grid--cards {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--intelindev-space-3);
+}
+.services__tile {
+  position: relative;
+  aspect-ratio: 503 / 609;
+  border-radius: var(--intelindev-radius-lg);
+  overflow: hidden;
+  background: var(--intelindev-color-graphite);
+}
+.services__tile-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+.services__tile-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.services__tile:hover .services__tile-image,
+.services__tile:focus-within .services__tile-image {
+  transform: scale(1.04);
+}
+.services__tile-label {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(343px, 68%);
+  padding: 22px clamp(24px, 2.3vw, 40px);
+  border-radius: 0 60px 0 var(--intelindev-radius-lg);
+  background: var(--intelindev-color-graphite);
+  color: var(--intelindev-color-white);
+  transition: background-color .3s ease, color .3s ease;
+}
+.services__tile-name {
+  margin: 0;
+  font-size: var(--intelindev-text-4);
+  font-weight: 600;
+  line-height: 1.1;
+}
+.services__tile-excerpt {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin: 0;
+  color: var(--intelindev-color-black);
+  font-size: var(--intelindev-text-0);
+  line-height: 1.5;
+  transition: grid-template-rows .35s ease, margin-top .35s ease;
+}
+.services__tile-excerpt > span {
+  min-height: 0;
+  overflow: hidden;
+}
+.services__tile:hover .services__tile-label,
+.services__tile:focus-within .services__tile-label {
+  background: var(--intelindev-color-white);
+  color: var(--intelindev-color-ink);
+}
+.services__tile:hover .services__tile-excerpt,
+.services__tile:focus-within .services__tile-excerpt {
+  grid-template-rows: 1fr;
+  margin-top: 22px;
+}
+/* Botón rojo 45×48 pegado a la derecha de la etiqueta, 22 px sobre su base */
+.services__tile-arrow {
+  position: absolute;
+  left: 100%;
+  bottom: 22px;
+  width: 45px;
+  height: 48px;
+  border-radius: 0 10px 10px 0;
+  background: var(--intelindev-accent);
+  transition: background-color .3s ease;
+}
+.services__tile-arrow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 22px;
+  height: 22px;
+  background: var(--intelindev-color-white);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 12h17M14 6l6 6-6 6'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 12h17M14 6l6 6-6 6'/></svg>") center / contain no-repeat;
+}
+.services__tile:hover .services__tile-arrow,
+.services__tile:focus-within .services__tile-arrow {
+  background: var(--intelindev-accent-hover);
+}
+
+/* --- [inner-video] "¿Por qué elegirnos?": cabecera centrada (1088) y
+       reproductor 1240×535 r40 con botón de play; el <iframe>/<video> del
+       <template> reemplaza al póster al pulsar (scripts.js). Video y stack
+       van sobre el fondo gris de la página, con el chip blanco --- */
+.video, .stack {
+  background: var(--intelindev-surface);
+}
+.video .eyebrow, .stack .eyebrow {
+  background: var(--intelindev-color-white);
+}
+.video__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 1088px;
+  margin: 0 auto var(--intelindev-space-6);
+  text-align: center;
+}
+.video__title {
+  margin: 0;
+  font-size: var(--intelindev-text-5);
+  font-weight: 400;
+  line-height: 1.02;
+}
+.video__text {
+  margin: 0;
+  color: var(--intelindev-color-ink);
+}
+.video__player {
+  position: relative;
+  max-width: 1240px;
+  aspect-ratio: 1240 / 535;
+  margin: 0 auto;
+  border-radius: 40px;
+  overflow: hidden;
+  background: var(--intelindev-color-graphite);
+}
+.video__poster,
+.video__media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+.video__poster[src=""] { visibility: hidden; }
+.video__play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 130px;
+  height: 130px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .3);
+  cursor: pointer;
+  transition: transform .3s ease, background-color .3s ease;
+}
+.video__play::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 1px solid var(--intelindev-color-white);
+}
+.video__play::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 28px;
+  height: 35px;
+  transform: translateX(4px);
+  background: var(--intelindev-color-white);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.video__play:hover, .video__play:focus-visible {
+  background: rgba(255, 255, 255, .45);
+  transform: scale(1.05);
+}
+.video__player:not(:has(template > *)) .video__play { display: none; }
+.video__player.is-playing .video__play { display: none; }
+
+/* --- [stack] Stack tecnológico: dos fotos 471×687 desfasadas 120 px a la
+       izquierda (951) y lista de tecnologías a la derecha (617) --- */
+.stack__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 951fr) minmax(0, 617fr);
+  gap: var(--intelindev-space-4);
+  align-items: center;
+}
+.stack__gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+}
+.stack__photo {
+  display: block;
+  aspect-ratio: 471 / 687;
+  border-radius: var(--intelindev-radius-lg);
+  overflow: hidden;
+  background: var(--intelindev-surface-2);
+}
+.stack__photo--1 { margin-top: clamp(40px, 7vw, 120px); }
+.stack__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.stack__photo img[src=""] { display: none; }
+.stack__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.stack__title {
+  margin: 0;
+  font-size: var(--intelindev-text-5);
+  font-weight: 400;
+  line-height: 1.02;
+}
+.stack__text {
+  margin: 0 0 var(--intelindev-space-2);
+  font-size: var(--intelindev-text-0);
+  color: var(--intelindev-color-black);
+}
+.stack__list {
+  width: 100%;
+  margin: 0 0 var(--intelindev-space-3);
+}
+.stack__item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--intelindev-color-gray-300);
+}
+.stack__item:has(dt:empty) { display: none; }
+.stack__item dt {
+  font-size: var(--intelindev-text-2);
+  font-weight: 600;
+  line-height: 1.35;
+}
+.stack__item dd {
+  margin: 5px 0 0;
+  font-size: var(--intelindev-text--1);
+  line-height: 1.35;
+}
+
+/* --- [services layout="list"]: lista de servicios del detalle, líneas de
+       1 px, el actual en negrita marrón --- */
+.services-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--intelindev-color-gray-300);
+}
+.services-nav__item {
+  border-bottom: 1px solid var(--intelindev-color-gray-300);
+}
+.services-nav__link {
+  display: block;
+  padding: 10px 20px;
+  color: var(--intelindev-color-cocoa);
+  text-decoration: none;
+}
+.services-nav__link:hover, .services-nav__link:focus-visible {
+  color: var(--intelindev-color-maroon);
+}
+.services-nav__link[aria-current="page"] {
+  color: var(--intelindev-color-maroon);
+  font-weight: 600;
+}
+
+/* --- Detalle: contenido a la izquierda (951) y lista a la derecha (519);
+       intertítulos en DM Sans 300/50, párrafos de 16 px, figuras r20 --- */
+.service__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 951fr) minmax(0, 519fr);
+  gap: var(--intelindev-space-4) clamp(30px, 4vw, 58px);
+  align-items: start;
+  padding-block: var(--intelindev-space-6);
+}
+.service__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--intelindev-space-4);
+  font-size: var(--intelindev-text--1);
+  color: var(--intelindev-color-ink);
+}
+.service__main > * { margin: 0; }
+.service__main h2, .service__main h3 {
+  margin-bottom: calc(-1 * var(--intelindev-space-2));
+  font-size: clamp(28px, 2.9vw, 50px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--intelindev-color-black);
+}
+.service__main p { text-align: justify; }
+.service__main img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--intelindev-radius-lg);
+}
+.service__figure {
+  aspect-ratio: 951 / 519;
+  border-radius: var(--intelindev-radius-lg);
+  overflow: hidden;
+  background: var(--intelindev-surface-2);
+}
+.service__figure img { height: 100%; object-fit: cover; }
+.service__aside { position: sticky; top: calc(var(--intelindev-header-offset) + 20px); }
+
+@media (max-width: 991.98px) {
+  .services__grid--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stack__inner, .service__inner { grid-template-columns: 1fr; }
+  .stack__gallery { max-width: 640px; }
+  .service__aside { position: static; }
+  .video__player { border-radius: var(--intelindev-radius-lg); }
+}
+@media (max-width: 767.98px) {
+  .services__grid--cards { grid-template-columns: 1fr; }
+  .services__tile { aspect-ratio: 4 / 5; }
+  .services__tile-label { width: 78%; padding: 18px 24px; }
+  .services__tile-name { font-size: var(--intelindev-text-3); }
+  .services__tile-arrow { bottom: 16px; }
+  .services--cards .services__title, .video__title, .stack__title { font-size: var(--intelindev-text-4); }
+  .video__play { width: 90px; height: 90px; }
+  .video__play::before { width: 58px; height: 58px; }
+  .video__play::after { width: 20px; height: 25px; }
+  .service__main h2, .service__main h3 { margin-bottom: calc(-1 * var(--intelindev-space-1)); }
 }
 
 /**********************

@@ -19,6 +19,12 @@
  * gallery (IDs), lang_text, lang_textarea. Sin editor de bloques: show_in_rest
  * false y el contenido va por el metabox de traducción, como pages/posts.
  *
+ * Archivo editable: los tipos públicos suman a Ajustes → Lectura una "Página
+ * de {Servicios}" (option page_for_{post_type}, como page_for_posts). La
+ * plantilla archive-{post_type}.php imprime el hero y los bloques traducidos
+ * de esa página (donde va el shortcode del listado, p. ej. [services
+ * layout="cards"]); la URL propia de la página redirige al archivo.
+ *
  * @package Intelindev
  */
 
@@ -38,7 +44,8 @@ abstract class ContentTypeController extends BaseController
      * post_type (≤ 20 chars), labels [lang => [name, singular]], menu_icon,
      * menu_position, public (archivo + single con URL), slugs [lang => base],
      * supports (extra a title/thumbnail), fields [key => [label, type,
-     * description?, options?, column?]], orderby, order.
+     * description?, options?, column?]], orderby, order, list_shortcode
+     * (shortcode del listado que se sugiere en Ajustes → Lectura).
      */
     abstract protected function config(): array;
 
@@ -60,6 +67,12 @@ abstract class ContentTypeController extends BaseController
         }
         add_filter('manage_' . $this->post_type() . '_posts_columns', [$this, 'columns']);
         add_action('manage_' . $this->post_type() . '_posts_custom_column', [$this, 'render_column'], 10, 2);
+
+        if ($this->is_public()) {
+            add_action('admin_init', [$this, 'register_archive_page_setting']);
+            add_filter('display_post_states', [$this, 'archive_page_state'], 10, 2);
+            add_action('template_redirect', [$this, 'redirect_archive_page']);
+        }
     }
 
     /* ------------------------------------------------------------------ */
@@ -185,6 +198,58 @@ abstract class ContentTypeController extends BaseController
         }
 
         return $map;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Página del archivo (Ajustes → Lectura)                               */
+    /* ------------------------------------------------------------------ */
+
+    public function archive_page_option(): string
+    {
+        return 'page_for_' . $this->post_type();
+    }
+
+    /** Página publicada asignada como cuerpo del archivo, o null. */
+    public function archive_page(): ?WP_Post
+    {
+        $id   = (int) get_option($this->archive_page_option());
+        $page = $id > 0 ? get_post($id) : null; // get_post(0) devolvería el post global
+
+        return $page instanceof WP_Post && $page->post_type === 'page' && $page->post_status === 'publish' ? $page : null;
+    }
+
+    public function register_archive_page_setting(): void
+    {
+        $option = $this->archive_page_option();
+        register_setting('reading', $option, ['type' => 'integer', 'sanitize_callback' => 'absint', 'default' => 0]);
+        add_settings_field($option, sprintf(__('Página de %s', 'intelindev'), $this->label('name')), function () use ($option) {
+            wp_dropdown_pages(['name' => $option, 'id' => $option, 'show_option_none' => __('— Seleccionar —', 'intelindev'), 'option_none_value' => 0, 'selected' => (int) get_option($option)]);
+            echo '<p class="description">' . sprintf(
+                esc_html__('Sus bloques por idioma (hero, [%s …], testimonios, contacto…) arman la página del listado /%s/; su URL propia redirige allí.', 'intelindev'),
+                esc_html($this->cfg('list_shortcode', $this->post_type())),
+                esc_html($this->slug(idml_get_default_language()))
+            ) . '</p>';
+        }, 'reading', 'default');
+    }
+
+    /** "— Página de Servicios" en el listado de páginas, como "Página de entradas". */
+    public function archive_page_state(array $states, WP_Post $post): array
+    {
+        if ($post->post_type === 'page' && $post->ID === (int) get_option($this->archive_page_option())) {
+            $states[$this->archive_page_option()] = sprintf(__('Página de %s', 'intelindev'), $this->label('name'));
+        }
+
+        return $states;
+    }
+
+    /** La página asignada no se ve en su URL: su contenido vive en el archivo. */
+    public function redirect_archive_page(): void
+    {
+        $page = $this->archive_page();
+        if ($page && is_page($page->ID) && function_exists('intelindev_get_post_type_archive_url')) {
+            wp_safe_redirect(intelindev_get_post_type_archive_url($this->post_type(), $this->get_current_lang()), 301);
+            exit;
+        }
     }
 
     /* ------------------------------------------------------------------ */

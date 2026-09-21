@@ -1,0 +1,23 @@
+<section class="stack section" id="{id|stack}">
+  <div class="stack__inner wrap">
+    <div class="stack__gallery">
+      <span class="stack__photo stack__photo--1"><img src="{image1:url|}" alt="" loading="lazy" decoding="async"></span>
+      <span class="stack__photo stack__photo--2"><img src="{image2:url|}" alt="" loading="lazy" decoding="async"></span>
+    </div>
+    <div class="stack__body">
+      <span class="eyebrow">{eyebrow|{t:stack.eyebrow}}</span>
+      <h2 class="stack__title">{title:html}</h2>
+      <p class="stack__text">{text}</p>
+      <dl class="stack__list">
+        <div class="stack__item"><dt>{item1_title}</dt><dd>{item1_text}</dd></div>
+        <div class="stack__item"><dt>{item2_title}</dt><dd>{item2_text}</dd></div>
+        <div class="stack__item"><dt>{item3_title}</dt><dd>{item3_text}</dd></div>
+        <div class="stack__item"><dt>{item4_title}</dt><dd>{item4_text}</dd></div>
+        <div class="stack__item"><dt>{item5_title}</dt><dd>{item5_text}</dd></div>
+        <div class="stack__item"><dt>{item6_title}</dt><dd>{item6_text}</dd></div>
+      </dl>
+      <a class="btn btn--primary btn--phone" href="{cta_url:url|#contacto}">{cta_text|{t:cta.icon_label}}</a>
+      {content}
+    </div>
+  </div>
+</section>

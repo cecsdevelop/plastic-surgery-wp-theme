@@ -30,6 +30,7 @@ class PortfolioController extends ContentTypeController
             'description'   => __('Proyectos del portafolio, con ficha y galería.', 'intelindev'),
             'public'        => true,
             'slugs'         => ['es' => 'portafolio', 'en' => 'portfolio'],
+            'list_shortcode' => 'projects',
             'menu_icon'     => 'dashicons-portfolio',
             'menu_position' => 27,
             'orderby'       => ['menu_order' => 'ASC', 'date' => 'DESC'], // orden manual y, a igual orden, el más nuevo primero

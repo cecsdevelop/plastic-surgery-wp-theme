@@ -1,0 +1,15 @@
+<section class="video section" id="{id|why}">
+  <div class="video__inner wrap">
+    <div class="video__heading">
+      <span class="eyebrow">{eyebrow|{t:video.eyebrow}}</span>
+      <h2 class="video__title">{title:html}</h2>
+      <p class="video__text">{text}</p>
+    </div>
+    <figure class="video__player" data-video>
+      <img class="video__poster" src="{image:url|}" alt="" loading="lazy" decoding="async">
+      <button class="video__play" type="button" aria-label="{t:video.play}"></button>
+      <template>{url:embed}</template>
+    </figure>
+    {content}
+  </div>
+</section>

@@ -106,13 +106,17 @@ class SectionsController extends BaseController
     /* ------------------------------------------------------------------ */
 
     /**
-     * Tarjetas de servicio (362×421, gris claro con borde degradado rosa):
-     * ícono del campo "icon" (o el del theme por posición), título, excerpt y
-     * "Conocer más" al detalle. Cabecera centrada.
+     * Tarjetas de servicio. layout="icons" (home, 362×421 gris con borde
+     * degradado rosa): ícono del campo "icon" (o el del theme por posición),
+     * título, excerpt y "Conocer más". layout="cards" (listado /servicios/,
+     * 503×609): imagen destacada a sangre con etiqueta gris + botón rojo; al
+     * pasar el mouse la etiqueta se vuelve blanca y muestra el excerpt.
+     * layout="list" (columna derecha del detalle): solo los nombres enlazados,
+     * el actual con aria-current. Cabecera centrada; "cards" va en 3 columnas.
      */
     public function services($atts = []): string
     {
-        $atts  = shortcode_atts(['eyebrow' => '', 'title' => '', 'text' => '', 'limit' => 4, 'more' => ''], is_array($atts) ? $atts : [], 'services');
+        $atts  = shortcode_atts(['eyebrow' => '', 'title' => '', 'text' => '', 'limit' => 4, 'more' => '', 'layout' => 'icons'], is_array($atts) ? $atts : [], 'services');
         $ctrl  = new ServicesController();
         $items = $ctrl->get_items(['numberposts' => (int) $atts['limit']]);
         if (!$items) {
@@ -120,23 +124,42 @@ class SectionsController extends BaseController
         }
         $lang  = $this->get_current_lang();
         $more  = trim((string) $atts['more']) !== '' ? (string) $atts['more'] : idml_t('services.more', $lang);
+        $cards = (string) $atts['layout'] === 'cards';
         $fallback_icons = ['code', 'design', 'update', 'search'];
 
-        $cards = '';
+        if ((string) $atts['layout'] === 'list') {
+            $current = (int) get_queried_object_id();
+            $links   = '';
+            foreach ($items as $service) {
+                $links .= '<li class="services-nav__item"><a class="services-nav__link" href="' . esc_url(get_permalink($service)) . '"' . ($service->ID === $current ? ' aria-current="page"' : '') . '>' . esc_html(get_the_title($service)) . '</a></li>';
+            }
+            return '<nav class="services-nav" aria-label="' . esc_attr($ctrl->label('name', $lang)) . '"><ul class="services-nav__list">' . $links . '</ul></nav>';
+        }
+
+        $html = '';
         foreach (array_values($items) as $i => $service) {
+            $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($service, $lang) : '';
+            $url     = esc_url(get_permalink($service));
+            if ($cards) {
+                $html .= '<article class="services__tile"><a class="services__tile-link" href="' . $url . '">'
+                    . (has_post_thumbnail($service) ? get_the_post_thumbnail($service, 'large', ['class' => 'services__tile-image', 'alt' => '', 'loading' => 'lazy']) : '<span class="services__tile-image"></span>')
+                    . '<div class="services__tile-label"><h3 class="services__tile-name">' . esc_html(get_the_title($service)) . '</h3>'
+                    . ($excerpt !== '' ? '<p class="services__tile-excerpt"><span>' . esc_html($excerpt) . '</span></p>' : '')
+                    . '<span class="services__tile-arrow" aria-hidden="true"></span><span class="screen-reader-text">' . esc_html($more) . '</span></div></a></article>';
+                continue;
+            }
             $icon_id = (int) $ctrl->get_field($service, 'icon');
             $icon    = $icon_id > 0
                 ? wp_get_attachment_image($icon_id, 'thumbnail', false, ['class' => 'services__icon', 'alt' => '', 'loading' => 'lazy'])
                 : '<img class="services__icon" src="' . esc_url(get_template_directory_uri() . '/assets/img/icons/' . $fallback_icons[$i % 4] . '.svg') . '" alt="" width="72" height="72" loading="lazy">';
-            $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($service, $lang) : '';
-            $cards .= '<article class="services__card">' . $icon
-                . '<div class="services__body"><h3 class="services__name"><a href="' . esc_url(get_permalink($service)) . '">' . esc_html(get_the_title($service)) . '</a></h3>'
+            $html .= '<article class="services__card">' . $icon
+                . '<div class="services__body"><h3 class="services__name"><a href="' . $url . '">' . esc_html(get_the_title($service)) . '</a></h3>'
                 . ($excerpt !== '' ? '<p class="services__excerpt">' . esc_html($excerpt) . '</p>' : '') . '</div>'
-                . '<a class="services__more" href="' . esc_url(get_permalink($service)) . '">' . esc_html($more) . '<span class="services__more-icon" aria-hidden="true"></span></a></article>';
+                . '<a class="services__more" href="' . $url . '">' . esc_html($more) . '<span class="services__more-icon" aria-hidden="true"></span></a></article>';
         }
 
-        return '<section class="services section"><div class="services__inner wrap">' . $this->heading($atts, 'services')
-            . '<div class="services__grid">' . $cards . '</div></div></section>';
+        return '<section class="services section' . ($cards ? ' services--cards' : '') . '"><div class="services__inner wrap">' . $this->heading($atts, 'services')
+            . '<div class="services__grid' . ($cards ? ' services__grid--cards' : '') . '">' . $html . '</div></div></section>';
     }
 
     /* ------------------------------------------------------------------ */

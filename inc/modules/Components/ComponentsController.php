@@ -19,6 +19,8 @@
  *                   *texto* → <em>texto</em>: para acentos en títulos
  *   {nombre:url}    atributo como URL (esc_url)
  *   {nombre:icon}   atributo como ícono: URL, o nombre de assets/img/icons/{nombre}.svg
+ *   {nombre:embed}  atributo como video embebido: URL de YouTube/Vimeo → <iframe>
+ *                   (sin cookies, sin pedir nada al proveedor); .mp4/.webm → <video>
  *   {t:clave}                                  texto de Apariencia → Traducciones
  *   {content}                                  contenido envolvente [hero]…[/hero]
 
@@ -234,7 +236,7 @@ class ComponentsController extends BaseController
         $lang = $this->get_current_lang();
 
         // El default admite un placeholder anidado ({title:html|{title}}, {eyebrow|{t:clave}}).
-        $pattern = '/\{(t:[a-z0-9_.\-]+|featured_image(?::[a-z0-9_\-]+)?|[a-z0-9_]+(?::(?:html|url|icon))?)(?:\|((?:[^{}]|\{[^{}]*\})*))?\}/i';
+        $pattern = '/\{(t:[a-z0-9_.\-]+|featured_image(?::[a-z0-9_\-]+)?|[a-z0-9_]+(?::(?:html|url|icon|embed))?)(?:\|((?:[^{}]|\{[^{}]*\})*))?\}/i';
 
         return (string) preg_replace_callback($pattern, function ($m) use ($post, $lang, $atts, $content) {
             $token   = strtolower($m[1]);
@@ -320,9 +322,33 @@ class ComponentsController extends BaseController
                 }
                 $name = sanitize_key($value);
                 return $name !== '' ? esc_url(get_template_directory_uri() . '/assets/img/icons/' . $name . '.svg') : '';
+            case 'embed':
+                return self::embed_video($value);
             default:
                 return esc_html($value);
         }
+    }
+
+    /**
+     * <iframe> de YouTube (youtube.com/watch?v=, youtu.be/, /shorts/, /embed/)
+     * o Vimeo (vimeo.com/{id}) resuelto localmente, o <video> para un archivo
+     * .mp4/.webm/.ogg; '' si no se reconoce. Carga diferida: el componente lo
+     * deja dentro de un <template> hasta que se pulsa play (scripts.js).
+     */
+    public static function embed_video(string $url): string
+    {
+        $url = trim($url);
+        if (preg_match('#^(?:https?:)?//(?:www\.|m\.)?(?:youtube(?:-nocookie)?\.com/(?:watch\?(?:.*&)?v=|embed/|shorts/|live/)|youtu\.be/)([A-Za-z0-9_-]{6,})#i', $url, $m)) {
+            $src = 'https://www.youtube-nocookie.com/embed/' . $m[1] . '?rel=0';
+        } elseif (preg_match('#^(?:https?:)?//(?:www\.|player\.)?vimeo\.com/(?:video/)?(\d+)#i', $url, $m)) {
+            $src = 'https://player.vimeo.com/video/' . $m[1] . '?dnt=1';
+        } elseif (preg_match('#\.(mp4|webm|ogg|ogv)(\?.*)?$#i', $url)) {
+            return '<video class="video__media" controls playsinline preload="metadata" src="' . esc_url($url) . '"></video>';
+        } else {
+            return '';
+        }
+
+        return '<iframe class="video__media" src="' . esc_url($src) . '" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
     }
 
     /** Atributos que acepta una plantilla (placeholders no reservados), ordenados. */
@@ -330,7 +356,7 @@ class ComponentsController extends BaseController
     {
         // Con modificador ({title:html}) siempre es atributo, aunque el nombre
         // coincida con un placeholder de contexto ({title} = título del post).
-        preg_match_all('/\{([a-z0-9_]+)(:(?:html|url|icon))?(?:\|(?:[^{}]|\{[^{}]*\})*)?\}/i', $template, $m, PREG_SET_ORDER);
+        preg_match_all('/\{([a-z0-9_]+)(:(?:html|url|icon|embed))?(?:\|(?:[^{}]|\{[^{}]*\})*)?\}/i', $template, $m, PREG_SET_ORDER);
         $attrs = [];
         foreach ($m as $match) {
             $name = strtolower($match[1]);
