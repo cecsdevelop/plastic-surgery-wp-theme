@@ -242,9 +242,12 @@ abstract class ContentTypeController extends BaseController
         return $states;
     }
 
-    /** La página asignada no se ve en su URL: su contenido vive en el archivo. */
+    /** La página asignada no se ve en su URL: su contenido vive en el archivo (salvo vista previa/personalizador). */
     public function redirect_archive_page(): void
     {
+        if (is_preview() || is_customize_preview()) {
+            return;
+        }
         $page = $this->archive_page();
         if ($page && is_page($page->ID) && function_exists('intelindev_get_post_type_archive_url')) {
             wp_safe_redirect(intelindev_get_post_type_archive_url($this->post_type(), $this->get_current_lang()), 301);

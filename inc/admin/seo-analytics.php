@@ -22,7 +22,7 @@ add_action('wp_head', function () {
   $canonical = rtrim((string)intelindev_acf_or_setting('canonical_domain'), '/');
   $gsc = trim((string)intelindev_acf_or_setting('gsc_verification'));
   $bing = trim((string)intelindev_acf_or_setting('bing_verification'));
-  $manifest = esc_url(intelindev_acf_or_setting('manifest_url'));
+  $manifest = esc_url((string) intelindev_acf_or_setting('manifest_url')); // (string): sin ajuste devuelve null y esc_url avisa (PHP 8.1+)
   $theme_color = sanitize_text_field(intelindev_acf_or_setting('theme_color'));
 
   if ($force_noindex) echo '<meta name="robots" content="noindex,nofollow" />' . PHP_EOL;

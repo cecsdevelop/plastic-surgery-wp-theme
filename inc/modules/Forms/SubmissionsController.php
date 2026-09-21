@@ -167,7 +167,7 @@ class SubmissionsController extends BaseController
 
         $out = fopen('php://temp', 'r+');
         fwrite($out, "\xEF\xBB\xBF"); // BOM: Excel abre UTF-8 con acentos correctos
-        fputcsv($out, array_merge($fixed, array_values($columns)));
+        fputcsv($out, array_merge($fixed, array_values($columns)), ",", '"', "\\"); // $escape explícito: PHP 8.4+ avisa si se omite
         foreach ($entries as $entry) {
             $fid     = (int) get_post_meta($entry->ID, self::META_FORM, true);
             $data    = (array) get_post_meta($entry->ID, self::META_DATA, true);
@@ -186,7 +186,7 @@ class SubmissionsController extends BaseController
             foreach (array_keys($columns) as $name) {
                 $row[] = self::csv_safe((string) ($data[$name] ?? ''));
             }
-            fputcsv($out, $row);
+            fputcsv($out, $row, ",", '"', "\\");
         }
         rewind($out);
         $csv = (string) stream_get_contents($out);

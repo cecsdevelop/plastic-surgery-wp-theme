@@ -61,7 +61,7 @@ try {
 
     echo "4) [clients] (módulo Sections)\n";
     $im = imagecreatetruecolor(200, 60); imagefill($im, 0, 0, imagecolorallocate($im, 55, 71, 79));
-    $up = wp_upload_bits('test-logo.png', null, ''); ob_start(); imagepng($im); file_put_contents($up['file'], ob_get_clean()); imagedestroy($im);
+    $up = wp_upload_bits('test-logo.png', null, ''); ob_start(); imagepng($im); file_put_contents($up['file'], ob_get_clean());
     require_once ABSPATH . 'wp-admin/includes/image.php';
     $att = wp_insert_attachment(['post_mime_type' => 'image/png', 'post_title' => 'test logo', 'post_status' => 'inherit'], $up['file']);
     wp_update_attachment_metadata($att, wp_generate_attachment_metadata($att, $up['file']));

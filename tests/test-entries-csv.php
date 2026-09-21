@@ -13,7 +13,7 @@ require_once ABSPATH . 'wp-admin/includes/admin.php';
 wp_set_current_user(1);
 $fails = 0;
 function check(string $label, bool $ok): void { global $fails; echo ($ok ? "  ok   " : "  FAIL ") . "$label\n"; if (!$ok) $fails++; }
-$parse = function (string $csv): array { $rows = []; $h = fopen('php://temp', 'r+'); fwrite($h, preg_replace('/^\xEF\xBB\xBF/', '', $csv)); rewind($h); while (($r = fgetcsv($h)) !== false) $rows[] = $r; fclose($h); return $rows; };
+$parse = function (string $csv): array { $rows = []; $h = fopen('php://temp', 'r+'); fwrite($h, preg_replace('/^\xEF\xBB\xBF/', '', $csv)); rewind($h); while (($r = fgetcsv($h, null, ",", '"', "\\")) !== false) $rows[] = $r; fclose($h); return $rows; };
 $forms = [];
 
 try {

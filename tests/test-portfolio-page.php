@@ -36,7 +36,7 @@ try {
         'en' => ['[projects layout="cards" limit="-1" per_page="1" eyebrow="Our Projects" title="Solutions *test*"]'],
     ]);
     $im = imagecreatetruecolor(320, 200); imagefill($im, 0, 0, imagecolorallocate($im, 200, 60, 40));
-    $up = wp_upload_bits('test-project.png', null, ''); ob_start(); imagepng($im); file_put_contents($up['file'], ob_get_clean()); imagedestroy($im);
+    $up = wp_upload_bits('test-project.png', null, ''); ob_start(); imagepng($im); file_put_contents($up['file'], ob_get_clean());
     $att = wp_insert_attachment(['post_mime_type' => 'image/png', 'post_title' => 'test project', 'post_status' => 'inherit'], $up['file']);
     require_once ABSPATH . 'wp-admin/includes/image.php';
     wp_update_attachment_metadata($att, wp_generate_attachment_metadata($att, $up['file']));

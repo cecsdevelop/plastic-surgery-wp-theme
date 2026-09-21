@@ -1058,9 +1058,13 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -.08em;
+  /* En el Figma las mayúsculas (136 px) asoman por el borde inferior de la
+     sección y quedan cortadas 35 px: línea de 1em y la base del texto por
+     debajo del borde (~0,18em más la mitad del espacio de la fuente). */
+  bottom: -.35em;
   font-size: clamp(64px, 11.6vw, 200px);
   font-weight: 700;
+  line-height: 1;
   letter-spacing: .28em;
   text-align: center;
   text-transform: uppercase;

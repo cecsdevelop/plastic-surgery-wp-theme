@@ -39,7 +39,7 @@ try {
     echo "3) subida real: 1600×1200 JPEG\n";
     $upload = wp_upload_dir();
     $tmp = trailingslashit($upload['path']) . 'intelindev-test-perf-' . wp_generate_password(6, false) . '.jpg';
-    $im = imagecreatetruecolor(1600, 1200); imagefilledrectangle($im, 0, 0, 1599, 1199, imagecolorallocate($im, 30, 90, 200)); imagejpeg($im, $tmp, 95); imagedestroy($im);
+    $im = imagecreatetruecolor(1600, 1200); imagefilledrectangle($im, 0, 0, 1599, 1199, imagecolorallocate($im, 30, 90, 200)); imagejpeg($im, $tmp, 95);
     $attachment_id = wp_insert_attachment(['post_mime_type' => 'image/jpeg', 'post_title' => 'test perf', 'post_status' => 'inherit'], $tmp);
     $meta = wp_generate_attachment_metadata($attachment_id, $tmp);
     wp_update_attachment_metadata($attachment_id, $meta);

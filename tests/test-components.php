@@ -34,7 +34,7 @@ $mk = function (string $title, string $slug, string $template, string $status = 
 try {
     echo "1) fixtures\n";
     $im = imagecreatetruecolor(300, 120); imagefill($im, 0, 0, imagecolorallocate($im, 81, 102, 236));
-    $up = wp_upload_bits('test-hero.png', null, ''); ob_start(); imagepng($im); file_put_contents($up['file'], ob_get_clean()); imagedestroy($im);
+    $up = wp_upload_bits('test-hero.png', null, ''); ob_start(); imagepng($im); file_put_contents($up['file'], ob_get_clean());
     $att = wp_insert_attachment(['post_mime_type' => 'image/png', 'post_title' => 'test hero', 'post_status' => 'inherit'], $up['file']);
     wp_update_attachment_metadata($att, wp_generate_attachment_metadata($att, $up['file'])); set_post_thumbnail($PAGE, $att);
     $hero = $mk('Hero', 'hero', '<section class="hero" data-lang="{lang}" style="background-image:url({featured_image:medium})"><h1>{title}</h1><p class="sub">{subtitle}</p><a class="btn" href="{cta_url|#contacto}">{cta|Contactanos}</a><span class="dict">{t:nav.prev_page}</span><span class="site">{site_name}</span><span class="link">{permalink}</span><div class="body">{content}</div>[inner]</section>');
