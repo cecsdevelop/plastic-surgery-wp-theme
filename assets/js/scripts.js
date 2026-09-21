@@ -40,6 +40,19 @@
     list.scrollBy({ left: arrow.hasAttribute('data-scroll-prev') ? -step : step, behavior: 'smooth' });
   });
 
+  // "Ver más" de las grillas de tarjetas ([projects layout="cards" per_page]):
+  // destapa el siguiente lote de .tile[hidden] y oculta el botón al agotarse.
+  document.addEventListener('click', function (event) {
+    var more = event.target.closest('[data-tiles-more]');
+    if (!more) return;
+    var section = more.closest('section');
+    var grid = section && section.querySelector('.tiles');
+    if (!grid) return;
+    var step = parseInt(grid.getAttribute('data-tiles-step'), 10) || 6;
+    Array.prototype.slice.call(grid.querySelectorAll('.tile[hidden]'), 0, step).forEach(function (tile) { tile.hidden = false; });
+    if (!grid.querySelector('.tile[hidden]')) more.hidden = true;
+  });
+
   // Video ([inner-video]): al pulsar play, el <iframe>/<video> que el componente
   // dejó en su <template> reemplaza al póster (nada del proveedor carga antes).
   document.addEventListener('click', function (event) {

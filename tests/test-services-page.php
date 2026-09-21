@@ -45,16 +45,16 @@ try {
 
     echo "2) archivo con página (curl)\n";
     $es = $curl('/servicios/');
-    check('ES: hero interior con el título de la página, bloques (cards con el servicio temporal) y párrafo del idioma', strpos($es, '<h1 class="hero__title">Servicios Test</h1>') !== false && strpos($es, '<h2 class="services__title">Soluciones <em>test</em></h2>') !== false && strpos($es, '<h3 class="services__tile-name">Servicio Test Página</h3>') !== false && strpos($es, '<p class="test-es">Bloque ES</p>') !== false && strpos($es, 'test-en') === false);
+    check('ES: hero interior con el título de la página, bloques (cards con el servicio temporal) y párrafo del idioma', strpos($es, '<h1 class="hero__title">Servicios Test</h1>') !== false && strpos($es, '<h2 class="services__title">Soluciones <em>test</em></h2>') !== false && strpos($es, '<h3 class="tile__name">Servicio Test Página</h3>') !== false && strpos($es, '<p class="test-es">Bloque ES</p>') !== false && strpos($es, 'test-en') === false);
     $en = $curl('/en/services/');
-    check('EN: título, cards y párrafo traducidos', strpos($en, '<h1 class="hero__title">Services Test</h1>') !== false && strpos($en, '<h3 class="services__tile-name">Test Page Service</h3>') !== false && strpos($en, '<p class="test-en">Block EN</p>') !== false && strpos($en, 'test-es') === false);
+    check('EN: título, cards y párrafo traducidos', strpos($en, '<h1 class="hero__title">Services Test</h1>') !== false && strpos($en, '<h3 class="tile__name">Test Page Service</h3>') !== false && strpos($en, '<p class="test-en">Block EN</p>') !== false && strpos($en, 'test-es') === false);
     check('la URL propia de la página redirige 301 al archivo', $head('/test-servicios-pagina/') === '301 http://localhost:8888/Intelindev/servicios/');
     check('sin <h1 class="entry-title"> ni loop de servicios sueltos', strpos($es, 'entry-title') === false && substr_count($es, '<h1') === 1);
 
     echo "3) archivo sin página\n";
     delete_option($OPTION);
     $fb = $curl('/servicios/');
-    check('fallback: hero con el nombre del tipo (sin imagen) y grilla de tarjetas completa', strpos($fb, '<section class="hero hero--interior"><div class="hero__inner wrap"><div class="hero__content"><h1 class="hero__title">Servicios</h1>') !== false && strpos($fb, 'services__grid--cards') !== false && strpos($fb, 'Servicio Test Página') !== false);
+    check('fallback: hero con el nombre del tipo (sin imagen) y grilla de tarjetas completa', strpos($fb, '<section class="hero hero--interior"><div class="hero__inner wrap"><div class="hero__content"><h1 class="hero__title">Servicios</h1>') !== false && strpos($fb, 'class="tiles"') !== false && strpos($fb, 'Servicio Test Página') !== false);
     check('fallback EN', strpos($curl('/en/services/'), '<h1 class="hero__title">Services</h1>') !== false);
 
     echo "4) detalle\n";

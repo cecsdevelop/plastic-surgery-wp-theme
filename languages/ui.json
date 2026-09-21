@@ -170,5 +170,41 @@
     "stack.eyebrow": {
         "es": "Tecnología",
         "en": "Technology"
+    },
+    "projects.more": {
+        "es": "Ver más proyectos",
+        "en": "See more projects"
+    },
+    "projects.view": {
+        "es": "Ver proyecto",
+        "en": "View project"
+    },
+    "project.info_title": {
+        "es": "Información del proyecto",
+        "en": "Project information"
+    },
+    "project.year": {
+        "es": "Año",
+        "en": "Year"
+    },
+    "project.period": {
+        "es": "Periodo",
+        "en": "Period"
+    },
+    "project.client": {
+        "es": "Cliente",
+        "en": "Client"
+    },
+    "project.service": {
+        "es": "Servicio",
+        "en": "Service"
+    },
+    "project.sector": {
+        "es": "Sector",
+        "en": "Sector"
+    },
+    "project.url": {
+        "es": "Sitio",
+        "en": "Website"
     }
 }
