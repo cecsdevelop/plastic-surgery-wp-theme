@@ -2599,6 +2599,65 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 }
 
 /**********************
+* Contacto ([contact-info], Figma 7449:11611): 3 cajas 492×235 gris claro
+* con borde y radio 20 — ícono 64, título 600/35 y dato 18; cada caja enlaza
+* (WhatsApp, mailto, mapa) y las que no tienen dato no se pintan.
+***********************/
+.contact-info {
+  background: var(--intelindev-color-white);
+}
+.contact-info__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--intelindev-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.contact-info__item:has(.contact-info__text:empty) { display: none; }
+.contact-info__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--intelindev-space-3);
+  height: 100%;
+  min-height: 235px;
+  padding: var(--intelindev-space-3);
+  border: 1px solid var(--intelindev-color-gray-300);
+  border-radius: var(--intelindev-radius-lg);
+  background: var(--intelindev-surface);
+  color: var(--intelindev-color-black);
+  text-decoration: none;
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+.contact-info__link:hover, .contact-info__link:focus-visible {
+  border-color: var(--intelindev-accent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+}
+.contact-info__link[href=""] { pointer-events: none; }
+.contact-info__icon {
+  width: 64px;
+  height: 64px;
+}
+.contact-info__title {
+  display: block;
+  font-size: var(--intelindev-text-4);
+  font-weight: 600;
+  line-height: 1.1;
+}
+.contact-info__text {
+  display: block;
+  margin-top: -15px;
+  font-size: var(--intelindev-text-0);
+  line-height: 1.5;
+  color: var(--intelindev-color-ink);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 991.98px) {
+  .contact-info__list { grid-template-columns: 1fr; }
+  .contact-info__link { min-height: 0; }
+}
+
+/**********************
 * Formularios ([form slug="…"], ver inc/modules/Forms)
 ***********************/
 .intelindev-form {

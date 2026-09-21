@@ -290,5 +290,9 @@
     "comments.pending": {
         "es": "Tu comentario está pendiente de moderación.",
         "en": "Your comment is awaiting moderation."
+    },
+    "contact_info.address": {
+        "es": "Dirección",
+        "en": "Address"
     }
 }
