@@ -34,6 +34,8 @@ class ModuleRegistrar
             'IntelindevInit\\Team\\TeamController',
             // Secciones dinámicas (shortcodes que leen los CPT).
             'IntelindevInit\\Sections\\SectionsController',
+            // Blog nativo: áreas de widgets por idioma, fechas, comentarios.
+            'IntelindevInit\\Blog\\BlogController',
             'IntelindevInit\\Forms\\SubmissionsController',
         ];
     }

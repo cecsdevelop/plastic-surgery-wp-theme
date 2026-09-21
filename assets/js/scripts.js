@@ -53,6 +53,28 @@
     if (!grid.querySelector('.tile[hidden]')) more.hidden = true;
   });
 
+  // Compartir (detalle del blog): Web Share API si existe; si no, copia el
+  // enlace al portapapeles y muestra "Enlace copiado" un momento.
+  document.addEventListener('click', function (event) {
+    var share = event.target.closest('[data-share-url]');
+    if (!share) return;
+    var url = share.getAttribute('data-share-url');
+    var title = share.getAttribute('data-share-title') || document.title;
+    if (navigator.share) {
+      navigator.share({ title: title, url: url }).catch(function () {});
+      return;
+    }
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(url).then(function () {
+      var label = share.querySelector('span');
+      if (!label || share.dataset.copying) return;
+      var original = label.textContent;
+      share.dataset.copying = '1';
+      label.textContent = share.getAttribute('data-copied-label') || original;
+      setTimeout(function () { label.textContent = original; delete share.dataset.copying; }, 2000);
+    });
+  });
+
   // Video ([inner-video]): al pulsar play, el <iframe>/<video> que el componente
   // dejó en su <template> reemplaza al póster (nada del proveedor carga antes).
   document.addEventListener('click', function (event) {

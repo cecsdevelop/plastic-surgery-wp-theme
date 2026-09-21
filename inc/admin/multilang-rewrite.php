@@ -111,6 +111,15 @@ add_action('init', function() {
             'top'
         );
 
+        // Paginación de la página del blog y de los archivos de CPT:
+        // /{lang}/blog/page/2/, /{lang}/{base}/page/2/ (el filtro 'request'
+        // conserva 'paged' al resolver el slug).
+        add_rewrite_rule(
+            '^' . preg_quote($lang, '/') . '/([^/]+)/page/([0-9]+)/?$',
+            'index.php?idml_post_slug=$matches[1]&idml_post_lang=' . $lang . '&paged=$matches[2]',
+            'top'
+        );
+
         // CPTs públicos: /{lang}/{base-del-tipo}/{slug}/. La base se resuelve en
         // el filtro 'request' contra intelindev_post_type_by_lang_slug(), así un
         // cambio de base no exige flush; el archivo /{lang}/{base}/ cae en la
@@ -130,7 +139,7 @@ add_action('init', function() {
  * tocar reglas o registrar un CPT nuevo). Prioridad 99: después de los CPT
  * (init 5) y de las reglas.
  */
-const IDML_REWRITE_VERSION = 3;
+const IDML_REWRITE_VERSION = 4;
 add_action('init', function() {
     if ((int) get_option('idml_rewrite_version', 0) !== IDML_REWRITE_VERSION) {
         flush_rewrite_rules(false);
@@ -199,8 +208,11 @@ add_filter('request', function($query_vars) {
         return $query_vars;
     }
 
-    $slug = sanitize_title((string) $query_vars['idml_post_slug']);
-    $lang = isset($query_vars['idml_post_lang']) ? sanitize_key((string) $query_vars['idml_post_lang']) : '';
+    $slug  = sanitize_title((string) $query_vars['idml_post_slug']);
+    $lang  = isset($query_vars['idml_post_lang']) ? sanitize_key((string) $query_vars['idml_post_lang']) : '';
+    $paged = isset($query_vars['paged']) ? max(0, (int) $query_vars['paged']) : 0;
+    // Los listados (archivo de CPT, página del blog) conservan la página pedida.
+    $with_paged = fn(array $vars) => $paged > 1 ? $vars + ['paged' => $paged] : $vars;
 
     // An empty/unmatched main query resolves to the blog home in WordPress instead of
     // a 404. Fall back to a plain 'name' lookup (post_type=post) on failure so a
@@ -225,7 +237,7 @@ add_filter('request', function($query_vars) {
     // /{lang}/{base}/ → archivo del CPT cuya base en ese idioma es {base}.
     $archive_type = function_exists('intelindev_post_type_by_lang_slug') ? intelindev_post_type_by_lang_slug($slug, $lang) : '';
     if ($archive_type !== '') {
-        return ['post_type' => $archive_type];
+        return $with_paged(['post_type' => $archive_type]);
     }
 
     $resolved = idml_resolve_translated_slug($slug, $lang);
@@ -241,7 +253,7 @@ add_filter('request', function($query_vars) {
         // La página del blog (page_for_posts) es la home de posts: WP ignora page_id
         // en el WHERE y lista lo que diga post_type, así que no se fija 'page'.
         if ((int) get_option('page_for_posts') === (int) $resolved['id']) {
-            return ['page_id' => $resolved['id']];
+            return $with_paged(['page_id' => $resolved['id']]);
         }
 
         return ['page_id' => $resolved['id'], 'post_type' => 'page'];

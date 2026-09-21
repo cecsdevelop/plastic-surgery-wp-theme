@@ -237,19 +237,31 @@ class SectionsController extends BaseController
     /* ------------------------------------------------------------------ */
 
     /**
-     * Últimas entradas en acordeón horizontal: la primera abierta (imagen +
-     * título serif + fecha + excerpt + botón), el resto plegadas con el
-     * título en vertical; al pasar el mouse se abre la que toque (solo CSS).
+     * Últimas entradas en acordeón horizontal (home): la primera abierta
+     * (imagen + título serif + fecha + excerpt + botón), el resto plegadas con
+     * el título en vertical; al pasar el mouse se abre la que toque (solo CSS).
+     * layout="cards" para la página del blog (ver post_cards()).
      */
     public function latest_posts($atts = []): string
     {
-        $atts  = shortcode_atts(['eyebrow' => '', 'title' => '', 'text' => '', 'limit' => 4, 'more' => ''], is_array($atts) ? $atts : [], 'latest_posts');
+        $atts = shortcode_atts(['eyebrow' => '', 'title' => '', 'text' => '', 'limit' => 4, 'more' => '', 'layout' => 'accordion'], is_array($atts) ? $atts : [], 'latest_posts');
+        $lang = $this->get_current_lang();
+        $more = trim((string) $atts['more']) !== '' ? (string) $atts['more'] : idml_t('posts.read_more', $lang);
+
+        // layout="cards" (página del blog): en el índice de entradas lista la
+        // query principal (paginada con /page/N/); fuera de él, las últimas `limit`.
+        if ((string) $atts['layout'] === 'cards') {
+            $in_index = is_home() && !is_admin();
+            $posts    = $in_index ? (array) $GLOBALS['wp_query']->posts : get_posts(['post_type' => 'post', 'post_status' => 'publish', 'numberposts' => (int) $atts['limit'], 'suppress_filters' => false]);
+            return '<section class="posts section posts--cards"><div class="posts__inner wrap">' . $this->heading($atts, 'posts')
+                . ($posts ? $this->post_cards($posts, $more, $lang) : '<p class="posts__empty">' . esc_html(idml_t('archive.nothing_found', $lang)) . '</p>')
+                . ($in_index ? $this->pagination($lang) : '') . '</div></section>';
+        }
+
         $posts = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'numberposts' => (int) $atts['limit'], 'suppress_filters' => false]);
         if (!$posts) {
             return '';
         }
-        $lang = $this->get_current_lang();
-        $more = trim((string) $atts['more']) !== '' ? (string) $atts['more'] : idml_t('posts.read_more', $lang);
 
         $items = '';
         foreach ($posts as $post) {
@@ -269,6 +281,50 @@ class SectionsController extends BaseController
         return '<section class="posts section"><div class="posts__inner wrap">'
             . '<div class="posts__top">' . $this->heading($atts, 'posts', 'h2', true) . '</div>'
             . '<ul class="posts__list">' . $items . '</ul></div></section>';
+    }
+
+    /**
+     * Tarjetas 769×380 del blog (2 columnas): foto 372 a la izquierda y caja
+     * blanca con fecha corta (línea + "Diciembre 05, 2026"), título, excerpt
+     * y el ícono add-circle que enlaza al post.
+     */
+    private function post_cards(array $posts, string $more, string $lang): string
+    {
+        $blog  = new \IntelindevInit\Blog\BlogController();
+        $cards = '';
+        foreach ($posts as $post) {
+            $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($post, $lang) : '';
+            if ($excerpt === '') {
+                $excerpt = wp_trim_words(wp_strip_all_tags((string) $post->post_excerpt), 20);
+            }
+            $url    = esc_url(get_permalink($post));
+            $cards .= '<article class="post-card">'
+                . '<a class="post-card__media" href="' . $url . '" tabindex="-1" aria-hidden="true">' . (has_post_thumbnail($post) ? get_the_post_thumbnail($post, 'medium_large', ['class' => 'post-card__image', 'alt' => '', 'loading' => 'lazy']) : '<span class="post-card__image"></span>') . '</a>'
+                . '<div class="post-card__body">' . $blog->time_html($post, 'date.short', 'post-card__date')
+                . '<h3 class="post-card__title"><a href="' . $url . '">' . esc_html(get_the_title($post)) . '</a></h3>'
+                . ($excerpt !== '' ? '<p class="post-card__excerpt">' . esc_html($excerpt) . '</p>' : '')
+                . '<a class="post-card__more" href="' . $url . '"><span class="screen-reader-text">' . esc_html($more) . '</span></a></div></article>';
+        }
+
+        return '<div class="post-cards">' . $cards . '</div>';
+    }
+
+    /** Paginación de la query principal: números (el actual en círculo rojo) y salto a la última página. */
+    private function pagination(string $lang): string
+    {
+        $query = $GLOBALS['wp_query'];
+        $total = (int) $query->max_num_pages;
+        if ($total < 2) {
+            return '';
+        }
+        $current = max(1, (int) $query->get('paged'));
+        $links   = paginate_links(['type' => 'array', 'prev_next' => false, 'current' => $current, 'total' => $total, 'mid_size' => 2]);
+        $html    = implode('', (array) $links);
+        if ($current < $total) {
+            $html .= '<a class="page-numbers page-numbers--last" href="' . esc_url(get_pagenum_link($total)) . '" aria-label="' . esc_attr(idml_t('nav.last_page', $lang)) . '"></a>';
+        }
+
+        return '<nav class="pagination" aria-label="' . esc_attr(idml_t('nav.pagination_label', $lang)) . '">' . $html . '</nav>';
     }
 
     /* ------------------------------------------------------------------ */

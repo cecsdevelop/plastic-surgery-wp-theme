@@ -206,5 +206,89 @@
     "project.url": {
         "es": "Sitio",
         "en": "Website"
+    },
+    "date.long": {
+        "es": "l j \\d\\e F, Y",
+        "en": "l, F j, Y"
+    },
+    "date.short": {
+        "es": "F d, Y",
+        "en": "F d, Y"
+    },
+    "blog.categories": {
+        "es": "Categorías",
+        "en": "Categories"
+    },
+    "blog.tags": {
+        "es": "Etiquetas",
+        "en": "Tags"
+    },
+    "blog.back": {
+        "es": "Regresar al inicio",
+        "en": "Back to blog"
+    },
+    "blog.share": {
+        "es": "Compartir",
+        "en": "Share"
+    },
+    "blog.link_copied": {
+        "es": "Enlace copiado",
+        "en": "Link copied"
+    },
+    "nav.last_page": {
+        "es": "Última página",
+        "en": "Last page"
+    },
+    "comments.title": {
+        "es": "Deja un comentario",
+        "en": "Leave a comment"
+    },
+    "comments.title_reply_to": {
+        "es": "Responder a %s",
+        "en": "Reply to %s"
+    },
+    "comments.notes": {
+        "es": "Tu dirección de correo electrónico no será publicada.",
+        "en": "Your email address will not be published."
+    },
+    "comments.name": {
+        "es": "NOMBRE",
+        "en": "NAME"
+    },
+    "comments.email": {
+        "es": "CORREO ELECTRÓNICO",
+        "en": "EMAIL"
+    },
+    "comments.message": {
+        "es": "MENSAJE",
+        "en": "MESSAGE"
+    },
+    "comments.submit": {
+        "es": "Publicar comentario",
+        "en": "Post comment"
+    },
+    "comments.cancel": {
+        "es": "Cancelar",
+        "en": "Cancel"
+    },
+    "comments.cookies": {
+        "es": "Guardar mi nombre y correo en este navegador para la próxima vez que comente.",
+        "en": "Save my name and email in this browser for the next time I comment."
+    },
+    "comments.must_log_in": {
+        "es": "Debes <a href=\"%s\">iniciar sesión</a> para comentar.",
+        "en": "You must <a href=\"%s\">log in</a> to comment."
+    },
+    "comments.list_title": {
+        "es": "Comentarios",
+        "en": "Comments"
+    },
+    "comments.reply": {
+        "es": "Responder",
+        "en": "Reply"
+    },
+    "comments.pending": {
+        "es": "Tu comentario está pendiente de moderación.",
+        "en": "Your comment is awaiting moderation."
     }
 }
