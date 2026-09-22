@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) exit;
 const INTELINDEV_TYPO_SIZE_MIN = 14;
 const INTELINDEV_TYPO_SIZE_MAX = 22;
 const INTELINDEV_TYPO_WEIGHTS  = [300, 400, 500, 600, 700, 800];
-const INTELINDEV_TYPO_DEFAULT_BODY = 'dm-sans'; // slug en theme.json; es el default de --intelindev-font-body en styles.css
+const INTELINDEV_TYPO_DEFAULT_BODY = 'dm-sans'; // slug en theme.json; es el default de --psw-font-body en styles.css
 
 /**
  * Al activar una fuente, la Biblioteca guarda en los estilos globales del usuario
@@ -199,23 +199,23 @@ add_action('wp_head', function () {
 
     $body = (string) intelindev_get_setting('font_body', '');
     if ($body !== '' && isset($families[$body])) {
-        $decl .= '--intelindev-font-body:var(--wp--preset--font-family--' . $body . ');';
+        $decl .= '--psw-font-body:var(--wp--preset--font-family--' . $body . ');';
     }
     $heading = (string) intelindev_get_setting('font_heading', '');
     if ($heading !== '' && isset($families[$heading])) {
-        $decl .= '--intelindev-font-heading:var(--wp--preset--font-family--' . $heading . ');';
+        $decl .= '--psw-font-heading:var(--wp--preset--font-family--' . $heading . ');';
     }
     $accent = (string) intelindev_get_setting('font_accent', '');
     if ($accent !== '' && isset($families[$accent])) {
-        $decl .= '--intelindev-font-accent:var(--wp--preset--font-family--' . $accent . ');';
+        $decl .= '--psw-font-accent:var(--wp--preset--font-family--' . $accent . ');';
     }
     $size = (int) intelindev_get_setting('font_size_base', 0);
     if ($size >= INTELINDEV_TYPO_SIZE_MIN && $size <= INTELINDEV_TYPO_SIZE_MAX) {
-        $decl .= '--intelindev-font-size-base:' . $size . 'px;';
+        $decl .= '--psw-font-size-base:' . $size . 'px;';
     }
     $weight = (int) intelindev_get_setting('font_weight_heading', 0);
     if (in_array($weight, INTELINDEV_TYPO_WEIGHTS, true)) {
-        $decl .= '--intelindev-font-weight-heading:' . $weight . ';';
+        $decl .= '--psw-font-weight-heading:' . $weight . ';';
     }
 
     if ($decl !== '') {

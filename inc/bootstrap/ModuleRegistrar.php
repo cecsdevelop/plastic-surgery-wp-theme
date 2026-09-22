@@ -34,6 +34,8 @@ class ModuleRegistrar
             'IntelindevInit\\Team\\TeamController',
             // Secciones dinámicas (shortcodes que leen los CPT).
             'IntelindevInit\\Sections\\SectionsController',
+            // Elemento global de móvil renderizado en wp_footer.
+            'IntelindevInit\\StickyCta\\StickyCtaController',
             // Blog nativo: áreas de widgets por idioma, fechas, comentarios.
             'IntelindevInit\\Blog\\BlogController',
             'IntelindevInit\\Forms\\SubmissionsController',

@@ -5,7 +5,7 @@
  *
  * Todo vive en la option intelindev_header_settings y se lee con
  * intelindev_get_header_setting(). Los colores se imprimen como custom
- * properties CSS (--intelindev-header-*) en un <style> en wp_head, solo las
+ * properties CSS (--psw-header-*) en un <style> en wp_head, solo las
  * que el admin configuró — el resto lo cubre el default de
  * assets/css/styles.css en :root, así que sin configurar nada no cambia nada.
  *
@@ -65,27 +65,27 @@ add_action('admin_enqueue_scripts', function ($hook) {
 function intelindev_header_color_matrix(): array {
     return [
         'menu' => [
-            'bg_color'                 => ['label' => __('Fondo del header', 'intelindev'),               'var' => '--intelindev-header-bg'],
-            'nav_bg_color'             => ['label' => __('Fondo de la barra del menú', 'intelindev'),     'var' => '--intelindev-header-nav-bg'],
-            'link_color'               => ['label' => __('Color de los links', 'intelindev'),             'var' => '--intelindev-header-link-color'],
-            'active_bg_color'          => ['label' => __('Fondo del ítem activo', 'intelindev'),          'var' => '--intelindev-header-active-bg'],
-            'active_link_color'        => ['label' => __('Texto del ítem activo', 'intelindev'),          'var' => '--intelindev-header-active-color'],
-            'submenu_bg_color'         => ['label' => __('Fondo del submenú', 'intelindev'),              'var' => '--intelindev-header-submenu-bg'],
-            'submenu_link_color'       => ['label' => __('Color de los links del submenú', 'intelindev'), 'var' => '--intelindev-header-submenu-link-color'],
-            'submenu_hover_bg_color'   => ['label' => __('Fondo del submenú (hover)', 'intelindev'),      'var' => '--intelindev-header-submenu-hover-bg'],
-            'submenu_hover_link_color' => ['label' => __('Link del submenú (hover)', 'intelindev'),       'var' => '--intelindev-header-submenu-hover-link-color'],
+            'bg_color'                 => ['label' => __('Fondo del header', 'intelindev'),               'var' => '--psw-header-bg'],
+            'nav_bg_color'             => ['label' => __('Fondo de la barra del menú', 'intelindev'),     'var' => '--psw-header-nav-bg'],
+            'link_color'               => ['label' => __('Color de los links', 'intelindev'),             'var' => '--psw-header-link-color'],
+            'active_bg_color'          => ['label' => __('Fondo del ítem activo', 'intelindev'),          'var' => '--psw-header-active-bg'],
+            'active_link_color'        => ['label' => __('Texto del ítem activo', 'intelindev'),          'var' => '--psw-header-active-color'],
+            'submenu_bg_color'         => ['label' => __('Fondo del submenú', 'intelindev'),              'var' => '--psw-header-submenu-bg'],
+            'submenu_link_color'       => ['label' => __('Color de los links del submenú', 'intelindev'), 'var' => '--psw-header-submenu-link-color'],
+            'submenu_hover_bg_color'   => ['label' => __('Fondo del submenú (hover)', 'intelindev'),      'var' => '--psw-header-submenu-hover-bg'],
+            'submenu_hover_link_color' => ['label' => __('Link del submenú (hover)', 'intelindev'),       'var' => '--psw-header-submenu-hover-link-color'],
         ],
         'cta' => [
-            'cta_bg_color'         => ['label' => __('Fondo', 'intelindev'),         'var' => '--intelindev-header-cta-bg'],
-            'cta_text_color'       => ['label' => __('Texto', 'intelindev'),         'var' => '--intelindev-header-cta-text-color'],
-            'cta_hover_bg_color'   => ['label' => __('Fondo (hover)', 'intelindev'), 'var' => '--intelindev-header-cta-hover-bg'],
-            'cta_hover_text_color' => ['label' => __('Texto (hover)', 'intelindev'), 'var' => '--intelindev-header-cta-hover-text-color'],
+            'cta_bg_color'         => ['label' => __('Fondo', 'intelindev'),         'var' => '--psw-header-cta-bg'],
+            'cta_text_color'       => ['label' => __('Texto', 'intelindev'),         'var' => '--psw-header-cta-text-color'],
+            'cta_hover_bg_color'   => ['label' => __('Fondo (hover)', 'intelindev'), 'var' => '--psw-header-cta-hover-bg'],
+            'cta_hover_text_color' => ['label' => __('Texto (hover)', 'intelindev'), 'var' => '--psw-header-cta-hover-text-color'],
         ],
     ];
 }
 
 function intelindev_header_sticky_css_var(string $var): string {
-    return str_replace('--intelindev-header-', '--intelindev-header-sticky-', $var);
+    return str_replace('--psw-header-', '--psw-header-sticky-', $var);
 }
 
 /* ------------------------------------------------------------------ */

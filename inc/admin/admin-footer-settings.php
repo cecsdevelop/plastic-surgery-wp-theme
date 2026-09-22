@@ -85,26 +85,26 @@ function intelindev_footer_bar_aligns(): array {
 /** Colores: clave de option => [label, custom property]. */
 function intelindev_footer_color_map(): array {
     return [
-        'bg_color'         => [__('Fondo del footer', 'intelindev'),        '--intelindev-footer-bg'],
-        'text_color'       => [__('Texto', 'intelindev'),                   '--intelindev-footer-text-color'],
-        'heading_color'    => [__('Títulos de los widgets', 'intelindev'),  '--intelindev-footer-heading-color'],
-        'link_color'       => [__('Links', 'intelindev'),                   '--intelindev-footer-link-color'],
-        'link_hover_color' => [__('Links (hover)', 'intelindev'),           '--intelindev-footer-link-hover-color'],
-        'bar_bg_color'     => [__('Fondo de la barra', 'intelindev'),       '--intelindev-footer-bar-bg'],
-        'bar_text_color'   => [__('Texto de la barra', 'intelindev'),       '--intelindev-footer-bar-text-color'],
-        'bar_link_color'   => [__('Links de la barra', 'intelindev'),       '--intelindev-footer-bar-link-color'],
+        'bg_color'         => [__('Fondo del footer', 'intelindev'),        '--psw-footer-bg'],
+        'text_color'       => [__('Texto', 'intelindev'),                   '--psw-footer-text-color'],
+        'heading_color'    => [__('Títulos de los widgets', 'intelindev'),  '--psw-footer-heading-color'],
+        'link_color'       => [__('Links', 'intelindev'),                   '--psw-footer-link-color'],
+        'link_hover_color' => [__('Links (hover)', 'intelindev'),           '--psw-footer-link-hover-color'],
+        'bar_bg_color'     => [__('Fondo de la barra', 'intelindev'),       '--psw-footer-bar-bg'],
+        'bar_text_color'   => [__('Texto de la barra', 'intelindev'),       '--psw-footer-bar-text-color'],
+        'bar_link_color'   => [__('Links de la barra', 'intelindev'),       '--psw-footer-bar-link-color'],
     ];
 }
 
 /** Medidas en px: clave => [label, custom property, min, max, descripción]. */
 function intelindev_footer_size_map(): array {
     return [
-        'padding_top'    => [__('Padding superior', 'intelindev'),        '--intelindev-footer-padding-top',    0, 400,  ''],
-        'padding_bottom' => [__('Padding inferior', 'intelindev'),        '--intelindev-footer-padding-bottom', 0, 400,  ''],
-        'padding_x'      => [__('Padding lateral', 'intelindev'),         '--intelindev-footer-padding-x',      0, 200,  ''],
-        'column_gap'     => [__('Separación entre columnas', 'intelindev'), '--intelindev-footer-gap',          0, 120,  ''],
-        'max_width'      => [__('Ancho máximo del contenido', 'intelindev'), '--intelindev-footer-max-width',   0, 2400, __('0 = ancho completo.', 'intelindev')],
-        'bar_padding'    => [__('Padding de la barra', 'intelindev'),     '--intelindev-footer-bar-padding',    0, 100,  ''],
+        'padding_top'    => [__('Padding superior', 'intelindev'),        '--psw-footer-padding-top',    0, 400,  ''],
+        'padding_bottom' => [__('Padding inferior', 'intelindev'),        '--psw-footer-padding-bottom', 0, 400,  ''],
+        'padding_x'      => [__('Padding lateral', 'intelindev'),         '--psw-footer-padding-x',      0, 200,  ''],
+        'column_gap'     => [__('Separación entre columnas', 'intelindev'), '--psw-footer-gap',          0, 120,  ''],
+        'max_width'      => [__('Ancho máximo del contenido', 'intelindev'), '--psw-footer-max-width',   0, 2400, __('0 = ancho completo.', 'intelindev')],
+        'bar_padding'    => [__('Padding de la barra', 'intelindev'),     '--psw-footer-bar-padding',    0, 100,  ''],
     ];
 }
 
