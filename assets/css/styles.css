@@ -350,6 +350,8 @@ h1 em, h2 em, h3 em, h4 em,
   background: var(--intelindev-header-bg);
   color: var(--intelindev-header-link-color);
   transition: background-color .2s ease, box-shadow .2s ease;
+  max-width: 1540px;
+  margin: auto;
 }
 /* Sticky: la clase la imprime header.php solo si está activado en Apariencia → Intelindev Header */
 .site-header--sticky {
@@ -449,6 +451,24 @@ h1 em, h2 em, h3 em, h4 em,
 .nav-list > li:hover > .sub-menu,
 .nav-list > li:focus-within > .sub-menu {
   display: block;
+}
+/* Puente invisible sobre los 8 px de separación: sin él, al bajar el puntero
+   del ítem al submenú se pierde el :hover y el desplegable se cierra antes de
+   poder elegir (el caso del selector de idioma). Al ser hijo del submenú, el
+   puntero sobre el puente mantiene el :hover del <li>. */
+.nav-list .sub-menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  height: 10px;
+}
+/* El submenú arranca en el borde del ítem, no del menú: el puente cubre todo
+   el recorrido diagonal hacia la primera opción. */
+.nav-list > li:last-child > .sub-menu {
+  left: auto;
+  right: 0;
 }
 .nav-list .sub-menu a {
   display: block;
@@ -572,6 +592,8 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
     padding: 0 0 4px 15px;
     background: transparent;
   }
+  .nav-list .sub-menu::before { content: none; } /* el puente es solo para el hover de escritorio */
+  .nav-list > li:last-child > .sub-menu { right: auto; }
   .nav-list > li.menu-item-has-children > .sub-menu {
     display: block;
   }
@@ -1061,7 +1083,7 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   /* En el Figma las mayúsculas (136 px) asoman por el borde inferior de la
      sección y quedan cortadas 35 px: línea de 1em y la base del texto por
      debajo del borde (~0,18em más la mitad del espacio de la fuente). */
-  bottom: -.35em;
+  bottom: -.15em;
   font-size: clamp(64px, 11.6vw, 200px);
   font-weight: 700;
   line-height: 1;

@@ -104,24 +104,41 @@ class BlogController extends BaseController
     /* ------------------------------------------------------------------ */
 
     /**
-     * Fecha del post con el formato del diccionario (date.long: "Miércoles 3
-     * de diciembre, 2025"; date.short: "Diciembre 05, 2026") en el idioma
-     * pedido: en EN se cambia el locale para los nombres de mes y día.
+     * Fecha con el formato del diccionario (date.long: "Miércoles 3 de
+     * diciembre, 2025"; date.short: "Diciembre 05, 2026"; date.medium,
+     * date.comment) en el idioma pedido, sin depender del idioma del sitio
+     * (Ajustes → General) ni de packs instalados: se formatea en en_US y los
+     * nombres de mes y día salen de date.months / date.days del diccionario.
      */
-    public function date(WP_Post $post, string $key = 'date.long', $lang = null): string
+    public function format_date(int $timestamp, string $key = 'date.long', $lang = null): string
     {
         $lang   = $lang !== null ? idml_normalize_lang($lang) : $this->get_current_lang();
         $format = idml_t($key, $lang);
         if ($format === $key) {
             $format = (string) get_option('date_format');
         }
-        $switched = $lang === 'en' && get_locale() !== 'en_US' && switch_to_locale('en_US');
-        $date     = wp_date($format, get_post_timestamp($post));
+        $switched = get_locale() !== 'en_US' && switch_to_locale('en_US');
+        $date     = wp_date($format, $timestamp);
         if ($switched) {
             restore_previous_locale();
         }
 
+        $names = [];
+        foreach (['date.months' => 12, 'date.days' => 7] as $dict => $count) {
+            $en = explode('|', idml_t($dict, 'en'));
+            $to = explode('|', idml_t($dict, $lang));
+            if (count($en) === $count && count($to) === $count) {
+                $names += array_combine($en, $to);
+            }
+        }
+        $date = $names ? strtr($date, $names) : $date;
+
         return function_exists('mb_strtoupper') ? mb_strtoupper(mb_substr($date, 0, 1)) . mb_substr($date, 1) : ucfirst($date);
+    }
+
+    public function date(WP_Post $post, string $key = 'date.long', $lang = null): string
+    {
+        return $this->format_date(get_post_timestamp($post), $key, $lang);
     }
 
     public function time_html(WP_Post $post, string $key = 'date.long', string $class = ''): string
@@ -186,7 +203,7 @@ class BlogController extends BaseController
         echo '<article class="comment-item__body" id="div-comment-' . esc_attr((string) $comment->comment_ID) . '">';
         echo '<header class="comment-item__meta">' . get_avatar($comment, 56, '', '', ['class' => 'comment-item__avatar'])
             . '<span class="comment-item__author">' . esc_html(get_comment_author($comment)) . '</span>'
-            . '<time class="comment-item__date" datetime="' . esc_attr(get_comment_date('c', $comment)) . '">' . esc_html(get_comment_date((string) get_option('date_format'), $comment)) . '</time></header>';
+            . '<time class="comment-item__date" datetime="' . esc_attr(get_comment_date('c', $comment)) . '">' . esc_html((new self())->format_date((int) get_comment_time('U', true, false, $comment), 'date.comment', $lang)) . '</time></header>';
         if (!$approved) {
             echo '<p class="comment-item__pending">' . esc_html(idml_t('comments.pending', $lang)) . '</p>';
         }

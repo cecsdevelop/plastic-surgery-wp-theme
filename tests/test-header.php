@@ -44,6 +44,7 @@ try {
     $css = file_get_contents(dirname(__DIR__) . '/assets/css/styles.css');
     check('defaults del diseño aprobado: barra flotante negra translúcida, chip activo claro, footer ink, main deja el hueco', strpos($css, '--intelindev-header-bg: rgba(0, 0, 0, 0.71);') !== false && strpos($css, '--intelindev-header-active-bg: var(--intelindev-surface-2);') !== false && strpos($css, '--intelindev-footer-bg: var(--intelindev-color-ink);') !== false && strpos($css, ".site-main {\n  padding-top: var(--intelindev-header-offset);") !== false && strpos($css, ".site-header--sticky {\n  position: fixed;") !== false);
     check('menú móvil y sticky compacto', strpos($css, 'body.nav-open .site-nav {') !== false && strpos($css, '.site-header.is-scrolled .nav-list {') !== false);
+    check('submenús (selector de idioma): puente sobre el hueco para no perder el hover, alineado al borde en el último ítem y sin puente en móvil', strpos($css, '.nav-list .sub-menu::before {') !== false && strpos($css, 'top: -10px;') !== false && strpos($css, '.nav-list > li:last-child > .sub-menu {') !== false && strpos($css, '.nav-list .sub-menu::before { content: none; }') !== false);
 } finally {
     if ($orig === null) delete_option('intelindev_header_settings'); else update_option('intelindev_header_settings', $orig);
     echo "   (limpieza: ajustes del header restaurados)\n";

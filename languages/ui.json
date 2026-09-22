@@ -294,5 +294,21 @@
     "contact_info.address": {
         "es": "Dirección",
         "en": "Address"
+    },
+    "date.medium": {
+        "es": "j \\d\\e F, Y",
+        "en": "F j, Y"
+    },
+    "date.comment": {
+        "es": "j \\d\\e F, Y",
+        "en": "F j, Y"
+    },
+    "date.months": {
+        "es": "enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre",
+        "en": "January|February|March|April|May|June|July|August|September|October|November|December"
+    },
+    "date.days": {
+        "es": "domingo|lunes|martes|miércoles|jueves|viernes|sábado",
+        "en": "Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday"
     }
 }

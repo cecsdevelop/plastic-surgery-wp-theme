@@ -273,7 +273,7 @@ class SectionsController extends BaseController
                 . '<a class="posts__toggle" href="' . esc_url(get_permalink($post)) . '"><span class="posts__arrow" aria-hidden="true"></span><span class="posts__vertical">' . esc_html(get_the_title($post)) . '</span></a>'
                 . '<div class="posts__card">' . (has_post_thumbnail($post) ? get_the_post_thumbnail($post, 'medium_large', ['class' => 'posts__image', 'loading' => 'lazy']) : '<span class="posts__image posts__image--empty"></span>')
                 . '<div class="posts__body"><h3 class="posts__name">' . esc_html(get_the_title($post)) . '</h3>'
-                . '<time class="posts__date" datetime="' . esc_attr(get_the_date('c', $post)) . '">' . esc_html(date_i18n(get_option('date_format'), get_post_timestamp($post))) . '</time>'
+                . '<time class="posts__date" datetime="' . esc_attr(get_the_date('c', $post)) . '">' . esc_html((new \IntelindevInit\Blog\BlogController())->date($post, 'date.medium', $lang)) . '</time>'
                 . ($excerpt !== '' ? '<p class="posts__excerpt">' . esc_html($excerpt) . '</p>' : '')
                 . '<a class="btn btn--primary btn--arrow posts__more" href="' . esc_url(get_permalink($post)) . '">' . esc_html($more) . '</a></div></div></li>';
         }
