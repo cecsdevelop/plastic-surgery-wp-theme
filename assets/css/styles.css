@@ -3105,6 +3105,135 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
 }
 
 /* ==========================================================================
+   Franja de reseñas de portada — [home_reviews]
+   --------------------------------------------------------------------------
+   Derivado de `section.homerev` medido a 1440x900 y 390x844.
+   Las familias apuntan a los roles semánticos del theme, no a las del origen
+   (Raleway / Cormorant Garamond / Bodoni Moda): cargar esas webfonts es una
+   decisión de licencia aparte. Tamaños, ritmo y espaciados sí son los medidos.
+   ========================================================================== */
+
+.psw-reviews {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: 0 24px;
+  text-align: center;
+  color: var(--psw-text);
+  font-family: var(--psw-font-body, inherit);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 29.75px;
+  letter-spacing: 0.36px;
+}
+
+.psw-reviews__title {
+  margin: 0;
+  font-family: var(--psw-font-heading, inherit);
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 48.4px;
+  letter-spacing: 0.66px;
+}
+
+/* Centrado con texto en flujo, no flex: lo medido es `text-align: center`, y
+   con flex la etiqueta larga se partía en dos filas separadas de las estrellas
+   en móvil. Las estrellas van inline y se alinean con vertical-align. */
+.psw-reviews__rating {
+  margin: 20px 0 0;
+  font-family: var(--psw-font-heading, inherit);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 34.2px;
+  letter-spacing: 0.38px;
+}
+
+.psw-reviews__star {
+  color: var(--psw-reviews-star, var(--psw-accent));
+  vertical-align: -1px;
+  margin-right: 1px;
+}
+
+.psw-reviews__star:last-of-type { margin-right: 6px; }
+
+/* El número en cursiva y con otra familia es lo que le da el aire editorial
+   al bloque en el original; sin eso la valoración parece un dato de sistema. */
+.psw-reviews__num {
+  font-family: var(--psw-font-accent, inherit);
+  font-size: 22px;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.437px;
+}
+
+.psw-reviews__feature {
+  display: grid;
+  /* Medido 593.39px y 438.59px: proporción 1.35, no dos columnas iguales.
+     En px se rompería a cualquier otro ancho. */
+  grid-template-columns: 1.35fr 1fr;
+  gap: 64px;
+  margin-top: 60px;
+  text-align: left;
+  align-items: start;
+}
+
+.psw-reviews__figure { margin: 0; }
+.psw-reviews__img { display: block; max-width: 100%; height: auto; }
+
+.psw-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 56px;
+  margin-top: 51.84px;
+  text-align: left;
+}
+
+.psw-reviews blockquote {
+  margin: 0;
+  padding-top: 26px;
+  font-family: var(--psw-font-heading, inherit);
+  font-size: 24px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 36px;
+  letter-spacing: 0.36px;
+}
+
+.psw-reviews__grid blockquote { font-size: 20px; line-height: 32px; }
+
+.psw-reviews cite {
+  display: block;
+  margin-top: 16px;
+  font-family: var(--psw-font-body, inherit);
+  font-size: 11px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 16.5px;
+  letter-spacing: 2.42px;
+  text-transform: uppercase;
+  color: var(--psw-text-2);
+}
+
+/* Aviso legal: el original lo acota a ~411px para que no compita con las
+   citas. Se conserva porque es una decisión de jerarquía, no un accidente. */
+.psw-reviews__fine {
+  max-width: 411px;
+  margin: 38px auto 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 19.8px;
+  color: var(--psw-text-2);
+}
+
+@media (max-width: 767.98px) {
+  .psw-reviews { padding: 64px 24px; }
+  .psw-reviews__title { font-size: 28px; line-height: 30.8px; }
+  .psw-reviews__feature { grid-template-columns: 1fr; gap: 32px; margin-top: 44px; }
+  .psw-reviews__grid { grid-template-columns: 1fr; gap: 28px; margin-top: 36px; }
+  .psw-reviews blockquote { font-size: 20px; line-height: 30px; }
+  .psw-reviews__img { padding-top: 10px; }
+}
+
+/* ==========================================================================
    Sticky CTA — barra fija de acciones en móvil
    --------------------------------------------------------------------------
    Derivado de medidas reales de https://femsculpt.com a 390x844.

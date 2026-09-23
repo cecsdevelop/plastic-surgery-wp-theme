@@ -12,6 +12,7 @@
  *   [latest_posts limit="3"]         últimas entradas del blog
  *   [testimonials]                   citas de clientes (CPT Testimonios)
  *   [team]                           personas del equipo (CPT Equipo)
+ *   [home_reviews]                   franja de reseñas de portada (CPT Testimonios)
  *
  * Todos aceptan eyebrow="" title="" text="" cta_text="" cta_url="" y
  * marcan el HTML con clases BEM propias (CSS en styles.css, sección
@@ -45,6 +46,7 @@ class SectionsController extends BaseController
         add_shortcode('latest_posts', [$this, 'latest_posts']);
         add_shortcode('testimonials', [$this, 'testimonials']);
         add_shortcode('team', [$this, 'team']);
+        add_shortcode('home_reviews', [$this, 'home_reviews']);
     }
 
     /* ------------------------------------------------------------------ */
@@ -417,4 +419,143 @@ class SectionsController extends BaseController
         return '<section class="team section" id="team"><div class="team__inner wrap">' . $this->heading($atts, 'team', 'h2', true)
             . '<ul class="team__list" data-scroller>' . $cards . '</ul></div></section>';
     }
+    /**
+     * Franja de reseñas de la portada.
+     *
+     * Derivada de medidas reales (`section.homerev`): titular, valoración con
+     * el número en cursiva, una reseña destacada con foto y una rejilla con el
+     * resto, más la letra pequeña legal.
+     *
+     * Las reseñas salen del CPT de Testimonios, no de atributos: son contenido
+     * que el cliente edita, y varias de ellas citan a pacientes, así que tienen
+     * que vivir donde se puedan revisar y retirar. Lo que entra por atributos
+     * es el marco: titular, cifra de valoración y aviso legal.
+     *
+     * La destacada es la primera del CPT; el resto van a la rejilla.
+     */
+    public function home_reviews($atts = []): string
+    {
+        $atts = shortcode_atts([
+            'title'        => '',
+            'rating'       => '',
+            'rating_label' => '',
+            'fine'         => '',
+            'stars'        => '5',
+            'limit'        => 5,
+            'lang'         => '',
+        ], is_array($atts) ? $atts : [], 'home_reviews');
+
+        $lang  = $this->resolve_lang((string) $atts['lang']);
+        $ctrl  = new TestimonialsController();
+        $items = $ctrl->get_items(['numberposts' => max(1, (int) $atts['limit'])]);
+        if (!$items) {
+            return '';
+        }
+
+        $featured = array_shift($items);
+
+        $out = '<section class="psw-reviews">';
+
+        $title = trim((string) $atts['title']);
+        if ($title !== '') {
+            $out .= '<h2 class="psw-reviews__title">' . esc_html($title) . '</h2>';
+        }
+
+        $rating = trim((string) $atts['rating']);
+        if ($rating !== '') {
+            $stars = max(0, min(5, (int) $atts['stars']));
+            $out .= '<p class="psw-reviews__rating">'
+                . str_repeat($this->star_icon(), $stars)
+                . '<span class="psw-reviews__num">' . esc_html($rating) . '</span>'
+                . ($atts['rating_label'] !== '' ? ' ' . esc_html((string) $atts['rating_label']) : '')
+                . '</p>';
+        }
+
+        $out .= '<div class="psw-reviews__feature">'
+            . $this->review_figure($featured)
+            . '<div class="psw-reviews__quote">' . $this->review_quote($featured, $ctrl, $lang) . '</div>'
+            . '</div>';
+
+        if ($items) {
+            $cards = '';
+            foreach ($items as $item) {
+                $cards .= '<div class="psw-reviews__card">' . $this->review_quote($item, $ctrl, $lang) . '</div>';
+            }
+            $out .= '<div class="psw-reviews__grid">' . $cards . '</div>';
+        }
+
+        $fine = trim((string) $atts['fine']);
+        if ($fine === '') {
+            $fine = $this->translate_or('reviews.fine', $lang, '');
+        }
+        if ($fine !== '') {
+            $out .= '<p class="psw-reviews__fine">' . esc_html($fine) . '</p>';
+        }
+
+        return $out . '</section>';
+    }
+
+    /** Cita y autoría de una reseña. La cita vive en el contenido del CPT. */
+    private function review_quote(WP_Post $item, TestimonialsController $ctrl, string $lang): string
+    {
+        // El contenido se guarda en bloques por idioma. Un testimonio escrito sin
+        // marcar idioma devuelve vacío para el idioma pedido, y una cita vacía
+        // deja la tarjeta con el nombre y el cargo pero sin reseña, que es peor
+        // que no pintarla: se cae al contenido crudo.
+        $quote = '';
+        if (function_exists('intelindev_get_post_translated_content_blocks')) {
+            $quote = trim(implode(' ', intelindev_get_post_translated_content_blocks($item, $lang)));
+        }
+        if ($quote === '') {
+            $quote = trim((string) $item->post_content);
+        }
+
+        $meta = array_filter([$ctrl->get_field($item, 'role', $lang), $ctrl->get_field($item, 'company')]);
+        $cite = array_filter([get_the_title($item), $meta ? implode(' · ', $meta) : '']);
+
+        if ($quote === '') {
+            return '';
+        }
+
+        return '<blockquote>' . wp_kses_post($quote) . '</blockquote>'
+            . ($cite ? '<cite>' . esc_html(implode(' · ', $cite)) . '</cite>' : '');
+    }
+
+    /** Foto de la reseña destacada. Sin imagen destacada no se pinta la figura. */
+    private function review_figure(WP_Post $item): string
+    {
+        if (!has_post_thumbnail($item)) {
+            return '';
+        }
+        return '<figure class="psw-reviews__figure">'
+            . get_the_post_thumbnail($item, 'large', [
+                'class'   => 'psw-reviews__img',
+                'alt'     => get_the_title($item),
+                'loading' => 'lazy',
+            ])
+            . '</figure>';
+    }
+
+    /**
+     * Estrella inline.
+     *
+     * SVG en el marcado y no un carácter tipográfico: el original usa un icono
+     * propio y una estrella de fuente cambia de forma en cada sistema.
+     */
+    private function star_icon(): string
+    {
+        return '<svg class="psw-reviews__star" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">'
+            . '<path d="M12 2l2.9 6.3 6.9.8-5 4.7 1.3 6.8L12 17.4 5.9 20.6 7.2 13.8l-5-4.7 6.9-.8L12 2z"/></svg>';
+    }
+
+    /** Diccionario si existe; si no, el texto por defecto. */
+    private function translate_or(string $key, string $lang, string $fallback): string
+    {
+        if (!function_exists('idml_t')) {
+            return $fallback;
+        }
+        $value = (string) idml_t($key, $lang);
+        return ($value === '' || $value === $key) ? $fallback : $value;
+    }
+
 }
