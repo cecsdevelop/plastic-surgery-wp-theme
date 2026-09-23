@@ -34,15 +34,13 @@ if (!function_exists('idml_get_languages')) {
       $langs = ['es', 'en'];
     }
 
-    // Keep baseline bilingual support for admin/runtime consumers.
-    if (!in_array('es', $langs, true)) {
-      $langs[] = 'es';
-    }
-    if (!in_array('en', $langs, true)) {
-      $langs[] = 'en';
-    }
-
-    return array_values(array_unique($langs));
+    // Se respeta exactamente lo declarado. Antes se reañadían 'es' y 'en' si
+    // faltaban, "para los consumidores", y eso hacía imposible un sitio
+    // monolingüe: declarar solo "en" devolvía ['en','es'] y el español
+    // reaparecía en los bloques del editor y en las URLs. No hay consumidor en
+    // el theme que indexe posiciones ni asuma dos idiomas, así que forzarlos
+    // solo servía para ignorar la configuración.
+    return $langs;
   }
 }
 
