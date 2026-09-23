@@ -7,6 +7,9 @@ $footer_lang = function_exists('idml_get_current_language') ? idml_get_current_l
 $footer_grid = function_exists('intelindev_get_footer_grid') ? intelindev_get_footer_grid($footer_lang) : [];
 $footer_bar  = function_exists('intelindev_get_footer_bar') ? intelindev_get_footer_bar($footer_lang) : null;
 ?>
+<?php if (function_exists('intelindev_chrome_active') && intelindev_chrome_active()) : ?>
+<?php echo intelindev_chrome_footer(); ?>
+<?php else : ?>
 <footer class="site-footer">
   <?php if ($footer_grid) : ?>
   <div class="site-footer__widgets">
@@ -41,6 +44,7 @@ $footer_bar  = function_exists('intelindev_get_footer_bar') ? intelindev_get_foo
   </div>
   <?php endif; ?>
 </footer>
+<?php endif; ?>
 <?php wp_footer(); ?>
 </body>
 </html>

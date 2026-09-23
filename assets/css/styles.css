@@ -2790,6 +2790,319 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
   margin: 0 0 16px;
 }
 
+/* Paleta extraída de femsculpt.com por frecuencia de uso real.
+   Sobreescribe los valores crudos del theme; los alias semánticos de
+   styles.css los recogen solos y recolorean el sitio entero. */
+:root {
+  --psw-color-black: #302d26;   /* texto principal · 6784 usos */
+  --psw-color-ink: #5a5450;     /* texto secundario · 6048 usos */
+  --psw-color-red: #7a3230;     /* acento de marca, granate · 1827 usos */
+  --psw-color-gray-100: #faf8f5;/* crema de fondo · 468 usos */
+  --psw-color-white: #fffdfa;
+  --psw-color-gray-300: #ad974f;/* oro, filetes y bordes · 186 usos */
+  --psw-color-graphite: #302d26;/* bandas oscuras */
+
+  /* El sticky usa el oro al 35%, como el original. */
+  --psw-sticky-cta-border: rgba(173, 151, 79, 0.35);
+
+  /* Medidos en el cromo: el pie no usa el gris del theme sino un crema
+     ligeramente más cálido, y los filetes son el granate al 30%. */
+  --psw-color-gray-200: #f3efe8;         /* fondo del pie · 490 usos */
+  --psw-chrome-rule: rgba(122, 50, 48, 0.3); /* filetes · 792 usos */
+}
+
+
+.sticky-cta {
+  --sticky-cta-border: var(--psw-sticky-cta-border);
+}
+
+/* ==========================================================================
+   Cabecera y pie — derivado de medidas reales de femsculpt.com (66/66 páginas)
+   --------------------------------------------------------------------------
+   Medido a 1440x900 y 390x844. Valores del original entre paréntesis.
+   Los colores referencian alias del theme; la paleta por sitio los recolorea.
+   ========================================================================== */
+
+.psw-header {
+  --psw-header-bg: var(--psw-surface);          /* rgb(250,248,245) */
+  --psw-header-text: var(--psw-text);           /* rgb(48,45,38)    */
+  /* Fallback en la declaración en vez de sobreescribir desde la paleta: dos
+     reglas de clase con el mismo peso las decide el orden del archivo, y eso
+     es una trampa. Así el módulo pide el token y la paleta solo lo define. */
+  --psw-header-rule: var(--psw-chrome-rule, var(--psw-border));
+  --psw-header-pad: 56px;                       /* padding-left medido */
+
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background-color: var(--psw-header-bg);
+  color: var(--psw-header-text);
+  border-bottom: 1px solid var(--psw-header-rule);
+  font-family: var(--psw-font-sans, inherit);
+  letter-spacing: 0.36px;
+}
+
+.psw-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 43.2px;
+  padding: 0 var(--psw-header-pad);
+  min-height: 72px;
+}
+
+.psw-header__logo img { max-width: 100%; height: auto; display: block; }
+.psw-header__logo { text-decoration: none; color: inherit; font-weight: 500; }
+
+/* --- Nav de escritorio: submenús por hover y foco, sin JS --- */
+
+.psw-header__menu {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.psw-header__item { position: relative; display: flex; align-items: center; }
+
+.psw-header__link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 0;
+  color: inherit;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2.42px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.psw-header__item--has-children > .psw-header__link::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+}
+
+.psw-header__submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 232px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  background-color: var(--psw-header-bg);
+  border: 1px solid var(--psw-header-rule);
+  /* Oculto con visibility y no con display para que la transición y el foco
+     por teclado funcionen: display:none saca el submenú del orden de foco. */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.psw-header__item:hover > .psw-header__submenu,
+.psw-header__item:focus-within > .psw-header__submenu {
+  visibility: visible;
+  opacity: 1;
+}
+
+.psw-header__submenu a {
+  display: block;
+  padding: 9px 20px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+}
+
+.psw-header__submenu a:hover,
+.psw-header__submenu a:focus-visible { background-color: var(--psw-surface-2); }
+
+/* --- Acciones --- */
+
+.psw-header__actions { display: flex; align-items: center; gap: 18px; }
+
+.psw-header__tel {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 1.68px;
+  white-space: nowrap;
+}
+
+.psw-header__cta {
+  padding: 12px 22px;
+  border-radius: 2px;
+  background-color: var(--psw-text);
+  color: var(--psw-surface);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2.42px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.psw-header__cta:hover, .psw-header__cta:focus-visible { background-color: var(--psw-text-2); }
+
+/* --- Cajón móvil: <details> nativo, cero JS --- */
+
+.psw-drawer { display: none; }
+.psw-drawer__toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  list-style: none;
+}
+.psw-drawer__toggle::-webkit-details-marker { display: none; }
+
+.psw-drawer__bars, .psw-drawer__bars::before, .psw-drawer__bars::after {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background-color: currentColor;
+}
+.psw-drawer__bars::before, .psw-drawer__bars::after { content: ""; position: relative; }
+.psw-drawer__bars::before { top: -7px; }
+.psw-drawer__bars::after { top: 6px; }
+
+.psw-drawer__body {
+  position: fixed;
+  inset: 72px 0 0 0;
+  overflow-y: auto;
+  padding: 8px var(--psw-header-pad) 32px;
+  background-color: var(--psw-header-bg);
+  border-top: 1px solid var(--psw-header-rule);
+}
+
+.psw-drawer__link {
+  display: block;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--psw-header-rule);
+  color: inherit;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 2.42px;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+}
+.psw-drawer__link::-webkit-details-marker { display: none; }
+
+/* Rótulo sin destino: se distingue de un enlace para no prometer un clic. */
+.psw-drawer__link--label {
+  margin: 0;
+  color: var(--psw-text-2);
+  cursor: default;
+}
+
+.psw-drawer__group > summary::after {
+  content: "+";
+  float: right;
+  font-size: 16px;
+  line-height: 1;
+}
+.psw-drawer__group[open] > summary::after { content: "–"; }
+
+.psw-drawer__panel { padding: 4px 0 12px; }
+.psw-drawer__panel a {
+  display: block;
+  padding: 10px 0 10px 14px;
+  color: var(--psw-text-2);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+}
+
+.psw-drawer__foot { padding-top: 24px; display: grid; gap: 12px; justify-items: start; }
+.psw-drawer__tel { color: inherit; text-decoration: none; font-size: 14px; letter-spacing: 1.68px; }
+.psw-drawer__hours, .psw-drawer__addr {
+  margin: 0;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.6;
+  color: var(--psw-text-2);
+}
+
+@media (max-width: 991.98px) {
+  .psw-header__bar { padding: 0 20px; gap: 12px; }
+  .psw-header__nav, .psw-header__actions { display: none; }
+  .psw-drawer { display: block; }
+  .psw-drawer__body { inset-block-start: 64px; padding-inline: 20px; }
+  .psw-header__bar { min-height: 64px; }
+}
+
+/* ==========================================================================
+   Pie
+   ========================================================================== */
+
+.psw-footer {
+  --psw-footer-bg: var(--psw-surface-2);        /* rgb(243,239,232) */
+  --psw-footer-rule: var(--psw-chrome-rule, var(--psw-border));
+
+  background-color: var(--psw-footer-bg);
+  color: var(--psw-text);
+  border-top: 1px solid var(--psw-footer-rule);
+  font-family: var(--psw-font-sans, inherit);
+  letter-spacing: 0.36px;
+}
+
+.psw-footer__inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 20px;
+}
+
+.psw-footer__brand { display: grid; gap: 18px; justify-items: start; }
+.psw-footer__social { display: flex; gap: 14px; }
+
+.psw-social {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--psw-footer-rule);
+  border-radius: 50%;
+  color: inherit;
+}
+.psw-social:hover, .psw-social:focus-visible { background-color: var(--psw-surface); }
+
+.psw-footer__card { display: grid; gap: 10px; justify-items: start; font-size: 16px; color: var(--psw-text-2); }
+.psw-footer__addr { margin: 0; font-style: normal; line-height: 1.7; }
+.psw-footer__tel, .psw-footer__map { color: inherit; text-decoration: none; letter-spacing: 1.2px; }
+.psw-footer__map { text-decoration: underline; }
+.psw-footer__hours { margin: 0; font-size: 13px; }
+
+.psw-footer__nav ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.psw-footer__nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.psw-footer__nav a:hover, .psw-footer__nav a:focus-visible { text-decoration: underline; }
+
+.psw-footer__mission {
+  padding: 28px 20px;
+  border-top: 1px solid var(--psw-footer-rule);
+  text-align: center;
+}
+.psw-footer__mission p { margin: 0 auto; max-width: 760px; font-size: 14px; color: var(--psw-text-2); }
+
+.psw-footer__base { padding: 18px 20px; text-align: center; border-top: 1px solid var(--psw-footer-rule); }
+.psw-footer__base p { margin: 0; font-size: 12px; color: var(--psw-text-2); }
+
+@media (max-width: 767.98px) {
+  .psw-footer__inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px; }
+}
 
 /* ==========================================================================
    Sticky CTA — barra fija de acciones en móvil
@@ -2877,23 +3190,4 @@ body.nav-open .site-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) r
     /* 19px + 19px de padding + 22px de línea = 60px de barra. */
     padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
   }
-}
-/* Paleta extraída de femsculpt.com por frecuencia de uso real.
-   Sobreescribe los valores crudos del theme; los alias semánticos de
-   styles.css los recogen solos y recolorean el sitio entero. */
-:root {
-  --psw-color-black: #302d26;   /* texto principal · 6784 usos */
-  --psw-color-ink: #5a5450;     /* texto secundario · 6048 usos */
-  --psw-color-red: #7a3230;     /* acento de marca, granate · 1827 usos */
-  --psw-color-gray-100: #faf8f5;/* crema de fondo · 468 usos */
-  --psw-color-white: #fffdfa;
-  --psw-color-gray-300: #ad974f;/* oro, filetes y bordes · 186 usos */
-  --psw-color-graphite: #302d26;/* bandas oscuras */
-
-  /* El sticky usa el oro al 35%, como el original. */
-  --psw-sticky-cta-border: rgba(173, 151, 79, 0.35);
-}
-
-.sticky-cta {
-  --sticky-cta-border: var(--psw-sticky-cta-border);
 }

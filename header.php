@@ -26,6 +26,9 @@ $header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_ge
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<?php if (function_exists('intelindev_chrome_active') && intelindev_chrome_active()) : ?>
+<?php echo intelindev_chrome_header(); ?>
+<?php else : ?>
 <header class="site-header<?php echo $header_is_sticky ? ' site-header--sticky' : ''; ?>"<?php if ($header_is_sticky) printf(' data-scroll-threshold="%d"', intelindev_get_header_sticky_threshold()); ?>>
   <div class="site-branding">
     <?php
@@ -70,6 +73,7 @@ $header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_ge
     <a href="<?php echo esc_url($header_cta['href']); ?>" class="<?php echo esc_attr($cta_class); ?>"><?php echo $cta_inner; ?></a>
   <?php endif; endif; ?>
 </header>
+<?php endif; ?>
 <?php if ($header_cta['type'] === 'modal') : ?>
 <dialog id="header-cta-modal" class="header-cta-modal"<?php echo $header_cta['modal_title'] !== '' ? ' aria-labelledby="header-cta-modal-title"' : ''; ?> data-cta-modal-src="<?php echo esc_url(add_query_arg('lang', $current_lang, rest_url('intelindev/v1/modal'))); ?>" data-loading="<?php echo esc_attr(idml_t('cta.modal_loading')); ?>" data-error="<?php echo esc_attr(idml_t('cta.modal_error')); ?>">
   <div class="header-cta-modal__box">

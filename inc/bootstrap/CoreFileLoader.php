@@ -34,6 +34,7 @@ class CoreFileLoader
             '/inc/admin/multilang-rewrite.php',
             '/inc/admin/content-filters.php',
             '/inc/admin/helpers.php',
+            '/inc/admin/chrome-helpers.php',
             '/inc/admin/seo-analytics.php',
             '/inc/admin/seo-multilang.php',
             '/inc/admin/security-hardening.php',
