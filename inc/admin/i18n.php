@@ -48,7 +48,11 @@ if (!function_exists('idml_get_languages')) {
 
 if (!function_exists('idml_get_default_language')) {
   function idml_get_default_language() {
-    $default = idml_normalize_lang(get_option('idml_default_language', 'es'));
+    // Sin valor guardado el defecto es el PRIMER idioma declarado, no 'es'.
+    // Con 'es' como defecto de get_option, la comprobación de abajo lo aceptaba
+    // (está entre los idiomas) y el return $languages[0] quedaba inalcanzable:
+    // declarar "en, es" seguía dando 'es' como base.
+    $default = idml_normalize_lang(get_option('idml_default_language', ''));
     $languages = idml_get_languages();
 
     if ($default === '' || !in_array($default, $languages, true)) {

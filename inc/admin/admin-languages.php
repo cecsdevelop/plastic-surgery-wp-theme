@@ -23,8 +23,17 @@ function idml_languages_admin_page() {
         $new_langs = array_map('sanitize_key', explode(',', $_POST['idml_languages']));
         $new_langs = array_values(array_filter(array_unique($new_langs)));
         if ($new_langs) {
+            $changed = $new_langs !== array_values((array) get_option($option_name, []));
             update_option($option_name, $new_langs);
             $langs = $new_langs;
+            if ($changed) {
+                // El orden decide el idioma por defecto, y con él qué prefijo
+                // sobra en las URLs. El flush general está atado a una
+                // constante que solo sube un desarrollador, así que sin esto
+                // quedaban las reglas de la lista anterior: declarar "en, es"
+                // dejaba /en/ resolviendo como si 'en' siguiera prefijado.
+                flush_rewrite_rules(false);
+            }
             echo '<div class="updated"><p>Idiomas actualizados.</p></div>';
         }
     }
