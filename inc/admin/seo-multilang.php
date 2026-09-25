@@ -9,12 +9,12 @@
  * petición actual (título traducido del post, nombre del archivo del CPT o
  * categoría por idioma, y los textos de búsqueda/404 del diccionario) y se
  * aplica a los filtros del plugin, conservando la plantilla del plugin (el
- * " - Intelindev" del final) cuando solo hay que cambiar el título dentro.
+ * " - pswpt" del final) cuando solo hay que cambiar el título dentro.
  *
  * Si no hay plugin SEO, estos filtros no existen y no pasa nada: manda
  * 'document_title_parts' como siempre.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
 if (!defined('ABSPATH')) exit;
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) exit;
  *   'original' es el texto del idioma por defecto que el plugin ya metió en su
  *   plantilla; si aparece, se reemplaza ahí y se conserva el resto.
  */
-function intelindev_seo_title_override(): array
+function pswpt_seo_title_override(): array
 {
     static $cache = null;
     if (is_array($cache)) {
@@ -54,8 +54,8 @@ function intelindev_seo_title_override(): array
 
     // Archivo de un CPT público: "Services" en vez de "Servicios".
     if (is_post_type_archive()) {
-        $type   = (string) get_query_var('post_type'); // 'intelindev_post_type_lang_labels' es filtro, no función
-        $labels = (array) apply_filters('intelindev_post_type_lang_labels', []);
+        $type   = (string) get_query_var('post_type'); // 'pswpt_post_type_lang_labels' es filtro, no función
+        $labels = (array) apply_filters('pswpt_post_type_lang_labels', []);
         $set    = $labels[$type] ?? [];
         if (!empty($set[$lang]) && !empty($set[$default])) {
             return $cache = ['title' => (string) $set[$lang], 'original' => (string) $set[$default]];
@@ -66,8 +66,8 @@ function intelindev_seo_title_override(): array
     // Categoría o etiqueta con nombre traducido.
     if (is_category() || is_tag()) {
         $term = get_queried_object();
-        if ($term instanceof WP_Term && function_exists('intelindev_get_category_translated_name')) {
-            $translated = intelindev_get_category_translated_name($term, $lang);
+        if ($term instanceof WP_Term && function_exists('pswpt_get_category_translated_name')) {
+            $translated = pswpt_get_category_translated_name($term, $lang);
             if ($translated !== '' && $translated !== $term->name) {
                 return $cache = ['title' => $translated, 'original' => $term->name];
             }
@@ -77,14 +77,14 @@ function intelindev_seo_title_override(): array
 
     // Singular (incluida la página del blog) con título traducido.
     $post = is_home() ? get_post((int) get_option('page_for_posts')) : get_queried_object();
-    if (!($post instanceof WP_Post) || is_front_page() || !function_exists('intelindev_get_post_translated_title')) {
+    if (!($post instanceof WP_Post) || is_front_page() || !function_exists('pswpt_get_post_translated_title')) {
         return $cache = $none;
     }
-    $translatable = function_exists('intelindev_translatable_post_types') ? intelindev_translatable_post_types() : ['post', 'page'];
+    $translatable = function_exists('pswpt_translatable_post_types') ? pswpt_translatable_post_types() : ['post', 'page'];
     if (!in_array($post->post_type, $translatable, true)) {
         return $cache = $none;
     }
-    $translated = intelindev_get_post_translated_title($post, $lang);
+    $translated = pswpt_get_post_translated_title($post, $lang);
 
     return $cache = $translated !== '' && $translated !== $post->post_title
         ? ['title' => $translated, 'original' => $post->post_title]
@@ -93,13 +93,13 @@ function intelindev_seo_title_override(): array
 
 /**
  * Aplica el texto del theme al título que armó el plugin: si el original está
- * dentro (el caso normal, "Servicio - Intelindev"), se reemplaza ahí; si no,
- * se conserva la cola de la plantilla (" - Intelindev") detrás del texto nuevo.
+ * dentro (el caso normal, "Servicio - pswpt"), se reemplaza ahí; si no,
+ * se conserva la cola de la plantilla (" - pswpt") detrás del texto nuevo.
  */
-function intelindev_seo_apply_title($title)
+function pswpt_seo_apply_title($title)
 {
     $title    = (string) $title;
-    $override = intelindev_seo_title_override();
+    $override = pswpt_seo_title_override();
     if ($override['title'] === '' || $title === '') {
         return $title;
     }
@@ -121,12 +121,12 @@ function intelindev_seo_apply_title($title)
  * Descripción: en un idioma distinto al de defecto se usa el resumen traducido
  * del post (el plugin genera la suya del contenido en el idioma por defecto).
  */
-function intelindev_seo_apply_description($description)
+function pswpt_seo_apply_description($description)
 {
     $description = (string) $description;
     // Si el plugin no imprime descripción (no está configurada), tampoco acá:
     // solo se traduce lo que el plugin ya decidió mostrar.
-    if ($description === '' || is_admin() || is_feed() || !function_exists('idml_get_current_language') || !function_exists('intelindev_get_post_translated_excerpt')) {
+    if ($description === '' || is_admin() || is_feed() || !function_exists('idml_get_current_language') || !function_exists('pswpt_get_post_translated_excerpt')) {
         return $description;
     }
     $lang = idml_get_current_language();
@@ -137,37 +137,37 @@ function intelindev_seo_apply_description($description)
     if (!($post instanceof WP_Post)) {
         return $description;
     }
-    $translated = intelindev_get_post_translated_excerpt($post, $lang);
+    $translated = pswpt_get_post_translated_excerpt($post, $lang);
 
     return $translated !== '' ? $translated : $description;
 }
 
 /** og:locale del idioma actual (es → es_ES, en → en_US), no el del sitio. */
-function intelindev_seo_apply_locale($locale)
+function pswpt_seo_apply_locale($locale)
 {
     if (is_admin() || !function_exists('idml_get_current_language')) {
         return $locale;
     }
     $lang = idml_get_current_language();
-    $map  = apply_filters('intelindev_language_locales', ['es' => 'es_ES', 'en' => 'en_US', 'pt' => 'pt_BR'], $lang);
+    $map  = apply_filters('pswpt_language_locales', ['es' => 'es_ES', 'en' => 'en_US', 'pt' => 'pt_BR'], $lang);
 
     return $map[$lang] ?? $locale;
 }
 
 // Rank Math (y cualquier plugin que use estos nombres de filtro).
-add_filter('rank_math/frontend/title', 'intelindev_seo_apply_title', 20);
-add_filter('rank_math/frontend/description', 'intelindev_seo_apply_description', 20);
-add_filter('rank_math/opengraph/facebook/og_title', 'intelindev_seo_apply_title', 20);
-add_filter('rank_math/opengraph/facebook/og_description', 'intelindev_seo_apply_description', 20);
-add_filter('rank_math/opengraph/facebook/og_locale', 'intelindev_seo_apply_locale', 20);
-add_filter('rank_math/opengraph/twitter/twitter_title', 'intelindev_seo_apply_title', 20);
-add_filter('rank_math/opengraph/twitter/twitter_description', 'intelindev_seo_apply_description', 20);
+add_filter('rank_math/frontend/title', 'pswpt_seo_apply_title', 20);
+add_filter('rank_math/frontend/description', 'pswpt_seo_apply_description', 20);
+add_filter('rank_math/opengraph/facebook/og_title', 'pswpt_seo_apply_title', 20);
+add_filter('rank_math/opengraph/facebook/og_description', 'pswpt_seo_apply_description', 20);
+add_filter('rank_math/opengraph/facebook/og_locale', 'pswpt_seo_apply_locale', 20);
+add_filter('rank_math/opengraph/twitter/twitter_title', 'pswpt_seo_apply_title', 20);
+add_filter('rank_math/opengraph/twitter/twitter_description', 'pswpt_seo_apply_description', 20);
 
 // Yoast, por si algún día se cambia de plugin.
-add_filter('wpseo_title', 'intelindev_seo_apply_title', 20);
-add_filter('wpseo_metadesc', 'intelindev_seo_apply_description', 20);
-add_filter('wpseo_opengraph_title', 'intelindev_seo_apply_title', 20);
-add_filter('wpseo_opengraph_desc', 'intelindev_seo_apply_description', 20);
-add_filter('wpseo_twitter_title', 'intelindev_seo_apply_title', 20);
-add_filter('wpseo_twitter_description', 'intelindev_seo_apply_description', 20);
-add_filter('wpseo_locale', 'intelindev_seo_apply_locale', 20);
+add_filter('wpseo_title', 'pswpt_seo_apply_title', 20);
+add_filter('wpseo_metadesc', 'pswpt_seo_apply_description', 20);
+add_filter('wpseo_opengraph_title', 'pswpt_seo_apply_title', 20);
+add_filter('wpseo_opengraph_desc', 'pswpt_seo_apply_description', 20);
+add_filter('wpseo_twitter_title', 'pswpt_seo_apply_title', 20);
+add_filter('wpseo_twitter_description', 'pswpt_seo_apply_description', 20);
+add_filter('wpseo_locale', 'pswpt_seo_apply_locale', 20);

@@ -10,12 +10,12 @@
  *
  * Módulo estándar del theme: ver la skill wp-theme-cpt-module.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\Blog;
+namespace pswptInit\Blog;
 
-use IntelindevInit\General\BaseController;
+use pswptInit\General\BaseController;
 use WP_Comment;
 use WP_Post;
 
@@ -50,8 +50,8 @@ class BlogController extends BaseController
     {
         $default = idml_get_default_language();
         $areas   = [
-            self::AREA_SIDEBAR => [__('Blog · Barra lateral (%s)', 'intelindev'), __('Detalle de la entrada, debajo de categorías y etiquetas (p. ej. el bloque de Instagram).', 'intelindev')],
-            self::AREA_AFTER   => [__('Blog · Debajo de la entrada (%s)', 'intelindev'), __('Sección a lo ancho después del detalle, p. ej. un bloque Shortcode con [inner-contact …][form slug="contacto"][/inner-contact].', 'intelindev')],
+            self::AREA_SIDEBAR => [__('Blog · Sidebar (%s)', 'pswpt'), __('Post detail, below categories and tags (e.g. the Instagram block).', 'pswpt')],
+            self::AREA_AFTER   => [__('Blog · Below the post (%s)', 'pswpt'), __('Full-width section after the detail, e.g. a Shortcode block with [inner-contact …][form slug="contacto"][/inner-contact].', 'pswpt')],
         ];
         foreach ($areas as $area => [$name, $description]) {
             foreach (idml_get_languages() as $lang) {
@@ -59,8 +59,8 @@ class BlogController extends BaseController
                     'id'            => self::sidebar_id($area, $lang),
                     'name'          => sprintf($name, strtoupper($lang)),
                     'description'   => $description . ' ' . ($lang === $default
-                        ? __('Idioma por defecto: se muestra también en los idiomas cuya área esté vacía.', 'intelindev')
-                        : sprintf(__('Contenido en %s. Vacío = se muestra el del idioma por defecto.', 'intelindev'), strtoupper($lang))),
+                        ? __('Default language: also shown for languages whose area is empty.', 'pswpt')
+                        : sprintf(__('Content in %s. Empty = the default language\'s content is shown.', 'pswpt'), strtoupper($lang))),
                     'before_widget' => '<div id="%1$s" class="widget blog-widget %2$s">',
                     'after_widget'  => '</div>',
                     'before_title'  => '<h2 class="widget-title blog-widget__title">',

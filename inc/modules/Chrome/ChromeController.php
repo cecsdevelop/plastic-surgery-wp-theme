@@ -11,22 +11,22 @@
  * original usaba `<button>` más JavaScript para lo mismo, y `<details>` ya es
  * accesible por teclado y anunciable por lectores de pantalla sin código.
  *
- * Los datos de contacto y las redes viven en la opción `intelindev_chrome`.
- * El prefijo sigue siendo `intelindev_` a propósito: el namespace y los
+ * Los datos de contacto y las redes viven en la opción `pswpt_chrome`.
+ * El prefijo sigue siendo `pswpt_` a propósito: el namespace y los
  * prefijos PHP del theme no se han renombrado, y mezclar dos convenciones
  * sería peor que mantener la que hay.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\Chrome;
+namespace pswptInit\Chrome;
 
-use IntelindevInit\General\BaseController;
+use pswptInit\General\BaseController;
 use WP_Post;
 
 class ChromeController extends BaseController
 {
-    public const OPTION = 'intelindev_chrome';
+    public const OPTION = 'pswpt_chrome';
     public const MENU_PRIMARY = 'psw_primary';
     public const MENU_FOOTER = 'psw_footer';
 
@@ -41,8 +41,8 @@ class ChromeController extends BaseController
     public function register_menus(): void
     {
         register_nav_menus([
-            self::MENU_PRIMARY => __('Navegación principal (cabecera)', 'intelindev'),
-            self::MENU_FOOTER  => __('Navegación del pie', 'intelindev'),
+            self::MENU_PRIMARY => __('Main navigation (header)', 'pswpt'),
+            self::MENU_FOOTER  => __('Footer navigation', 'pswpt'),
         ]);
     }
 
@@ -114,7 +114,7 @@ class ChromeController extends BaseController
                 . $trigger . $submenu . '</li>';
         }
 
-        return '<nav class="psw-header__nav" aria-label="' . esc_attr__('Navegación principal', 'intelindev') . '">'
+        return '<nav class="psw-header__nav" aria-label="' . esc_attr__('Main navigation', 'pswpt') . '">'
             . '<ul class="psw-header__menu">' . $items . '</ul></nav>';
     }
 
@@ -189,7 +189,7 @@ class ChromeController extends BaseController
         $foot .= $this->address_block('psw-drawer__addr', $settings);
 
         return '<details class="psw-drawer">'
-            . '<summary class="psw-drawer__toggle" aria-label="' . esc_attr__('Abrir el menú', 'intelindev') . '">'
+            . '<summary class="psw-drawer__toggle" aria-label="' . esc_attr__('Open menu', 'pswpt') . '">'
             . '<span class="psw-drawer__bars" aria-hidden="true"></span></summary>'
             . '<div class="psw-drawer__body">' . $accordions
             . '<div class="psw-drawer__foot">' . $foot . '</div>'
@@ -234,7 +234,7 @@ class ChromeController extends BaseController
             . '<div class="psw-footer__brand">' . $this->logo() . $this->social($settings) . '</div>'
             . $card
             . ($nav === '' ? '' : '<nav class="psw-footer__nav" aria-label="'
-                . esc_attr__('Navegación del pie', 'intelindev') . '"><ul>' . $nav . '</ul></nav>')
+                . esc_attr__('Footer navigation', 'pswpt') . '"><ul>' . $nav . '</ul></nav>')
             . '</div></div>'
             . ($settings['mission'] === '' ? '' : '<div class="psw-footer__mission"><p>'
                 . esc_html($settings['mission']) . '</p></div>')

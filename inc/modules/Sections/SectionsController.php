@@ -7,7 +7,6 @@
  * por idioma —escritos en el bloque de cada idioma— o por el diccionario.
  *
  *   [clients]                        franja de logos (CPT Clientes)
- *   [services limit="4"]             tarjetas de servicios (CPT Servicios)
  *   [projects limit="4"]             proyectos destacados (CPT Portafolio)
  *   [latest_posts limit="3"]         últimas entradas del blog
  *   [testimonials]                   citas de clientes (CPT Testimonios)
@@ -18,17 +17,16 @@
  * marcan el HTML con clases BEM propias (CSS en styles.css, sección
  * "Secciones"). Sin JS: los carruseles son scroll horizontal con snap.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\Sections;
+namespace pswptInit\Sections;
 
-use IntelindevInit\General\BaseController;
-use IntelindevInit\Clients\ClientsController;
-use IntelindevInit\Services\ServicesController;
-use IntelindevInit\Portfolio\PortfolioController;
-use IntelindevInit\Testimonials\TestimonialsController;
-use IntelindevInit\Team\TeamController;
+use pswptInit\General\BaseController;
+use pswptInit\Clients\ClientsController;
+use pswptInit\Portfolio\PortfolioController;
+use pswptInit\Testimonials\TestimonialsController;
+use pswptInit\Team\TeamController;
 use WP_Post;
 
 class SectionsController extends BaseController
@@ -41,7 +39,6 @@ class SectionsController extends BaseController
     public function register_shortcodes(): void
     {
         add_shortcode('clients', [$this, 'clients']);
-        add_shortcode('services', [$this, 'services']);
         add_shortcode('projects', [$this, 'projects']);
         add_shortcode('latest_posts', [$this, 'latest_posts']);
         add_shortcode('testimonials', [$this, 'testimonials']);
@@ -67,7 +64,7 @@ class SectionsController extends BaseController
             $html .= '<span class="eyebrow">' . esc_html($eyebrow) . '</span>';
         }
         if ($title !== '') {
-            $html .= '<' . $level . ' class="' . esc_attr($class) . '__title' . ($serif ? ' accent' : '') . '">' . \IntelindevInit\Components\ComponentsController::format_attribute($title, 'html') . '</' . $level . '>';
+            $html .= '<' . $level . ' class="' . esc_attr($class) . '__title' . ($serif ? ' accent' : '') . '">' . \pswptInit\Components\ComponentsController::format_attribute($title, 'html') . '</' . $level . '>';
         }
         if ($text !== '') {
             $html .= '<p class="' . esc_attr($class) . '__text">' . esc_html($text) . '</p>';
@@ -98,7 +95,7 @@ class SectionsController extends BaseController
     {
         $html = '';
         foreach (array_values($posts) as $i => $post) {
-            $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($post, $lang) : '';
+            $excerpt = function_exists('pswpt_get_post_translated_excerpt') ? pswpt_get_post_translated_excerpt($post, $lang) : '';
             $html   .= $this->tile($post, $excerpt, $more, $per_page > 0 && $i >= $per_page);
         }
         $grid = '<div class="tiles"' . ($per_page > 0 ? ' data-tiles-step="' . $per_page . '"' : '') . '>' . $html . '</div>';
@@ -138,62 +135,6 @@ class SectionsController extends BaseController
     }
 
     /* ------------------------------------------------------------------ */
-    /* [services]                                                           */
-    /* ------------------------------------------------------------------ */
-
-    /**
-     * Tarjetas de servicio. layout="icons" (home, 362×421 gris con borde
-     * degradado rosa): ícono del campo "icon" (o el del theme por posición),
-     * título, excerpt y "Conocer más". layout="cards" (listado /servicios/):
-     * tarjetas tile() en 3 columnas. layout="list" (columna derecha del
-     * detalle): solo los nombres enlazados, el actual con aria-current.
-     * Cabecera centrada.
-     */
-    public function services($atts = []): string
-    {
-        $atts  = shortcode_atts(['eyebrow' => '', 'title' => '', 'text' => '', 'limit' => 4, 'more' => '', 'layout' => 'icons'], is_array($atts) ? $atts : [], 'services');
-        $ctrl  = new ServicesController();
-        $items = $ctrl->get_items(['numberposts' => (int) $atts['limit']]);
-        if (!$items) {
-            return '';
-        }
-        $lang = $this->get_current_lang();
-        $more = trim((string) $atts['more']) !== '' ? (string) $atts['more'] : idml_t('services.more', $lang);
-
-        if ((string) $atts['layout'] === 'list') {
-            $current = (int) get_queried_object_id();
-            $links   = '';
-            foreach ($items as $service) {
-                $links .= '<li class="services-nav__item"><a class="services-nav__link" href="' . esc_url(get_permalink($service)) . '"' . ($service->ID === $current ? ' aria-current="page"' : '') . '>' . esc_html(get_the_title($service)) . '</a></li>';
-            }
-            return '<nav class="services-nav" aria-label="' . esc_attr($ctrl->label('name', $lang)) . '"><ul class="services-nav__list">' . $links . '</ul></nav>';
-        }
-
-        if ((string) $atts['layout'] === 'cards') {
-            return '<section class="services section services--cards"><div class="services__inner wrap">' . $this->heading($atts, 'services')
-                . $this->tiles($items, $more, $lang) . '</div></section>';
-        }
-
-        $fallback_icons = ['code', 'design', 'update', 'search'];
-        $cards = '';
-        foreach (array_values($items) as $i => $service) {
-            $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($service, $lang) : '';
-            $url     = esc_url(get_permalink($service));
-            $icon_id = (int) $ctrl->get_field($service, 'icon');
-            $icon    = $icon_id > 0
-                ? wp_get_attachment_image($icon_id, 'thumbnail', false, ['class' => 'services__icon', 'alt' => '', 'loading' => 'lazy'])
-                : '<img class="services__icon" src="' . esc_url(get_template_directory_uri() . '/assets/img/icons/' . $fallback_icons[$i % 4] . '.svg') . '" alt="" width="72" height="72" loading="lazy">';
-            $cards .= '<article class="services__card">' . $icon
-                . '<div class="services__body"><h3 class="services__name"><a href="' . $url . '">' . esc_html(get_the_title($service)) . '</a></h3>'
-                . ($excerpt !== '' ? '<p class="services__excerpt">' . esc_html($excerpt) . '</p>' : '') . '</div>'
-                . '<a class="services__more" href="' . $url . '">' . esc_html($more) . '<span class="services__more-icon" aria-hidden="true"></span></a></article>';
-        }
-
-        return '<section class="services section"><div class="services__inner wrap">' . $this->heading($atts, 'services')
-            . '<div class="services__grid">' . $cards . '</div></div></section>';
-    }
-
-    /* ------------------------------------------------------------------ */
     /* [projects]                                                           */
     /* ------------------------------------------------------------------ */
 
@@ -223,7 +164,7 @@ class SectionsController extends BaseController
         $cards = '';
         foreach ($items as $project) {
             $image   = get_the_post_thumbnail_url($project, 'large');
-            $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($project, $lang) : '';
+            $excerpt = function_exists('pswpt_get_post_translated_excerpt') ? pswpt_get_post_translated_excerpt($project, $lang) : '';
             $cards .= '<li class="projects__item"><a class="projects__card" href="' . esc_url(get_permalink($project)) . '"' . ($image ? ' style="background-image:url(\'' . esc_url($image) . '\')"' : '') . '>'
                 . '<span class="projects__body"><span class="projects__name">' . esc_html(get_the_title($project)) . '</span>'
                 . ($excerpt !== '' ? '<span class="projects__excerpt">' . esc_html($excerpt) . '</span>' : '') . '</span></a></li>';
@@ -267,7 +208,7 @@ class SectionsController extends BaseController
 
         $items = '';
         foreach ($posts as $post) {
-            $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($post, $lang) : '';
+            $excerpt = function_exists('pswpt_get_post_translated_excerpt') ? pswpt_get_post_translated_excerpt($post, $lang) : '';
             if ($excerpt === '') {
                 $excerpt = wp_trim_words(wp_strip_all_tags((string) $post->post_excerpt), 20);
             }
@@ -275,7 +216,7 @@ class SectionsController extends BaseController
                 . '<a class="posts__toggle" href="' . esc_url(get_permalink($post)) . '"><span class="posts__arrow" aria-hidden="true"></span><span class="posts__vertical">' . esc_html(get_the_title($post)) . '</span></a>'
                 . '<div class="posts__card">' . (has_post_thumbnail($post) ? get_the_post_thumbnail($post, 'medium_large', ['class' => 'posts__image', 'loading' => 'lazy']) : '<span class="posts__image posts__image--empty"></span>')
                 . '<div class="posts__body"><h3 class="posts__name">' . esc_html(get_the_title($post)) . '</h3>'
-                . '<time class="posts__date" datetime="' . esc_attr(get_the_date('c', $post)) . '">' . esc_html((new \IntelindevInit\Blog\BlogController())->date($post, 'date.medium', $lang)) . '</time>'
+                . '<time class="posts__date" datetime="' . esc_attr(get_the_date('c', $post)) . '">' . esc_html((new \pswptInit\Blog\BlogController())->date($post, 'date.medium', $lang)) . '</time>'
                 . ($excerpt !== '' ? '<p class="posts__excerpt">' . esc_html($excerpt) . '</p>' : '')
                 . '<a class="btn btn--primary btn--arrow posts__more" href="' . esc_url(get_permalink($post)) . '">' . esc_html($more) . '</a></div></div></li>';
         }
@@ -292,10 +233,10 @@ class SectionsController extends BaseController
      */
     private function post_cards(array $posts, string $more, string $lang): string
     {
-        $blog  = new \IntelindevInit\Blog\BlogController();
+        $blog  = new \pswptInit\Blog\BlogController();
         $cards = '';
         foreach ($posts as $post) {
-            $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($post, $lang) : '';
+            $excerpt = function_exists('pswpt_get_post_translated_excerpt') ? pswpt_get_post_translated_excerpt($post, $lang) : '';
             if ($excerpt === '') {
                 $excerpt = wp_trim_words(wp_strip_all_tags((string) $post->post_excerpt), 20);
             }
@@ -349,7 +290,7 @@ class SectionsController extends BaseController
         $lang  = $this->get_current_lang();
         $cards = '';
         foreach ($items as $t) {
-            $quote = function_exists('intelindev_get_post_translated_content_blocks') ? implode(' ', intelindev_get_post_translated_content_blocks($t, $lang)) : '';
+            $quote = function_exists('pswpt_get_post_translated_content_blocks') ? implode(' ', pswpt_get_post_translated_content_blocks($t, $lang)) : '';
             $meta  = array_filter([$ctrl->get_field($t, 'role', $lang), $ctrl->get_field($t, 'company'), $ctrl->get_field($t, 'country')]);
             $cards .= '<li class="testimonials__item"><figure class="testimonials__card"><span class="testimonials__badge" aria-hidden="true">&ldquo;</span>'
                 . '<blockquote class="testimonials__quote">' . wp_kses_post($quote) . '</blockquote>'
@@ -503,8 +444,8 @@ class SectionsController extends BaseController
         // deja la tarjeta con el nombre y el cargo pero sin reseña, que es peor
         // que no pintarla: se cae al contenido crudo.
         $quote = '';
-        if (function_exists('intelindev_get_post_translated_content_blocks')) {
-            $quote = trim(implode(' ', intelindev_get_post_translated_content_blocks($item, $lang)));
+        if (function_exists('pswpt_get_post_translated_content_blocks')) {
+            $quote = trim(implode(' ', pswpt_get_post_translated_content_blocks($item, $lang)));
         }
         if ($quote === '') {
             $quote = trim((string) $item->post_content);

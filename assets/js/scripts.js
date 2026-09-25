@@ -133,7 +133,7 @@
     });
     target.innerHTML = '';
     target.appendChild(fragment);
-    if (window.intelindevTurnstileRender) window.intelindevTurnstileRender();
+    if (window.pswptTurnstileRender) window.pswptTurnstileRender();
   }
 
   function loadModalContent(dialog) {
@@ -193,10 +193,10 @@
   });
 })();
 
-// Cloudflare Turnstile: api.js se carga con ?onload=intelindevTurnstileRender&render=explicit
+// Cloudflare Turnstile: api.js se carga con ?onload=pswptTurnstileRender&render=explicit
 // solo donde hay un formulario protegido; esta función renderiza los widgets que
 // todavía no lo están (también los que llegan después, ej. al abrir el modal).
-window.intelindevTurnstileRender = function () {
+window.pswptTurnstileRender = function () {
   if (!window.turnstile) return;
   Array.prototype.forEach.call(document.querySelectorAll('.cf-turnstile:not([data-widget-id])'), function (el) {
     var id = window.turnstile.render(el, { sitekey: el.getAttribute('data-sitekey'), language: el.getAttribute('data-language') || 'auto' });
@@ -211,7 +211,7 @@ window.intelindevTurnstileRender = function () {
   'use strict';
 
   function setMessage(form, text, isError) {
-    var box = form.querySelector('.intelindev-form__message');
+    var box = form.querySelector('.pswpt-form__message');
     if (!box) return;
     box.textContent = text || '';
     box.classList.toggle('is-error', !!isError);
@@ -219,7 +219,7 @@ window.intelindevTurnstileRender = function () {
   }
 
   function clearErrors(form) {
-    Array.prototype.forEach.call(form.querySelectorAll('.intelindev-form__error'), function (el) { el.textContent = ''; });
+    Array.prototype.forEach.call(form.querySelectorAll('.pswpt-form__error'), function (el) { el.textContent = ''; });
     Array.prototype.forEach.call(form.querySelectorAll('.has-error'), function (el) { el.classList.remove('has-error'); });
   }
 
@@ -228,7 +228,7 @@ window.intelindevTurnstileRender = function () {
       var el = form.querySelector('[data-error-for="' + name + '"]');
       if (el) {
         el.textContent = errors[name];
-        var field = el.closest('.intelindev-form__field');
+        var field = el.closest('.pswpt-form__field');
         if (field) field.classList.add('has-error');
       }
     });
@@ -237,11 +237,11 @@ window.intelindevTurnstileRender = function () {
   }
 
   document.addEventListener('submit', function (event) {
-    var form = event.target.closest('form.intelindev-form');
+    var form = event.target.closest('form.pswpt-form');
     if (!form || !window.fetch) return;
     event.preventDefault();
 
-    var button = form.querySelector('.intelindev-form__submit');
+    var button = form.querySelector('.pswpt-form__submit');
     var original = button ? button.textContent : '';
     clearErrors(form);
     setMessage(form, '', false);
@@ -255,7 +255,7 @@ window.intelindevTurnstileRender = function () {
           if (body.redirect) { window.location.href = body.redirect; return; }
           form.classList.add('is-sent');
           var row = form.querySelector('.row');
-          var actions = form.querySelector('.intelindev-form__actions');
+          var actions = form.querySelector('.pswpt-form__actions');
           if (row) row.hidden = true;
           if (actions) actions.hidden = true;
           setMessage(form, body.message || form.getAttribute('data-success') || '', false);

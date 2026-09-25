@@ -1,0 +1,140 @@
+/**
+ * [surgeon-hero] (Components → slug "surgeon-hero"): full-bleed portrait
+ * photo with a dark scrim, name/credentials/bio in the lower-left. Only
+ * enqueued on pswpt_surgeon singles (SurgeonsController::enqueue_hero_css) —
+ * it is a safety-net enqueue (no sitewide shortcode-detection exists yet,
+ * see AGENTS.md "CSS and JS: where things go and when they load").
+ *
+ * Colors/fonts reuse the --oxblood/--gold/--cream/--serif custom properties
+ * already defined in styles.css (Brand System v2, assets/fonts/*.woff2):
+ * that is the site's actual current palette for this page family, not the
+ * red/graphite --psw-* tokens used by the rest of the theme.
+ */
+
+.surgeon-hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 82svh;
+  background-color: var(--dark, #302d26);
+  background-size: cover;
+  background-position: center 20%;
+  overflow: hidden;
+}
+
+.surgeon-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg,
+    rgba(24, 20, 17, .94) 0%,
+    rgba(24, 20, 17, .8) 30%,
+    rgba(24, 20, 17, .4) 60%,
+    rgba(24, 20, 17, .05) 100%);
+  pointer-events: none;
+}
+
+.surgeon-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding: clamp(32px, 6vw, 72px) var(--psw-gutter, 24px) clamp(40px, 6vw, 88px);
+}
+
+.surgeon-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+.surgeon-hero__eyebrow::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+  opacity: .6;
+}
+
+.surgeon-hero__name {
+  margin: 18px 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(34px, 4.6vw, 52px);
+  line-height: 1.1;
+  color: var(--cream);
+}
+
+.surgeon-hero__credentials {
+  margin: 8px 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--gold-light);
+}
+.surgeon-hero__credentials:empty { display: none; }
+
+.surgeon-hero__bio {
+  margin: 22px 0 0;
+  max-width: 52ch;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.7;
+  color: var(--cream-deep);
+}
+.surgeon-hero__bio:empty { display: none; }
+.surgeon-hero__bio em { color: var(--gold-light); font-style: italic; }
+
+.surgeon-hero__actions { margin-top: 30px; }
+.surgeon-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 30px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  background: transparent;
+  transition: background .25s, color .25s, border-color .25s;
+}
+.surgeon-hero__cta:hover {
+  background: var(--gold);
+  color: var(--dark);
+}
+.surgeon-hero__cta:empty { display: none; }
+
+.surgeon-hero__subtext {
+  margin: 20px 0 0;
+  max-width: 46ch;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-faint, var(--cream-deep));
+}
+.surgeon-hero__subtext:empty { display: none; }
+
+.surgeon-hero__contact {
+  margin: 8px 0 0;
+  font-size: 13.5px;
+  color: var(--cream-deep);
+}
+.surgeon-hero__contact:has(.surgeon-hero__phone[href="tel:"]) { display: none; }
+.surgeon-hero__phone {
+  color: var(--gold-light);
+  font-weight: 600;
+  text-decoration: none;
+}
+.surgeon-hero__phone:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .surgeon-hero { min-height: 100svh; }
+  .surgeon-hero__inner { padding-bottom: 48px; }
+}

@@ -1,8 +1,8 @@
 <?php
-// Helpers para intelindev
-if (!function_exists('intelindev_get_setting')) {
-    function intelindev_get_setting($key, $default = null) {
-        $opts = get_option('intelindev_settings', []);
+// Helpers para pswpt
+if (!function_exists('pswpt_get_setting')) {
+    function pswpt_get_setting($key, $default = null) {
+        $opts = get_option('pswpt_settings', []);
         if (is_array($opts) && array_key_exists($key, $opts)) {
             return $opts[$key];
         }
@@ -15,13 +15,13 @@ if (!function_exists('intelindev_get_setting')) {
  * post_content) arranca con un componente hero: entonces la plantilla no
  * imprime el título, porque el hero ya trae el <h1>.
  */
-if (!function_exists('intelindev_content_starts_with_hero')) {
-    function intelindev_content_starts_with_hero(?WP_Post $post = null): bool {
+if (!function_exists('pswpt_content_starts_with_hero')) {
+    function pswpt_content_starts_with_hero(?WP_Post $post = null): bool {
         $post = $post ?: get_post();
         if (!$post instanceof WP_Post) {
             return false;
         }
-        $blocks = function_exists('intelindev_get_post_translated_content_blocks') ? intelindev_get_post_translated_content_blocks($post) : [];
+        $blocks = function_exists('pswpt_get_post_translated_content_blocks') ? pswpt_get_post_translated_content_blocks($post) : [];
         $first  = ltrim((string) ($blocks[0] ?? $post->post_content));
 
         return (bool) preg_match('/^\[[a-z0-9_-]*hero\b/i', $first);
@@ -34,8 +34,8 @@ if (!function_exists('intelindev_content_starts_with_hero')) {
  * markup que el componente hero para que herede su CSS. $post: null = el
  * actual; false = sin imagen (archivos sin página asignada).
  */
-if (!function_exists('intelindev_render_interior_hero')) {
-    function intelindev_render_interior_hero(string $title, string $subtitle = '', $post = null): void {
+if (!function_exists('pswpt_render_interior_hero')) {
+    function pswpt_render_interior_hero(string $title, string $subtitle = '', $post = null): void {
         $post  = $post === null ? get_post() : $post;
         $image = $post instanceof WP_Post ? (string) get_the_post_thumbnail_url($post, 'full') : '';
         echo '<section class="hero hero--interior"' . ($image !== '' ? ' style="background-image:url(\'' . esc_url($image) . '\')"' : '') . '><div class="hero__inner wrap"><div class="hero__content">';
@@ -51,8 +51,8 @@ if (!function_exists('intelindev_render_interior_hero')) {
  * Página asignada como cuerpo del archivo de un CPT público (Ajustes →
  * Lectura, "Página de Servicios"; option page_for_{post_type}), o null.
  */
-if (!function_exists('intelindev_get_archive_page')) {
-    function intelindev_get_archive_page(string $post_type): ?WP_Post {
+if (!function_exists('pswpt_get_archive_page')) {
+    function pswpt_get_archive_page(string $post_type): ?WP_Post {
         $id   = (int) get_option('page_for_' . $post_type);
         $page = $id > 0 ? get_post($id) : null; // get_post(0) devolvería el post global
 
@@ -67,17 +67,17 @@ if (!function_exists('intelindev_get_archive_page')) {
  * (shortcodes de componentes y listados, enlaces relativos). Se hace fuera del
  * loop del archivo, así que el post global se apunta a la página mientras tanto.
  */
-if (!function_exists('intelindev_render_archive_page')) {
-    function intelindev_render_archive_page(WP_Post $page): void {
+if (!function_exists('pswpt_render_archive_page')) {
+    function pswpt_render_archive_page(WP_Post $page): void {
         global $post;
         $previous = $post;
         $post     = $page;
         setup_postdata($page);
 
-        if (!intelindev_content_starts_with_hero($page)) {
-            intelindev_render_interior_hero(get_the_title($page), '', $page);
+        if (!pswpt_content_starts_with_hero($page)) {
+            pswpt_render_interior_hero(get_the_title($page), '', $page);
         }
-        $blocks  = function_exists('intelindev_get_post_translated_content_blocks') ? intelindev_get_post_translated_content_blocks($page) : [];
+        $blocks  = function_exists('pswpt_get_post_translated_content_blocks') ? pswpt_get_post_translated_content_blocks($page) : [];
         $content = $blocks ? implode("\n\n", $blocks) : $page->post_content;
         echo '<div class="entry-content">' . apply_filters('the_content', $content) . '</div>';
 

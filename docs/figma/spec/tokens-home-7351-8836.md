@@ -3,7 +3,7 @@
 ## Tipografía (familia peso · tamaño · interlineado)
 
 - DM Sans 500 · 18px · lh 27px × 44 — ej. Contáctanos
-- DM Sans 400 · 18px · lh 27px × 32 — ej. En Intelindev desarrollamos plataformas digitales,
+- DM Sans 400 · 18px · lh 27px × 32 — ej. En pswpt desarrollamos plataformas digitales,
 - DM Sans 500 · 18px · lh 27px · center × 10 — ej. Conoce nuestros servicios
 - DM Sans 400 · 22.5px · lh 32px × 5 — ej. Soluciones innovadoras, ágiles y seguras, desarrol
 - DM Sans 400 · 14.399999618530273px · lh 22px · center × 5 — ej. ¿Qué te ofrecemos?
@@ -14,11 +14,11 @@
 - DM Sans 600 · 14.399999618530273px · lh 22px × 4 — ej. Nosotros
 - DM Sans 600 · 28.1299991607666px · lh 34px · title × 3 — ej. Software a medida
 - DM Sans 400 · 43.95000076293945px · lh 53px · title × 3 — ej. New Product Idea Development for Nvana Inc.
-- DM Sans 300 · 30px · lh 29px × 3 — ej. La experiencia Intelindev Experiencias reales trab
+- DM Sans 300 · 30px · lh 29px × 3 — ej. La experiencia pswpt Experiencias reales trab
 - DM Sans 600 · 54.93000030517578px · lh 55px · title × 2 — ej. Soluciones tecnológicas diseñadas para escalar
 - DM Serif Text 400 · 50px · lh 48px × 2 — ej. Visión digital: Tendencias, tecnología y estrategí
 - DM Sans 400 · 16px · lh 21px × 2 — ej. Ideas que impulsan la evolución tecnológica de tu 
-- DM Sans 400 · 20px · lh 26px × 2 — ej. Trabajar con Intelindev fue una experiencia increí
+- DM Sans 400 · 20px · lh 26px × 2 — ej. Trabajar con pswpt fue una experiencia increí
 - DM Sans 400 · 14.399999618530273px · lh 22px × 2 — ej. Software Development & SEO Services
 - DM Sans 600 · 68.66000366210938px · lh 69px · title × 1 — ej. Construimos el futuro digital de tu empresa
 - DM Sans 600 · 54.93000030517578px · lh 55px · title · center × 1 — ej. Soluciones tecnológicas diseñadas para escalar

@@ -29,8 +29,8 @@ check('sin variantes sm/xl/xxl de espaciado y fs (por diseño)', !preg_match('/\
 check('sin escala rem de Bootstrap (pt-1..pt-4 no existen)', !preg_match('/\.pt-[1-4]\{/', $css));
 
 echo "3) encolado\n";
-$home = (string) shell_exec('curl -s http://localhost:8888/Intelindev/');
-$grid = strpos($home, "id='intelindev-grid-css'"); $styles = strpos($home, "id='intelindev-styles-css'");
+$home = (string) shell_exec('curl -s http://localhost:8888/WPfemsculpt/');
+$grid = strpos($home, "id='pswpt-grid-css'"); $styles = strpos($home, "id='pswpt-styles-css'");
 check('grid.css encolado antes de styles.css', $grid !== false && $styles !== false && $grid < $styles);
 
 echo $fails ? "\nHAY FALLOS ($fails)\n" : "\nTODO OK\n";

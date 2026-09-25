@@ -17,7 +17,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
     - FRAME "Frame 195" 7568:12947 951×1147 [column gap 40]
       - FRAME "Heading" 7568:12948 945×72 [column gap 10 main center cross center]
         - FRAME "Frame 193" 7568:12949 945×72 [row gap 10 main center cross center]
-          - TEXT "Title" 7568:12950 945×72 {DM Sans 400 · 16px · lh 24px · justified · #151414} "En Intelindev desarrollamos soluciones digitales adaptadas a las necesidades específicas de cada organización. Diseñamos aplicaciones web, plataformas empresari"
+          - TEXT "Title" 7568:12950 945×72 {DM Sans 400 · 16px · lh 24px · justified · #151414} "En pswpt desarrollamos soluciones digitales adaptadas a las necesidades específicas de cada organización. Diseñamos aplicaciones web, plataformas empresari"
       - RECTANGLE "collage-de-fondo-de-programacion 1" 7568:12951 951×519 bg image radius 20
       - FRAME "Frame 255" 7568:12952 951×476 [column gap 40]
         - FRAME "Frame 253" 7568:12953 945×164 [column gap 20]
@@ -218,7 +218,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
                 - GROUP "Group 98" 7470:13618 24×24
                   - VECTOR "Vector" 7470:13619 24×24 bg #ffffff
                   - VECTOR "Vector" 7470:13620 9×9 bg #ffffff
-              - TEXT "ACTION" 7470:13621 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "design@intelindev.com"
+              - TEXT "ACTION" 7470:13621 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "design@pswpt.com"
             - FRAME "Item 8" 7470:13622 234×81 [row gap 10]
               - FRAME "Frame 207" 7470:13623 24×24 [column gap 10 pad 10/10/10/10 main center cross center]
                 - GROUP "Group 96" 7470:13624 25×24
@@ -237,7 +237,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
     - FRAME "SOCKET" 7470:13637 1728×82 [row gap 105 pad 20/0/20/0 main space_between cross center] bg #080808
       - FRAME "Container" 7470:13638 1536×42 [row gap 1209 main space_between cross center]
         - INSTANCE "SOCKET COPY" 7470:13639 748×42 [column pad 10/0/10/0 main center cross center] <instance 20:947>
-          - TEXT "Description" I7470:13639;20:948 748×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ebe6e6} "Intelindev © 2026 All Rights Reserved."
+          - TEXT "Description" I7470:13639;20:948 748×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ebe6e6} "pswpt © 2026 All Rights Reserved."
         - INSTANCE "TEXT" 7470:13640 421×22 [column] <instance 2383:7294>
           - TEXT "Description" I7470:13640;2383:7295 421×22 {DM Sans 400 · 14.399999618530273px · lh 22px · right · #ffffff} "Terms & Conditions | Privacy Policy"
   - FRAME "Header" 7470:13641 1536×80 [row pad 10/30/10/30 main center cross center] bg #000000 71% radius 20

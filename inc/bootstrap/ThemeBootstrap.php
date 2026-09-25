@@ -1,6 +1,6 @@
 <?php
 
-namespace IntelindevInit\Bootstrap;
+namespace pswptInit\Bootstrap;
 
 class ThemeBootstrap
 {
@@ -20,7 +20,7 @@ class ThemeBootstrap
             require_once $loader_path;
         }
 
-        if (!class_exists('IntelindevInit\\Bootstrap\\CoreFileLoader')) {
+        if (!class_exists('pswptInit\\Bootstrap\\CoreFileLoader')) {
             return;
         }
 
@@ -34,7 +34,7 @@ class ThemeBootstrap
         }
 
         spl_autoload_register(function ($class_name) {
-            $prefix = 'IntelindevInit\\';
+            $prefix = 'pswptInit\\';
             if (strpos($class_name, $prefix) !== 0) {
                 return;
             }
@@ -70,7 +70,7 @@ class ThemeBootstrap
             require_once $module_registrar_path;
         }
 
-        if (!class_exists('IntelindevInit\\Bootstrap\\ModuleRegistrar')) {
+        if (!class_exists('pswptInit\\Bootstrap\\ModuleRegistrar')) {
             return;
         }
 

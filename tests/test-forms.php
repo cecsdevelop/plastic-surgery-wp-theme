@@ -7,27 +7,27 @@
  * Crea un formulario, un receptor de webhook temporal en htdocs/_claude-test,
  * bloques traducidos temporales en la página 18 y envíos; restaura todo al final.
  */
-use IntelindevInit\Forms\FormsController as F;
-use IntelindevInit\Forms\FormRenderer as R;
-use IntelindevInit\Forms\SubmissionsController as S;
+use pswptInit\Forms\FormsController as F;
+use pswptInit\Forms\FormRenderer as R;
+use pswptInit\Forms\SubmissionsController as S;
 
-$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/Intelindev/'; define('WP_USE_THEMES', false);
+$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/WPfemsculpt/'; define('WP_USE_THEMES', false);
 require dirname(__DIR__, 4) . '/wp-load.php';
 require_once ABSPATH . 'wp-admin/includes/template.php';
 wp_set_current_user(1);
 
 $fails = 0;
 function check(string $label, bool $ok): void { global $fails; echo ($ok ? "  ok   " : "  FAIL ") . "$label\n"; if (!$ok) $fails++; }
-$curl = fn(string $path) => (string) shell_exec('curl -s ' . escapeshellarg('http://localhost:8888/Intelindev' . $path));
+$curl = fn(string $path) => (string) shell_exec('curl -s ' . escapeshellarg('http://localhost:8888/WPfemsculpt' . $path));
 $send = function (int $id, array $data): array {
-    $out = shell_exec('curl -s -w "\n%{http_code}" -X POST -H "Accept: application/json" --data ' . escapeshellarg(http_build_query($data)) . ' ' . escapeshellarg('http://localhost:8888/Intelindev/wp-json/intelindev/v1/form/' . $id));
+    $out = shell_exec('curl -s -w "\n%{http_code}" -X POST -H "Accept: application/json" --data ' . escapeshellarg(http_build_query($data)) . ' ' . escapeshellarg('http://localhost:8888/WPfemsculpt/wp-json/pswpt/v1/form/' . $id));
     $lines = explode("\n", trim((string) $out)); $code = (int) array_pop($lines);
     return [$code, json_decode(implode("\n", $lines), true) ?: []];
 };
-$sub = fn(string $code) => trim((string) shell_exec(PHP_BINARY . ' -r ' . escapeshellarg('$_SERVER["HTTP_HOST"]="localhost:8888"; $_SERVER["REQUEST_URI"]="/Intelindev/wp-admin/"; define("WP_USE_THEMES",false); define("WP_ADMIN",true); require "' . ABSPATH . 'wp-load.php"; require_once ABSPATH."wp-admin/includes/template.php"; wp_set_current_user(1); ' . $code) . ' 2>/dev/null'));
-$clear_rate_limit = function () { foreach (['127.0.0.1', '::1', 'localhost'] as $ip) delete_transient('intelindev_form_rl_' . md5($ip)); };
+$sub = fn(string $code) => trim((string) shell_exec(PHP_BINARY . ' -r ' . escapeshellarg('$_SERVER["HTTP_HOST"]="localhost:8888"; $_SERVER["REQUEST_URI"]="/WPfemsculpt/wp-admin/"; define("WP_USE_THEMES",false); define("WP_ADMIN",true); require "' . ABSPATH . 'wp-load.php"; require_once ABSPATH."wp-admin/includes/template.php"; wp_set_current_user(1); ' . $code) . ' 2>/dev/null'));
+$clear_rate_limit = function () { foreach (['127.0.0.1', '::1', 'localhost'] as $ip) delete_transient('pswpt_form_rl_' . md5($ip)); };
 
-$PAGE = 18; $META = INTELINDEV_POST_TRANSLATED_CONTENT_META;
+$PAGE = 18; $META = pswpt_POST_TRANSLATED_CONTENT_META;
 $orig_blocks = get_post_meta($PAGE, $META, true);
 $hook_dir = '/Applications/MAMP/htdocs/_claude-test'; $hook_log = $hook_dir . '/hook.log';
 $form_id = 0; $draft_id = 0;
@@ -72,15 +72,15 @@ try {
 
     echo "3) render (curl ES/EN)\n";
     $es = $curl('/contacto/'); $en = $curl('/en/contact-us/');
-    check('ES: form con action REST, data-success y _lang', preg_match('#<form class="intelindev-form" method="post" action="http://localhost:8888/Intelindev/wp-json/intelindev/v1/form/' . $form_id . '" data-intelindev-form="' . $form_id . '" data-success="Gracias, te respondemos pronto."#', $es) === 1 && strpos($es, 'name="_lang" value="es"') !== false);
-    check('ES: nombre col-md-6 required + placeholder; textarea; select con opciones ES', strpos($es, '<div class="col-12 col-md-6 intelindev-form__field intelindev-form__field--text">') !== false && preg_match('/<input type="text" id="f' . $form_id . '-nombre" name="nombre" placeholder="Tu nombre" required>/', $es) === 1 && strpos($es, '<textarea id="f' . $form_id . '-mensaje" name="mensaje" rows="5" placeholder="" required>') !== false && strpos($es, '<option value="Ventas">Ventas</option>') !== false && strpos($es, '<option value="">Elegí…</option>') !== false);
-    check('ES: checkbox con link, hidden, honeypot, token, botón', strpos($es, 'Acepto la <a href="/Intelindev/privacidad/">política</a> <span class="intelindev-form__req"') !== false /* enlace relativo a la raíz resuelto al subdirectorio (content-filters.php) */ && strpos($es, '<input type="hidden" name="origen" value="web">') !== false && strpos($es, 'name="_website"') !== false && preg_match('/name="_sig" value="[a-f0-9]{64}"/', $es) === 1 && strpos($es, '<button type="submit" class="intelindev-form__submit">Enviar consulta</button>') !== false);
-    check('ES: borrador no renderiza', strpos($es, 'slug="borrador"') === false && substr_count($es, '<form class="intelindev-form"') === 1);
-    check('EN: etiquetas, opciones, botón y success en inglés', strpos($en, '>Name <span class="intelindev-form__req"') !== false && strpos($en, '<option value="Sales">Sales</option>') !== false && strpos($en, '>Send inquiry</button>') !== false && strpos($en, 'data-success="Thanks, we will reply soon."') !== false && strpos($en, 'name="_lang" value="en"') !== false);
+    check('ES: form con action REST, data-success y _lang', preg_match('#<form class="pswpt-form" method="post" action="http://localhost:8888/WPfemsculpt/wp-json/pswpt/v1/form/' . $form_id . '" data-pswpt-form="' . $form_id . '" data-success="Gracias, te respondemos pronto."#', $es) === 1 && strpos($es, 'name="_lang" value="es"') !== false);
+    check('ES: nombre col-md-6 required + placeholder; textarea; select con opciones ES', strpos($es, '<div class="col-12 col-md-6 pswpt-form__field pswpt-form__field--text">') !== false && preg_match('/<input type="text" id="f' . $form_id . '-nombre" name="nombre" placeholder="Tu nombre" required>/', $es) === 1 && strpos($es, '<textarea id="f' . $form_id . '-mensaje" name="mensaje" rows="5" placeholder="" required>') !== false && strpos($es, '<option value="Ventas">Ventas</option>') !== false && strpos($es, '<option value="">Elegí…</option>') !== false);
+    check('ES: checkbox con link, hidden, honeypot, token, botón', strpos($es, 'Acepto la <a href="/WPfemsculpt/privacidad/">política</a> <span class="pswpt-form__req"') !== false /* enlace relativo a la raíz resuelto al subdirectorio (content-filters.php) */ && strpos($es, '<input type="hidden" name="origen" value="web">') !== false && strpos($es, 'name="_website"') !== false && preg_match('/name="_sig" value="[a-f0-9]{64}"/', $es) === 1 && strpos($es, '<button type="submit" class="pswpt-form__submit">Enviar consulta</button>') !== false);
+    check('ES: borrador no renderiza', strpos($es, 'slug="borrador"') === false && substr_count($es, '<form class="pswpt-form"') === 1);
+    check('EN: etiquetas, opciones, botón y success en inglés', strpos($en, '>Name <span class="pswpt-form__req"') !== false && strpos($en, '<option value="Sales">Sales</option>') !== false && strpos($en, '>Send inquiry</button>') !== false && strpos($en, 'data-success="Thanks, we will reply soon."') !== false && strpos($en, 'name="_lang" value="en"') !== false);
 
     echo "4) envíos por REST\n";
     $ts = time() - 5; $sig = R::sign($form_id, $ts);
-    $valid = ['_lang' => 'es', '_ts' => $ts, '_sig' => $sig, '_page' => 'http://localhost:8888/Intelindev/contacto/', 'nombre' => 'Ana', 'email' => 'ana@example.com', 'telefono' => '+57 300 123 4567', 'asunto' => 'Ventas', 'mensaje' => "Hola\nQuiero info", 'acepto' => '1', 'origen' => 'web'];
+    $valid = ['_lang' => 'es', '_ts' => $ts, '_sig' => $sig, '_page' => 'http://localhost:8888/WPfemsculpt/contacto/', 'nombre' => 'Ana', 'email' => 'ana@example.com', 'telefono' => '+57 300 123 4567', 'asunto' => 'Ventas', 'mensaje' => "Hola\nQuiero info", 'acepto' => '1', 'origen' => 'web'];
     [$c, $b] = $send($form_id, array_merge($valid, ['_sig' => 'x']));
     check('firma inválida → 400', $c === 400 && $b['ok'] === false);
     [$c, $b] = $send($form_id, array_merge($valid, ['_ts' => time(), '_sig' => R::sign($form_id, time())]));
@@ -97,7 +97,7 @@ try {
     $entries = get_posts(['post_type' => S::POST_TYPE, 'posts_per_page' => 1, 'orderby' => 'ID', 'order' => 'DESC']);
     $entry = $entries[0] ?? null; $data = $entry ? get_post_meta($entry->ID, S::META_DATA, true) : []; $ctx = $entry ? get_post_meta($entry->ID, S::META_CONTEXT, true) : [];
     check('envío guardado con datos limpios y título "Contacto · Ana"', $entry && $entry->post_title === 'Contacto · Ana' && $data['email'] === 'ana@example.com' && $data['acepto'] === '1' && $data['origen'] === 'web' && $data['mensaje'] === "Hola\nQuiero info" && (int) get_post_meta($entry->ID, S::META_FORM, true) === $form_id);
-    check('contexto: lang, página, resultado del correo registrado (bool)', ($ctx['lang'] ?? '') === 'es' && ($ctx['page'] ?? '') === 'http://localhost:8888/Intelindev/contacto/' && isset($ctx['mail']['sent']) && is_bool($ctx['mail']['sent']) && ($ctx['mail']['to'] ?? '') === 'ventas@example.com');
+    check('contexto: lang, página, resultado del correo registrado (bool)', ($ctx['lang'] ?? '') === 'es' && ($ctx['page'] ?? '') === 'http://localhost:8888/WPfemsculpt/contacto/' && isset($ctx['mail']['sent']) && is_bool($ctx['mail']['sent']) && ($ctx['mail']['to'] ?? '') === 'ventas@example.com');
     $received = file_exists($hook_log) ? json_decode((string) file_get_contents($hook_log), true) : null;
     check('webhook: POST JSON recibido (form, lang, fields) y HTTP 200 registrado', ($ctx['webhook']['status'] ?? 0) === 200 && is_array($received) && $received['form']['slug'] === 'contacto-test' && $received['lang'] === 'es' && $received['fields']['nombre'] === 'Ana' && $received['fields']['asunto'] === 'Ventas');
     for ($n = 0; $n < 3; $n++) $send($form_id, $valid); // 2 previos + 1 + 3 = 6 intentos válidos
@@ -107,17 +107,17 @@ try {
     check('borrador → 404', $send($draft_id, ['_lang' => 'es', '_ts' => $ts, '_sig' => R::sign($draft_id, $ts)])[0] === 404);
 
     echo "5) admin\n";
-    $mb = $sub('ob_start(); (new \IntelindevInit\Forms\FormsController())->render_fields_meta_box(get_post(' . $form_id . ')); echo ob_get_clean();');
-    check('metabox campos: 7 filas + template + shortcode', substr_count($mb, 'class="intelindev-form-field"') === 8 && strpos($mb, '[fields][__i__][name]') !== false && strpos($mb, '<code>[form slug="contacto-test"]</code>') !== false && strpos($mb, 'value="Tu nombre"') !== false);
-    $ms = $sub('ob_start(); (new \IntelindevInit\Forms\FormsController())->render_settings_meta_box(get_post(' . $form_id . ')); echo ob_get_clean();');
-    check('metabox envío: destinatarios, asunto por idioma, webhook, store', strpos($ms, 'value="ventas@example.com"') !== false && strpos($ms, 'name="intelindev_form[settings][subject][en]" value="Contact from {site}"') !== false && strpos($ms, 'value="http://localhost:8888/_claude-test/hook.php"') !== false && preg_match('/name="intelindev_form\[settings\]\[store\]" value="1"\s*checked/', $ms) === 1);
+    $mb = $sub('ob_start(); (new \pswptInit\Forms\FormsController())->render_fields_meta_box(get_post(' . $form_id . ')); echo ob_get_clean();');
+    check('metabox campos: 7 filas + template + shortcode', substr_count($mb, 'class="pswpt-form-field"') === 8 && strpos($mb, '[fields][__i__][name]') !== false && strpos($mb, '<code>[form slug="contacto-test"]</code>') !== false && strpos($mb, 'value="Tu nombre"') !== false);
+    $ms = $sub('ob_start(); (new \pswptInit\Forms\FormsController())->render_settings_meta_box(get_post(' . $form_id . ')); echo ob_get_clean();');
+    check('metabox envío: destinatarios, asunto por idioma, webhook, store', strpos($ms, 'value="ventas@example.com"') !== false && strpos($ms, 'name="pswpt_form[settings][subject][en]" value="Contact from {site}"') !== false && strpos($ms, 'value="http://localhost:8888/_claude-test/hook.php"') !== false && preg_match('/name="pswpt_form\[settings\]\[store\]" value="1"\s*checked/', $ms) === 1);
     $_POST = [F::NONCE_FIELD => wp_create_nonce(F::NONCE_ACTION), F::FIELD => ['fields' => [['name' => 'solo', 'type' => 'email', 'required' => '1', 'width' => 'col-12', 'label' => ['es' => 'Solo', 'en' => '']]], 'settings' => ['recipients' => 'x@y.com', 'store' => '1']]];
     do_action('save_post_' . F::POST_TYPE, $form_id, get_post($form_id), true);
     check('save con nonce: campos y ajustes reemplazados', count(F::get_fields($form_id)) === 1 && F::get_fields($form_id)[0]['name'] === 'solo' && F::get_settings($form_id)['recipients'] === 'x@y.com');
-    $col = $sub('ob_start(); do_action("manage_' . F::POST_TYPE . '_posts_custom_column", "intelindev_shortcode", ' . $form_id . '); do_action("manage_' . F::POST_TYPE . '_posts_custom_column", "intelindev_entries", ' . $form_id . '); echo ob_get_clean();');
+    $col = $sub('ob_start(); do_action("manage_' . F::POST_TYPE . '_posts_custom_column", "pswpt_shortcode", ' . $form_id . '); do_action("manage_' . F::POST_TYPE . '_posts_custom_column", "pswpt_entries", ' . $form_id . '); echo ob_get_clean();');
     $stored = count(get_posts(['post_type' => S::POST_TYPE, 'posts_per_page' => -1, 'fields' => 'ids']));
-    check('columnas: shortcode y conteo de envíos (= DB) con link', strpos($col, '<code>[form slug="contacto-test"]</code>') !== false && preg_match('/intelindev_form=' . $form_id . '">(\d+)<\/a>/', $col, $m) === 1 && (int) $m[1] === $stored && $stored >= 4);
-    $emb = $sub('ob_start(); (new \IntelindevInit\Forms\SubmissionsController())->render_meta_box(get_post(' . $entry->ID . ')); echo ob_get_clean();');
+    check('columnas: shortcode y conteo de envíos (= DB) con link', strpos($col, '<code>[form slug="contacto-test"]</code>') !== false && preg_match('/pswpt_form=' . $form_id . '">(\d+)<\/a>/', $col, $m) === 1 && (int) $m[1] === $stored && $stored >= 4);
+    $emb = $sub('ob_start(); (new \pswptInit\Forms\SubmissionsController())->render_meta_box(get_post(' . $entry->ID . ')); echo ob_get_clean();');
     check('detalle del envío: datos + contexto', strpos($emb, '<td>ana@example.com</td>') !== false && strpos($emb, 'Webhook') !== false && strpos($emb, 'HTTP 200') !== false);
 } finally {
     if ($orig_blocks === '') delete_post_meta($PAGE, $META); else update_post_meta($PAGE, $META, $orig_blocks);

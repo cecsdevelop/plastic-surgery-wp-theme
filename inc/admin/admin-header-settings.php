@@ -1,10 +1,10 @@
 <?php
 /**
- * Intelindev Header (Apariencia → Intelindev Header): sticky, logos, menú,
+ * pswpt Header (Apariencia → pswpt Header): sticky, logos, menú,
  * colores y CTA del header en tres pestañas (Header / Menú / CTA).
  *
- * Todo vive en la option intelindev_header_settings y se lee con
- * intelindev_get_header_setting(). Los colores se imprimen como custom
+ * Todo vive en la option pswpt_header_settings y se lee con
+ * pswpt_get_header_setting(). Los colores se imprimen como custom
  * properties CSS (--psw-header-*) en un <style> en wp_head, solo las
  * que el admin configuró — el resto lo cubre el default de
  * assets/css/styles.css en :root, así que sin configurar nada no cambia nada.
@@ -26,28 +26,28 @@
  * el <dialog> recién al primer clic, así el JS del CRM no carga hasta que
  * alguien abre el modal.
  *
- * @package intelindev
+ * @package pswpt
  */
 
 if (!defined('ABSPATH')) exit;
 
 add_action('admin_menu', function () {
     add_theme_page(
-        __('Intelindev Header', 'intelindev'),
-        __('Intelindev Header', 'intelindev'),
+        __('pswpt Header', 'pswpt'),
+        __('pswpt Header', 'pswpt'),
         'manage_options',
-        'intelindev-header-settings',
-        'intelindev_header_settings_page_html'
+        'pswpt-header-settings',
+        'pswpt_header_settings_page_html'
     );
 });
 
 add_action('admin_init', function () {
-    register_setting('intelindev_header_settings_group', 'intelindev_header_settings', 'intelindev_header_settings_sanitize');
+    register_setting('pswpt_header_settings_group', 'pswpt_header_settings', 'pswpt_header_settings_sanitize');
 });
 
 add_action('admin_enqueue_scripts', function ($hook) {
-    if ($hook === 'appearance_page_intelindev-header-settings') {
-        intelindev_admin_enqueue_field_assets();
+    if ($hook === 'appearance_page_pswpt-header-settings') {
+        pswpt_admin_enqueue_field_assets();
     }
 }, 20);
 
@@ -58,33 +58,33 @@ add_action('admin_enqueue_scripts', function ($hook) {
 /**
  * Matriz de colores del header: clave de option => label + custom property.
  * La variante sticky de cada clave es 'sticky_' . $key y su custom property
- * intelindev_header_sticky_css_var(). Única fuente para sanitize, salida CSS
+ * pswpt_header_sticky_css_var(). Única fuente para sanitize, salida CSS
  * y formulario: agregar un color acá alcanza para que aparezca en todos lados
  * (styles.css debe traer el default de la variable nueva).
  */
-function intelindev_header_color_matrix(): array {
+function pswpt_header_color_matrix(): array {
     return [
         'menu' => [
-            'bg_color'                 => ['label' => __('Fondo del header', 'intelindev'),               'var' => '--psw-header-bg'],
-            'nav_bg_color'             => ['label' => __('Fondo de la barra del menú', 'intelindev'),     'var' => '--psw-header-nav-bg'],
-            'link_color'               => ['label' => __('Color de los links', 'intelindev'),             'var' => '--psw-header-link-color'],
-            'active_bg_color'          => ['label' => __('Fondo del ítem activo', 'intelindev'),          'var' => '--psw-header-active-bg'],
-            'active_link_color'        => ['label' => __('Texto del ítem activo', 'intelindev'),          'var' => '--psw-header-active-color'],
-            'submenu_bg_color'         => ['label' => __('Fondo del submenú', 'intelindev'),              'var' => '--psw-header-submenu-bg'],
-            'submenu_link_color'       => ['label' => __('Color de los links del submenú', 'intelindev'), 'var' => '--psw-header-submenu-link-color'],
-            'submenu_hover_bg_color'   => ['label' => __('Fondo del submenú (hover)', 'intelindev'),      'var' => '--psw-header-submenu-hover-bg'],
-            'submenu_hover_link_color' => ['label' => __('Link del submenú (hover)', 'intelindev'),       'var' => '--psw-header-submenu-hover-link-color'],
+            'bg_color'                 => ['label' => __('Header background', 'pswpt'),               'var' => '--psw-header-bg'],
+            'nav_bg_color'             => ['label' => __('Menu bar background', 'pswpt'),     'var' => '--psw-header-nav-bg'],
+            'link_color'               => ['label' => __('Link color', 'pswpt'),             'var' => '--psw-header-link-color'],
+            'active_bg_color'          => ['label' => __('Active item background', 'pswpt'),          'var' => '--psw-header-active-bg'],
+            'active_link_color'        => ['label' => __('Active item text', 'pswpt'),          'var' => '--psw-header-active-color'],
+            'submenu_bg_color'         => ['label' => __('Submenu background', 'pswpt'),              'var' => '--psw-header-submenu-bg'],
+            'submenu_link_color'       => ['label' => __('Submenu link color', 'pswpt'), 'var' => '--psw-header-submenu-link-color'],
+            'submenu_hover_bg_color'   => ['label' => __('Submenu background (hover)', 'pswpt'),      'var' => '--psw-header-submenu-hover-bg'],
+            'submenu_hover_link_color' => ['label' => __('Submenu link (hover)', 'pswpt'),       'var' => '--psw-header-submenu-hover-link-color'],
         ],
         'cta' => [
-            'cta_bg_color'         => ['label' => __('Fondo', 'intelindev'),         'var' => '--psw-header-cta-bg'],
-            'cta_text_color'       => ['label' => __('Texto', 'intelindev'),         'var' => '--psw-header-cta-text-color'],
-            'cta_hover_bg_color'   => ['label' => __('Fondo (hover)', 'intelindev'), 'var' => '--psw-header-cta-hover-bg'],
-            'cta_hover_text_color' => ['label' => __('Texto (hover)', 'intelindev'), 'var' => '--psw-header-cta-hover-text-color'],
+            'cta_bg_color'         => ['label' => __('Background', 'pswpt'),         'var' => '--psw-header-cta-bg'],
+            'cta_text_color'       => ['label' => __('Text', 'pswpt'),         'var' => '--psw-header-cta-text-color'],
+            'cta_hover_bg_color'   => ['label' => __('Background (hover)', 'pswpt'), 'var' => '--psw-header-cta-hover-bg'],
+            'cta_hover_text_color' => ['label' => __('Text (hover)', 'pswpt'), 'var' => '--psw-header-cta-hover-text-color'],
         ],
     ];
 }
 
-function intelindev_header_sticky_css_var(string $var): string {
+function pswpt_header_sticky_css_var(string $var): string {
     return str_replace('--psw-header-', '--psw-header-sticky-', $var);
 }
 
@@ -92,42 +92,42 @@ function intelindev_header_sticky_css_var(string $var): string {
 /* Lectura (frontend)                                                   */
 /* ------------------------------------------------------------------ */
 
-if (!function_exists('intelindev_get_header_setting')) {
-    function intelindev_get_header_setting($key, $default = null) {
-        $opts = get_option('intelindev_header_settings', []);
+if (!function_exists('pswpt_get_header_setting')) {
+    function pswpt_get_header_setting($key, $default = null) {
+        $opts = get_option('pswpt_header_settings', []);
         return (is_array($opts) && array_key_exists($key, $opts)) ? $opts[$key] : $default;
     }
 }
 
-function intelindev_header_is_sticky(): bool {
-    return !empty(intelindev_get_header_setting('sticky_enabled', 0));
+function pswpt_header_is_sticky(): bool {
+    return !empty(pswpt_get_header_setting('sticky_enabled', 0));
 }
 
-function intelindev_get_header_sticky_threshold(): int {
-    $threshold = (int) intelindev_get_header_setting('sticky_threshold', 80);
+function pswpt_get_header_sticky_threshold(): int {
+    $threshold = (int) pswpt_get_header_setting('sticky_threshold', 80);
     return max(0, min(1000, $threshold));
 }
 
-function intelindev_get_header_cta_text($lang = null): string {
-    return intelindev_resolve_lang_text(intelindev_get_header_setting('cta_text', []), $lang);
+function pswpt_get_header_cta_text($lang = null): string {
+    return pswpt_resolve_lang_text(pswpt_get_header_setting('cta_text', []), $lang);
 }
 
 /**
  * CTA resuelto para el idioma: type none|page|url|modal, href, text,
  * modal_title y modal_content (ya con do_shortcode). type 'none' = no imprimir.
  */
-function intelindev_get_header_cta($lang = null): array {
+function pswpt_get_header_cta($lang = null): array {
     $none = ['type' => 'none', 'href' => '', 'text' => '', 'modal_title' => '', 'modal_content' => '', 'style' => 'text'];
 
-    $type = (string) intelindev_get_header_setting('cta_type', 'none');
-    $text = intelindev_get_header_cta_text($lang);
+    $type = (string) pswpt_get_header_setting('cta_type', 'none');
+    $text = pswpt_get_header_cta_text($lang);
     $href = '';
     $modal_title = '';
     $modal_content = '';
 
     switch ($type) {
         case 'page':
-            $page_id = (int) intelindev_get_header_setting('cta_page_id', 0);
+            $page_id = (int) pswpt_get_header_setting('cta_page_id', 0);
             if ($page_id <= 0 || get_post_type($page_id) !== 'page' || get_post_status($page_id) !== 'publish') {
                 return $none;
             }
@@ -138,20 +138,20 @@ function intelindev_get_header_cta($lang = null): array {
             break;
 
         case 'url':
-            $href = trim((string) intelindev_get_header_setting('cta_url', ''));
+            $href = trim((string) pswpt_get_header_setting('cta_url', ''));
             if (!preg_match('#^https?://#i', $href)) {
                 return $none;
             }
             break;
 
         case 'modal':
-            if (trim((string) intelindev_get_header_setting('cta_modal_content', '')) === '') {
+            if (trim((string) pswpt_get_header_setting('cta_modal_content', '')) === '') {
                 return $none;
             }
             // El contenido no se imprime en la página: lo pide scripts.js al primer
-            // clic a GET intelindev/v1/modal?lang= (ver intelindev_render_header_modal_content).
+            // clic a GET pswpt/v1/modal?lang= (ver pswpt_render_header_modal_content).
             $modal_content = '';
-            $modal_title = intelindev_resolve_lang_text(intelindev_get_header_setting('cta_modal_title', []), $lang);
+            $modal_title = pswpt_resolve_lang_text(pswpt_get_header_setting('cta_modal_title', []), $lang);
             break;
 
         default:
@@ -160,7 +160,7 @@ function intelindev_get_header_cta($lang = null): array {
 
     // Estilo 'icon' (botón cuadrado con ícono, como en el diseño): el texto pasa a
     // ser la etiqueta accesible y puede venir vacío.
-    $style = (string) intelindev_get_header_setting('cta_style', 'text') === 'icon' ? 'icon' : 'text';
+    $style = (string) pswpt_get_header_setting('cta_style', 'text') === 'icon' ? 'icon' : 'text';
     if ($text === '' && $style === 'icon') {
         $text = idml_t('cta.icon_label', $lang);
     }
@@ -177,17 +177,17 @@ function intelindev_get_header_cta($lang = null): array {
  * de CRM, captcha) no viaja en cada página y el token antispam de un
  * formulario nace al abrir el modal, no al cachear la página.
  */
-function intelindev_render_header_modal_content(string $lang): string {
-    $content = trim((string) intelindev_get_header_setting('cta_modal_content', ''));
-    if ($content === '' || (string) intelindev_get_header_setting('cta_type', 'none') !== 'modal') {
+function pswpt_render_header_modal_content(string $lang): string {
+    $content = trim((string) pswpt_get_header_setting('cta_modal_content', ''));
+    if ($content === '' || (string) pswpt_get_header_setting('cta_type', 'none') !== 'modal') {
         return '';
     }
     idml_set_current_language($lang);
-    return intelindev_resolve_root_relative_urls(do_shortcode($content));
+    return pswpt_resolve_root_relative_urls(do_shortcode($content));
 }
 
 add_action('rest_api_init', function () {
-    register_rest_route('intelindev/v1', '/modal', [
+    register_rest_route('pswpt/v1', '/modal', [
         'methods'             => 'GET',
         'permission_callback' => '__return_true',
         'args'                => ['lang' => ['sanitize_callback' => 'sanitize_key']],
@@ -196,7 +196,7 @@ add_action('rest_api_init', function () {
             if (!in_array($lang, idml_get_languages(), true)) {
                 $lang = idml_get_default_language();
             }
-            $html = intelindev_render_header_modal_content($lang);
+            $html = pswpt_render_header_modal_content($lang);
             $response = new \WP_REST_Response($html === '' ? ['html' => ''] : ['html' => $html], $html === '' ? 404 : 200);
             // Token antispam fresco en cada apertura: sin caché intermedia.
             $response->header('Cache-Control', 'no-store, max-age=0');
@@ -211,9 +211,9 @@ add_action('rest_api_init', function () {
  * muestra uno u otro según .is-scrolled — sin JS extra. Eager + fetchpriority
  * en el principal porque suele ser el LCP.
  */
-function intelindev_render_header_logo(string $home_url): void {
-    $logo_id        = (int) intelindev_get_header_setting('logo_id', 0);
-    $sticky_logo_id = intelindev_header_is_sticky() ? (int) intelindev_get_header_setting('sticky_logo_id', 0) : 0;
+function pswpt_render_header_logo(string $home_url): void {
+    $logo_id        = (int) pswpt_get_header_setting('logo_id', 0);
+    $sticky_logo_id = pswpt_header_is_sticky() ? (int) pswpt_get_header_setting('sticky_logo_id', 0) : 0;
     $site_name      = get_bloginfo('name');
 
     if ($logo_id > 0 && wp_attachment_is_image($logo_id)) {
@@ -258,22 +258,22 @@ function intelindev_render_header_logo(string $home_url): void {
  * en el documento, así que esto pisa los defaults de styles.css sin
  * !important. Las variables sticky solo se imprimen con sticky activo.
  */
-add_action('wp_head', 'intelindev_print_header_style_overrides', 20);
+add_action('wp_head', 'pswpt_print_header_style_overrides', 20);
 
-function intelindev_print_header_style_overrides() {
-    $sticky = intelindev_header_is_sticky();
+function pswpt_print_header_style_overrides() {
+    $sticky = pswpt_header_is_sticky();
     $declarations = '';
 
-    foreach (intelindev_header_color_matrix() as $group) {
+    foreach (pswpt_header_color_matrix() as $group) {
         foreach ($group as $key => $def) {
-            $value = intelindev_sanitize_css_color((string) intelindev_get_header_setting($key, ''));
+            $value = pswpt_sanitize_css_color((string) pswpt_get_header_setting($key, ''));
             if ($value !== '') {
                 $declarations .= $def['var'] . ':' . $value . ';';
             }
             if ($sticky) {
-                $value = intelindev_sanitize_css_color((string) intelindev_get_header_setting('sticky_' . $key, ''));
+                $value = pswpt_sanitize_css_color((string) pswpt_get_header_setting('sticky_' . $key, ''));
                 if ($value !== '') {
-                    $declarations .= intelindev_header_sticky_css_var($def['var']) . ':' . $value . ';';
+                    $declarations .= pswpt_header_sticky_css_var($def['var']) . ':' . $value . ';';
                 }
             }
         }
@@ -281,7 +281,7 @@ function intelindev_print_header_style_overrides() {
 
     if ($declarations === '') return;
 
-    echo '<style id="intelindev-header-style-overrides">:root{' . $declarations . '}</style>' . "\n";
+    echo '<style id="pswpt-header-style-overrides">:root{' . $declarations . '}</style>' . "\n";
 }
 
 /* ------------------------------------------------------------------ */
@@ -292,9 +292,9 @@ function intelindev_print_header_style_overrides() {
  * Parte de lo ya guardado y sobreescribe solo las claves que este formulario
  * gestiona; una clave sin valor válido se quita (vuelve al default).
  */
-function intelindev_header_settings_sanitize($input) {
+function pswpt_header_settings_sanitize($input) {
     $input    = is_array($input) ? $input : [];
-    $existing = get_option('intelindev_header_settings', []);
+    $existing = get_option('pswpt_header_settings', []);
     $out      = is_array($existing) ? $existing : [];
 
     // Claves de la versión anterior del panel (scrolled_*): ya no se leen.
@@ -331,10 +331,10 @@ function intelindev_header_settings_sanitize($input) {
     }
 
     // --- Colores (normal + sticky) ---
-    foreach (intelindev_header_color_matrix() as $group) {
+    foreach (pswpt_header_color_matrix() as $group) {
         foreach (array_keys($group) as $key) {
             foreach ([$key, 'sticky_' . $key] as $option_key) {
-                $clean = intelindev_sanitize_css_color((string) ($input[$option_key] ?? ''));
+                $clean = pswpt_sanitize_css_color((string) ($input[$option_key] ?? ''));
                 if ($clean !== '') {
                     $out[$option_key] = $clean;
                 } else {
@@ -364,7 +364,7 @@ function intelindev_header_settings_sanitize($input) {
     }
 
     foreach (['cta_text', 'cta_modal_title'] as $key) {
-        $texts = intelindev_sanitize_lang_text($input[$key] ?? []);
+        $texts = pswpt_sanitize_lang_text($input[$key] ?? []);
         if ($texts) {
             $out[$key] = $texts;
         } else {
@@ -388,84 +388,84 @@ function intelindev_header_settings_sanitize($input) {
 /* Page HTML                                                            */
 /* ------------------------------------------------------------------ */
 
-function intelindev_header_settings_page_html() {
+function pswpt_header_settings_page_html() {
     if (!current_user_can('manage_options')) return;
 
-    $opts   = get_option('intelindev_header_settings', []);
+    $opts   = get_option('pswpt_header_settings', []);
     $opts   = is_array($opts) ? $opts : [];
     $sticky = !empty($opts['sticky_enabled']);
-    $matrix = intelindev_header_color_matrix();
-    $option = 'intelindev_header_settings';
+    $matrix = pswpt_header_color_matrix();
+    $option = 'pswpt_header_settings';
     $sticky_if = $option . '[sticky_enabled]';
     $cta_if    = $option . '[cta_type]';
 
     $tabs = [
-        'header' => ['🧭', __('Header', 'intelindev')],
-        'menu'   => ['☰', __('Menú', 'intelindev')],
-        'cta'    => ['🔘', __('CTA', 'intelindev')],
+        'header' => ['🧭', __('Header', 'pswpt')],
+        'menu'   => ['☰', __('Menu', 'pswpt')],
+        'cta'    => ['🔘', __('CTA', 'pswpt')],
     ];
 
     if (isset($_GET['settings-updated'])) {
-        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Configuración del header guardada correctamente.', 'intelindev') . '</p></div>';
+        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Header settings saved successfully.', 'pswpt') . '</p></div>';
     }
     ?>
     <div class="wrap">
-        <h1><?php esc_html_e('Intelindev Header', 'intelindev'); ?></h1>
-        <p><?php esc_html_e('Comportamiento sticky, logos, menú, colores y botón CTA del header.', 'intelindev'); ?></p>
+        <h1><?php esc_html_e('pswpt Header', 'pswpt'); ?></h1>
+        <p><?php esc_html_e('Header sticky behavior, logos, menu, colors and CTA button.', 'pswpt'); ?></p>
 
-        <form action="options.php" method="post" class="intelindev-settings-form intelindev-panel-form">
-            <?php settings_fields('intelindev_header_settings_group'); ?>
+        <form action="options.php" method="post" class="pswpt-settings-form pswpt-panel-form">
+            <?php settings_fields('pswpt_header_settings_group'); ?>
 
-            <?php intelindev_admin_tabs_nav($tabs); ?>
+            <?php pswpt_admin_tabs_nav($tabs); ?>
 
-            <div class="tab-content intelindev-tabs-container">
+            <div class="tab-content pswpt-tabs-container">
 
                 <!-- ===================== HEADER ===================== -->
                 <div class="tab-pane fade show active" id="content-header" role="tabpanel">
-                    <h2><?php esc_html_e('Comportamiento', 'intelindev'); ?></h2>
+                    <h2><?php esc_html_e('Behavior', 'pswpt'); ?></h2>
                     <table class="form-table" role="presentation">
                         <tr>
-                            <th scope="row"><?php esc_html_e('Header sticky', 'intelindev'); ?></th>
+                            <th scope="row"><?php esc_html_e('Sticky header', 'pswpt'); ?></th>
                             <td>
                                 <label>
-                                    <input type="checkbox" id="intelindev_sticky_enabled" name="intelindev_header_settings[sticky_enabled]" value="1"<?php checked($sticky); ?> />
-                                    <?php esc_html_e('El header queda fijo arriba al hacer scroll', 'intelindev'); ?>
+                                    <input type="checkbox" id="pswpt_sticky_enabled" name="pswpt_header_settings[sticky_enabled]" value="1"<?php checked($sticky); ?> />
+                                    <?php esc_html_e('The header stays fixed at the top while scrolling', 'pswpt'); ?>
                                 </label>
-                                <p class="description"><?php esc_html_e('Activarlo habilita el logo sticky y la columna "Sticky" de los colores en Menú y CTA. Apagado, el header es estático y no carga ningún script de scroll.', 'intelindev'); ?></p>
+                                <p class="description"><?php esc_html_e('Enabling it turns on the sticky logo and the "Sticky" color column in Menu and CTA. When off, the header is static and no scroll script is loaded.', 'pswpt'); ?></p>
                             </td>
                         </tr>
                         <tr data-show-if="<?php echo esc_attr($sticky_if); ?>">
-                            <th scope="row"><label for="intelindev_sticky_threshold"><?php esc_html_e('Umbral de scroll', 'intelindev'); ?></label></th>
+                            <th scope="row"><label for="pswpt_sticky_threshold"><?php esc_html_e('Scroll threshold', 'pswpt'); ?></label></th>
                             <td>
-                                <input type="number" id="intelindev_sticky_threshold" name="intelindev_header_settings[sticky_threshold]" value="<?php echo esc_attr((string) ($opts['sticky_threshold'] ?? 80)); ?>" min="0" max="1000" step="1" class="small-text" /> px
-                                <p class="description"><?php esc_html_e('Píxeles de scroll a partir de los cuales el header pasa a su estado sticky (logo y colores sticky).', 'intelindev'); ?></p>
+                                <input type="number" id="pswpt_sticky_threshold" name="pswpt_header_settings[sticky_threshold]" value="<?php echo esc_attr((string) ($opts['sticky_threshold'] ?? 80)); ?>" min="0" max="1000" step="1" class="small-text" /> px
+                                <p class="description"><?php esc_html_e('Scroll distance in pixels after which the header switches to its sticky state (sticky logo and colors).', 'pswpt'); ?></p>
                             </td>
                         </tr>
                     </table>
 
-                    <h2><?php esc_html_e('Logo', 'intelindev'); ?></h2>
+                    <h2><?php esc_html_e('Logo', 'pswpt'); ?></h2>
                     <table class="form-table" role="presentation">
                         <?php
-                        intelindev_admin_media_field($option, 'logo_id', __('Logo del header', 'intelindev'), $opts, __('Sin logo elegido se usa el del Personalizador (Identidad del sitio) y, si tampoco hay, el nombre del sitio.', 'intelindev'));
-                        intelindev_admin_media_field($option, 'sticky_logo_id', __('Logo con header sticky', 'intelindev'), $opts, __('Se muestra en lugar del logo principal cuando el header está en estado sticky. Vacío = se mantiene el principal.', 'intelindev'), $sticky_if);
+                        pswpt_admin_media_field($option, 'logo_id', __('Header logo', 'pswpt'), $opts, __('With no logo selected, the Customizer one (Site Identity) is used and, failing that, the site name.', 'pswpt'));
+                        pswpt_admin_media_field($option, 'sticky_logo_id', __('Sticky header logo', 'pswpt'), $opts, __('Shown instead of the main logo when the header is sticky. Empty = the main logo is kept.', 'pswpt'), $sticky_if);
                         ?>
                     </table>
                 </div>
 
                 <!-- ===================== MENÚ ===================== -->
                 <div class="tab-pane fade" id="content-menu" role="tabpanel">
-                    <h2><?php esc_html_e('Menú principal', 'intelindev'); ?></h2>
+                    <h2><?php esc_html_e('Main menu', 'pswpt'); ?></h2>
                     <table class="form-table" role="presentation">
                         <tr>
-                            <th scope="row"><label for="intelindev_menu_id"><?php esc_html_e('Menú a mostrar', 'intelindev'); ?></label></th>
+                            <th scope="row"><label for="pswpt_menu_id"><?php esc_html_e('Menu to display', 'pswpt'); ?></label></th>
                             <td>
                                 <?php
                                 $locations  = get_nav_menu_locations();
                                 $current_id = (int) ($locations['primary'] ?? 0);
                                 $menus      = wp_get_nav_menus();
                                 ?>
-                                <select id="intelindev_menu_id" name="intelindev_header_settings[menu_id]">
-                                    <option value="0"><?php esc_html_e('— Ninguno —', 'intelindev'); ?></option>
+                                <select id="pswpt_menu_id" name="pswpt_header_settings[menu_id]">
+                                    <option value="0"><?php esc_html_e('— None —', 'pswpt'); ?></option>
                                     <?php foreach ($menus as $menu) : ?>
                                         <option value="<?php echo (int) $menu->term_id; ?>"<?php selected($current_id, (int) $menu->term_id); ?>><?php echo esc_html($menu->name); ?></option>
                                     <?php endforeach; ?>
@@ -473,8 +473,8 @@ function intelindev_header_settings_page_html() {
                                 <p class="description">
                                     <?php
                                     printf(
-                                        esc_html__('Es la ubicación "Menú principal": lo mismo que asignarla en %s. Los ítems del menú se editan ahí.', 'intelindev'),
-                                        '<a href="' . esc_url(admin_url('nav-menus.php')) . '">' . esc_html__('Apariencia → Menús', 'intelindev') . '</a>'
+                                        esc_html__('This is the "Main menu" location: same as assigning it in %s. Menu items are edited there.', 'pswpt'),
+                                        '<a href="' . esc_url(admin_url('nav-menus.php')) . '">' . esc_html__('Appearance → Menus', 'pswpt') . '</a>'
                                     );
                                     ?>
                                 </p>
@@ -482,35 +482,35 @@ function intelindev_header_settings_page_html() {
                         </tr>
                     </table>
 
-                    <h2><?php esc_html_e('Colores del header y del menú', 'intelindev'); ?></h2>
+                    <h2><?php esc_html_e('Header and menu colors', 'pswpt'); ?></h2>
                     <?php
                     $color_columns = [
-                        ['prefix' => '', 'label' => __('Normal', 'intelindev')],
-                        ['prefix' => 'sticky_', 'label' => __('Sticky', 'intelindev'), 'show_if' => $sticky_if],
+                        ['prefix' => '', 'label' => __('Normal', 'pswpt')],
+                        ['prefix' => 'sticky_', 'label' => __('Sticky', 'pswpt'), 'show_if' => $sticky_if],
                     ];
-                    intelindev_admin_color_table($option, array_map(fn($def) => $def['label'], $matrix['menu']), $opts, $color_columns);
+                    pswpt_admin_color_table($option, array_map(fn($def) => $def['label'], $matrix['menu']), $opts, $color_columns);
                     ?>
                 </div>
 
                 <!-- ===================== CTA ===================== -->
                 <div class="tab-pane fade" id="content-cta" role="tabpanel">
-                    <h2><?php esc_html_e('Botón CTA', 'intelindev'); ?></h2>
+                    <h2><?php esc_html_e('CTA Button', 'pswpt'); ?></h2>
                     <table class="form-table" role="presentation">
                         <tr>
-                            <th scope="row"><?php esc_html_e('Tipo', 'intelindev'); ?></th>
+                            <th scope="row"><?php esc_html_e('Type', 'pswpt'); ?></th>
                             <td>
                                 <?php
                                 $cta_type = (string) ($opts['cta_type'] ?? 'none');
                                 $types = [
-                                    'none'  => __('Sin CTA', 'intelindev'),
-                                    'page'  => __('Ir a una página del sitio', 'intelindev'),
-                                    'url'   => __('Ir a una URL', 'intelindev'),
-                                    'modal' => __('Abrir un modal', 'intelindev'),
+                                    'none'  => __('No CTA', 'pswpt'),
+                                    'page'  => __('Go to a site page', 'pswpt'),
+                                    'url'   => __('Go to a URL', 'pswpt'),
+                                    'modal' => __('Open a modal', 'pswpt'),
                                 ];
                                 foreach ($types as $value => $label) :
                                 ?>
-                                    <label class="intelindev-radio-row">
-                                        <input type="radio" name="intelindev_header_settings[cta_type]" value="<?php echo esc_attr($value); ?>"<?php checked($cta_type, $value); ?> />
+                                    <label class="pswpt-radio-row">
+                                        <input type="radio" name="pswpt_header_settings[cta_type]" value="<?php echo esc_attr($value); ?>"<?php checked($cta_type, $value); ?> />
                                         <?php echo esc_html($label); ?>
                                     </label>
                                 <?php endforeach; ?>
@@ -518,60 +518,60 @@ function intelindev_header_settings_page_html() {
                         </tr>
 
                         <tr data-show-if="<?php echo esc_attr($cta_if); ?>=page">
-                            <th scope="row"><label for="intelindev_cta_page_id"><?php esc_html_e('Página', 'intelindev'); ?></label></th>
+                            <th scope="row"><label for="pswpt_cta_page_id"><?php esc_html_e('Page', 'pswpt'); ?></label></th>
                             <td>
                                 <?php
                                 wp_dropdown_pages([
-                                    'name'              => 'intelindev_header_settings[cta_page_id]',
-                                    'id'                => 'intelindev_cta_page_id',
+                                    'name'              => 'pswpt_header_settings[cta_page_id]',
+                                    'id'                => 'pswpt_cta_page_id',
                                     'selected'          => (int) ($opts['cta_page_id'] ?? 0),
-                                    'show_option_none'  => __('— Seleccionar —', 'intelindev'),
+                                    'show_option_none'  => __('— Select —', 'pswpt'),
                                     'option_none_value' => 0,
                                     'post_status'       => 'publish',
                                 ]);
                                 ?>
-                                <p class="description"><?php esc_html_e('La URL y el título se toman de la página y cambian solos según el idioma (slug y título traducidos de la página).', 'intelindev'); ?></p>
+                                <p class="description"><?php esc_html_e('The URL and title are taken from the page and change automatically per language (the page\'s translated slug and title).', 'pswpt'); ?></p>
                             </td>
                         </tr>
 
                         <tr data-show-if="<?php echo esc_attr($cta_if); ?>=url">
-                            <th scope="row"><label for="intelindev_cta_url"><?php esc_html_e('URL', 'intelindev'); ?></label></th>
+                            <th scope="row"><label for="pswpt_cta_url"><?php esc_html_e('URL', 'pswpt'); ?></label></th>
                             <td>
-                                <input type="url" id="intelindev_cta_url" name="intelindev_header_settings[cta_url]" value="<?php echo esc_attr((string) ($opts['cta_url'] ?? '')); ?>" class="regular-text" placeholder="https://..." />
-                                <p class="description"><?php esc_html_e('Debe empezar con http:// o https://.', 'intelindev'); ?></p>
+                                <input type="url" id="pswpt_cta_url" name="pswpt_header_settings[cta_url]" value="<?php echo esc_attr((string) ($opts['cta_url'] ?? '')); ?>" class="regular-text" placeholder="https://..." />
+                                <p class="description"><?php esc_html_e('Must start with http:// or https://.', 'pswpt'); ?></p>
                             </td>
                         </tr>
 
                         <tr data-show-if="<?php echo esc_attr($cta_if); ?>!=none">
-                            <th scope="row"><?php esc_html_e('Estilo del botón', 'intelindev'); ?></th>
+                            <th scope="row"><?php esc_html_e('Button style', 'pswpt'); ?></th>
                             <td>
                                 <?php $cta_style = (string) ($opts['cta_style'] ?? 'text'); ?>
-                                <label style="margin-right:16px;"><input type="radio" name="intelindev_header_settings[cta_style]" value="text"<?php checked($cta_style, 'text'); ?> /> <?php esc_html_e('Píldora con texto', 'intelindev'); ?></label>
-                                <label><input type="radio" name="intelindev_header_settings[cta_style]" value="icon"<?php checked($cta_style, 'icon'); ?> /> <?php esc_html_e('Cuadrado con ícono (el texto queda como etiqueta accesible)', 'intelindev'); ?></label>
+                                <label style="margin-right:16px;"><input type="radio" name="pswpt_header_settings[cta_style]" value="text"<?php checked($cta_style, 'text'); ?> /> <?php esc_html_e('Pill with text', 'pswpt'); ?></label>
+                                <label><input type="radio" name="pswpt_header_settings[cta_style]" value="icon"<?php checked($cta_style, 'icon'); ?> /> <?php esc_html_e('Square with icon (the text is kept as an accessible label)', 'pswpt'); ?></label>
                             </td>
                         </tr>
                         <?php
-                        intelindev_admin_lang_text_fields($option, 'cta_text', __('Texto del botón (%s)', 'intelindev'), $opts, __('Si un idioma queda vacío se usa el del idioma por defecto. Con tipo "página", vacío = título de la página; con estilo ícono, vacío = "Contáctanos" (clave cta.icon_label).', 'intelindev'), $cta_if . '!=none');
-                        intelindev_admin_lang_text_fields($option, 'cta_modal_title', __('Título del modal (%s)', 'intelindev'), $opts, '', $cta_if . '=modal');
+                        pswpt_admin_lang_text_fields($option, 'cta_text', __('Button text (%s)', 'pswpt'), $opts, __('If a language is empty, the default language\'s is used. With type "page", empty = page title; with icon style, empty = "Contact us" (key cta.icon_label).', 'pswpt'), $cta_if . '!=none');
+                        pswpt_admin_lang_text_fields($option, 'cta_modal_title', __('Modal title (%s)', 'pswpt'), $opts, '', $cta_if . '=modal');
                         ?>
                         <tr data-show-if="<?php echo esc_attr($cta_if); ?>=modal">
-                            <th scope="row"><label for="intelindev_cta_modal_content"><?php esc_html_e('Contenido del modal', 'intelindev'); ?></label></th>
+                            <th scope="row"><label for="pswpt_cta_modal_content"><?php esc_html_e('Modal content', 'pswpt'); ?></label></th>
                             <td>
-                                <textarea id="intelindev_cta_modal_content" name="intelindev_header_settings[cta_modal_content]" rows="10" class="large-text code" spellcheck="false"><?php echo esc_textarea((string) ($opts['cta_modal_content'] ?? '')); ?></textarea>
-                                <p class="description"><?php esc_html_e('Acepta el script de embed de un CRM (GoHighLevel, HubSpot…), el HTML de un formulario o un shortcode. Se carga recién cuando el visitante abre el modal, así no afecta la velocidad del sitio.', 'intelindev'); ?></p>
+                                <textarea id="pswpt_cta_modal_content" name="pswpt_header_settings[cta_modal_content]" rows="10" class="large-text code" spellcheck="false"><?php echo esc_textarea((string) ($opts['cta_modal_content'] ?? '')); ?></textarea>
+                                <p class="description"><?php esc_html_e('Accepts a CRM embed script (GoHighLevel, HubSpot…), form HTML or a shortcode. It only loads when the visitor opens the modal, so it does not affect site speed.', 'pswpt'); ?></p>
                             </td>
                         </tr>
                     </table>
 
                     <div data-show-if="<?php echo esc_attr($cta_if); ?>!=none">
-                        <h2><?php esc_html_e('Colores del CTA', 'intelindev'); ?></h2>
-                        <?php intelindev_admin_color_table($option, array_map(fn($def) => $def['label'], $matrix['cta']), $opts, $color_columns); ?>
+                        <h2><?php esc_html_e('CTA colors', 'pswpt'); ?></h2>
+                        <?php pswpt_admin_color_table($option, array_map(fn($def) => $def['label'], $matrix['cta']), $opts, $color_columns); ?>
                     </div>
                 </div>
 
             </div>
 
-            <?php submit_button(__('Guardar', 'intelindev')); ?>
+            <?php submit_button(__('Save', 'pswpt')); ?>
         </form>
     </div>
     <?php

@@ -15,7 +15,7 @@
 - DM Serif Text 400 · 20px · lh 23px × 3 — ej. Cómo elegir el partner ideal de desarrollo de soft
 - DM Sans 300 · 50px · lh 48px × 2 — ej. Nos encantaría hablar de tus ideas
 - DM Serif Text 400 · 50px · lh 48px × 2 — ej. Tendencias, tecnología y estrategía
-- DM Sans 400 · 20px · lh 26px × 2 — ej. Trabajar con Intelindev fue una experiencia increí
+- DM Sans 400 · 20px · lh 26px × 2 — ej. Trabajar con pswpt fue una experiencia increí
 - DM Sans 300 · 60px · lh 57px × 1 — ej. Construimos el futuro digital de tu empresa
 - DM Serif Text 400 · 60px · lh 57px × 1 — ej. Súmate a nuestras novedades
 - DM Sans 700 · 150px · lh 143px × 1 — ej. +25
@@ -27,7 +27,7 @@
 - #a5d9e4 × 23 — ej. fondo "Ellipse 3"
 - #312f30 × 8 — ej. fondo "Rectangle 81"
 - #611711 × 7 — ej. fondo "Rectangle 76"
-- #1b1a1a × 5 — ej. texto "En Intelindev desarrollamos plataformas digitales, productos tecnológicos y sistemas a medida que optimizan procesos, aumentan la eficiencia y generan crecimiento real."
+- #1b1a1a × 5 — ej. texto "En pswpt desarrollamos plataformas digitales, productos tecnológicos y sistemas a medida que optimizan procesos, aumentan la eficiencia y generan crecimiento real."
 - gradient_linear(#232122 → #5f1a14) × 4 — ej. gradiente "Rectangle 50"
 - #2d2b2c × 3 — ej. fondo "Rectangle 89"
 - #d9d9d9 × 2 — ej. fondo "Rectangle 80"

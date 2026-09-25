@@ -8,8 +8,8 @@ get_header();
       <?php
       // Las páginas armadas con componentes traen su propio hero (con el <h1>);
       // las demás reciben el hero interior con el título sobre la imagen destacada.
-      if (!intelindev_content_starts_with_hero()) {
-        intelindev_render_interior_hero(get_the_title());
+      if (!pswpt_content_starts_with_hero()) {
+        pswpt_render_interior_hero(get_the_title());
       }
       ?>
       <div class="entry-content"><?php the_content(); ?></div>

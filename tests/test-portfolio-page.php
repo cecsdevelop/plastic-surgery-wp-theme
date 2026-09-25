@@ -1,6 +1,6 @@
 <?php
 /**
- * Página de Portafolio (archive-intelindev_project.php + single): la "Página
+ * Página de Portafolio (archive-pswpt_project.php + single): la "Página
  * de Portafolio" de Ajustes → Lectura arma el listado ([projects layout="cards"]
  * con "Ver más"), su URL redirige al archivo; el detalle lleva la ficha
  * "Información del proyecto" y la galería del campo gallery.
@@ -8,19 +8,19 @@
  *   /Applications/MAMP/bin/php/php8.5.2/bin/php tests/test-portfolio-page.php
  *
  * Crea una página, un proyecto y una imagen temporales, cambia
- * page_for_intelindev_project y lo restaura al final.
+ * page_for_pswpt_project y lo restaura al final.
  */
-use IntelindevInit\Portfolio\PortfolioController;
+use pswptInit\Portfolio\PortfolioController;
 
-$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/Intelindev/wp-admin/'; define('WP_USE_THEMES', false); define('WP_ADMIN', true);
+$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/WPfemsculpt/wp-admin/'; define('WP_USE_THEMES', false); define('WP_ADMIN', true);
 require dirname(__DIR__, 4) . '/wp-load.php';
 require_once ABSPATH . 'wp-admin/includes/admin.php';
 wp_set_current_user(1);
 
 $fails = 0;
 function check(string $label, bool $ok): void { global $fails; echo ($ok ? "  ok   " : "  FAIL ") . "$label\n"; if (!$ok) $fails++; }
-$curl = fn(string $path) => (string) shell_exec('curl -s ' . escapeshellarg('http://localhost:8888/Intelindev' . $path));
-$head = fn(string $path) => (string) shell_exec('curl -s -o /dev/null -w "%{http_code} %{redirect_url}" ' . escapeshellarg('http://localhost:8888/Intelindev' . $path));
+$curl = fn(string $path) => (string) shell_exec('curl -s ' . escapeshellarg('http://localhost:8888/WPfemsculpt' . $path));
+$head = fn(string $path) => (string) shell_exec('curl -s -o /dev/null -w "%{http_code} %{redirect_url}" ' . escapeshellarg('http://localhost:8888/WPfemsculpt' . $path));
 
 $ctrl = new PortfolioController();
 $OPTION = $ctrl->archive_page_option();
@@ -30,8 +30,8 @@ $created = []; $att = 0;
 try {
     echo "1) página, proyecto e imagen temporales\n";
     $page = wp_insert_post(['post_type' => 'page', 'post_title' => 'Portafolio Test', 'post_name' => 'test-portafolio-pagina', 'post_status' => 'publish']);
-    update_post_meta($page, INTELINDEV_POST_TRANSLATED_TITLE_META, ['en' => 'Portfolio Test']);
-    update_post_meta($page, INTELINDEV_POST_TRANSLATED_CONTENT_META, [
+    update_post_meta($page, pswpt_POST_TRANSLATED_TITLE_META, ['en' => 'Portfolio Test']);
+    update_post_meta($page, pswpt_POST_TRANSLATED_CONTENT_META, [
         'es' => ['[projects layout="cards" limit="-1" per_page="1" eyebrow="Nuestros Proyectos" title="Soluciones *test*"]'],
         'en' => ['[projects layout="cards" limit="-1" per_page="1" eyebrow="Our Projects" title="Solutions *test*"]'],
     ]);
@@ -41,9 +41,9 @@ try {
     require_once ABSPATH . 'wp-admin/includes/image.php';
     wp_update_attachment_metadata($att, wp_generate_attachment_metadata($att, $up['file']));
     $prj = wp_insert_post(['post_type' => PortfolioController::POST_TYPE, 'post_title' => 'Proyecto Test Página', 'post_name' => 'proyecto-test-pagina', 'post_status' => 'publish', 'menu_order' => -50]);
-    update_post_meta($prj, INTELINDEV_POST_TRANSLATED_TITLE_META, ['en' => 'Test Page Project']);
-    update_post_meta($prj, INTELINDEV_POST_TRANSLATED_EXCERPT_META, ['es' => 'Resumen proyecto', 'en' => 'Project summary']);
-    update_post_meta($prj, INTELINDEV_POST_TRANSLATED_CONTENT_META, ['es' => ['<h2>Problema</h2><p>Detalle ES</p>'], 'en' => ['<h2>Problem</h2><p>Detail EN</p>']]);
+    update_post_meta($prj, pswpt_POST_TRANSLATED_TITLE_META, ['en' => 'Test Page Project']);
+    update_post_meta($prj, pswpt_POST_TRANSLATED_EXCERPT_META, ['es' => 'Resumen proyecto', 'en' => 'Project summary']);
+    update_post_meta($prj, pswpt_POST_TRANSLATED_CONTENT_META, ['es' => ['<h2>Problema</h2><p>Detalle ES</p>'], 'en' => ['<h2>Problem</h2><p>Detail EN</p>']]);
     update_post_meta($prj, $ctrl->meta_key('client'), 'Cliente Test'); update_post_meta($prj, $ctrl->meta_key('year'), 2025);
     update_post_meta($prj, $ctrl->meta_key('period'), ['es' => '1 año', 'en' => '1 year']); update_post_meta($prj, $ctrl->meta_key('gallery'), [$att]);
     set_post_thumbnail($prj, $att);
@@ -53,10 +53,10 @@ try {
 
     echo "2) archivo con página (curl)\n";
     $es = $curl('/portafolio/');
-    check('ES: hero con el título de la página, cabecera, tarjeta con foto y excerpt, resto oculto y botón "Ver más proyectos"', strpos($es, '<h1 class="hero__title">Portafolio Test</h1>') !== false && strpos($es, '<h2 class="projects__title">Soluciones <em>test</em></h2>') !== false && preg_match('#<article class="tile"><a class="tile__link" href="http://localhost:8888/Intelindev/portafolio/proyecto-test-pagina/"><img [^>]*class="tile__image wp-post-image"#', $es) === 1 && strpos($es, '<p class="tile__excerpt"><span>Resumen proyecto</span></p>') !== false && strpos($es, '<article class="tile" hidden>') !== false && strpos($es, 'data-tiles-more>Ver más proyectos</button>') !== false);
+    check('ES: hero con el título de la página, cabecera, tarjeta con foto y excerpt, resto oculto y botón "Ver más proyectos"', strpos($es, '<h1 class="hero__title">Portafolio Test</h1>') !== false && strpos($es, '<h2 class="projects__title">Soluciones <em>test</em></h2>') !== false && preg_match('#<article class="tile"><a class="tile__link" href="http://localhost:8888/WPfemsculpt/portafolio/proyecto-test-pagina/"><img [^>]*class="tile__image wp-post-image"#', $es) === 1 && strpos($es, '<p class="tile__excerpt"><span>Resumen proyecto</span></p>') !== false && strpos($es, '<article class="tile" hidden>') !== false && strpos($es, 'data-tiles-more>Ver más proyectos</button>') !== false);
     $en = $curl('/en/portfolio/');
     check('EN: título, tarjeta y botón traducidos', strpos($en, '<h1 class="hero__title">Portfolio Test</h1>') !== false && strpos($en, '<h3 class="tile__name">Test Page Project</h3>') !== false && strpos($en, 'data-tiles-more>See more projects</button>') !== false);
-    check('la URL propia de la página redirige 301 al archivo', $head('/test-portafolio-pagina/') === '301 http://localhost:8888/Intelindev/portafolio/');
+    check('la URL propia de la página redirige 301 al archivo', $head('/test-portafolio-pagina/') === '301 http://localhost:8888/WPfemsculpt/portafolio/');
 
     echo "3) archivo sin página\n";
     delete_option($OPTION);

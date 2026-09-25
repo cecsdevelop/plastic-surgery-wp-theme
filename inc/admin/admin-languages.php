@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) exit;
 // Admin page for managing active languages
 add_action('admin_menu', function() {
     add_theme_page(
-        __('Idiomas del sitio', 'intelindev'),
-        __('Idiomas', 'intelindev'),
+        __('Site languages', 'pswpt'),
+        __('Languages', 'pswpt'),
         'manage_options',
         'idml-languages',
         'idml_languages_admin_page'
@@ -35,19 +35,19 @@ function idml_languages_admin_page() {
     }
     ?>
     <div class="wrap">
-        <h1><?php _e('Idiomas activos del sitio', 'intelindev'); ?></h1>
+        <h1><?php _e('Active site languages', 'pswpt'); ?></h1>
         <form method="post">
             <?php wp_nonce_field('idml_languages_save', 'idml_languages_nonce'); ?>
             <table class="form-table">
                 <tr>
-                    <th><label for="idml_languages">Códigos de idioma (ej: es,en,pt)</label></th>
+                    <th><label for="idml_languages"><?php esc_html_e('Language codes (e.g. es,en,pt)', 'pswpt'); ?></label></th>
                     <td>
                         <input type="text" id="idml_languages" name="idml_languages" value="<?php echo esc_attr(implode(',', $langs)); ?>" class="regular-text" />
-                        <p class="description">Separados por coma. Cada idioma agrega una columna en Apariencia → Traducciones.</p>
+                        <p class="description"><?php esc_html_e('Comma separated. Each language adds a column in Appearance → Translations.', 'pswpt'); ?></p>
                     </td>
                 </tr>
             </table>
-            <p class="submit"><input type="submit" class="button-primary" value="Guardar cambios" /></p>
+            <p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e('Save changes', 'pswpt'); ?>" /></p>
         </form>
     </div>
     <?php

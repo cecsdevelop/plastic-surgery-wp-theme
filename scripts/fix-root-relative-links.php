@@ -1,16 +1,16 @@
 <?php
 /**
- * Contenido con rutas de un subdirectorio de instalación ("/Intelindev/…",
+ * Contenido con rutas de un subdirectorio de instalación ("/pswpt/…",
  * escritas cuando el sitio corría en local) → relativas a la raíz ("/…").
  * Desde content-filters.php el theme antepone el subdirectorio al imprimir,
  * así el mismo contenido sirve en local, staging y producción.
  *
  * Toca post_content, postmeta, options y termmeta (serializados incluidos:
  * se pasa por get_option / update_post_meta y afines). No toca URLs absolutas
- * (http://…/Intelindev/…), que ya reescribe la herramienta de migración.
+ * (http://…/pswpt/…), que ya reescribe la herramienta de migración.
  *
- *   php wp-content/themes/Intelindev/scripts/fix-root-relative-links.php --prefix=/Intelindev --dry-run
- *   php wp-content/themes/Intelindev/scripts/fix-root-relative-links.php --prefix=/Intelindev
+ *   php wp-content/themes/pswpt/scripts/fix-root-relative-links.php --prefix=/pswpt --dry-run
+ *   php wp-content/themes/pswpt/scripts/fix-root-relative-links.php --prefix=/pswpt
  */
 $opts   = getopt('', ['prefix:', 'dry-run']);
 $prefix = '/' . trim((string) ($opts['prefix'] ?? ''), '/');

@@ -10,7 +10,7 @@
 - DM Sans 400 · 16px · lh 24px × 3 — ej. Construimos soluciones bajo estándares de arquitec
 - DM Sans 400 · 14.399999618530273px · lh 22px × 2 — ej. Software Development & SEO Services
 - DM Sans 600 · 68.66000366210938px · lh 69px · title · center × 1 — ej. Desarrollo de Software
-- DM Sans 400 · 16px · lh 24px · justified × 1 — ej. En Intelindev desarrollamos soluciones digitales a
+- DM Sans 400 · 16px · lh 24px · justified × 1 — ej. En pswpt desarrollamos soluciones digitales a
 - DM Sans 400 · 14.399999618530273px · lh 22px · right × 1 — ej. Terms & Conditions | Privacy Policy
 
 ## Colores

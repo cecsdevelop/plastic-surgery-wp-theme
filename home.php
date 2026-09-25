@@ -12,9 +12,9 @@ $blog_page = $blog_page instanceof WP_Post && $blog_page->post_status === 'publi
 ?>
 <main class="site-main">
   <?php if ($blog_page) : ?>
-    <?php intelindev_render_archive_page($blog_page); ?>
+    <?php pswpt_render_archive_page($blog_page); ?>
   <?php else : ?>
-    <?php intelindev_render_interior_hero(get_bloginfo('name'), '', false); ?>
+    <?php pswpt_render_interior_hero(get_bloginfo('name'), '', false); ?>
     <div class="entry-content"><?php echo do_shortcode('[latest_posts layout="cards"]'); ?></div>
   <?php endif; ?>
 </main>

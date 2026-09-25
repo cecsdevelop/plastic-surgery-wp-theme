@@ -1,6 +1,6 @@
 <?php
 /**
- * Secciones estáticas del diseño como Componentes (CPT intelindev_component):
+ * Secciones estáticas del diseño como Componentes (CPT pswpt_component):
  * modificadores :html/:url/:icon, defaults anidados y render de las 6
  * plantillas (hero, about, stats, cta, contact, newsletter, intro, process,
  * pillars) y de los shortcodes del módulo Sections en ES/EN.
@@ -11,23 +11,23 @@
  *
  *   /Applications/MAMP/bin/php/php8.5.2/bin/php tests/test-sections.php
  */
-use IntelindevInit\Components\ComponentsController as C;
+use pswptInit\Components\ComponentsController as C;
 
-$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/Intelindev/'; define('WP_USE_THEMES', false);
+$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/WPfemsculpt/'; define('WP_USE_THEMES', false);
 require dirname(__DIR__, 4) . '/wp-load.php';
 wp_set_current_user(1);
 
 $fails = 0;
 function check(string $label, bool $ok): void { global $fails; echo ($ok ? "  ok   " : "  FAIL ") . "$label\n"; if (!$ok) $fails++; }
 // Los shortcodes se registran en init (subproceso limpio por render).
-$render = fn(string $code, string $lang = 'es') => trim((string) shell_exec(PHP_BINARY . ' -r ' . escapeshellarg('$_SERVER["HTTP_HOST"]="localhost:8888"; $_SERVER["REQUEST_URI"]="/Intelindev/' . ($lang === 'es' ? '' : $lang . '/') . '"; define("WP_USE_THEMES",false); require "' . ABSPATH . 'wp-load.php"; echo do_shortcode(' . var_export($code, true) . ');') . ' 2>/dev/null'));
+$render = fn(string $code, string $lang = 'es') => trim((string) shell_exec(PHP_BINARY . ' -r ' . escapeshellarg('$_SERVER["HTTP_HOST"]="localhost:8888"; $_SERVER["REQUEST_URI"]="/WPfemsculpt/' . ($lang === 'es' ? '' : $lang . '/') . '"; define("WP_USE_THEMES",false); require "' . ABSPATH . 'wp-load.php"; echo do_shortcode(' . var_export($code, true) . ');') . ' 2>/dev/null'));
 
 $c = new C();
 $fixtures = glob(__DIR__ . '/fixtures/components/*.html');
 $created = [];
 try {
     echo "1) fixtures → componentes temporales\n";
-    check('12 plantillas de referencia', count($fixtures) === 12);
+    check('13 plantillas de referencia', count($fixtures) === 13);
     foreach ($fixtures as $file) {
         $slug = 'test-' . basename($file, '.html');
         $id = wp_insert_post(['post_type' => C::POST_TYPE, 'post_title' => $slug, 'post_name' => $slug, 'post_status' => 'publish']);
@@ -55,7 +55,7 @@ try {
     check('cta: botón con etiqueta por defecto del diccionario y contenedor de imagen', strpos($cta, 'href="#contacto">Contáctanos</a>') !== false && strpos($cta, '<div class="cta__media">') !== false && strpos($cta, 'section section--surface') !== false);
     check('cta EN: etiqueta traducida', strpos($render('[test-cta title="T"]', 'en'), '>Contact us</a>') !== false);
     $contact = $render('[test-contact title="Hola"]<p>inner</p>[/test-contact]');
-    check('contact: eyebrow del diccionario, marca de agua y contenido envolvente', strpos($contact, '<span class="eyebrow">Contacto</span>') !== false && strpos($contact, 'data-watermark="Intelindev"') !== false && strpos($contact, '<div class="contact__form"><p>inner</p></div>') !== false);
+    check('contact: eyebrow del diccionario, marca de agua y contenido envolvente', strpos($contact, '<span class="eyebrow">Contacto</span>') !== false && strpos($contact, 'data-watermark="pswpt"') !== false && strpos($contact, '<div class="contact__form"><p>inner</p></div>') !== false);
     $news = $render('[test-newsletter]', 'en');
     check('newsletter EN: título, texto, etiqueta, placeholder y botón del diccionario', strpos($news, 'Join our newsletter') !== false && strpos($news, 'placeholder="Enter your email address"') !== false && strpos($news, '>Email</label>') !== false && strpos($news, '>Subscribe</button>') !== false && strpos($news, 'type="email"') !== false);
 
@@ -65,29 +65,24 @@ try {
     require_once ABSPATH . 'wp-admin/includes/image.php';
     $att = wp_insert_attachment(['post_mime_type' => 'image/png', 'post_title' => 'test logo', 'post_status' => 'inherit'], $up['file']);
     wp_update_attachment_metadata($att, wp_generate_attachment_metadata($att, $up['file']));
-    $cli = wp_insert_post(['post_type' => 'intelindev_client', 'post_title' => 'Cliente Test', 'post_name' => 'cliente-test-sections', 'post_status' => 'publish', 'menu_order' => -1]);
-    set_post_thumbnail($cli, $att); update_post_meta($cli, '_intelindev_client_url', 'https://cliente.test/');
+    $cli = wp_insert_post(['post_type' => 'pswpt_client', 'post_title' => 'Cliente Test', 'post_name' => 'cliente-test-sections', 'post_status' => 'publish', 'menu_order' => -1]);
+    set_post_thumbnail($cli, $att); update_post_meta($cli, '_pswpt_client_url', 'https://cliente.test/');
     $created[] = $cli; $created[] = $att;
     $clients = $render('[clients eyebrow="Confían" title="Nuestros *clientes*"]', 'en');
     check('clients: cabecera con acento, lista con logo enlazado', strpos($clients, '<section class="clients">') !== false && strpos($clients, '<h2 class="clients__title">Nuestros <em>clientes</em></h2>') !== false && strpos($clients, 'aria-label="They trust us"') !== false && preg_match('#<li class="clients__item"><a href="https://cliente\.test/" target="_blank" rel="noopener"><img[^>]*alt="Cliente Test"#', $clients) === 1);
 
-    echo "5) [services] [projects] [latest_posts] [testimonials]\n";
-    $svc = wp_insert_post(['post_type' => 'intelindev_service', 'post_title' => 'Servicio Test', 'post_name' => 'servicio-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
-    update_post_meta($svc, INTELINDEV_POST_TRANSLATED_EXCERPT_META, ['es' => 'Resumen test', 'en' => 'Test summary']); update_post_meta($svc, INTELINDEV_POST_TRANSLATED_TITLE_META, ['en' => 'Test Service']);
-    $prj = wp_insert_post(['post_type' => 'intelindev_project', 'post_title' => 'Proyecto Test', 'post_name' => 'proyecto-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
-    update_post_meta($prj, INTELINDEV_POST_TRANSLATED_EXCERPT_META, ['es' => 'Excerpt proyecto']);
+    echo "5) [projects] [latest_posts] [testimonials]\n";
+    $prj = wp_insert_post(['post_type' => 'pswpt_project', 'post_title' => 'Proyecto Test', 'post_name' => 'proyecto-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
+    update_post_meta($prj, pswpt_POST_TRANSLATED_EXCERPT_META, ['es' => 'Excerpt proyecto']);
     $pst = wp_insert_post(['post_type' => 'post', 'post_title' => 'Entrada Test Secciones', 'post_name' => 'entrada-test-sections', 'post_status' => 'publish']);
-    update_post_meta($pst, INTELINDEV_POST_TRANSLATED_EXCERPT_META, ['es' => 'Excerpt entrada']);
-    $tst = wp_insert_post(['post_type' => 'intelindev_testimony', 'post_title' => 'Ana Test', 'post_name' => 'ana-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
-    update_post_meta($tst, INTELINDEV_POST_TRANSLATED_CONTENT_META, ['es' => ['<p>Cita de prueba.</p>'], 'en' => ['<p>Test quote.</p>']]); update_post_meta($tst, '_intelindev_testimony_role', ['es' => 'CEO']); update_post_meta($tst, '_intelindev_testimony_company', 'Acme');
-    array_push($created, $svc, $prj, $pst, $tst);
-    $sv = $render('[services eyebrow="Nuestros servicios" title="Soluciones *para escalar*" limit="1"]');
-    check('services: cabecera centrada, tarjeta con ícono del theme, título, excerpt y "Conocer más"', strpos($sv, '<h2 class="services__title">Soluciones <em>para escalar</em></h2>') !== false && strpos($sv, '/assets/img/icons/code.svg') !== false && strpos($sv, '>Servicio Test</a></h3><p class="services__excerpt">Resumen test</p>') !== false && strpos($sv, 'class="services__more" href="http://localhost:8888/Intelindev/servicios/servicio-test-sections/">Conocer más') !== false);
-    check('services EN: título y "Learn more" traducidos', strpos($render('[services limit="1"]', 'en'), '>Test Service</a>') !== false && strpos($render('[services limit="1"]', 'en'), 'Learn more<') !== false);
+    update_post_meta($pst, pswpt_POST_TRANSLATED_EXCERPT_META, ['es' => 'Excerpt entrada']);
+    $tst = wp_insert_post(['post_type' => 'pswpt_testimony', 'post_title' => 'Ana Test', 'post_name' => 'ana-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
+    update_post_meta($tst, pswpt_POST_TRANSLATED_CONTENT_META, ['es' => ['<p>Cita de prueba.</p>'], 'en' => ['<p>Test quote.</p>']]); update_post_meta($tst, '_pswpt_testimony_role', ['es' => 'CEO']); update_post_meta($tst, '_pswpt_testimony_company', 'Acme');
+    array_push($created, $prj, $pst, $tst);
     $pj = $render('[projects title="Proyectos" limit="1"]');
     check('projects: scroller con flechas y tarjeta con nombre + excerpt', strpos($pj, 'data-scroll-prev') !== false && strpos($pj, '<ul class="projects__list" data-scroller>') !== false && strpos($pj, '<span class="projects__name">Proyecto Test</span><span class="projects__excerpt">Excerpt proyecto</span>') !== false);
     $lp = $render('[latest_posts title="Visión digital" limit="1"]');
-    check('latest_posts: título serif, ítem con toggle vertical, tarjeta con fecha, excerpt y "Leer más"', strpos($lp, '<h2 class="posts__title accent">Visión digital</h2>') !== false && strpos($lp, '<span class="posts__vertical">Entrada Test Secciones</span>') !== false && strpos($lp, '<time class="posts__date"') !== false && strpos($lp, '<p class="posts__excerpt">Excerpt entrada</p>') !== false && strpos($lp, 'posts__more" href="http://localhost:8888/Intelindev/entrada-test-sections/">Leer más</a>') !== false);
+    check('latest_posts: título serif, ítem con toggle vertical, tarjeta con fecha, excerpt y "Leer más"', strpos($lp, '<h2 class="posts__title accent">Visión digital</h2>') !== false && strpos($lp, '<span class="posts__vertical">Entrada Test Secciones</span>') !== false && strpos($lp, '<time class="posts__date"') !== false && strpos($lp, '<p class="posts__excerpt">Excerpt entrada</p>') !== false && strpos($lp, 'posts__more" href="http://localhost:8888/WPfemsculpt/entrada-test-sections/">Leer más</a>') !== false);
     $tm = $render('[testimonials eyebrow="Clientes" value="+25" label="clientes" limit="1"]');
     check('testimonials: cifra, etiqueta, flechas y tarjeta con cita y autor · cargo · empresa', strpos($tm, '<p class="testimonials__value">+25</p><p class="testimonials__label">clientes</p>') !== false && strpos($tm, 'scroller-arrow--on-dark') !== false && strpos($tm, '<blockquote class="testimonials__quote"><p>Cita de prueba.</p></blockquote><figcaption class="testimonials__author"><strong>Ana Test</strong><span>CEO · Acme</span></figcaption>') !== false);
     check('testimonials EN: cita traducida', strpos($render('[testimonials limit="1"]', 'en'), '<p>Test quote.</p>') !== false);
@@ -99,18 +94,13 @@ try {
     check('process: ancla framework, eyebrow del diccionario (EN), pasos y botón', strpos($proc, 'id="framework"') !== false && strpos($proc, '<span class="eyebrow">Work methodology</span>') !== false && strpos($proc, '<h3 class="process__step-title">Descubrimiento</h3><p>Analizamos</p>') !== false && strpos($proc, 'href="#contacto">Contáctanos</a>') !== false);
     $pil = $render('[test-pillars title="Pilares" item1_title="Excelencia" item1_text="Calidad" item6_title="Acompañamiento" item6_text="Guía"]');
     check('pillars: ancla philosophy, 6 ítems con íconos del theme', strpos($pil, 'id="philosophy"') !== false && substr_count($pil, 'class="pillars__item"') === 6 && strpos($pil, '/assets/img/icons/mobile-app.svg') !== false && strpos($pil, '<h3 class="pillars__name">Acompañamiento</h3><p>Guía</p>') !== false);
-    $mem = wp_insert_post(['post_type' => 'intelindev_member', 'post_title' => 'Persona Test', 'post_name' => 'persona-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
-    update_post_meta($mem, '_intelindev_member_role', ['es' => 'Cargo ES', 'en' => 'Role EN']); update_post_meta($mem, '_intelindev_member_linkedin', 'https://www.linkedin.com/in/test');
+    $mem = wp_insert_post(['post_type' => 'pswpt_member', 'post_title' => 'Persona Test', 'post_name' => 'persona-test-sections', 'post_status' => 'publish', 'menu_order' => -5]);
+    update_post_meta($mem, '_pswpt_member_role', ['es' => 'Cargo ES', 'en' => 'Role EN']); update_post_meta($mem, '_pswpt_member_linkedin', 'https://www.linkedin.com/in/test');
     $created[] = $mem;
     $team = $render('[team title="El *talento*" limit="1"]', 'en');
     check('team: eyebrow del diccionario, título serif, tarjeta con nombre enlazado a LinkedIn y cargo EN', strpos($team, 'id="team"') !== false && strpos($team, '<span class="eyebrow">Our team</span>') !== false && strpos($team, '<h2 class="team__title accent">El <em>talento</em></h2>') !== false && strpos($team, '<a href="https://www.linkedin.com/in/test" target="_blank" rel="noopener">Persona Test</a></strong><span class="team__role">Role EN</span>') !== false);
 
-    echo "8) Servicios: [services layout=cards|list], [inner-video], [stack]\n";
-    $cards = $render('[services layout="cards" limit="1" eyebrow="Nuestros servicios" title="Soluciones *para escalar*"]');
-    check('cards: sección --cards, tarjeta con etiqueta, nombre h3, excerpt plegable, flecha y texto accesible', strpos($cards, '<section class="services section services--cards">') !== false && strpos($cards, '<div class="tiles">') !== false && strpos($cards, '<article class="tile"><a class="tile__link" href="http://localhost:8888/Intelindev/servicios/servicio-test-sections/">') !== false && strpos($cards, '<h3 class="tile__name">Servicio Test</h3><p class="tile__excerpt"><span>Resumen test</span></p><span class="tile__arrow" aria-hidden="true"></span><span class="screen-reader-text">Conocer más</span>') !== false);
-    check('cards: sin imagen destacada queda el marcador; sin tarjetas de ícono', strpos($cards, '<span class="tile__image"></span>') !== false && strpos($cards, 'services__card') === false);
-    $list = $render('[services layout="list" limit="1"]', 'en');
-    check('list EN: nav con aria-label del tipo y enlace traducido (sin aria-current fuera del detalle)', strpos($list, '<nav class="services-nav" aria-label="Services"><ul class="services-nav__list"><li class="services-nav__item"><a class="services-nav__link" href="http://localhost:8888/Intelindev/en/services/servicio-test-sections/">Test Service</a></li>') !== false && strpos($list, 'aria-current') === false);
+    echo "8) [inner-video], [stack]\n";
     check('embed_video: YouTube (watch/youtu.be/shorts) → iframe nocookie, Vimeo → player, mp4 → <video>, otro → vacío', strpos(C::embed_video('https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=1'), 'src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0"') !== false && strpos(C::embed_video('https://youtu.be/dQw4w9WgXcQ'), '/embed/dQw4w9WgXcQ') !== false && strpos(C::embed_video('https://youtube.com/shorts/dQw4w9WgXcQ'), '/embed/dQw4w9WgXcQ') !== false && strpos(C::embed_video('https://vimeo.com/76979871'), 'src="https://player.vimeo.com/video/76979871?dnt=1"') !== false && strpos(C::embed_video('https://x.test/clip.mp4'), '<video class="video__media" controls playsinline preload="metadata" src="https://x.test/clip.mp4">') !== false && C::embed_video('https://example.com/pagina') === '' && C::embed_video('javascript:alert(1)') === '');
     $vid = $render('[test-inner-video title="La confianza, *nuestro respaldo*" text="T" image="/wp-content/uploads/p.jpg" url="https://youtu.be/dQw4w9WgXcQ"]');
     check('inner-video: ancla why, eyebrow del diccionario, título con <em>, póster, play con etiqueta y <template> con el iframe', strpos($vid, '<section class="video section" id="why">') !== false && strpos($vid, '<span class="eyebrow">¿Por qué elegirnos?</span>') !== false && strpos($vid, '<h2 class="video__title">La confianza, <em>nuestro respaldo</em></h2>') !== false && strpos($vid, '<img class="video__poster" src="/wp-content/uploads/p.jpg"') !== false && strpos($vid, '<button class="video__play" type="button" aria-label="Reproducir video"></button>') !== false && strpos($vid, '<template><iframe class="video__media" src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0"') !== false);
@@ -124,7 +114,7 @@ try {
     check('cards: sección --cards, grilla con paso, 1 visible + 1 hidden, texto accesible "Ver proyecto" y botón "Ver más proyectos"', strpos($pc, '<section class="projects section projects--cards">') !== false && strpos($pc, '<div class="tiles" data-tiles-step="1">') !== false && substr_count($pc, '<article class="tile">') === 1 && substr_count($pc, '<article class="tile" hidden>') === 1 && strpos($pc, '<span class="screen-reader-text">Ver proyecto</span>') !== false && strpos($pc, '<p class="tiles__more"><button type="button" class="btn btn--primary btn--plus" data-tiles-more>Ver más proyectos</button></p>') !== false && strpos($pc, 'data-scroller') === false);
     $pc1 = $render('[projects layout="cards" limit="1" per_page="6"]', 'en');
     check('cards EN sin lote pendiente: sin botón; texto "View project"', strpos($pc1, 'data-tiles-more') === false && strpos($pc1, 'View project</span>') !== false && strpos($pc1, '" hidden>') === false);
-    $pf = new \IntelindevInit\Portfolio\PortfolioController();
+    $pf = new \pswptInit\Portfolio\PortfolioController();
     update_post_meta($prj, $pf->meta_key('client'), 'Acme'); update_post_meta($prj, $pf->meta_key('year'), 2024); update_post_meta($prj, $pf->meta_key('period'), ['es' => '6 meses', 'en' => '6 months']); update_post_meta($prj, $pf->meta_key('service'), ['es' => 'Frontend']); update_post_meta($prj, $pf->meta_key('url'), 'https://www.acme.test/');
     $info = $pf->info_html(get_post($prj), 'en');
     check('info_html EN: título serif del diccionario, año/periodo/cliente/servicio (fallback ES) y sitio enlazado sin protocolo', strpos($info, '<h2 class="project__info-title accent">Project information</h2><dl class="project__facts">') !== false && strpos($info, '<div class="project__fact"><dt>Year</dt><dd>2024</dd></div><div class="project__fact"><dt>Period</dt><dd>6 months</dd></div><div class="project__fact"><dt>Client</dt><dd>Acme</dd></div><div class="project__fact"><dt>Service</dt><dd>Frontend</dd></div>') !== false && strpos($info, '<dt>Website</dt><dd><a href="https://www.acme.test/" target="_blank" rel="noopener">acme.test</a></dd>') !== false && strpos($info, 'Sector') === false);
@@ -132,7 +122,7 @@ try {
 
     echo "10) Blog: [latest_posts layout=cards] fuera del índice\n";
     $lp = $render('[latest_posts layout="cards" limit="1" eyebrow="Nuevas noticias" title="*Tendencias* que impulsan"]');
-    check('cards: sección --cards, cabecera sans con <em>, tarjeta con fecha corta, título enlazado, excerpt y "+"; sin paginación fuera del índice', strpos($lp, '<section class="posts section posts--cards">') !== false && strpos($lp, '<h2 class="posts__title"><em>Tendencias</em> que impulsan</h2>') !== false && substr_count($lp, '<article class="post-card">') === 1 && preg_match('#<time class="post-card__date" datetime="[^"]+">[A-Z][a-z]+ \d\d, \d{4}</time>#', $lp) === 1 && strpos($lp, '<h3 class="post-card__title"><a href="http://localhost:8888/Intelindev/entrada-test-sections/">Entrada Test Secciones</a></h3><p class="post-card__excerpt">Excerpt entrada</p><a class="post-card__more" href="http://localhost:8888/Intelindev/entrada-test-sections/"><span class="screen-reader-text">Leer más</span></a>') !== false && strpos($lp, 'class="pagination"') === false);
+    check('cards: sección --cards, cabecera sans con <em>, tarjeta con fecha corta, título enlazado, excerpt y "+"; sin paginación fuera del índice', strpos($lp, '<section class="posts section posts--cards">') !== false && strpos($lp, '<h2 class="posts__title"><em>Tendencias</em> que impulsan</h2>') !== false && substr_count($lp, '<article class="post-card">') === 1 && preg_match('#<time class="post-card__date" datetime="[^"]+">[A-Z][a-z]+ \d\d, \d{4}</time>#', $lp) === 1 && strpos($lp, '<h3 class="post-card__title"><a href="http://localhost:8888/WPfemsculpt/entrada-test-sections/">Entrada Test Secciones</a></h3><p class="post-card__excerpt">Excerpt entrada</p><a class="post-card__more" href="http://localhost:8888/WPfemsculpt/entrada-test-sections/"><span class="screen-reader-text">Leer más</span></a>') !== false && strpos($lp, 'class="pagination"') === false);
 
     echo "11) Contacto: [contact-info]\n";
     $ci = $render('[test-contact-info item1_text="+593 945" item1_url="https://wa.me/593945" item2_text="hola@x.test" item2_url="mailto:hola@x.test" item3_text="Calle 1"]');

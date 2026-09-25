@@ -1,22 +1,22 @@
-/* Campos compartidos de los paneles Intelindev (solo admin) */
-.intelindev-panel-form .intelindev-tab-icon {
+/* Campos compartidos de los paneles pswpt (solo admin) */
+.pswpt-panel-form .pswpt-tab-icon {
     font-size: 16px;
     margin-right: 6px;
 }
 
-.intelindev-panel-form .intelindev-radio-row {
+.pswpt-panel-form .pswpt-radio-row {
     display: block;
     margin: 0 0 6px;
 }
 
 /* Logos */
-.intelindev-media-field {
+.pswpt-media-field {
     display: flex;
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
 }
-.intelindev-media-field .intelindev-media-preview {
+.pswpt-media-field .pswpt-media-preview {
     max-height: 60px;
     max-width: 240px;
     border: 1px solid #dcdcde;
@@ -26,47 +26,47 @@
 }
 
 /* Tabla de colores Normal | Sticky */
-.intelindev-color-table {
+.pswpt-color-table {
     max-width: 640px;
     margin: 8px 0 24px;
 }
-.intelindev-color-table th,
-.intelindev-color-table td {
+.pswpt-color-table th,
+.pswpt-color-table td {
     vertical-align: middle;
 }
-.intelindev-color-table tbody th {
+.pswpt-color-table tbody th {
     font-weight: 400;
     width: 40%;
 }
 /* Swatch solo-color + input siempre visible (WP lo oculta con .hidden hasta
    abrir) + picker flotando debajo sin mover la tabla. */
-.intelindev-color-table .wp-picker-container {
+.pswpt-color-table .wp-picker-container {
     position: relative;
     display: flex;
     align-items: center;
     gap: 6px;
     white-space: nowrap;
 }
-.intelindev-color-table .wp-picker-container .wp-color-result.button {
+.pswpt-color-table .wp-picker-container .wp-color-result.button {
     width: 30px;
     min-width: 0;
     padding: 0;
     margin: 0;
 }
-.intelindev-color-table .wp-color-result-text {
+.pswpt-color-table .wp-color-result-text {
     display: none;
 }
-.intelindev-color-table .wp-picker-container .wp-picker-input-wrap,
-.intelindev-color-table .wp-picker-container .wp-picker-input-wrap.hidden {
+.pswpt-color-table .wp-picker-container .wp-picker-input-wrap,
+.pswpt-color-table .wp-picker-container .wp-picker-input-wrap.hidden {
     display: inline-flex;
     align-items: center;
     gap: 4px;
 }
-.intelindev-color-table .wp-picker-container input[type="text"].wp-color-picker {
+.pswpt-color-table .wp-picker-container input[type="text"].wp-color-picker {
     width: 120px;
     margin: 0;
 }
-.intelindev-color-table .wp-picker-container .wp-picker-input-wrap .button.wp-picker-clear {
+.pswpt-color-table .wp-picker-container .wp-picker-input-wrap .button.wp-picker-clear {
     margin: 0;
     min-height: 30px;
     line-height: 2.5;
@@ -75,50 +75,50 @@
    la izquierda (sobre las etiquetas), columna Sticky hacia la derecha (fuera de
    la tabla). El padding (no margin) mantiene el hueco dentro del contenedor, así
    el mouse no "sale" al pasar del swatch al picker. */
-.intelindev-color-table .wp-picker-holder {
+.pswpt-color-table .wp-picker-holder {
     position: absolute;
     top: -10px;
     z-index: 100;
 }
-.intelindev-color-table td:nth-child(2) .wp-picker-holder {
+.pswpt-color-table td:nth-child(2) .wp-picker-holder {
     right: 100%;
     padding-right: 6px;
 }
-.intelindev-color-table td:nth-child(3) .wp-picker-holder {
+.pswpt-color-table td:nth-child(3) .wp-picker-holder {
     left: 100%;
     padding-left: 6px;
 }
 
-/* Filas del footer (Apariencia → Intelindev Footer) */
-.intelindev-footer-rows {
+/* Filas del footer (Apariencia → pswpt Footer) */
+.pswpt-footer-rows {
     max-width: 640px;
     margin: 8px 0 12px;
 }
-.intelindev-footer-rows td,
-.intelindev-footer-rows th {
+.pswpt-footer-rows td,
+.pswpt-footer-rows th {
     vertical-align: middle;
 }
-.intelindev-footer-rows .intelindev-footer-row__index {
+.pswpt-footer-rows .pswpt-footer-row__index {
     width: 40px;
     font-weight: 600;
 }
 
 /* Grilla visual del footer (celda = área de widgets; botones por idioma → Personalizador) */
-.intelindev-footer-grid {
+.pswpt-footer-grid {
     max-width: 760px;
     margin: 8px 0 16px;
     padding: 16px;
     background: #1d2327;
     border-radius: 8px;
 }
-.intelindev-footer-grid__row {
+.pswpt-footer-grid__row {
     display: grid;
     gap: 12px;
 }
-.intelindev-footer-grid__row + .intelindev-footer-grid__row {
+.pswpt-footer-grid__row + .pswpt-footer-grid__row {
     margin-top: 12px;
 }
-.intelindev-footer-grid__cell {
+.pswpt-footer-grid__cell {
     min-width: 0;
     min-height: 88px;
     padding: 12px;
@@ -130,7 +130,7 @@
     justify-content: space-between;
     gap: 10px;
 }
-.intelindev-footer-grid__name {
+.pswpt-footer-grid__name {
     color: #f0f0f1;
     font-weight: 600;
     font-size: 12px;
@@ -138,22 +138,22 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.intelindev-footer-grid__langs {
+.pswpt-footer-grid__langs {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
 }
-.intelindev-footer-grid__langs .button.button-small {
+.pswpt-footer-grid__langs .button.button-small {
     min-height: 26px;
     line-height: 2;
     padding: 0 8px;
 }
-.intelindev-footer-grid__langs .intelindev-footer-grid__lang--filled {
+.pswpt-footer-grid__langs .pswpt-footer-grid__lang--filled {
     background: #2271b1;
     border-color: #2271b1;
     color: #fff;
 }
-.intelindev-footer-grid__count {
+.pswpt-footer-grid__count {
     display: inline-block;
     min-width: 16px;
     margin-left: 4px;
@@ -166,46 +166,46 @@
 }
 
 /* Editor de campos de Formularios */
-.intelindev-form-fields td,
-.intelindev-form-fields th {
+.pswpt-form-fields td,
+.pswpt-form-fields th {
     vertical-align: top;
 }
-.intelindev-form-fields .intelindev-form-field__handle {
+.pswpt-form-fields .pswpt-form-field__handle {
     cursor: move;
     color: #8c8f94;
     font-size: 16px;
     padding-top: 14px;
 }
-.intelindev-form-fields td p {
+.pswpt-form-fields td p {
     margin: 4px 0 8px;
 }
-.intelindev-form-field__langs {
+.pswpt-form-field__langs {
     width: 100%;
     border-collapse: collapse;
 }
-.intelindev-form-field__langs th {
+.pswpt-form-field__langs th {
     width: 36px;
     text-align: left;
     padding: 6px 6px 6px 0;
     font-weight: 600;
 }
-.intelindev-form-field__langs td {
+.pswpt-form-field__langs td {
     padding: 4px 0;
 }
-.intelindev-form-field__langs input,
-.intelindev-form-field__langs textarea {
+.pswpt-form-field__langs input,
+.pswpt-form-field__langs textarea {
     display: block;
     width: 100%;
     max-width: 420px;
     margin: 0 0 6px;
 }
-.intelindev-form-field.ui-sortable-helper {
+.pswpt-form-field.ui-sortable-helper {
     background: #f6f7f7;
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
 }
 
 /* Galería (campo gallery de los CPT de contenido) */
-.intelindev-gallery-list {
+.pswpt-gallery-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -213,20 +213,20 @@
   padding: 0;
   list-style: none;
 }
-.intelindev-gallery-list > li {
+.pswpt-gallery-list > li {
   position: relative;
   width: 80px;
   height: 80px;
   margin: 0;
 }
-.intelindev-gallery-list img {
+.pswpt-gallery-list img {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 4px;
   display: block;
 }
-.intelindev-gallery-remove {
+.pswpt-gallery-remove {
   position: absolute;
   top: -6px;
   right: -6px;
@@ -241,6 +241,6 @@
   padding: 0;
   cursor: pointer;
 }
-.intelindev-ct-fields .form-table th {
+.pswpt-ct-fields .form-table th {
   width: 160px;
 }

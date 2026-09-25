@@ -1,0 +1,14 @@
+<section class="surgeon-hero" style="background-image:url('{image:url|{featured_image:full}}')">
+  <div class="surgeon-hero__scrim"></div>
+  <div class="surgeon-hero__inner wrap">
+    <p class="surgeon-hero__eyebrow">{eyebrow|{role} · {site_name}}</p>
+    <h1 class="surgeon-hero__name">{title}</h1>
+    <p class="surgeon-hero__credentials">{credentials}</p>
+    <div class="surgeon-hero__bio">{text:html}</div>
+    <div class="surgeon-hero__actions">
+      <a class="surgeon-hero__cta" href="{cta_url:url|#contacto}">{cta_text|{t:surgeon-hero.cta|Book a consultation}}</a>
+    </div>
+    <p class="surgeon-hero__subtext">{subtext|{t:surgeon-hero.subtext|In-person and virtual consultations in a private, judgment-free environment. Your consultation fee is applied toward your treatment cost.}}</p>
+    <p class="surgeon-hero__contact">{t:surgeon-hero.call|Call or text} <a class="surgeon-hero__phone" href="tel:{phone:url|}">{phone_label|{phone}}</a></p>
+  </div>
+</section>

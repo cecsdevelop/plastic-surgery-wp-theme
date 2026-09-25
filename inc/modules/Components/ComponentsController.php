@@ -1,6 +1,6 @@
 <?php
 /**
- * Componentes (CPT intelindev_component): plantillas HTML reutilizables con
+ * Componentes (CPT pswpt_component): plantillas HTML reutilizables con
  * placeholders, expuestas como shortcodes cuyo nombre es el slug del
  * componente ([hero …], [precios …]). Se usan en los bloques por idioma de
  * pages/posts, en el modal del header y en las áreas de widgets del footer.
@@ -23,6 +23,12 @@
  *                   (sin cookies, sin pedir nada al proveedor); .mp4/.webm → <video>
  *   {t:clave}                                  texto de Apariencia → Traducciones
  *   {content}                                  contenido envolvente [hero]…[/hero]
+ *
+ * Un atributo sin valor en el shortcode cae, antes que al default de la
+ * plantilla, a la meta propia del post actual si existe con la convención de
+ * ContentTypeController::meta_key() (_{post_type}_{campo}, ej. {role} en
+ * [surgeon-hero] lee _pswpt_surgeon_role): lo que el admin ya llenó en el
+ * metabox del CPT no hay que retiparlo en el shortcode.
 
  *
 
@@ -33,23 +39,23 @@
  *
  * Módulo CPT estándar del theme: ver la skill wp-theme-cpt-module.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\Components;
+namespace pswptInit\Components;
 
-use IntelindevInit\General\BaseController;
+use pswptInit\General\BaseController;
 use WP_Post;
 use WP_Screen;
 
 class ComponentsController extends BaseController
 {
-    public const POST_TYPE     = 'intelindev_component';
-    public const META_TEMPLATE = '_intelindev_component_template';
-    public const TRANSIENT     = 'intelindev_component_slugs';
-    public const NONCE_ACTION  = 'intelindev_component_save';
-    public const NONCE_FIELD   = 'intelindev_component_nonce';
-    public const FIELD_TEMPLATE = 'intelindev_component_template';
+    public const POST_TYPE     = 'pswpt_component';
+    public const META_TEMPLATE = '_pswpt_component_template';
+    public const TRANSIENT     = 'pswpt_component_slugs';
+    public const NONCE_ACTION  = 'pswpt_component_save';
+    public const NONCE_FIELD   = 'pswpt_component_nonce';
+    public const FIELD_TEMPLATE = 'pswpt_component_template';
 
     /** Placeholders resueltos por el theme (no son atributos del shortcode). */
     public const RESERVED_PLACEHOLDERS = ['title', 'excerpt', 'permalink', 'site_name', 'lang', 'featured_image', 'content', 't'];
@@ -86,19 +92,19 @@ class ComponentsController extends BaseController
     {
         register_post_type(self::POST_TYPE, [
             'labels' => [
-                'name'               => __('Componentes', 'intelindev'),
-                'singular_name'      => __('Componente', 'intelindev'),
-                'menu_name'          => __('Componentes', 'intelindev'),
-                'add_new'            => __('Agregar componente', 'intelindev'),
-                'add_new_item'       => __('Agregar componente', 'intelindev'),
-                'edit_item'          => __('Editar componente', 'intelindev'),
-                'new_item'           => __('Nuevo componente', 'intelindev'),
-                'all_items'          => __('Todos los componentes', 'intelindev'),
-                'search_items'       => __('Buscar componentes', 'intelindev'),
-                'not_found'          => __('No hay componentes todavía.', 'intelindev'),
-                'not_found_in_trash' => __('No hay componentes en la papelera.', 'intelindev'),
+                'name'               => __('Components', 'pswpt'),
+                'singular_name'      => __('Component', 'pswpt'),
+                'menu_name'          => __('Components', 'pswpt'),
+                'add_new'            => __('Add component', 'pswpt'),
+                'add_new_item'       => __('Add component', 'pswpt'),
+                'edit_item'          => __('Edit component', 'pswpt'),
+                'new_item'           => __('New component', 'pswpt'),
+                'all_items'          => __('All components', 'pswpt'),
+                'search_items'       => __('Search components', 'pswpt'),
+                'not_found'          => __('No components yet.', 'pswpt'),
+                'not_found_in_trash' => __('No components found in Trash.', 'pswpt'),
             ],
-            'description'         => __('Plantillas HTML reutilizables que se insertan como shortcodes.', 'intelindev'),
+            'description'         => __('Reusable HTML templates inserted as shortcodes.', 'pswpt'),
             'public'              => false,
             'show_ui'             => true,
             'show_in_menu'        => true,
@@ -263,7 +269,7 @@ class ComponentsController extends BaseController
                     return $post ? (string) get_the_title($post) : $default;
                 case 'excerpt':
                     if (!$post) return $default;
-                    $excerpt = function_exists('intelindev_get_post_translated_excerpt') ? intelindev_get_post_translated_excerpt($post, $lang) : '';
+                    $excerpt = function_exists('pswpt_get_post_translated_excerpt') ? pswpt_get_post_translated_excerpt($post, $lang) : '';
                     if ($excerpt === '') $excerpt = (string) $post->post_excerpt;
                     return $excerpt !== '' ? esc_html($excerpt) : $default;
                 case 'permalink':
@@ -282,6 +288,19 @@ class ComponentsController extends BaseController
                 [$token, $modifier] = explode(':', $token, 2);
             }
             $value = array_key_exists($token, $atts) ? (string) $atts[$token] : '';
+            if ($value === '' && $post) {
+                // Sin atributo: cae a la meta propia del post con la convención de
+                // ContentTypeController::meta_key() (_{post_type}_{campo} — role,
+                // credentials...), para no reescribir en el shortcode lo que el
+                // admin ya llenó en el metabox del CPT.
+                $meta = get_post_meta($post->ID, '_' . $post->post_type . '_' . $token, true);
+                if (is_array($meta)) {
+                    $meta = function_exists('pswpt_resolve_lang_text') ? pswpt_resolve_lang_text($meta, $lang) : '';
+                }
+                if (is_string($meta) && $meta !== '') {
+                    $value = $meta;
+                }
+            }
             if ($value === '') {
                 // Default: crudo si era un placeholder anidado (ya viene resuelto/escapado);
                 // si no, se trata como valor del modificador (nombre de ícono, URL, HTML).
@@ -389,8 +408,8 @@ class ComponentsController extends BaseController
     {
         // La caja nativa "Slug" (slugdiv) es donde se define el nombre del shortcode:
         // se re-registra con título explícito y por encima de la plantilla.
-        add_meta_box('slugdiv', __('Slug = nombre del shortcode', 'intelindev'), 'post_slug_meta_box', self::POST_TYPE, 'normal', 'high');
-        add_meta_box('intelindev_component_template', __('Plantilla del componente', 'intelindev'), [$this, 'render_meta_box'], self::POST_TYPE, 'normal', 'high');
+        add_meta_box('slugdiv', __('Slug = shortcode name', 'pswpt'), 'post_slug_meta_box', self::POST_TYPE, 'normal', 'high');
+        add_meta_box('pswpt_component_template', __('Component template', 'pswpt'), [$this, 'render_meta_box'], self::POST_TYPE, 'normal', 'high');
     }
 
     /** WP oculta slugdiv por defecto (Opciones de pantalla); acá es imprescindible. */
@@ -412,25 +431,25 @@ class ComponentsController extends BaseController
         ?>
         <?php if ($post->post_status === 'publish' && $post->post_name !== '') : ?>
             <p>
-                <strong><?php esc_html_e('Shortcode:', 'intelindev'); ?></strong>
+                <strong><?php esc_html_e('Shortcode:', 'pswpt'); ?></strong>
                 <code><?php echo esc_html($this->shortcode_example($post)); ?></code>
                 <?php if ($conflict) : ?>
-                    <span class="description" style="color:#b32d2e"><?php esc_html_e('— en conflicto: ya existe un shortcode con ese nombre (WordPress o un plugin). Cambiá el slug.', 'intelindev'); ?></span>
+                    <span class="description" style="color:#b32d2e"><?php esc_html_e('— conflict: a shortcode with that name already exists (WordPress or a plugin). Change the slug.', 'pswpt'); ?></span>
                 <?php endif; ?>
             </p>
         <?php else : ?>
-            <p class="description"><?php esc_html_e('Al publicar, el slug (caja "Slug" de arriba) pasa a ser el nombre del shortcode: [slug …].', 'intelindev'); ?></p>
+            <p class="description"><?php esc_html_e('Once published, the slug ("Slug" box above) becomes the shortcode name: [slug …].', 'pswpt'); ?></p>
         <?php endif; ?>
 
         <textarea name="<?php echo esc_attr(self::FIELD_TEMPLATE); ?>" rows="18" class="large-text code" spellcheck="false" style="font-family:monospace"><?php echo esc_textarea($template); ?></textarea>
 
         <p class="description">
-            <?php esc_html_e('HTML con placeholders. Del post donde se inserta (ya traducidos):', 'intelindev'); ?>
+            <?php esc_html_e('HTML with placeholders. From the post where it is inserted (already translated):', 'pswpt'); ?>
             <code>{title}</code> <code>{excerpt}</code> <code>{permalink}</code> <code>{featured_image}</code> <code>{featured_image:large}</code> <code>{site_name}</code> <code>{lang}</code>.
-            <?php esc_html_e('Atributos del shortcode:', 'intelindev'); ?> <code>{nombre}</code> <?php esc_html_e('o con valor por defecto', 'intelindev'); ?> <code>{nombre|texto}</code>.
-            <?php esc_html_e('Texto del diccionario (Apariencia → Traducciones):', 'intelindev'); ?> <code>{t:clave}</code>.
-            <?php esc_html_e('Contenido envolvente', 'intelindev'); ?> <code>[slug]…[/slug]</code> → <code>{content}</code>.
-            <?php esc_html_e('Los shortcodes dentro de la plantilla también se procesan.', 'intelindev'); ?>
+            <?php esc_html_e('Shortcode attributes:', 'pswpt'); ?> <code>{nombre}</code> <?php esc_html_e('or with a default value', 'pswpt'); ?> <code>{nombre|texto}</code>.
+            <?php esc_html_e('Dictionary text (Appearance → Translations):', 'pswpt'); ?> <code>{t:clave}</code>.
+            <?php esc_html_e('Wrapped content', 'pswpt'); ?> <code>[slug]…[/slug]</code> → <code>{content}</code>.
+            <?php esc_html_e('Shortcodes inside the template are processed too.', 'pswpt'); ?>
         </p>
         <?php
     }
@@ -446,8 +465,8 @@ class ComponentsController extends BaseController
         $raw = $_POST[self::FIELD_TEMPLATE] ?? '';
         // Misma política que el contenido de pages/posts: tal cual con
         // unfiltered_html, si no wp_kses_post.
-        $template = function_exists('intelindev_sanitize_translated_rich_text')
-            ? intelindev_sanitize_translated_rich_text($raw)
+        $template = function_exists('pswpt_sanitize_translated_rich_text')
+            ? pswpt_sanitize_translated_rich_text($raw)
             : (current_user_can('unfiltered_html') ? wp_unslash((string) $raw) : wp_kses_post(wp_unslash((string) $raw)));
 
         if (trim($template) === '') {
@@ -467,7 +486,7 @@ class ComponentsController extends BaseController
         foreach ($columns as $key => $label) {
             $out[$key] = $label;
             if ($key === 'title') {
-                $out['intelindev_shortcode'] = __('Shortcode', 'intelindev');
+                $out['pswpt_shortcode'] = __('Shortcode', 'pswpt');
             }
         }
         return $out;
@@ -475,17 +494,17 @@ class ComponentsController extends BaseController
 
     public function render_column($column, $post_id): void
     {
-        if ($column !== 'intelindev_shortcode') return;
+        if ($column !== 'pswpt_shortcode') return;
         $post = get_post($post_id);
         if (!$post instanceof WP_Post) return;
 
         if ($post->post_status !== 'publish') {
-            echo '<span class="description">' . esc_html__('Se activa al publicar', 'intelindev') . '</span>';
+            echo '<span class="description">' . esc_html__('Activated on publish', 'pswpt') . '</span>';
             return;
         }
         echo '<code>' . esc_html($this->shortcode_example($post)) . '</code>';
         if (!self::is_registered($post->post_name)) {
-            echo ' <span style="color:#b32d2e">' . esc_html__('(en conflicto con otro shortcode)', 'intelindev') . '</span>';
+            echo ' <span style="color:#b32d2e">' . esc_html__('(conflicts with another shortcode)', 'pswpt') . '</span>';
         }
     }
 }

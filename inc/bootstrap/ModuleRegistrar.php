@@ -1,6 +1,6 @@
 <?php
 
-namespace IntelindevInit\Bootstrap;
+namespace pswptInit\Bootstrap;
 
 class ModuleRegistrar
 {
@@ -21,26 +21,20 @@ class ModuleRegistrar
     private function module_classes(): array
     {
         return [
-            'IntelindevInit\\General\\EnqueueController',
+            'pswptInit\\General\\EnqueueController',
             // CPTs: un módulo por carpeta en inc/modules/{Modulo}/{Modulo}Controller
             // (ver skill wp-theme-cpt-module).
-            'IntelindevInit\\Components\\ComponentsController',
-            'IntelindevInit\\Forms\\FormsController',
+            'pswptInit\\Components\\ComponentsController',
+            'pswptInit\\Forms\\FormsController',
             // CPTs de contenido (extienden General\ContentTypeController).
-            'IntelindevInit\\Services\\ServicesController',
-            'IntelindevInit\\Portfolio\\PortfolioController',
-            'IntelindevInit\\Testimonials\\TestimonialsController',
-            'IntelindevInit\\Clients\\ClientsController',
-            'IntelindevInit\\Team\\TeamController',
-            // Secciones dinámicas (shortcodes que leen los CPT).
-            'IntelindevInit\\Sections\\SectionsController',
-            // Cabecera y pie derivados del sitio de referencia (opt-in).
-            'IntelindevInit\\Chrome\\ChromeController',
-            // Elemento global de móvil renderizado en wp_footer.
-            'IntelindevInit\\StickyCta\\StickyCtaController',
-            // Blog nativo: áreas de widgets por idioma, fechas, comentarios.
-            'IntelindevInit\\Blog\\BlogController',
-            'IntelindevInit\\Forms\\SubmissionsController',
+            'pswptInit\\Testimonials\\TestimonialsController',
+            'pswptInit\\Surgeons\\SurgeonsController',
+            'pswptInit\\Team\\TeamController',
+            'pswptInit\\PatientGallery\\PatientGalleryController',
+            'pswptInit\\Sections\\SectionsController',
+            'pswptInit\\Chrome\\ChromeController',
+            'pswptInit\\Blog\\BlogController',
+            'pswptInit\\Forms\\SubmissionsController',
         ];
     }
 }

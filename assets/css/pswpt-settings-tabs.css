@@ -1,5 +1,5 @@
 /* Settings tabs UI (admin only) */
-.intelindev-settings-form .intelindev-tabs-nav {
+.pswpt-settings-form .pswpt-tabs-nav {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -9,11 +9,11 @@
     border-bottom: 1px solid #dcdcde;
 }
 
-.intelindev-settings-form .intelindev-tabs-nav .nav-item {
+.pswpt-settings-form .pswpt-tabs-nav .nav-item {
     margin: 0;
 }
 
-.intelindev-settings-form .intelindev-tabs-nav .nav-link {
+.pswpt-settings-form .pswpt-tabs-nav .nav-link {
     border: 1px solid #dcdcde;
     border-bottom: 0;
     background: #f6f7f7;
@@ -26,33 +26,33 @@
     transition: background-color 0.15s ease;
 }
 
-.intelindev-settings-form .intelindev-tabs-nav .nav-link:hover {
+.pswpt-settings-form .pswpt-tabs-nav .nav-link:hover {
     background: #fff;
 }
 
-.intelindev-settings-form .intelindev-tabs-nav .nav-link.active {
+.pswpt-settings-form .pswpt-tabs-nav .nav-link.active {
     background: #fff;
     border-color: #8c8f94;
     color: #135e96;
     font-weight: 600;
 }
 
-.intelindev-settings-form .intelindev-tabs-container {
+.pswpt-settings-form .pswpt-tabs-container {
     background: #fff;
     border: 1px solid #dcdcde;
     border-radius: 0 6px 6px 6px;
     padding: 18px;
 }
 
-.intelindev-settings-form .intelindev-tabs-container .tab-pane {
+.pswpt-settings-form .pswpt-tabs-container .tab-pane {
     display: none;
 }
 
-.intelindev-settings-form .intelindev-tabs-container .tab-pane.show.active {
+.pswpt-settings-form .pswpt-tabs-container .tab-pane.show.active {
     display: block;
 }
 
-.intelindev-settings-form .intelindev-tabs-container .form-table th {
+.pswpt-settings-form .pswpt-tabs-container .form-table th {
     width: 260px;
 }
 

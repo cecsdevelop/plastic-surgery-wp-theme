@@ -13,7 +13,7 @@
  *
  * Token: variable FIGMA_TOKEN o archivo ~/.config/figma_token (o --token-file
  * <ruta>). Solo viaja en la cabecera X-Figma-Token; nunca se imprime ni se
- * guarda en el repo. Archivo por defecto: Website - DS Intelindev (--file <key>
+ * guarda en el repo. Archivo por defecto: Website - DS pswpt (--file <key>
  * para otro). Los ids aceptan la forma de la URL (7759-13797) o de la API (7759:13797).
  */
 

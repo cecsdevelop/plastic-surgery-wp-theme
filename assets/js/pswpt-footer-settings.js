@@ -1,15 +1,15 @@
 /**
- * Apariencia → Intelindev Footer (solo admin): alta/baja de filas de la
+ * Apariencia → pswpt Footer (solo admin): alta/baja de filas de la
  * estructura. Los campos comunes (tabs, colores, condicionales) los manejan
- * intelindev-settings-tabs.js e intelindev-admin-fields.js.
+ * pswpt-settings-tabs.js e pswpt-admin-fields.js.
  */
 (function ($) {
   'use strict';
 
   $(function () {
-    var $table = $('#intelindev-footer-rows');
-    var $add = $('#intelindev-footer-row-add');
-    var template = document.getElementById('intelindev-footer-row-template');
+    var $table = $('#pswpt-footer-rows');
+    var $add = $('#pswpt-footer-row-add');
+    var template = document.getElementById('pswpt-footer-row-template');
     if (!$table.length || !$add.length || !template) {
       return;
     }
@@ -22,7 +22,7 @@
 
     function renumber() {
       $body.find('tr').each(function (i) {
-        $(this).find('.intelindev-footer-row__index').text(i + 1);
+        $(this).find('.pswpt-footer-row__index').text(i + 1);
       });
       $add.prop('disabled', $body.find('tr').length >= maxRows);
     }
@@ -36,7 +36,7 @@
       renumber();
     });
 
-    $table.on('click', '.intelindev-footer-row-remove', function () {
+    $table.on('click', '.pswpt-footer-row-remove', function () {
       $(this).closest('tr').remove();
       renumber();
     });

@@ -8,7 +8,7 @@
 - DM Sans 400 · 26px · lh 25px · center × 5 — ej. 1
 - DM Sans 900 · 18px · lh 23px × 5 — ej. Descubrimiento
 - DM Sans 700 · 20px · lh 19px · center × 4 — ej. Adrian Alcantara
-- DM Sans 400 · 16px · lh 15px · center × 4 — ej. CEO Intelindev
+- DM Sans 400 · 16px · lh 15px · center × 4 — ej. CEO pswpt
 - DM Sans 700 · 16px · lh 21px · right × 3 — ej. Excelencia técnica Creamos software con estándares
 - DM Serif Text 400 · 50px · lh 48px × 2 — ej. Somos una empresa de desarrollo de software
 - DM Sans 300 · 50px · lh 48px × 2 — ej. Nuestro propósito: Impulsar el crecimiento de las 
@@ -16,7 +16,7 @@
 - DM Sans 400 · 60px · lh 57px · center × 1 — ej. Nosotros
 - DM Serif Text 400 · 150px · lh 173px × 1 — ej. 10
 - DM Serif Text 400 · 30px · lh 35px × 1 — ej. años de experiencia
-- DM Sans 400 · 16px · lh 21px · center × 1 — ej. En Intelindev, creemos que las grandes soluciones 
+- DM Sans 400 · 16px · lh 21px · center × 1 — ej. En pswpt, creemos que las grandes soluciones 
 - DM Sans 300 · 20px · lh 23px × 1 — ej. Contáctanos
 
 ## Colores

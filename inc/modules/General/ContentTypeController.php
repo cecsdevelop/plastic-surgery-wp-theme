@@ -9,11 +9,11 @@
  * Multilenguaje: el título, el contenido (bloques HTML), el excerpt y —si el
  * tipo es público— el slug se traducen con el metabox "Contenido traducido"
  * del núcleo (admin-post-translation-settings.php): el módulo se suma a
- * intelindev_translatable_post_types() y declara la base de URL por idioma
+ * pswpt_translatable_post_types() y declara la base de URL por idioma
  * (/{lang}/{base}/{slug}/) y el nombre plural por idioma para el título del
  * archivo. Los campos propios cortos que cambian por idioma se declaran como
  * 'lang_text' / 'lang_textarea' (array lang => texto, resueltos con
- * intelindev_resolve_lang_text()).
+ * pswpt_resolve_lang_text()).
  *
  * Tipos de campo: text, url, number, select, media (ID de adjunto),
  * gallery (IDs), lang_text, lang_textarea. Sin editor de bloques: show_in_rest
@@ -25,18 +25,18 @@
  * de esa página (donde va el shortcode del listado, p. ej. [services
  * layout="cards"]); la URL propia de la página redirige al archivo.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\General;
+namespace pswptInit\General;
 
 use WP_Post;
 
 abstract class ContentTypeController extends BaseController
 {
-    public const NONCE_ACTION = 'intelindev_content_type_save';
-    public const NONCE_FIELD  = 'intelindev_content_type_nonce';
-    public const FIELD_PREFIX = 'intelindev_ct';
+    public const NONCE_ACTION = 'pswpt_content_type_save';
+    public const NONCE_FIELD  = 'pswpt_content_type_nonce';
+    public const FIELD_PREFIX = 'pswpt_ct';
 
     private array $config = [];
 
@@ -56,9 +56,9 @@ abstract class ContentTypeController extends BaseController
     public function register(): void
     {
         add_action('init', [$this, 'register_post_type'], 5);
-        add_filter('intelindev_translatable_post_types', [$this, 'translatable_types']);
-        add_filter('intelindev_post_type_lang_slugs', [$this, 'lang_slugs']);
-        add_filter('intelindev_post_type_lang_labels', [$this, 'lang_labels']);
+        add_filter('pswpt_translatable_post_types', [$this, 'translatable_types']);
+        add_filter('pswpt_post_type_lang_slugs', [$this, 'lang_slugs']);
+        add_filter('pswpt_post_type_lang_labels', [$this, 'lang_labels']);
 
         if ($this->fields()) {
             add_action('add_meta_boxes_' . $this->post_type(), [$this, 'add_meta_boxes']);
@@ -142,16 +142,16 @@ abstract class ContentTypeController extends BaseController
                 'name'               => $name,
                 'singular_name'      => $single,
                 'menu_name'          => $name,
-                'add_new'            => sprintf(__('Agregar %s', 'intelindev'), mb_strtolower($single)),
-                'add_new_item'       => sprintf(__('Agregar %s', 'intelindev'), mb_strtolower($single)),
-                'edit_item'          => sprintf(__('Editar %s', 'intelindev'), mb_strtolower($single)),
-                'new_item'           => sprintf(__('Nuevo %s', 'intelindev'), mb_strtolower($single)),
-                'view_item'          => sprintf(__('Ver %s', 'intelindev'), mb_strtolower($single)),
-                'all_items'          => sprintf(__('Todos: %s', 'intelindev'), mb_strtolower($name)),
-                'search_items'       => sprintf(__('Buscar %s', 'intelindev'), mb_strtolower($name)),
-                'not_found'          => sprintf(__('No hay %s todavía.', 'intelindev'), mb_strtolower($name)),
-                'not_found_in_trash' => sprintf(__('No hay %s en la papelera.', 'intelindev'), mb_strtolower($name)),
-                'featured_image'     => (string) $this->cfg('thumbnail_label', __('Imagen destacada', 'intelindev')),
+                'add_new'            => sprintf(__('Add %s', 'pswpt'), mb_strtolower($single)),
+                'add_new_item'       => sprintf(__('Add %s', 'pswpt'), mb_strtolower($single)),
+                'edit_item'          => sprintf(__('Edit %s', 'pswpt'), mb_strtolower($single)),
+                'new_item'           => sprintf(__('New %s', 'pswpt'), mb_strtolower($single)),
+                'view_item'          => sprintf(__('View %s', 'pswpt'), mb_strtolower($single)),
+                'all_items'          => sprintf(__('All %s', 'pswpt'), mb_strtolower($name)),
+                'search_items'       => sprintf(__('Search %s', 'pswpt'), mb_strtolower($name)),
+                'not_found'          => sprintf(__('No %s yet.', 'pswpt'), mb_strtolower($name)),
+                'not_found_in_trash' => sprintf(__('No %s found in Trash.', 'pswpt'), mb_strtolower($name)),
+                'featured_image'     => (string) $this->cfg('thumbnail_label', __('Featured image', 'pswpt')),
             ],
             'description'         => (string) $this->cfg('description', ''),
             'public'              => $public,
@@ -222,10 +222,10 @@ abstract class ContentTypeController extends BaseController
     {
         $option = $this->archive_page_option();
         register_setting('reading', $option, ['type' => 'integer', 'sanitize_callback' => 'absint', 'default' => 0]);
-        add_settings_field($option, sprintf(__('Página de %s', 'intelindev'), $this->label('name')), function () use ($option) {
-            wp_dropdown_pages(['name' => $option, 'id' => $option, 'show_option_none' => __('— Seleccionar —', 'intelindev'), 'option_none_value' => 0, 'selected' => (int) get_option($option)]);
+        add_settings_field($option, sprintf(__('%s page', 'pswpt'), $this->label('name')), function () use ($option) {
+            wp_dropdown_pages(['name' => $option, 'id' => $option, 'show_option_none' => __('— Select —', 'pswpt'), 'option_none_value' => 0, 'selected' => (int) get_option($option)]);
             echo '<p class="description">' . sprintf(
-                esc_html__('Sus bloques por idioma (hero, [%s …], testimonios, contacto…) arman la página del listado /%s/; su URL propia redirige allí.', 'intelindev'),
+                esc_html__('Its per-language blocks (hero, [%s …], testimonials, contact…) build the /%s/ listing page; its own URL redirects there.', 'pswpt'),
                 esc_html($this->cfg('list_shortcode', $this->post_type())),
                 esc_html($this->slug(idml_get_default_language()))
             ) . '</p>';
@@ -236,7 +236,7 @@ abstract class ContentTypeController extends BaseController
     public function archive_page_state(array $states, WP_Post $post): array
     {
         if ($post->post_type === 'page' && $post->ID === (int) get_option($this->archive_page_option())) {
-            $states[$this->archive_page_option()] = sprintf(__('Página de %s', 'intelindev'), $this->label('name'));
+            $states[$this->archive_page_option()] = sprintf(__('%s page', 'pswpt'), $this->label('name'));
         }
 
         return $states;
@@ -249,8 +249,8 @@ abstract class ContentTypeController extends BaseController
             return;
         }
         $page = $this->archive_page();
-        if ($page && is_page($page->ID) && function_exists('intelindev_get_post_type_archive_url')) {
-            wp_safe_redirect(intelindev_get_post_type_archive_url($this->post_type(), $this->get_current_lang()), 301);
+        if ($page && is_page($page->ID) && function_exists('pswpt_get_post_type_archive_url')) {
+            wp_safe_redirect(pswpt_get_post_type_archive_url($this->post_type(), $this->get_current_lang()), 301);
             exit;
         }
     }
@@ -287,7 +287,7 @@ abstract class ContentTypeController extends BaseController
         switch ($type) {
             case 'lang_text':
             case 'lang_textarea':
-                return intelindev_resolve_lang_text($value, $lang);
+                return pswpt_resolve_lang_text($value, $lang);
             case 'media':
             case 'number':
                 return (int) $value;
@@ -306,7 +306,7 @@ abstract class ContentTypeController extends BaseController
     {
         $screen = function_exists('get_current_screen') ? get_current_screen() : null;
         if ($screen && $screen->base === 'post' && $screen->post_type === $this->post_type()) {
-            intelindev_admin_enqueue_field_assets();
+            pswpt_admin_enqueue_field_assets();
         }
     }
 
@@ -314,7 +314,7 @@ abstract class ContentTypeController extends BaseController
     {
         add_meta_box(
             $this->post_type() . '_fields',
-            sprintf(__('Datos de %s', 'intelindev'), mb_strtolower($this->label('singular', idml_get_default_language()))),
+            sprintf(__('%s details', 'pswpt'), mb_strtolower($this->label('singular', idml_get_default_language()))),
             [$this, 'render_meta_box'],
             $this->post_type(),
             'normal',
@@ -325,9 +325,9 @@ abstract class ContentTypeController extends BaseController
     public function render_meta_box(WP_Post $post): void
     {
         wp_nonce_field(self::NONCE_ACTION, self::NONCE_FIELD);
-        $languages = \IntelindevInit\General\MultilanguageTabsRenderer::get_languages();
+        $languages = \pswptInit\General\MultilanguageTabsRenderer::get_languages();
         ?>
-        <div class="intelindev-panel-form intelindev-ct-fields">
+        <div class="pswpt-panel-form pswpt-ct-fields">
             <table class="form-table" role="presentation">
                 <?php foreach ($this->fields() as $key => $field) : ?>
                     <?php $this->render_field($post, (string) $key, (array) $field, $languages); ?>
@@ -363,22 +363,22 @@ abstract class ContentTypeController extends BaseController
                     <?php endforeach; ?>
                 <?php elseif ($type === 'media') : ?>
                     <?php $media_id = (int) $value; $preview = $media_id > 0 ? (string) wp_get_attachment_image_url($media_id, 'medium') : ''; ?>
-                    <div class="intelindev-media-field">
-                        <img class="intelindev-media-preview" src="<?php echo esc_url($preview); ?>" alt="" <?php echo $preview === '' ? 'hidden' : ''; ?> />
+                    <div class="pswpt-media-field">
+                        <img class="pswpt-media-preview" src="<?php echo esc_url($preview); ?>" alt="" <?php echo $preview === '' ? 'hidden' : ''; ?> />
                         <input type="hidden" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($name); ?>" value="<?php echo $media_id; ?>" />
-                        <button type="button" class="button intelindev-media-upload"><?php esc_html_e('Seleccionar imagen', 'intelindev'); ?></button>
-                        <button type="button" class="button-link-delete intelindev-media-remove" <?php echo $media_id > 0 ? '' : 'hidden'; ?>><?php esc_html_e('Quitar', 'intelindev'); ?></button>
+                        <button type="button" class="button pswpt-media-upload"><?php esc_html_e('Select image', 'pswpt'); ?></button>
+                        <button type="button" class="button-link-delete pswpt-media-remove" <?php echo $media_id > 0 ? '' : 'hidden'; ?>><?php esc_html_e('Remove', 'pswpt'); ?></button>
                     </div>
                 <?php elseif ($type === 'gallery') : ?>
                     <?php $ids = array_values(array_filter(array_map('intval', (array) $value))); ?>
-                    <div class="intelindev-gallery-field">
+                    <div class="pswpt-gallery-field">
                         <input type="hidden" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($name); ?>" value="<?php echo esc_attr(implode(',', $ids)); ?>" />
-                        <ul class="intelindev-gallery-list">
+                        <ul class="pswpt-gallery-list">
                             <?php foreach ($ids as $img_id) : ?>
-                                <li data-id="<?php echo $img_id; ?>"><?php echo wp_get_attachment_image($img_id, 'thumbnail'); ?><button type="button" class="intelindev-gallery-remove" aria-label="<?php esc_attr_e('Quitar', 'intelindev'); ?>">&times;</button></li>
+                                <li data-id="<?php echo $img_id; ?>"><?php echo wp_get_attachment_image($img_id, 'thumbnail'); ?><button type="button" class="pswpt-gallery-remove" aria-label="<?php esc_attr_e('Remove', 'pswpt'); ?>">&times;</button></li>
                             <?php endforeach; ?>
                         </ul>
-                        <button type="button" class="button intelindev-gallery-add"><?php esc_html_e('Agregar imágenes', 'intelindev'); ?></button>
+                        <button type="button" class="button pswpt-gallery-add"><?php esc_html_e('Add images', 'pswpt'); ?></button>
                     </div>
                 <?php elseif ($type === 'select') : ?>
                     <select id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($name); ?>">
@@ -426,7 +426,7 @@ abstract class ContentTypeController extends BaseController
     {
         switch ($type) {
             case 'lang_text':
-                return intelindev_sanitize_lang_text($raw);
+                return pswpt_sanitize_lang_text($raw);
             case 'lang_textarea':
                 $out = [];
                 foreach (idml_get_languages() as $lang) {
@@ -460,7 +460,7 @@ abstract class ContentTypeController extends BaseController
             if ($key === 'title') {
                 foreach ($this->fields() as $field_key => $field) {
                     if (!empty($field['column'])) {
-                        $out['intelindev_ct_' . $field_key] = (string) ($field['label'] ?? $field_key);
+                        $out['pswpt_ct_' . $field_key] = (string) ($field['label'] ?? $field_key);
                     }
                 }
             }
@@ -471,17 +471,17 @@ abstract class ContentTypeController extends BaseController
 
     public function render_column($column, $post_id): void
     {
-        if (strpos((string) $column, 'intelindev_ct_') !== 0) {
+        if (strpos((string) $column, 'pswpt_ct_') !== 0) {
             return;
         }
-        $key   = substr((string) $column, strlen('intelindev_ct_'));
+        $key   = substr((string) $column, strlen('pswpt_ct_'));
         $type  = (string) ($this->fields()[$key]['type'] ?? 'text');
         $value = $this->get_field((int) $post_id, $key, idml_get_default_language());
 
         if ($type === 'media') {
             echo $value ? wp_get_attachment_image((int) $value, [40, 40]) : '—';
         } elseif ($type === 'gallery') {
-            echo esc_html(sprintf(_n('%d imagen', '%d imágenes', count($value), 'intelindev'), count($value)));
+            echo esc_html(sprintf(_n('%d image', '%d images', count($value), 'pswpt'), count($value)));
         } else {
             echo $value !== '' && $value !== 0 ? esc_html((string) $value) : '—';
         }

@@ -6,26 +6,26 @@
  *
  *   /Applications/MAMP/bin/php/php8.5.2/bin/php tests/test-turnstile.php
  */
-use IntelindevInit\Forms\FormsController as F;
-use IntelindevInit\Forms\FormRenderer as R;
-use IntelindevInit\Forms\SubmissionsController as S;
+use pswptInit\Forms\FormsController as F;
+use pswptInit\Forms\FormRenderer as R;
+use pswptInit\Forms\SubmissionsController as S;
 
-$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/Intelindev/'; define('WP_USE_THEMES', false);
+$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/WPfemsculpt/'; define('WP_USE_THEMES', false);
 require dirname(__DIR__, 4) . '/wp-load.php';
 require_once ABSPATH . 'wp-admin/includes/template.php';
 wp_set_current_user(1);
 $fails = 0;
 function check(string $label, bool $ok): void { global $fails; echo ($ok ? "  ok   " : "  FAIL ") . "$label\n"; if (!$ok) $fails++; }
-$curl = fn(string $path) => (string) shell_exec('curl -s ' . escapeshellarg('http://localhost:8888/Intelindev' . $path));
+$curl = fn(string $path) => (string) shell_exec('curl -s ' . escapeshellarg('http://localhost:8888/WPfemsculpt' . $path));
 $send = function (int $id, array $data): array {
-    $out = shell_exec('curl -s -w "\n%{http_code}" -X POST -H "Accept: application/json" --data ' . escapeshellarg(http_build_query($data)) . ' ' . escapeshellarg('http://localhost:8888/Intelindev/wp-json/intelindev/v1/form/' . $id));
+    $out = shell_exec('curl -s -w "\n%{http_code}" -X POST -H "Accept: application/json" --data ' . escapeshellarg(http_build_query($data)) . ' ' . escapeshellarg('http://localhost:8888/WPfemsculpt/wp-json/pswpt/v1/form/' . $id));
     $lines = explode("\n", trim((string) $out)); $code = (int) array_pop($lines);
     return [$code, json_decode(implode("\n", $lines), true) ?: []];
 };
-$clear_rl = function () { foreach (['127.0.0.1', '::1'] as $ip) delete_transient('intelindev_form_rl_' . md5($ip)); };
+$clear_rl = function () { foreach (['127.0.0.1', '::1'] as $ip) delete_transient('pswpt_form_rl_' . md5($ip)); };
 
 $PASS_SITE = '1x00000000000000000000AA'; $PASS_SECRET = '1x0000000000000000000000000000000AA'; $FAIL_SECRET = '2x0000000000000000000000000000000AA';
-$PAGE = 18; $META = INTELINDEV_POST_TRANSLATED_CONTENT_META;
+$PAGE = 18; $META = pswpt_POST_TRANSLATED_CONTENT_META;
 $orig_blocks = get_post_meta($PAGE, $META, true); $orig_opts = get_option(F::OPTION, null);
 $protected = 0; $plain = 0;
 
@@ -50,7 +50,7 @@ try {
     update_option(F::OPTION, ['turnstile_site_key' => $PASS_SITE, 'turnstile_secret' => $PASS_SECRET]);
     $html = $curl('/contacto/');
     check('con claves: widget con sitekey e idioma solo en el form protegido', substr_count($html, 'class="cf-turnstile"') === 1 && strpos($html, 'data-sitekey="' . $PASS_SITE . '" data-language="es"') !== false && strpos($html, 'data-error-for="_captcha"') !== false);
-    check('script de Cloudflare con render explícito, una vez', substr_count($html, 'challenges.cloudflare.com/turnstile/v0/api.js?onload=intelindevTurnstileRender&render=explicit') === 1);
+    check('script de Cloudflare con render explícito, una vez', substr_count($html, 'challenges.cloudflare.com/turnstile/v0/api.js?onload=pswptTurnstileRender&render=explicit') === 1);
     check('página sin formularios protegidos no carga el script', strpos($curl('/'), 'challenges.cloudflare.com') === false);
 
     echo "4) verificación server-side (claves de prueba de Cloudflare)\n";

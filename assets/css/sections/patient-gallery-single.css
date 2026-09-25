@@ -1,0 +1,582 @@
+/**
+ * Detalle de un caso de Patient Gallery (single-patient_gallery.php). Solo
+ * se enqueda en is_singular('patient_gallery') — ver
+ * PatientGalleryController::enqueue_frontend_assets().
+ *
+ * Transcripción fiel del CSS real de producción (femsculpt.com, compartido
+ * por el cliente el 2026-09-25) — mismos valores, no una reinterpretación
+ * con los tokens --psw-*/Brand v2 de este theme. Se omitió una sola regla
+ * del original, específica de Astra:
+ *   #content > .ast-container:has(> .pg-detail-wrap) { max-width:100%; ... }
+ * — ahí paraba el ancho fijo del <main> de Astra; este theme no lo tiene
+ * (.site-main solo trae padding-top, ver styles.css), así que .pg-detail
+ * ya es full-bleed por sí solo, sin nada que anular.
+ *
+ * `.pgd-postop`/`.pgd-single`/`.pgd-imgbtn` quedan incluidas (están en el
+ * CSS real) aunque este módulo todavía no las imprime — no hay un caso real
+ * confirmado que dispare esa variante (caption centrada de "Post-op" en vez
+ * de fila del panel, o una sola foto sin par). Cuando se identifique la
+ * regla, se agrega el HTML correspondiente en PatientGalleryRenderer.
+ */
+
+.pg-detail {
+  color: #5A5450;
+  font-family: 'Raleway', -apple-system, sans-serif;
+  background: #F4F1EB;
+  padding: 48px 20px 80px;
+}
+
+.pg-detail * {
+  box-sizing: border-box;
+}
+
+.pg-detail a {
+  color: inherit;
+}
+
+.pg-detail .pgd-col {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* --- Breadcrumb + Save --- */
+
+.pg-detail .pgd-crumb {
+  margin: 0 0 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pg-detail .pgd-crumb a {
+  color: #8A8480;
+  font-size: .85rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+.pg-detail .pgd-crumb a:hover {
+  color: #7A3230;
+}
+
+.pg-detail .pgd-save {
+  margin-top: -48px;
+  padding: 10px 12px 15px;
+  border: 1px solid rgba(122, 50, 48, .25);
+  border-top: 0;
+  cursor: pointer;
+  font-family: 'Raleway', -apple-system, sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #302D26;
+  background: #FAF8F5;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 6px), 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 6px), 0 100%);
+  transition: background .18s ease, color .18s ease;
+}
+.pg-detail .pgd-save:hover {
+  color: #7A3230;
+}
+.pg-detail .pgd-save[aria-pressed="true"] {
+  background: #7A3230;
+  color: #FFFFFF;
+}
+
+.pg-detail .pgd-mobilebar {
+  display: none;
+}
+
+/* --- Título --- */
+
+.pg-detail .pgd-h1 {
+  margin: 0 0 32px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: .01em;
+  color: #302D26;
+}
+
+.pg-detail .pgd-case {
+  display: block;
+  margin-top: 10px;
+  font-size: .5em;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #7A3230;
+}
+
+.pg-detail .pgd-rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: #C2A97E;
+  margin-top: 16px;
+}
+
+/* --- Fotos --- */
+
+.pg-detail .pgd-card {
+  background: #FAF8F5;
+  border: 1px solid rgba(173, 151, 79, .2);
+  box-shadow: 0 2px 20px rgba(48, 45, 38, .06);
+  padding: 32px 32px 40px;
+}
+
+.pg-detail .pgd-pairs {
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pg-detail .pgd-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.pg-detail .pgb,
+.pg-detail .pga {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 1px solid #C2A97E;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #F3EFE8;
+}
+
+.pg-detail .pgb img,
+.pg-detail .pga img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pg-detail .pgb::after,
+.pg-detail .pga::after {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: .47rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.pg-detail .pgb::after {
+  content: "Before";
+  background: rgba(194, 169, 126, .75);
+  color: #302D26;
+}
+
+.pg-detail .pga::after {
+  content: "After";
+  background: rgba(122, 50, 48, .75);
+  color: #FFFFFF;
+}
+
+/* Caso con una sola foto (sin par before/after) — sin ejemplo real confirmado todavía. */
+.pg-detail .pgd-single {
+  margin: 0 0 32px;
+}
+
+.pg-detail .pgd-imgbtn {
+  display: block;
+  width: 100%;
+  border: 1px solid #C2A97E;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: #F3EFE8;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.pg-detail .pgd-imgbtn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Caption "Post-op" centrada — alternativa a la fila del panel, sin trigger confirmado todavía. */
+.pg-detail .pgd-postop {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #302D26;
+  text-align: center;
+  margin: -12px 0 32px;
+  padding-bottom: 22px;
+  position: relative;
+}
+
+.pg-detail .pgd-postop::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 56px;
+  height: 2px;
+  background: #7A3230;
+}
+
+/* --- Narrativa --- */
+
+.pg-detail .pgd-narrative {
+  border-top: 1px solid #C2A97E;
+  padding-top: 28px;
+  margin-bottom: 32px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #5A5450;
+}
+
+.pg-detail .pgd-narrative p {
+  margin: 0 0 1em;
+}
+.pg-detail .pgd-narrative p:last-child {
+  margin-bottom: 0;
+}
+.pg-detail .pgd-narrative a {
+  text-decoration: underline;
+  text-decoration-color: rgba(173, 151, 79, .4);
+}
+.pg-detail .pgd-narrative strong,
+.pg-detail .pgd-narrative b {
+  color: #302D26;
+  font-weight: 500;
+}
+
+/* --- Ficha (Age/Gender/Surgeon/Number of Treatments) --- */
+
+.pg-detail .pgd-panel {
+  background: #F3EFE8;
+  border: 1px solid #AD974F;
+  border-top: 2px solid #AD974F;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.pg-detail .pgd-panel dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 0;
+}
+
+.pg-detail .pgd-row dt {
+  font-family: 'Raleway', -apple-system, sans-serif;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #AD974F;
+  margin: 0 0 6px;
+}
+
+.pg-detail .pgd-row dd {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #302D26;
+  margin: 0;
+}
+
+/* --- Píldoras de procedimiento --- */
+
+.pg-detail .pgd-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.pg-detail .pgd-cats a {
+  border-radius: 999px;
+  background: #D8AFA5;
+  color: #302D26;
+  padding: 8px 16px;
+  font-size: .8rem;
+  font-weight: 400;
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: background .18s ease;
+}
+.pg-detail .pgd-cats a:hover {
+  background: #C49A8F;
+}
+
+/* --- CTA --- */
+
+.pg-detail .pgd-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.pg-detail .pgd-btn {
+  flex: 1 1 220px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 28px;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+
+.pg-detail .pgd-btn-primary {
+  background: #7A3230;
+  border: 1px solid #7A3230;
+  color: #FFFFFF !important;
+}
+.pg-detail .pgd-btn-primary:hover {
+  background: #302D26;
+  border-color: #302D26;
+}
+
+.pg-detail .pgd-btn-secondary {
+  background: transparent;
+  border: 1px solid #AD974F;
+  color: #AD974F;
+}
+.pg-detail .pgd-btn-secondary:hover {
+  background: #AD974F;
+  color: #FFFFFF;
+}
+
+/* --- Caso siguiente/anterior --- */
+
+.pg-detail .pgd-prevnext {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(173, 151, 79, .2);
+  font-size: .85rem;
+}
+
+.pg-detail .pgd-prevnext a {
+  text-decoration: none;
+  color: #5A5450;
+  transition: color .15s ease;
+}
+.pg-detail .pgd-prevnext a:hover {
+  color: #7A3230;
+}
+.pg-detail .pgd-prevnext a span {
+  display: block;
+  font-size: .72rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #8A8480;
+  margin-top: 2px;
+}
+
+.pg-detail .pgd-next {
+  text-align: right;
+}
+
+.pg-detail button:focus-visible,
+.pg-detail a:focus-visible {
+  outline: 3px solid #7A3230;
+  outline-offset: 2px;
+}
+
+/* --- Lightbox --- */
+
+.pg-detail .pg-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+.pg-detail .pg-lb[hidden] {
+  display: none;
+}
+.pg-detail .pg-lb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(48, 45, 38, .9);
+}
+.pg-detail .pg-lb-dialog {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  margin: 5vh auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pg-detail .pg-lb-img {
+  max-width: 90vw;
+  max-height: 75vh;
+  object-fit: contain;
+  background: #FAF8F5;
+}
+.pg-detail .pg-lb-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(48, 45, 38, .85);
+  border: 1px solid rgba(255, 255, 255, .18);
+  color: #FAF8F5;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease;
+}
+.pg-detail .pg-lb-close:hover,
+.pg-detail .pg-lb-close:focus-visible {
+  border-color: #AD974F;
+  color: #AD974F;
+}
+.pg-detail .pg-lb-prev,
+.pg-detail .pg-lb-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(48, 45, 38, .85);
+  border: 1px solid rgba(255, 255, 255, .18);
+  color: #FAF8F5;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease;
+}
+.pg-detail .pg-lb-prev:hover,
+.pg-detail .pg-lb-prev:focus-visible,
+.pg-detail .pg-lb-next:hover,
+.pg-detail .pg-lb-next:focus-visible {
+  border-color: #AD974F;
+  color: #AD974F;
+}
+.pg-detail .pg-lb-prev {
+  left: 8px;
+}
+.pg-detail .pg-lb-next {
+  right: 8px;
+}
+.pg-detail .pg-lb-info {
+  color: rgba(250, 248, 245, .85);
+  font-size: .9rem;
+  margin-top: 12px;
+}
+
+@media (max-width: 767px) {
+  .pg-detail {
+    padding-top: 28px;
+    padding-bottom: 120px;
+  }
+  .pg-detail .pgd-pair {
+    gap: 6px;
+  }
+  .pg-detail .pgd-card {
+    padding: 24px 18px 28px;
+  }
+  .pg-detail .pgd-panel {
+    padding: 18px;
+  }
+  .pg-detail .pgd-panel dl {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 12px;
+  }
+  .pg-detail .pgd-cta {
+    flex-direction: column;
+  }
+  .pg-detail .pgd-btn {
+    flex: 1 1 auto;
+  }
+  .pg-detail .pgd-prevnext {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pg-detail .pgd-next {
+    text-align: left;
+  }
+  .pg-detail .pgd-crumb .pgd-save {
+    display: none;
+  }
+  .pg-detail .pgd-mobilebar {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9000;
+    background: #FAF8F5;
+    border-top: 1px solid rgba(173, 151, 79, .3);
+    box-shadow: 0 -4px 20px rgba(48, 45, 38, .12);
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  }
+  .pg-detail .pgd-mobilebar .pgd-btn {
+    flex: 1 1 auto;
+    min-height: 48px;
+    margin: 0;
+  }
+  .pg-detail .pgd-save--bar {
+    flex: 0 0 auto;
+    min-width: 84px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border: 1px solid #7A3230;
+    background: transparent;
+    color: #7A3230;
+    font-family: 'Raleway', -apple-system, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-clip-path: none;
+    clip-path: none;
+    margin: 0;
+    transition: background .18s ease, color .18s ease;
+  }
+  .pg-detail .pgd-save--bar[aria-pressed="true"] {
+    background: #7A3230;
+    color: #FFFFFF;
+  }
+}

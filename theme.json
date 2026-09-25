@@ -144,6 +144,56 @@
                     ]
                 },
                 {
+                    "name": "Cormorant Garamond",
+                    "slug": "cormorant-garamond",
+                    "fontFamily": "\"Cormorant Garamond\", Georgia, \"Times New Roman\", serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "Cormorant Garamond",
+                            "fontStyle": "normal",
+                            "fontWeight": "300 700",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/cormorant-garamond-variable-latin.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "Cormorant Garamond",
+                            "fontStyle": "italic",
+                            "fontWeight": "300 700",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/cormorant-garamond-variable-italic-latin.woff2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Raleway",
+                    "slug": "raleway",
+                    "fontFamily": "\"Raleway\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+                    "fontFace": [
+                        {
+                            "fontFamily": "Raleway",
+                            "fontStyle": "normal",
+                            "fontWeight": "100 900",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/Raleway.woff2"
+                            ]
+                        },
+                        {
+                            "fontFamily": "Raleway",
+                            "fontStyle": "italic",
+                            "fontWeight": "100 900",
+                            "fontDisplay": "swap",
+                            "src": [
+                                "file:./assets/fonts/raleway-variable-italic-latin.woff2"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "name": "System",
                     "slug": "system",
                     "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"

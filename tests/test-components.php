@@ -6,22 +6,22 @@
  *
  * Crea componentes, imagen destacada y bloques traducidos temporales en la
  * página 18 (Contactanos) y los restaura al final. Requiere el sitio en
- * http://localhost:8888/Intelindev/.
+ * http://localhost:8888/WPfemsculpt/.
  */
-use IntelindevInit\Components\ComponentsController as C;
+use pswptInit\Components\ComponentsController as C;
 
-$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/Intelindev/'; define('WP_USE_THEMES', false);
+$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/WPfemsculpt/'; define('WP_USE_THEMES', false);
 require dirname(__DIR__, 4) . '/wp-load.php';
 require_once ABSPATH . 'wp-admin/includes/image.php';
 require_once ABSPATH . 'wp-admin/includes/template.php';
 
 $fails = 0;
 function check(string $label, bool $ok): void { global $fails; echo ($ok ? "  ok   " : "  FAIL ") . "$label\n"; if (!$ok) $fails++; }
-$curl = fn(string $path) => (string) shell_exec('curl -s ' . escapeshellarg('http://localhost:8888/Intelindev' . $path));
-$sub  = fn(string $code) => trim((string) shell_exec(PHP_BINARY . ' -r ' . escapeshellarg('$_SERVER["HTTP_HOST"]="localhost:8888"; $_SERVER["REQUEST_URI"]="/Intelindev/wp-admin/"; define("WP_USE_THEMES",false); define("WP_ADMIN",true); require "' . ABSPATH . 'wp-load.php"; require_once ABSPATH."wp-admin/includes/template.php"; wp_set_current_user(1); ' . $code) . ' 2>/dev/null'));
+$curl = fn(string $path) => (string) shell_exec('curl -s ' . escapeshellarg('http://localhost:8888/WPfemsculpt' . $path));
+$sub  = fn(string $code) => trim((string) shell_exec(PHP_BINARY . ' -r ' . escapeshellarg('$_SERVER["HTTP_HOST"]="localhost:8888"; $_SERVER["REQUEST_URI"]="/WPfemsculpt/wp-admin/"; define("WP_USE_THEMES",false); define("WP_ADMIN",true); require "' . ABSPATH . 'wp-load.php"; require_once ABSPATH."wp-admin/includes/template.php"; wp_set_current_user(1); ' . $code) . ' 2>/dev/null'));
 wp_set_current_user(1);
 
-$PAGE = 18; $META = INTELINDEV_POST_TRANSLATED_CONTENT_META;
+$PAGE = 18; $META = pswpt_POST_TRANSLATED_CONTENT_META;
 $orig_blocks = get_post_meta($PAGE, $META, true); $orig_thumb = get_post_thumbnail_id($PAGE);
 $created = []; $att = 0;
 $mk = function (string $title, string $slug, string $template, string $status = 'publish') use (&$created): int {
@@ -45,7 +45,7 @@ try {
     check('5 componentes creados (4 publicados + 1 borrador)', count($created) === 5);
 
     echo "2) registro de shortcodes (subproceso, transient invalidado)\n";
-    $tags = explode(',', $sub('global $shortcode_tags; echo implode(",", array_keys(array_filter($shortcode_tags, fn($cb) => is_array($cb) && $cb[0] instanceof \IntelindevInit\Components\ComponentsController)));'));
+    $tags = explode(',', $sub('global $shortcode_tags; echo implode(",", array_keys(array_filter($shortcode_tags, fn($cb) => is_array($cb) && $cb[0] instanceof \pswptInit\Components\ComponentsController)));'));
     check('hero, inner, loop registrados por el módulo', array_diff(['hero', 'inner', 'loop'], $tags) === []);
     check('gallery (conflicto) y borrador NO', !in_array('gallery', $tags, true) && !in_array('borrador', $tags, true));
     check('gallery sigue siendo el de WP', $sub('global $shortcode_tags; echo is_string($shortcode_tags["gallery"]) ? $shortcode_tags["gallery"] : "closure";') === 'gallery_shortcode');
@@ -59,22 +59,22 @@ try {
     $ces = $grab($curl('/contacto/')); $cen = $grab($curl('/en/contact-us/'));
     $img = wp_get_attachment_image_url($att, 'medium');
     check('ES: título traducido + atributos + default cta_url', strpos($ces, '<h1>Contacto</h1>') !== false && strpos($ces, '<p class="sub">Hablemos de tu proyecto</p>') !== false && strpos($ces, '<a class="btn" href="#contacto">Escribinos</a>') !== false);
-    check('ES: imagen destacada medium + lang + site + permalink', strpos($ces, 'url(' . $img . ')') !== false && strpos($ces, 'data-lang="es"') !== false && strpos($ces, '<span class="site">Intelindev</span>') !== false && strpos($ces, '<span class="link">http://localhost:8888/Intelindev/contacto/</span>') !== false);
+    check('ES: imagen destacada medium + lang + site + permalink', strpos($ces, 'url(' . $img . ')') !== false && strpos($ces, 'data-lang="es"') !== false && strpos($ces, '<span class="site">pswpt</span>') !== false && strpos($ces, '<span class="link">http://localhost:8888/WPfemsculpt/contacto/</span>') !== false);
     check('ES: diccionario {t:} + contenido envolvente + componente anidado', strpos($ces, '<span class="dict">Anteriores</span>') !== false && strpos($ces, '<div class="body"><p>Cuerpo ES</p></div>') !== false && strpos($ces, '<em class="inner">inner:Contacto</em>') !== false);
     check('ES: recursión cortada (un solo loop) y borrador sin registrar', substr_count($ces, '<i class="loop">loop</i>') === 1 && strpos($ces, '[borrador]') !== false && strpos($ces, 'NO DEBE VERSE') === false);
-    check('EN: título/permalink traducidos + default cta + url escapada', strpos($cen, '<h1>Contact us</h1>') !== false && strpos($cen, '<span class="link">http://localhost:8888/Intelindev/en/contact-us/</span>') !== false && strpos($cen, '<a class="btn" href="https://x.com/?a=1&amp;b=2">Contactanos</a>') !== false);
+    check('EN: título/permalink traducidos + default cta + url escapada', strpos($cen, '<h1>Contact us</h1>') !== false && strpos($cen, '<span class="link">http://localhost:8888/WPfemsculpt/en/contact-us/</span>') !== false && strpos($cen, '<a class="btn" href="https://x.com/?a=1&amp;b=2">Contactanos</a>') !== false);
     check('EN: atributo con entidad + diccionario en inglés + lang', strpos($cen, '<p class="sub">Let&#039;s talk</p>') !== false && strpos($cen, '<span class="dict">Previous</span>') !== false && strpos($cen, 'data-lang="en"') !== false);
     check('EN: atributo con HTML escapado + sin content → vacío', strpos($cen, '<p class="sub">&lt;b&gt;x&lt;/b&gt;</p>') !== false && substr_count($cen, '<div class="body"></div>') === 1);
 
     echo "4) admin: metabox y columna\n";
-    $mb = $sub('ob_start(); (new \IntelindevInit\Components\ComponentsController())->render_meta_box(get_post(' . $hero . ')); echo ob_get_clean();');
+    $mb = $sub('ob_start(); (new \pswptInit\Components\ComponentsController())->render_meta_box(get_post(' . $hero . ')); echo ob_get_clean();');
     check('metabox: shortcode de ejemplo con atributos detectados (sin reservados)', strpos($mb, '[hero cta=&quot;&quot; cta_url=&quot;&quot; subtitle=&quot;&quot;]') !== false);
-    check('metabox: plantilla en textarea + sin aviso de conflicto', strpos($mb, 'name="' . C::FIELD_TEMPLATE . '"') !== false && strpos($mb, '{cta|Contactanos}') !== false && strpos($mb, 'en conflicto') === false);
+    check('metabox: plantilla en textarea + sin aviso de conflicto', strpos($mb, 'name="' . C::FIELD_TEMPLATE . '"') !== false && strpos($mb, '{cta|Contactanos}') !== false && strpos($mb, 'conflict') === false);
     $gal = (int) get_page_by_path('gallery', OBJECT, C::POST_TYPE)->ID;
-    $mbg = $sub('ob_start(); (new \IntelindevInit\Components\ComponentsController())->render_meta_box(get_post(' . $gal . ')); echo ob_get_clean();');
-    check('metabox gallery: aviso de conflicto', strpos($mbg, 'en conflicto') !== false);
-    $col = $sub('ob_start(); do_action("manage_' . C::POST_TYPE . '_posts_custom_column", "intelindev_shortcode", ' . $gal . '); do_action("manage_' . C::POST_TYPE . '_posts_custom_column", "intelindev_shortcode", ' . $hero . '); echo ob_get_clean();');
-    check('columna: gallery en conflicto, hero limpio', substr_count($col, 'en conflicto') === 1 && strpos($col, '[hero') !== false);
+    $mbg = $sub('ob_start(); (new \pswptInit\Components\ComponentsController())->render_meta_box(get_post(' . $gal . ')); echo ob_get_clean();');
+    check('metabox gallery: aviso de conflicto', strpos($mbg, 'conflict') !== false);
+    $col = $sub('ob_start(); do_action("manage_' . C::POST_TYPE . '_posts_custom_column", "pswpt_shortcode", ' . $gal . '); do_action("manage_' . C::POST_TYPE . '_posts_custom_column", "pswpt_shortcode", ' . $hero . '); echo ob_get_clean();');
+    check('columna: gallery en conflicto, hero limpio', substr_count($col, 'conflict') === 1 && strpos($col, '[hero') !== false);
 
     echo "5) guardado vía save_post con nonce (sanitize)\n";
     $_POST[C::NONCE_FIELD] = wp_create_nonce(C::NONCE_ACTION);

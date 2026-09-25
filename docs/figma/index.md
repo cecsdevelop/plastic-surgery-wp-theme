@@ -1,4 +1,4 @@
-# 🎨 Website - DS Intelindev
+# 🎨 Website - DS pswpt
 
 Archivo `soT78LzfqhZ72LVTGOs9xC` · última modificación 2026-09-11T14:48:16Z · bajado 2026-09-17T18:23:53.931Z
 
@@ -535,7 +535,7 @@ Archivo `soT78LzfqhZ72LVTGOs9xC` · última modificación 2026-09-11T14:48:16Z �
   - RECTANGLE Rectangle 83 `7004:472` 315×302
   - RECTANGLE Rectangle 85 `7004:473` 315×302
   - RECTANGLE Rectangle 44 `7004:474` 1440×160
-  - RECTANGLE intelindev 1 `7004:475` 1441×842
+  - RECTANGLE pswpt 1 `7004:475` 1441×842
   - FRAME Frame 16 `7004:476` 716×315
   - RECTANGLE Rectangle 49 `7004:488` 1440×821
   - RECTANGLE Rectangle 45 `7004:489` 820×89

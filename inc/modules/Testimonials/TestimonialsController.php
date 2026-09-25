@@ -1,6 +1,6 @@
 <?php
 /**
- * Testimonios (CPT intelindev_testimony — el nombre corto es por el límite
+ * Testimonios (CPT pswpt_testimony — el nombre corto es por el límite
  * de 20 caracteres de WP): citas de clientes para el carrusel "Clientes
  * testimoniales". Sin URL pública: se consumen desde componentes. Título =
  * nombre de la persona; foto = imagen destacada; la cita va en el metabox
@@ -8,16 +8,16 @@
  *
  * Módulo CPT estándar del theme: ver la skill wp-theme-cpt-module.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\Testimonials;
+namespace pswptInit\Testimonials;
 
-use IntelindevInit\General\ContentTypeController;
+use pswptInit\General\ContentTypeController;
 
 class TestimonialsController extends ContentTypeController
 {
-    public const POST_TYPE = 'intelindev_testimony';
+    public const POST_TYPE = 'pswpt_testimony';
 
     protected function config(): array
     {
@@ -27,15 +27,15 @@ class TestimonialsController extends ContentTypeController
                 'es' => ['name' => 'Testimonios', 'singular' => 'Testimonio'],
                 'en' => ['name' => 'Testimonials', 'singular' => 'Testimonial'],
             ],
-            'description'     => __('Citas de clientes. El título es el nombre de la persona; la cita va en "Contenido traducido".', 'intelindev'),
+            'description'     => __('Client quotes. The title is the person\'s name; the quote goes in "Translated content".', 'pswpt'),
             'public'          => false,
             'menu_icon'       => 'dashicons-format-quote',
             'menu_position'   => 28,
-            'thumbnail_label' => __('Foto', 'intelindev'),
+            'thumbnail_label' => __('Photo', 'pswpt'),
             'fields'          => [
-                'role'    => ['label' => __('Cargo', 'intelindev'), 'type' => 'lang_text', 'column' => true],
-                'company' => ['label' => __('Empresa', 'intelindev'), 'type' => 'text', 'column' => true],
-                'country' => ['label' => __('País', 'intelindev'), 'type' => 'text'],
+                'role'    => ['label' => __('Job title', 'pswpt'), 'type' => 'lang_text', 'column' => true],
+                'company' => ['label' => __('Company', 'pswpt'), 'type' => 'text', 'column' => true],
+                'country' => ['label' => __('Country', 'pswpt'), 'type' => 'text'],
             ],
         ];
     }

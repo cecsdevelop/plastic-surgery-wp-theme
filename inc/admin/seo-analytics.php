@@ -2,28 +2,28 @@
 /**
  * SEO & Analytics
  * Meta tags, resource hints, GTM/GA4, custom scripts. Lee la pestaña SEO y
- * Analytics de Intelindev Settings.
+ * Analytics de pswpt Settings.
  *
- * @package intelindev
+ * @package pswpt
  */
 
 if (!defined('ABSPATH')) exit;
 
 // Helper ACF fallback
-function intelindev_acf_or_setting($key, $default = null) {
+function pswpt_acf_or_setting($key, $default = null) {
   $get_acf = function_exists('get_field') ? get_field($key, 'option') : null;
-  return intelindev_get_setting($key, $get_acf) ?? $default;
+  return pswpt_get_setting($key, $get_acf) ?? $default;
 }
 
 // SEO/Meta
 add_action('wp_head', function () {
   if (is_admin()) return;
-  $force_noindex = (bool) intval(intelindev_acf_or_setting('force_noindex'));
-  $canonical = rtrim((string)intelindev_acf_or_setting('canonical_domain'), '/');
-  $gsc = trim((string)intelindev_acf_or_setting('gsc_verification'));
-  $bing = trim((string)intelindev_acf_or_setting('bing_verification'));
-  $manifest = esc_url((string) intelindev_acf_or_setting('manifest_url')); // (string): sin ajuste devuelve null y esc_url avisa (PHP 8.1+)
-  $theme_color = sanitize_text_field(intelindev_acf_or_setting('theme_color'));
+  $force_noindex = (bool) intval(pswpt_acf_or_setting('force_noindex'));
+  $canonical = rtrim((string)pswpt_acf_or_setting('canonical_domain'), '/');
+  $gsc = trim((string)pswpt_acf_or_setting('gsc_verification'));
+  $bing = trim((string)pswpt_acf_or_setting('bing_verification'));
+  $manifest = esc_url((string) pswpt_acf_or_setting('manifest_url')); // (string): sin ajuste devuelve null y esc_url avisa (PHP 8.1+)
+  $theme_color = sanitize_text_field(pswpt_acf_or_setting('theme_color'));
 
   if ($force_noindex) echo '<meta name="robots" content="noindex,nofollow" />' . PHP_EOL;
   if ($canonical && !is_404()) {
@@ -40,7 +40,7 @@ add_action('wp_head', function () {
 // resource hints, que el core imprime en wp_head (prioridad 2) y deduplica.
 add_filter('wp_resource_hints', function (array $urls, string $relation): array {
   if ($relation !== 'preconnect') return $urls;
-  $hosts = intelindev_get_setting('preconnect_hosts', []);
+  $hosts = pswpt_get_setting('preconnect_hosts', []);
   foreach ((array) $hosts as $host) {
     $host = trim((string) $host);
     if ($host !== '') $urls[] = $host;
@@ -53,8 +53,8 @@ add_action('wp_head', function () {
   if (is_admin()) return;
   $is_production = wp_get_environment_type() === 'production';
   if (!$is_production) return;
-  $gtm = trim((string)intelindev_acf_or_setting('gtm_container_id'));
-  $ga4 = trim((string)intelindev_acf_or_setting('ga4_measurement_id'));
+  $gtm = trim((string)pswpt_acf_or_setting('gtm_container_id'));
+  $ga4 = trim((string)pswpt_acf_or_setting('ga4_measurement_id'));
   if ($gtm) : ?>
     <script>
     (function(w,d,s,l,i){
@@ -99,7 +99,7 @@ add_action('wp_body_open', function () {
   if (is_admin()) return;
   $is_production = wp_get_environment_type() === 'production';
   if (!$is_production) return;
-  if ($gtm = trim((string)intelindev_acf_or_setting('gtm_container_id'))) {
+  if ($gtm = trim((string)pswpt_acf_or_setting('gtm_container_id'))) {
     echo '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id='.esc_attr($gtm).'" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>' . PHP_EOL;
   }
 }, 5);

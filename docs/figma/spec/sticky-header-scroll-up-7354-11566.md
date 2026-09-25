@@ -556,7 +556,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
             - TEXT "Description" 7354:11656 617×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ffffff} "Subheading" (oculto)
             - TEXT "Title" 7354:11657 617×110 {DM Sans 600 · 54.93000030517578px · lh 55px · title · #080808} "Soluciones tecnológicas diseñadas para escalar"
           - FRAME "Body" 7354:11658 617×81 [column gap 15 main center]
-            - TEXT "Description" 7354:11659 617×81 {DM Sans 400 · 18px · lh 27px · #151414} "En Intelindev desarrollamos plataformas digitales, productos tecnológicos y sistemas a medida que optimizan procesos, aumentan la eficiencia y generan crecimien"
+            - TEXT "Description" 7354:11659 617×81 {DM Sans 400 · 18px · lh 27px · #151414} "En pswpt desarrollamos plataformas digitales, productos tecnológicos y sistemas a medida que optimizan procesos, aumentan la eficiencia y generan crecimien"
             - TEXT "Description" 7354:11660 617×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ffffff} "Subbody" (oculto)
         - FRAME "Frame 147" 7354:11661 617×352 [column gap 30]
           - FRAME "Icon Box" 7354:11662 617×98 [row gap 20 cross center]
@@ -967,7 +967,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
           - FRAME "Frame 203" 7595:13120 420×201 [column gap 10]
             - TEXT "+25" 7595:13121 420×143 {DM Sans 700 · 150px · lh 143px · #ffffff} "+25"
             - TEXT "clientes atendidos" 7595:13122 420×48 {DM Sans 300 · 50px · lh 48px · center · #ffffff} "clientes atendidos"
-        - TEXT "La experiencia Intelindev Experiencias reales trabajando en desarrollo, delivery y escalabilidad." 7595:13123 289×64 {DM Sans 300 · 30px · lh 29px · #ffffff} "La experiencia Intelindev Experiencias reales trabajando en desarrollo, delivery y escalabilidad."
+        - TEXT "La experiencia pswpt Experiencias reales trabajando en desarrollo, delivery y escalabilidad." 7595:13123 289×64 {DM Sans 300 · 30px · lh 29px · #ffffff} "La experiencia pswpt Experiencias reales trabajando en desarrollo, delivery y escalabilidad."
         - FRAME "Frame 161" 7595:13124 198×48 [row gap 20 cross center]
           - INSTANCE "Button" 7595:13125 89×48 [row gap 10 pad 10/10/10/10 main center cross center] border 1px #ffffff radius 10 shadow <instance 5436:32826>
             - INSTANCE "arrow-left" I7595:13125;5436:32827 28×28 <instance 23:11103>
@@ -988,7 +988,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
                 - GROUP "Group 79" 7595:13137 79×59
                   - VECTOR "“" 7595:13138 79×59 bg #fefdfd
           - FRAME "Frame 144" 7595:13139 462×275 [column gap 50 main center]
-            - TEXT "Trabajar con Intelindev fue una experiencia increíble. Su equipo entendió nuestras necesidades desde el primer momento y desarrolló una solución a la medida que superó nuestras expectativas." 7595:13140 462×130 {DM Sans 400 · 20px · lh 26px · #ffffff} "Trabajar con Intelindev fue una experiencia increíble. Su equipo entendió nuestras necesidades desde el primer momento y desarrolló una solución a la medida que"
+            - TEXT "Trabajar con pswpt fue una experiencia increíble. Su equipo entendió nuestras necesidades desde el primer momento y desarrolló una solución a la medida que superó nuestras expectativas." 7595:13140 462×130 {DM Sans 400 · 20px · lh 26px · #ffffff} "Trabajar con pswpt fue una experiencia increíble. Su equipo entendió nuestras necesidades desde el primer momento y desarrolló una solución a la medida que"
             - LINE "Line 8" 7595:13141 462×0 border 1px #e73728
             - TEXT "Arlen Pérez Directora de innovación Sana Sana Costa Rica" 7595:13142 289×45 {DM Sans 300 · 30px · lh 29px · #ffffff} "Arlen Pérez Directora de innovación Sana Sana Costa Rica"
         - GROUP "Group 84" 7595:13143 696×487
@@ -1003,7 +1003,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
                 - GROUP "Group 79" 7595:13152 79×59
                   - VECTOR "“" 7595:13153 79×59 bg #312f30
           - FRAME "Frame 144" 7595:13154 462×275 [column gap 50 main center]
-            - TEXT "Trabajar con Intelindev fue una experiencia increíble. Su equipo entendió nuestras necesidades desde el primer momento y desarrolló una solución a la medida que superó nuestras expectativas." 7595:13155 462×130 {DM Sans 400 · 20px · lh 26px · #ffffff} "Trabajar con Intelindev fue una experiencia increíble. Su equipo entendió nuestras necesidades desde el primer momento y desarrolló una solución a la medida que"
+            - TEXT "Trabajar con pswpt fue una experiencia increíble. Su equipo entendió nuestras necesidades desde el primer momento y desarrolló una solución a la medida que superó nuestras expectativas." 7595:13155 462×130 {DM Sans 400 · 20px · lh 26px · #ffffff} "Trabajar con pswpt fue una experiencia increíble. Su equipo entendió nuestras necesidades desde el primer momento y desarrolló una solución a la medida que"
             - LINE "Line 8" 7595:13156 462×0 border 1px #e73728
             - TEXT "Arlen Pérez Directora de innovación Sana Sana Costa Rica" 7595:13157 289×45 {DM Sans 300 · 30px · lh 29px · #ffffff} "Arlen Pérez Directora de innovación Sana Sana Costa Rica"
   - FRAME "Frame 167" 7674:14100 1728×617 [column gap 60 pad 80/60/60/60 main center cross center] bg #ffffff
@@ -1955,7 +1955,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
     - FRAME "SOCKET" 7354:12043 1728×82 [row gap 105 pad 20/0/20/0 main space_between cross center]
       - FRAME "Container" 7354:12044 1536×42 [row gap 1209 main space_between cross center]
         - INSTANCE "SOCKET COPY" 7354:12045 252×42 [column pad 10/0/10/0] <instance 20:947>
-          - TEXT "Description" I7354:12045;20:948 252×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ebe6e6} "Intelindev © 2026 All Rights Reserved."
+          - TEXT "Description" I7354:12045;20:948 252×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ebe6e6} "pswpt © 2026 All Rights Reserved."
   - FRAME "Header" 7449:12834 1536×80 [row pad 10/30/10/30 main center cross center] bg #000000 71% radius 20
     - FRAME "Frame 3" 7449:12835 1476×60 [row cross center]
       - FRAME "Frame 19" 7449:12836 160×60 [column gap 10]

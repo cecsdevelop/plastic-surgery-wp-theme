@@ -17,7 +17,7 @@
 - #a5d9e4 × 3 — ej. fondo "Ellipse 3"
 - #611711 × 2 — ej. fondo "Rectangle 44"
 - #a4271c × 2 — ej. fondo "Rectangle 45"
-- #000000 × 2 — ej. texto "En Intelindev desarrollamos soluciones de software a medida basadas en arquitecturas modernas, diseñadas para integrarse eficientemente con los ecosistemas tecnológicos existentes de cada organización. Trabajamos con frameworks escalables, patrones de diseño robustos, bases de datos relacionales y no relacionales, microservicios y prácticas de seguridad alineadas a estándares internacionales. Nuestro objetivo es construir sistemas estables, mantenibles y preparados para soportar alto volumen de transacciones y crecimiento sostenido."
+- #000000 × 2 — ej. texto "En pswpt desarrollamos soluciones de software a medida basadas en arquitecturas modernas, diseñadas para integrarse eficientemente con los ecosistemas tecnológicos existentes de cada organización. Trabajamos con frameworks escalables, patrones de diseño robustos, bases de datos relacionales y no relacionales, microservicios y prácticas de seguridad alineadas a estándares internacionales. Nuestro objetivo es construir sistemas estables, mantenibles y preparados para soportar alto volumen de transacciones y crecimiento sostenido."
 
 ## Radios
 

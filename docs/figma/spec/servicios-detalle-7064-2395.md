@@ -4,7 +4,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
 
 - FRAME "Servicios_Detalle" 7064:2395 1440×1716 bg #ffffff
   - RECTANGLE "Rectangle 44" 7064:2396 1440×160 bg #611711
-  - RECTANGLE "intelindev 1" 7064:2397 1441×389 bg image
+  - RECTANGLE "pswpt 1" 7064:2397 1441×389 bg image
   - FRAME "Frame 16" 7064:2398 716×57 [column gap 20 main center]
     - TEXT "Desarrollo de Software" 7064:2399 716×57 {DM Sans 400 · 60px · lh 57px · center · #ffffff} "Desarrollo de Software"
   - RECTANGLE "Rectangle 45" 7064:2400 820×89 bg #a4271c radius 20
@@ -103,7 +103,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
         - VECTOR "Vector" I7064:2469;88:25 6×10 bg #ffffff
         - VECTOR "Vector" I7064:2469;88:26 6×11 bg #ffffff
   - FRAME "Frame 107" 7064:2470 715×745 [column gap 40]
-    - TEXT "En Intelindev desarrollamos soluciones de software a medida basadas en arquitecturas modernas, diseñadas para integrarse eficientemente con los ecosistemas tecnológicos existentes de cada organización. Trabajamos con frameworks escalables, patrones de diseño robustos, bases de datos relacionales y no relacionales, microservicios y prácticas de seguridad alineadas a estándares internacionales. Nuestro objetivo es construir sistemas estables, mantenibles y preparados para soportar alto volumen de transacciones y crecimiento sostenido." 7064:2471 715×147 {DM Sans 400 · 16px · lh 21px · #000000} "En Intelindev desarrollamos soluciones de software a medida basadas en arquitecturas modernas, diseñadas para integrarse eficientemente con los ecosistemas tecn"
+    - TEXT "En pswpt desarrollamos soluciones de software a medida basadas en arquitecturas modernas, diseñadas para integrarse eficientemente con los ecosistemas tecnológicos existentes de cada organización. Trabajamos con frameworks escalables, patrones de diseño robustos, bases de datos relacionales y no relacionales, microservicios y prácticas de seguridad alineadas a estándares internacionales. Nuestro objetivo es construir sistemas estables, mantenibles y preparados para soportar alto volumen de transacciones y crecimiento sostenido." 7064:2471 715×147 {DM Sans 400 · 16px · lh 21px · #000000} "En pswpt desarrollamos soluciones de software a medida basadas en arquitecturas modernas, diseñadas para integrarse eficientemente con los ecosistemas tecn"
     - RECTANGLE "collage-de-fondo-de-programacion 1" 7064:2472 718×392 bg image radius 20
     - TEXT "Nuestro proceso incluye análisis funcional y técnico, diseño de arquitectura, modelado de datos, desarrollo backend y frontend, automatización de pruebas, integración continua, despliegues en entornos cloud (Azure/AWS) y monitoreo post-implementación. Aplicamos metodologías ágiles (Scrum) para garantizar entregas frecuentes, visibilidad total del avance y capacidad de adaptación ante cambios. El resultado: software confiable, alineado a los objetivos del negocio y con una base tecnológica sólida para su evolución futura." 7064:2473 715×126 {DM Sans 400 · 16px · lh 21px · #000000} "Nuestro proceso incluye análisis funcional y técnico, diseño de arquitectura, modelado de datos, desarrollo backend y frontend, automatización de pruebas, integ"
   - FRAME "Frame 110" 7064:2474 505×459 [column]

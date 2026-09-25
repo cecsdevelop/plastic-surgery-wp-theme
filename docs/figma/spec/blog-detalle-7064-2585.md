@@ -4,7 +4,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
 
 - FRAME "Blog_Detalle" 7064:2585 1440×2998 bg #ffffff
   - RECTANGLE "Rectangle 44" 7064:2586 1440×160 bg #611711
-  - RECTANGLE "intelindev 1" 7064:2587 1441×389 bg image
+  - RECTANGLE "pswpt 1" 7064:2587 1441×389 bg image
   - FRAME "Frame 16" 7064:2588 1030×114 [column gap 20 main center cross center]
     - TEXT "Tendencias tecnológicas 2025 que están transformando el mercado" 7064:2589 974×114 {DM Sans 400 · 60px · lh 57px · center · #ffffff} "Tendencias tecnológicas 2025 que están transformando el mercado"
   - RECTANGLE "Rectangle 45" 7064:2590 820×89 bg #a4271c radius 20

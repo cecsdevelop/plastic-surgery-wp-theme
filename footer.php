@@ -1,14 +1,14 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-// Apariencia → Intelindev Footer: grilla de áreas de widgets por idioma + barra
+// Apariencia → pswpt Footer: grilla de áreas de widgets por idioma + barra
 // de copyright (ver admin-footer-settings.php).
 $footer_lang = function_exists('idml_get_current_language') ? idml_get_current_language() : '';
-$footer_grid = function_exists('intelindev_get_footer_grid') ? intelindev_get_footer_grid($footer_lang) : [];
-$footer_bar  = function_exists('intelindev_get_footer_bar') ? intelindev_get_footer_bar($footer_lang) : null;
+$footer_grid = function_exists('pswpt_get_footer_grid') ? pswpt_get_footer_grid($footer_lang) : [];
+$footer_bar  = function_exists('pswpt_get_footer_bar') ? pswpt_get_footer_bar($footer_lang) : null;
 ?>
-<?php if (function_exists('intelindev_chrome_active') && intelindev_chrome_active()) : ?>
-<?php echo intelindev_chrome_footer(); ?>
+<?php if (function_exists('pswpt_chrome_active') && pswpt_chrome_active()) : ?>
+<?php echo pswpt_chrome_footer(); ?>
 <?php else : ?>
 <footer class="site-footer">
   <?php if ($footer_grid) : ?>

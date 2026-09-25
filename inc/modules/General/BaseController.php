@@ -1,9 +1,9 @@
 <?php
 /**
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\General;
+namespace pswptInit\General;
 
 class BaseController
 {

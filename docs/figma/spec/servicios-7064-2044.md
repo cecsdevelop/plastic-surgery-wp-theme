@@ -4,7 +4,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
 
 - FRAME "Servicios" 7064:2044 1440×4720 bg #ffffff
   - RECTANGLE "Rectangle 44" 7064:2045 1440×160 bg #611711
-  - RECTANGLE "intelindev 1" 7064:2046 1441×389 bg image
+  - RECTANGLE "pswpt 1" 7064:2046 1441×389 bg image
   - FRAME "Frame 16" 7064:2047 716×57 [column gap 20 main center]
     - TEXT "Servicios" 7064:2048 716×57 {DM Sans 400 · 60px · lh 57px · center · #ffffff} "Servicios"
   - RECTANGLE "Rectangle 45" 7064:2049 820×89 bg #a4271c radius 20

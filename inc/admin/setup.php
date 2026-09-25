@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 add_action('after_setup_theme', function () {
-  load_theme_textdomain('intelindev', get_template_directory() . '/languages');
+  load_theme_textdomain('pswpt', get_template_directory() . '/languages');
 
   add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
@@ -15,7 +15,7 @@ add_action('after_setup_theme', function () {
   add_theme_support('editor-styles');
 
   register_nav_menus([
-    'primary' => __('Menú principal', 'intelindev'),
-    'footer'  => __('Menú del footer', 'intelindev'),
+    'primary' => __('Main menu', 'pswpt'),
+    'footer'  => __('Footer menu', 'pswpt'),
   ]);
 });

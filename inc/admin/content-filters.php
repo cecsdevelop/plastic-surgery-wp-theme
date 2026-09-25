@@ -6,18 +6,18 @@ if (!defined('ABSPATH')) exit;
  * Enlaces relativos a la raíz en contenido editado desde el dashboard
  * (href="/contacto/", src="/wp-content/…", action="/…"): se escriben siempre
  * respecto a la raíz del sitio y, si WordPress vive en un subdirectorio (local:
- * /Intelindev/), se les antepone esa ruta al imprimir. En producción (raíz) no
+ * /pswpt/), se les antepone esa ruta al imprimir. En producción (raíz) no
  * cambia nada. Así el mismo contenido funciona en local, staging y producción
  * sin search-replace ni rutas locales que luego dan 404 (el origen del bug de
- * los enlaces /Intelindev/… en staging). No toca URLs absolutas,
+ * los enlaces /pswpt/… en staging). No toca URLs absolutas,
  * protocol-relative (//) ni las que ya llevan el subdirectorio (idempotente).
  */
-if (!function_exists('intelindev_resolve_root_relative_urls')) {
-    function intelindev_resolve_root_relative_urls($html) {
+if (!function_exists('pswpt_resolve_root_relative_urls')) {
+    function pswpt_resolve_root_relative_urls($html) {
         if (!is_string($html) || $html === '' || (strpos($html, '="/') === false && strpos($html, "='/") === false)) {
             return $html;
         }
-        $base = rtrim((string) parse_url(home_url('/'), PHP_URL_PATH), '/'); // '' en raíz, '/Intelindev' en subdirectorio
+        $base = rtrim((string) parse_url(home_url('/'), PHP_URL_PATH), '/'); // '' en raíz, '/pswpt' en subdirectorio
         if ($base === '') {
             return $html;
         }
@@ -31,9 +31,9 @@ if (!function_exists('intelindev_resolve_root_relative_urls')) {
     }
 }
 // Después de do_shortcode (11) y wp_filter_content_tags (12) para cubrir el HTML de los componentes.
-add_filter('the_content', 'intelindev_resolve_root_relative_urls', 13);
-add_filter('widget_block_content', 'intelindev_resolve_root_relative_urls', 13);
-add_filter('widget_text_content', 'intelindev_resolve_root_relative_urls', 13);
+add_filter('the_content', 'pswpt_resolve_root_relative_urls', 13);
+add_filter('widget_block_content', 'pswpt_resolve_root_relative_urls', 13);
+add_filter('widget_text_content', 'pswpt_resolve_root_relative_urls', 13);
 
 // Language switcher como último ítem del menú primario (submenú con los demás idiomas).
 
@@ -66,7 +66,7 @@ add_filter('wp_nav_menu_items', function($items, $args) {
     $switcher_html .= '<a href="#" aria-haspopup="true" aria-expanded="false">' . esc_html(idml_get_language_label($current_lang)) . '</a>';
     if ($submenu_items !== '') {
         $switcher_html .= '<button class="idml-submenu-toggle" tabindex="0" aria-label="' . esc_attr(idml_t('language.switcher_label')) . '" type="button">'
-            . '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>'
+            . '<svg width="15" height="12" viewBox="0 0 24 24" fill="none" stroke="#302d26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>'
             . '</button>';
         $switcher_html .= '<ul class="sub-menu">' . $submenu_items . '</ul>';
     }

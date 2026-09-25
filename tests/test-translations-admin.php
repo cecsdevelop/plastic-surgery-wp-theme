@@ -5,7 +5,7 @@
  *
  *   /Applications/MAMP/bin/php/php8.5.2/bin/php tests/test-translations-admin.php
  */
-$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/Intelindev/wp-admin/'; define('WP_USE_THEMES', false); define('WP_ADMIN', true);
+$_SERVER['HTTP_HOST'] = 'localhost:8888'; $_SERVER['REQUEST_URI'] = '/WPfemsculpt/wp-admin/'; define('WP_USE_THEMES', false); define('WP_ADMIN', true);
 require dirname(__DIR__, 4) . '/wp-load.php';
 wp_set_current_user(1);
 $fails = 0;

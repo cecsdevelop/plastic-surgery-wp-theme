@@ -1,20 +1,20 @@
 <?php
 /**
- * Recepción de envíos: endpoint REST POST intelindev/v1/form/{id}.
+ * Recepción de envíos: endpoint REST POST pswpt/v1/form/{id}.
  *
  * Pipeline: formulario publicado → honeypot → token firmado con ventana de
  * tiempo (≥3 s desde el render, ≤24 h) → límite por IP → validación por campo
  * (obligatorio, email, tel, select ∈ opciones, checkbox) → filtro
- * intelindev_form_validate (para enganchar captcha u otras reglas) → guardar
+ * pswpt_form_validate (para enganchar captcha u otras reglas) → guardar
  * envío (CPT) → correo (wp_mail, reply-to al email del remitente) → webhook
  * (POST JSON, pensado para CRMs como GoHighLevel) → respuesta JSON.
  *
  * Los mensajes salen del diccionario (form.*) en el idioma del formulario.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\Forms;
+namespace pswptInit\Forms;
 
 use WP_Error;
 use WP_Post;
@@ -30,7 +30,7 @@ class FormHandler
 
     public function register_routes(): void
     {
-        register_rest_route('intelindev/v1', '/form/(?P<id>\d+)', [
+        register_rest_route('pswpt/v1', '/form/(?P<id>\d+)', [
             'methods'             => 'POST',
             'callback'            => [$this, 'handle'],
             'permission_callback' => '__return_true',
@@ -42,7 +42,7 @@ class FormHandler
     {
         $form = get_post((int) $request['id']);
         if (!$form instanceof WP_Post || $form->post_type !== FormsController::POST_TYPE || $form->post_status !== 'publish') {
-            return new WP_REST_Response(['ok' => false, 'message' => __('Formulario no disponible.', 'intelindev')], 404);
+            return new WP_REST_Response(['ok' => false, 'message' => __('Form unavailable.', 'pswpt')], 404);
         }
 
         $params = $request->get_body_params();
@@ -73,7 +73,7 @@ class FormHandler
         if (FormsController::form_uses_turnstile((int) $form->ID) && !$this->verify_turnstile((string) ($params['cf-turnstile-response'] ?? ''))) {
             $errors['_captcha'] = $t('form.captcha_failed');
         }
-        $errors = (array) apply_filters('intelindev_form_validate', $errors, $data, $form, $params, $lang);
+        $errors = (array) apply_filters('pswpt_form_validate', $errors, $data, $form, $params, $lang);
         if ($errors) {
             return new WP_REST_Response(['ok' => false, 'errors' => $errors, 'message' => $t('form.fix_errors')], 422);
         }
@@ -98,7 +98,7 @@ class FormHandler
             $submission_id = SubmissionsController::store($form, $data, $context);
         }
 
-        do_action('intelindev_form_submitted', $form, $data, $context, $submission_id);
+        do_action('pswpt_form_submitted', $form, $data, $context, $submission_id);
 
         return new WP_REST_Response([
             'ok'       => true,
@@ -110,7 +110,7 @@ class FormHandler
     private function success_message(WP_Post $form, string $lang): string
     {
         $settings = FormsController::get_settings($form->ID);
-        $message  = intelindev_resolve_lang_text($settings['success'] ?? [], $lang);
+        $message  = pswpt_resolve_lang_text($settings['success'] ?? [], $lang);
         return $message !== '' ? $message : idml_t('form.default_success', $lang);
     }
 
@@ -200,7 +200,7 @@ class FormHandler
 
     private function rate_limited(): bool
     {
-        $key   = 'intelindev_form_rl_' . md5($this->client_ip());
+        $key   = 'pswpt_form_rl_' . md5($this->client_ip());
         $count = (int) get_transient($key);
         if ($count >= self::RATE_LIMIT) {
             return true;
@@ -223,7 +223,7 @@ class FormHandler
             $recipients = [get_option('admin_email')];
         }
 
-        $subject = intelindev_resolve_lang_text($settings['subject'] ?? [], $lang);
+        $subject = pswpt_resolve_lang_text($settings['subject'] ?? [], $lang);
         if ($subject === '') {
             $subject = sprintf('[%s] %s', get_bloginfo('name'), $form->post_title);
         }
@@ -232,10 +232,10 @@ class FormHandler
         $lines = [];
         $reply_to = '';
         foreach (FormsController::get_fields($form->ID) as $field) {
-            $label = wp_strip_all_tags(intelindev_resolve_lang_text($field['label'] ?? [], $lang));
+            $label = wp_strip_all_tags(pswpt_resolve_lang_text($field['label'] ?? [], $lang));
             $value = (string) ($data[$field['name']] ?? '');
             if ($field['type'] === 'checkbox') {
-                $value = $value === '1' ? __('Sí', 'intelindev') : __('No', 'intelindev');
+                $value = $value === '1' ? __('Yes', 'pswpt') : __('No', 'pswpt');
             }
             if ($field['type'] === 'email' && $reply_to === '' && $value !== '') {
                 $reply_to = $value;
@@ -243,7 +243,7 @@ class FormHandler
             $lines[] = ($label !== '' ? $label : $field['name']) . ': ' . $value;
         }
         $lines[] = '';
-        $lines[] = sprintf(__('Enviado desde %s (%s)', 'intelindev'), get_bloginfo('name'), strtoupper($lang));
+        $lines[] = sprintf(__('Sent from %s (%s)', 'pswpt'), get_bloginfo('name'), strtoupper($lang));
 
         $headers = [];
         if ($reply_to !== '') {

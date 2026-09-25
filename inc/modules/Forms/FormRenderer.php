@@ -1,7 +1,7 @@
 <?php
 /**
  * HTML de un formulario (shortcode [form slug="…"]). Sin JS propio en el
- * markup: scripts.js intercepta el submit de cualquier form.intelindev-form y
+ * markup: scripts.js intercepta el submit de cualquier form.pswpt-form y
  * envía por fetch al endpoint REST (ver FormHandler). Usa el grid del theme
  * (row / col-*) para el ancho de cada campo.
  *
@@ -9,10 +9,10 @@
  * render (_ts/_sig) que FormHandler valida con ventana de tiempo. No usa
  * nonces de WP: caducan con la sesión y rompen en páginas cacheadas.
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\Forms;
+namespace pswptInit\Forms;
 
 use WP_Post;
 
@@ -41,14 +41,14 @@ class FormRenderer
         $ts      = time();
         $id      = (int) $form->ID;
         $prefix  = 'f' . $id . '-';
-        $button  = intelindev_resolve_lang_text($settings['button'] ?? [], $lang);
-        $success = intelindev_resolve_lang_text($settings['success'] ?? [], $lang);
+        $button  = pswpt_resolve_lang_text($settings['button'] ?? [], $lang);
+        $success = pswpt_resolve_lang_text($settings['success'] ?? [], $lang);
         if ($button === '')  $button  = idml_t('form.default_button', $lang);
         if ($success === '') $success = idml_t('form.default_success', $lang);
 
         ob_start();
         ?>
-<form class="intelindev-form" method="post" action="<?php echo esc_url(rest_url('intelindev/v1/form/' . $id)); ?>" data-intelindev-form="<?php echo $id; ?>" data-success="<?php echo esc_attr($success); ?>" data-error="<?php echo esc_attr(idml_t('form.error_send', $lang)); ?>" novalidate>
+<form class="pswpt-form" method="post" action="<?php echo esc_url(rest_url('pswpt/v1/form/' . $id)); ?>" data-pswpt-form="<?php echo $id; ?>" data-success="<?php echo esc_attr($success); ?>" data-error="<?php echo esc_attr(idml_t('form.error_send', $lang)); ?>" novalidate>
   <div class="row">
     <?php foreach ($fields as $field) : ?>
       <?php if ($field['type'] === 'hidden') : ?>
@@ -58,20 +58,20 @@ class FormRenderer
       <?php
       $name        = $field['name'];
       $input_id    = $prefix . $name;
-      $label       = intelindev_resolve_lang_text($field['label'] ?? [], $lang);
-      $placeholder = intelindev_resolve_lang_text($field['placeholder'] ?? [], $lang);
+      $label       = pswpt_resolve_lang_text($field['label'] ?? [], $lang);
+      $placeholder = pswpt_resolve_lang_text($field['placeholder'] ?? [], $lang);
       $required    = !empty($field['required']);
       $width       = (string) ($field['width'] ?? 'col-12');
       ?>
-    <div class="<?php echo esc_attr($width); ?> intelindev-form__field intelindev-form__field--<?php echo esc_attr($field['type']); ?>">
+    <div class="<?php echo esc_attr($width); ?> pswpt-form__field pswpt-form__field--<?php echo esc_attr($field['type']); ?>">
       <?php if ($field['type'] === 'checkbox') : ?>
-        <label class="intelindev-form__check" for="<?php echo esc_attr($input_id); ?>">
+        <label class="pswpt-form__check" for="<?php echo esc_attr($input_id); ?>">
           <input type="checkbox" id="<?php echo esc_attr($input_id); ?>" name="<?php echo esc_attr($name); ?>" value="1"<?php echo $required ? ' required' : ''; ?>>
-          <span><?php echo wp_kses($label, FormsController::LABEL_TAGS); ?><?php echo $required ? ' <span class="intelindev-form__req" aria-hidden="true">*</span>' : ''; ?></span>
+          <span><?php echo wp_kses($label, FormsController::LABEL_TAGS); ?><?php echo $required ? ' <span class="pswpt-form__req" aria-hidden="true">*</span>' : ''; ?></span>
         </label>
       <?php else : ?>
         <?php if ($label !== '') : ?>
-          <label class="intelindev-form__label" for="<?php echo esc_attr($input_id); ?>"><?php echo wp_kses($label, FormsController::LABEL_TAGS); ?><?php echo $required ? ' <span class="intelindev-form__req" aria-hidden="true">*</span>' : ''; ?></label>
+          <label class="pswpt-form__label" for="<?php echo esc_attr($input_id); ?>"><?php echo wp_kses($label, FormsController::LABEL_TAGS); ?><?php echo $required ? ' <span class="pswpt-form__req" aria-hidden="true">*</span>' : ''; ?></label>
         <?php endif; ?>
         <?php if ($field['type'] === 'textarea') : ?>
           <textarea id="<?php echo esc_attr($input_id); ?>" name="<?php echo esc_attr($name); ?>" rows="5" placeholder="<?php echo esc_attr($placeholder); ?>"<?php echo $required ? ' required' : ''; ?>></textarea>
@@ -86,7 +86,7 @@ class FormRenderer
           <input type="<?php echo esc_attr($field['type']); ?>" id="<?php echo esc_attr($input_id); ?>" name="<?php echo esc_attr($name); ?>" placeholder="<?php echo esc_attr($placeholder); ?>"<?php echo $required ? ' required' : ''; ?><?php echo $field['type'] === 'email' ? ' autocomplete="email"' : ($field['type'] === 'tel' ? ' autocomplete="tel"' : ''); ?>>
         <?php endif; ?>
       <?php endif; ?>
-      <span class="intelindev-form__error" data-error-for="<?php echo esc_attr($name); ?>" role="alert"></span>
+      <span class="pswpt-form__error" data-error-for="<?php echo esc_attr($name); ?>" role="alert"></span>
     </div>
     <?php endforeach; ?>
   </div>
@@ -94,16 +94,16 @@ class FormRenderer
   <input type="hidden" name="_ts" value="<?php echo $ts; ?>">
   <input type="hidden" name="_sig" value="<?php echo esc_attr(self::sign($id, $ts)); ?>">
   <input type="hidden" name="_page" value="<?php echo esc_url(self::current_url()); ?>">
-  <div class="intelindev-form__hp" aria-hidden="true"><label>Website <input type="text" name="_website" tabindex="-1" autocomplete="off"></label></div>
+  <div class="pswpt-form__hp" aria-hidden="true"><label>Website <input type="text" name="_website" tabindex="-1" autocomplete="off"></label></div>
 <?php if (FormsController::form_uses_turnstile($id)) : ?>
-  <div class="intelindev-form__captcha">
+  <div class="pswpt-form__captcha">
     <div class="cf-turnstile" data-sitekey="<?php echo esc_attr((string) (FormsController::get_global_settings()['turnstile_site_key'] ?? '')); ?>" data-language="<?php echo esc_attr($lang); ?>"></div>
-    <span class="intelindev-form__error" data-error-for="_captcha" role="alert"></span>
+    <span class="pswpt-form__error" data-error-for="_captcha" role="alert"></span>
   </div>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=intelindevTurnstileRender&render=explicit" async defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=pswptTurnstileRender&render=explicit" async defer></script>
 <?php endif; ?>
-  <p class="intelindev-form__actions"><button type="submit" class="intelindev-form__submit"><?php echo esc_html($button); ?></button></p>
-  <div class="intelindev-form__message" role="status" aria-live="polite"></div>
+  <p class="pswpt-form__actions"><button type="submit" class="pswpt-form__submit"><?php echo esc_html($button); ?></button></p>
+  <div class="pswpt-form__message" role="status" aria-live="polite"></div>
 </form>
         <?php
         return (string) ob_get_clean();

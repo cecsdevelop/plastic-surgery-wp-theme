@@ -2,12 +2,12 @@
   'use strict';
 
   function activateTab($root, targetSelector) {
-    var $buttons = $root.find('.intelindev-tabs-nav .nav-link');
-    var $panes = $root.find('.intelindev-tabs-container .tab-pane');
+    var $buttons = $root.find('.pswpt-tabs-nav .nav-link');
+    var $panes = $root.find('.pswpt-tabs-container .tab-pane');
     var $target = $panes.filter(targetSelector);
 
     if (!$target.length) {
-      $buttons = $root.find('.intelindev-tabs-nav .nav-link').first();
+      $buttons = $root.find('.pswpt-tabs-nav .nav-link').first();
       var fallback = $buttons.data('bs-target') || '#content-general';
       $target = $panes.filter(fallback);
     }
@@ -17,7 +17,7 @@
 
     var targetId = $target.attr('id');
     if (targetId) {
-      $root.find('.intelindev-tabs-nav .nav-link[data-bs-target="#' + targetId + '"]').addClass('active').attr('aria-selected', 'true');
+      $root.find('.pswpt-tabs-nav .nav-link[data-bs-target="#' + targetId + '"]').addClass('active').attr('aria-selected', 'true');
     }
     $target.addClass('show active');
 
@@ -30,13 +30,13 @@
   }
 
   $(function () {
-    var $form = $('.intelindev-settings-form');
+    var $form = $('.pswpt-settings-form');
     if (!$form.length) {
       return;
     }
 
-    var $nav = $form.find('.intelindev-tabs-nav');
-    var $panes = $form.find('.intelindev-tabs-container .tab-pane');
+    var $nav = $form.find('.pswpt-tabs-nav');
+    var $panes = $form.find('.pswpt-tabs-container .tab-pane');
     if (!$nav.length || !$panes.length) {
       return;
     }

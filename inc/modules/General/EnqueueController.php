@@ -1,10 +1,10 @@
 <?php
 /**
- * @package Intelindev
+ * @package pswpt
  * Enqueues CSS and JS files.
  */
 
-namespace IntelindevInit\General;
+namespace pswptInit\General;
 
 class EnqueueController extends BaseController
 {
@@ -21,18 +21,18 @@ class EnqueueController extends BaseController
         $deps = [];
         if (file_exists($grid_path)) {
             wp_enqueue_style(
-                'intelindev-grid',
+                'pswpt-grid',
                 $this->plugin_url . 'assets/css/grid.css',
                 [],
                 filemtime($grid_path)
             );
-            $deps[] = 'intelindev-grid';
+            $deps[] = 'pswpt-grid';
         }
 
         $css_path = $this->plugin_path . 'assets/css/styles.css';
         if (file_exists($css_path)) {
             wp_enqueue_style(
-                'intelindev-styles',
+                'pswpt-styles',
                 $this->plugin_url . 'assets/css/styles.css',
                 $deps,
                 filemtime($css_path)
@@ -44,7 +44,7 @@ class EnqueueController extends BaseController
         $js_path = $this->plugin_path . 'assets/js/scripts.js';
         if (file_exists($js_path)) {
             wp_enqueue_script(
-                'intelindev-scripts',
+                'pswpt-scripts',
                 $this->plugin_url . 'assets/js/scripts.js',
                 [],
                 filemtime($js_path),

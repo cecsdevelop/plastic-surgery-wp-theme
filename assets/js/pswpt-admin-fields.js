@@ -1,8 +1,8 @@
 /**
- * Campos compartidos de los paneles Intelindev (solo admin): visibilidad
+ * Campos compartidos de los paneles pswpt (solo admin): visibilidad
  * condicional, selector de imagen y color picker de WP (Iris). Se aplica a
- * cualquier formulario con la clase .intelindev-panel-form; las pestañas las
- * maneja intelindev-settings-tabs.js.
+ * cualquier formulario con la clase .pswpt-panel-form; las pestañas las
+ * maneja pswpt-settings-tabs.js.
  *
  * Visibilidad condicional: data-show-if en cualquier elemento del form.
  *   data-show-if="opt[sticky]"           visible si el checkbox está marcado
@@ -44,32 +44,32 @@
   }
 
   function initMediaFields($form) {
-    var i18n = window.intelindevAdminFields || {};
+    var i18n = window.pswptAdminFields || {};
 
-    $form.on('click', '.intelindev-media-upload', function (e) {
+    $form.on('click', '.pswpt-media-upload', function (e) {
       e.preventDefault();
-      var $field = $(this).closest('.intelindev-media-field');
+      var $field = $(this).closest('.pswpt-media-field');
       var frame = wp.media({
-        title: i18n.mediaTitle || 'Seleccionar imagen',
+        title: i18n.mediaTitle || 'Select image',
         library: { type: 'image' },
-        button: { text: i18n.mediaButton || 'Usar esta imagen' },
+        button: { text: i18n.mediaButton || 'Use this image' },
         multiple: false
       });
       frame.on('select', function () {
         var att = frame.state().get('selection').first().toJSON();
         var url = (att.sizes && att.sizes.medium) ? att.sizes.medium.url : att.url;
         $field.find('input[type="hidden"]').val(att.id);
-        $field.find('.intelindev-media-preview').attr('src', url).prop('hidden', false);
-        $field.find('.intelindev-media-remove').prop('hidden', false);
+        $field.find('.pswpt-media-preview').attr('src', url).prop('hidden', false);
+        $field.find('.pswpt-media-remove').prop('hidden', false);
       });
       frame.open();
     });
 
-    $form.on('click', '.intelindev-media-remove', function (e) {
+    $form.on('click', '.pswpt-media-remove', function (e) {
       e.preventDefault();
-      var $field = $(this).closest('.intelindev-media-field');
+      var $field = $(this).closest('.pswpt-media-field');
       $field.find('input[type="hidden"]').val('0');
-      $field.find('.intelindev-media-preview').attr('src', '').prop('hidden', true);
+      $field.find('.pswpt-media-preview').attr('src', '').prop('hidden', true);
       $(this).prop('hidden', true);
     });
   }
@@ -77,40 +77,40 @@
   // Galería: input oculto con IDs separados por coma + lista de miniaturas
   // (campo "gallery" de los CPT de contenido, ver General/ContentTypeController).
   function initGalleryFields($form) {
-    var i18n = window.intelindevAdminFields || {};
+    var i18n = window.pswptAdminFields || {};
 
     function syncIds($field) {
-      var ids = $field.find('.intelindev-gallery-list > li').map(function () { return $(this).data('id'); }).get();
+      var ids = $field.find('.pswpt-gallery-list > li').map(function () { return $(this).data('id'); }).get();
       $field.find('input[type="hidden"]').val(ids.join(','));
     }
 
-    $form.on('click', '.intelindev-gallery-add', function (e) {
+    $form.on('click', '.pswpt-gallery-add', function (e) {
       e.preventDefault();
-      var $field = $(this).closest('.intelindev-gallery-field');
+      var $field = $(this).closest('.pswpt-gallery-field');
       var frame = wp.media({
-        title: i18n.galleryTitle || 'Agregar imágenes',
+        title: i18n.galleryTitle || 'Add images',
         library: { type: 'image' },
-        button: { text: i18n.galleryButton || 'Agregar' },
+        button: { text: i18n.galleryButton || 'Add' },
         multiple: 'add'
       });
       frame.on('select', function () {
-        var $list = $field.find('.intelindev-gallery-list');
+        var $list = $field.find('.pswpt-gallery-list');
         frame.state().get('selection').each(function (att) {
           var data = att.toJSON();
           if ($list.find('li[data-id="' + data.id + '"]').length) {
             return;
           }
           var url = (data.sizes && data.sizes.thumbnail) ? data.sizes.thumbnail.url : data.url;
-          $list.append('<li data-id="' + data.id + '"><img src="' + url + '" alt="" /><button type="button" class="intelindev-gallery-remove" aria-label="' + (i18n.remove || 'Quitar') + '">&times;</button></li>');
+          $list.append('<li data-id="' + data.id + '"><img src="' + url + '" alt="" /><button type="button" class="pswpt-gallery-remove" aria-label="' + (i18n.remove || 'Remove') + '">&times;</button></li>');
         });
         syncIds($field);
       });
       frame.open();
     });
 
-    $form.on('click', '.intelindev-gallery-remove', function (e) {
+    $form.on('click', '.pswpt-gallery-remove', function (e) {
       e.preventDefault();
-      var $field = $(this).closest('.intelindev-gallery-field');
+      var $field = $(this).closest('.pswpt-gallery-field');
       $(this).closest('li').remove();
       syncIds($field);
     });
@@ -119,10 +119,10 @@
   var RGBA = /^rgba?\(/i;
 
   function initColorInput($input) {
-    if ($input.data('intelindevColorReady')) {
+    if ($input.data('pswptColorReady')) {
       return;
     }
-    $input.data('intelindevColorReady', true);
+    $input.data('pswptColorReady', true);
 
     $input.wpColorPicker({
       // Iris reescribe el input con el hex del color (pierde el alpha). Si el
@@ -205,7 +205,7 @@
   }
 
   $(function () {
-    var $form = $('.intelindev-panel-form');
+    var $form = $('.pswpt-panel-form');
     if (!$form.length) {
       return;
     }
@@ -218,17 +218,17 @@
     initMediaFields($form);
     initGalleryFields($form);
 
-    $form.find('.intelindev-color-input').each(function () {
+    $form.find('.pswpt-color-input').each(function () {
       initColorInput($(this));
     });
   });
 
   // Para filas agregadas dinámicamente (ej. filas del footer).
-  window.intelindevAdminFields = $.extend(window.intelindevAdminFields || {}, {
+  window.pswptAdminFields = $.extend(window.pswptAdminFields || {}, {
     refresh: function ($root) {
-      var $form = $root.closest('.intelindev-panel-form');
+      var $form = $root.closest('.pswpt-panel-form');
       applyConditions($form);
-      $root.find('.intelindev-color-input').each(function () {
+      $root.find('.pswpt-color-input').each(function () {
         initColorInput($(this));
       });
     }

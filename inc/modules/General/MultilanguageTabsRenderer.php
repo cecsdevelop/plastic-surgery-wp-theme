@@ -6,9 +6,9 @@
  * sin repetir código HTML/JS. Los idiomas son los configurados en
  * Apariencia → Idiomas (idml_get_languages), el por defecto primero.
  */
-namespace IntelindevInit\General;
+namespace pswptInit\General;
 
-if (!class_exists('IntelindevInit\\General\\MultilanguageTabsRenderer')):
+if (!class_exists('pswptInit\\General\\MultilanguageTabsRenderer')):
 class MultilanguageTabsRenderer
 {
 

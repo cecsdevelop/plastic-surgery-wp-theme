@@ -1,6 +1,6 @@
 <?php
 
-namespace IntelindevInit\Bootstrap;
+namespace pswptInit\Bootstrap;
 
 class CoreFileLoader
 {
@@ -38,6 +38,7 @@ class CoreFileLoader
             '/inc/admin/seo-analytics.php',
             '/inc/admin/seo-multilang.php',
             '/inc/admin/security-hardening.php',
+            '/inc/admin/login-url.php',
         ];
     }
 }

@@ -4,9 +4,9 @@ if (!defined('ABSPATH')) exit;
 $current_lang = function_exists('idml_get_current_language') ? idml_get_current_language() : get_locale();
 $home_url     = function_exists('idml_get_language_home_url') ? idml_get_language_home_url($current_lang) : home_url('/');
 
-// Apariencia → Intelindev Header: sticky, logo, CTA (ver admin-header-settings.php).
-$header_is_sticky = function_exists('intelindev_header_is_sticky') && intelindev_header_is_sticky();
-$header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_get_header_cta($current_lang) : ['type' => 'none'];
+// Apariencia → pswpt Header: sticky, logo, CTA (ver admin-header-settings.php).
+$header_is_sticky = function_exists('pswpt_header_is_sticky') && pswpt_header_is_sticky();
+$header_cta       = function_exists('pswpt_get_header_cta') ? pswpt_get_header_cta($current_lang) : ['type' => 'none'];
 ?>
 <!doctype html>
 <html lang="<?php echo esc_attr($current_lang); ?>">
@@ -14,8 +14,8 @@ $header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_ge
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
-  if (function_exists('intelindev_get_setting')) {
-    $favicon_url = intelindev_get_setting('favicon');
+  if (function_exists('pswpt_get_setting')) {
+    $favicon_url = pswpt_get_setting('favicon');
     if (!empty($favicon_url)) {
       $favicon_type = wp_check_filetype($favicon_url);
       printf('<link rel="icon" href="%s" type="%s">' . "\n", esc_url($favicon_url), esc_attr($favicon_type['type'] ?: 'image/x-icon'));
@@ -26,14 +26,14 @@ $header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_ge
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<?php if (function_exists('intelindev_chrome_active') && intelindev_chrome_active()) : ?>
-<?php echo intelindev_chrome_header(); ?>
+<?php if (function_exists('pswpt_chrome_active') && pswpt_chrome_active()) : ?>
+<?php echo pswpt_chrome_header(); ?>
 <?php else : ?>
-<header class="site-header<?php echo $header_is_sticky ? ' site-header--sticky' : ''; ?>"<?php if ($header_is_sticky) printf(' data-scroll-threshold="%d"', intelindev_get_header_sticky_threshold()); ?>>
+<header class="site-header<?php echo $header_is_sticky ? ' site-header--sticky' : ''; ?>"<?php if ($header_is_sticky) printf(' data-scroll-threshold="%d"', pswpt_get_header_sticky_threshold()); ?>>
   <div class="site-branding">
     <?php
-    if (function_exists('intelindev_render_header_logo')) {
-      intelindev_render_header_logo($home_url);
+    if (function_exists('pswpt_render_header_logo')) {
+      pswpt_render_header_logo($home_url);
     } elseif (has_custom_logo()) {
       the_custom_logo();
     } else {
@@ -59,7 +59,7 @@ $header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_ge
   </nav>
 
   <?php
-  // CTA: píldora con texto o cuadrado con ícono (Apariencia → Intelindev Header → CTA → Estilo).
+  // CTA: píldora con texto o cuadrado con ícono (Apariencia → pswpt Header → CTA → Estilo).
   if ($header_cta['type'] !== 'none') :
     $cta_is_icon = ($header_cta['style'] ?? 'text') === 'icon';
     $cta_class   = 'header-cta' . ($cta_is_icon ? ' header-cta--icon' : '');
@@ -75,7 +75,7 @@ $header_cta       = function_exists('intelindev_get_header_cta') ? intelindev_ge
 </header>
 <?php endif; ?>
 <?php if ($header_cta['type'] === 'modal') : ?>
-<dialog id="header-cta-modal" class="header-cta-modal"<?php echo $header_cta['modal_title'] !== '' ? ' aria-labelledby="header-cta-modal-title"' : ''; ?> data-cta-modal-src="<?php echo esc_url(add_query_arg('lang', $current_lang, rest_url('intelindev/v1/modal'))); ?>" data-loading="<?php echo esc_attr(idml_t('cta.modal_loading')); ?>" data-error="<?php echo esc_attr(idml_t('cta.modal_error')); ?>">
+<dialog id="header-cta-modal" class="header-cta-modal"<?php echo $header_cta['modal_title'] !== '' ? ' aria-labelledby="header-cta-modal-title"' : ''; ?> data-cta-modal-src="<?php echo esc_url(add_query_arg('lang', $current_lang, rest_url('pswpt/v1/modal'))); ?>" data-loading="<?php echo esc_attr(idml_t('cta.modal_loading')); ?>" data-error="<?php echo esc_attr(idml_t('cta.modal_error')); ?>">
   <div class="header-cta-modal__box">
     <button type="button" class="header-cta-modal__close" data-cta-modal-close aria-label="<?php echo esc_attr(idml_t('cta.modal_close_label')); ?>">&times;</button>
     <?php if ($header_cta['modal_title'] !== '') : ?>

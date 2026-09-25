@@ -1029,7 +1029,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
                 - GROUP "Group 98" 7436:10699 24×24
                   - VECTOR "Vector" 7436:10700 24×24 bg #ffffff
                   - VECTOR "Vector" 7436:10701 9×9 bg #ffffff
-              - TEXT "ACTION" 7436:10702 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "design@intelindev.com"
+              - TEXT "ACTION" 7436:10702 200×27 {DM Sans 400 · 18px · lh 27px · #ffffff} "design@pswpt.com"
             - FRAME "Item 8" 7436:10703 234×81 [row gap 10]
               - FRAME "Frame 207" 7436:10704 24×24 [column gap 10 pad 10/10/10/10 main center cross center]
                 - GROUP "Group 96" 7436:10705 25×24
@@ -1048,7 +1048,7 @@ Formato: TYPE "nombre" id ancho×alto [autolayout] bg/border/radius {tipografía
     - FRAME "SOCKET" 7436:10718 1728×82 [row gap 105 pad 20/0/20/0 main space_between cross center] bg #080808
       - FRAME "Container" 7436:10719 1536×42 [row gap 1209 main space_between cross center]
         - INSTANCE "SOCKET COPY" 7436:10720 748×42 [column pad 10/0/10/0 main center cross center] <instance 20:947>
-          - TEXT "Description" I7436:10720;20:948 748×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ebe6e6} "Intelindev © 2026 All Rights Reserved."
+          - TEXT "Description" I7436:10720;20:948 748×22 {DM Sans 400 · 14.399999618530273px · lh 22px · #ebe6e6} "pswpt © 2026 All Rights Reserved."
         - INSTANCE "TEXT" 7436:10721 421×22 [column] <instance 2383:7294>
           - TEXT "Description" I7436:10721;2383:7295 421×22 {DM Sans 400 · 14.399999618530273px · lh 22px · right · #ffffff} "Terms & Conditions | Privacy Policy"
   - FRAME "Header" 7436:10338 1536×80 [row pad 10/30/10/30 main center cross center] bg #000000 71% radius 20

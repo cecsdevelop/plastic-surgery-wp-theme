@@ -1,6 +1,6 @@
 <?php
 /**
- * Intelindev Footer (Apariencia → Intelindev Footer): estructura, barra de
+ * pswpt Footer (Apariencia → pswpt Footer): estructura, barra de
  * copyright y estilos del footer, en tres pestañas.
  *
  * El "builder" lo pone WordPress: cada celda de la grilla (fila × columna) es
@@ -9,7 +9,7 @@
  * área por idioma activo: si la del idioma actual está vacía se muestra la del
  * idioma por defecto, así lo neutro se carga una sola vez.
  *
- * Todo vive en la option intelindev_footer_settings (rows, barra, colores y
+ * Todo vive en la option pswpt_footer_settings (rows, barra, colores y
  * medidas). Las áreas se registran en widgets_init a partir de esa option, así
  * que al cambiar filas/columnas aparecen o desaparecen en Widgets (WP guarda
  * los widgets de un área que dejó de existir en "Widgets inactivos").
@@ -18,38 +18,38 @@
  * el admin las configuró; el resto lo cubre el default de styles.css (:root).
  * Frontend sin JS: grilla CSS con grid-template-columns por fila.
  *
- * @package intelindev
+ * @package pswpt
  */
 
 if (!defined('ABSPATH')) exit;
 
-const INTELINDEV_FOOTER_OPTION   = 'intelindev_footer_settings';
-const INTELINDEV_FOOTER_MAX_ROWS = 6;
-const INTELINDEV_FOOTER_MAX_COLS = 6;
+const pswpt_FOOTER_OPTION   = 'pswpt_footer_settings';
+const pswpt_FOOTER_MAX_ROWS = 6;
+const pswpt_FOOTER_MAX_COLS = 6;
 
 add_action('admin_menu', function () {
     add_theme_page(
-        __('Intelindev Footer', 'intelindev'),
-        __('Intelindev Footer', 'intelindev'),
+        __('pswpt Footer', 'pswpt'),
+        __('pswpt Footer', 'pswpt'),
         'manage_options',
-        'intelindev-footer-settings',
-        'intelindev_footer_settings_page_html'
+        'pswpt-footer-settings',
+        'pswpt_footer_settings_page_html'
     );
 });
 
 add_action('admin_init', function () {
-    register_setting('intelindev_footer_settings_group', INTELINDEV_FOOTER_OPTION, 'intelindev_footer_settings_sanitize');
+    register_setting('pswpt_footer_settings_group', pswpt_FOOTER_OPTION, 'pswpt_footer_settings_sanitize');
 });
 
 add_action('admin_enqueue_scripts', function ($hook) {
-    if ($hook !== 'appearance_page_intelindev-footer-settings') {
+    if ($hook !== 'appearance_page_pswpt-footer-settings') {
         return;
     }
-    intelindev_admin_enqueue_field_assets();
+    pswpt_admin_enqueue_field_assets();
 
-    $path = '/assets/js/intelindev-footer-settings.js';
+    $path = '/assets/js/pswpt-footer-settings.js';
     if (file_exists(get_template_directory() . $path)) {
-        wp_enqueue_script('intelindev-footer-settings', get_template_directory_uri() . $path, ['jquery', 'intelindev-admin-fields'], filemtime(get_template_directory() . $path), true);
+        wp_enqueue_script('pswpt-footer-settings', get_template_directory_uri() . $path, ['jquery', 'pswpt-admin-fields'], filemtime(get_template_directory() . $path), true);
     }
 }, 20);
 
@@ -57,7 +57,7 @@ add_action('admin_enqueue_scripts', function ($hook) {
 /* Definición                                                           */
 /* ------------------------------------------------------------------ */
 
-function intelindev_footer_defaults(): array {
+function pswpt_footer_defaults(): array {
     return [
         'rows'        => [['columns' => 4, 'layout' => 'equal']],
         'bar_enabled' => 1,
@@ -66,45 +66,45 @@ function intelindev_footer_defaults(): array {
     ];
 }
 
-function intelindev_footer_layouts(): array {
+function pswpt_footer_layouts(): array {
     return [
-        'equal'      => __('Columnas iguales', 'intelindev'),
-        'first-wide' => __('Primera columna más ancha', 'intelindev'),
-        'last-wide'  => __('Última columna más ancha', 'intelindev'),
+        'equal'      => __('Equal columns', 'pswpt'),
+        'first-wide' => __('Wider first column', 'pswpt'),
+        'last-wide'  => __('Wider last column', 'pswpt'),
     ];
 }
 
-function intelindev_footer_bar_aligns(): array {
+function pswpt_footer_bar_aligns(): array {
     return [
-        'space-between' => __('Texto a la izquierda, menú a la derecha', 'intelindev'),
-        'left'          => __('Todo a la izquierda', 'intelindev'),
-        'center'        => __('Todo centrado', 'intelindev'),
+        'space-between' => __('Text left, menu right', 'pswpt'),
+        'left'          => __('All left-aligned', 'pswpt'),
+        'center'        => __('All centered', 'pswpt'),
     ];
 }
 
 /** Colores: clave de option => [label, custom property]. */
-function intelindev_footer_color_map(): array {
+function pswpt_footer_color_map(): array {
     return [
-        'bg_color'         => [__('Fondo del footer', 'intelindev'),        '--psw-footer-bg'],
-        'text_color'       => [__('Texto', 'intelindev'),                   '--psw-footer-text-color'],
-        'heading_color'    => [__('Títulos de los widgets', 'intelindev'),  '--psw-footer-heading-color'],
-        'link_color'       => [__('Links', 'intelindev'),                   '--psw-footer-link-color'],
-        'link_hover_color' => [__('Links (hover)', 'intelindev'),           '--psw-footer-link-hover-color'],
-        'bar_bg_color'     => [__('Fondo de la barra', 'intelindev'),       '--psw-footer-bar-bg'],
-        'bar_text_color'   => [__('Texto de la barra', 'intelindev'),       '--psw-footer-bar-text-color'],
-        'bar_link_color'   => [__('Links de la barra', 'intelindev'),       '--psw-footer-bar-link-color'],
+        'bg_color'         => [__('Footer background', 'pswpt'),        '--psw-footer-bg'],
+        'text_color'       => [__('Text', 'pswpt'),                   '--psw-footer-text-color'],
+        'heading_color'    => [__('Widget titles', 'pswpt'),  '--psw-footer-heading-color'],
+        'link_color'       => [__('Links', 'pswpt'),                   '--psw-footer-link-color'],
+        'link_hover_color' => [__('Links (hover)', 'pswpt'),           '--psw-footer-link-hover-color'],
+        'bar_bg_color'     => [__('Bar background', 'pswpt'),       '--psw-footer-bar-bg'],
+        'bar_text_color'   => [__('Bar text', 'pswpt'),       '--psw-footer-bar-text-color'],
+        'bar_link_color'   => [__('Bar links', 'pswpt'),       '--psw-footer-bar-link-color'],
     ];
 }
 
 /** Medidas en px: clave => [label, custom property, min, max, descripción]. */
-function intelindev_footer_size_map(): array {
+function pswpt_footer_size_map(): array {
     return [
-        'padding_top'    => [__('Padding superior', 'intelindev'),        '--psw-footer-padding-top',    0, 400,  ''],
-        'padding_bottom' => [__('Padding inferior', 'intelindev'),        '--psw-footer-padding-bottom', 0, 400,  ''],
-        'padding_x'      => [__('Padding lateral', 'intelindev'),         '--psw-footer-padding-x',      0, 200,  ''],
-        'column_gap'     => [__('Separación entre columnas', 'intelindev'), '--psw-footer-gap',          0, 120,  ''],
-        'max_width'      => [__('Ancho máximo del contenido', 'intelindev'), '--psw-footer-max-width',   0, 2400, __('0 = ancho completo.', 'intelindev')],
-        'bar_padding'    => [__('Padding de la barra', 'intelindev'),     '--psw-footer-bar-padding',    0, 100,  ''],
+        'padding_top'    => [__('Top padding', 'pswpt'),        '--psw-footer-padding-top',    0, 400,  ''],
+        'padding_bottom' => [__('Bottom padding', 'pswpt'),        '--psw-footer-padding-bottom', 0, 400,  ''],
+        'padding_x'      => [__('Side padding', 'pswpt'),         '--psw-footer-padding-x',      0, 200,  ''],
+        'column_gap'     => [__('Column gap', 'pswpt'), '--psw-footer-gap',          0, 120,  ''],
+        'max_width'      => [__('Max content width', 'pswpt'), '--psw-footer-max-width',   0, 2400, __('0 = full width.', 'pswpt')],
+        'bar_padding'    => [__('Bar padding', 'pswpt'),     '--psw-footer-bar-padding',    0, 100,  ''],
     ];
 }
 
@@ -113,17 +113,17 @@ function intelindev_footer_size_map(): array {
 /* ------------------------------------------------------------------ */
 
 /** Option completa con defaults para lo que nunca se guardó (get_option ya cachea). */
-function intelindev_get_footer_settings(): array {
-    $saved = get_option(INTELINDEV_FOOTER_OPTION, null);
-    return is_array($saved) ? array_merge(intelindev_footer_defaults(), $saved) : intelindev_footer_defaults();
+function pswpt_get_footer_settings(): array {
+    $saved = get_option(pswpt_FOOTER_OPTION, null);
+    return is_array($saved) ? array_merge(pswpt_footer_defaults(), $saved) : pswpt_footer_defaults();
 }
 
-function intelindev_get_footer_setting(string $key, $default = null) {
-    $opts = intelindev_get_footer_settings();
+function pswpt_get_footer_setting(string $key, $default = null) {
+    $opts = pswpt_get_footer_settings();
     return array_key_exists($key, $opts) ? $opts[$key] : $default;
 }
 
-function intelindev_footer_sidebar_id(int $row, int $col, string $lang): string {
+function pswpt_footer_sidebar_id(int $row, int $col, string $lang): string {
     return sprintf('footer-r%d-c%d-%s', $row, $col, $lang);
 }
 
@@ -131,7 +131,7 @@ function intelindev_footer_sidebar_id(int $row, int $col, string $lang): string 
  * grid-template-columns de una fila según cantidad y distribución. Se imprime
  * inline por fila (repeat() con calc() no es fiable en todos los navegadores).
  */
-function intelindev_footer_grid_template(int $columns, string $layout): string {
+function pswpt_footer_grid_template(int $columns, string $layout): string {
     $columns = max(1, $columns);
     if ($columns === 1 || $layout === 'equal') {
         return 'repeat(' . $columns . ', minmax(0, 1fr))';
@@ -147,10 +147,10 @@ function intelindev_footer_grid_template(int $columns, string $layout): string {
  * widgets, si no la del idioma por defecto, si no null. Las filas sin ningún
  * contenido no se devuelven.
  */
-function intelindev_get_footer_grid($lang = null): array {
+function pswpt_get_footer_grid($lang = null): array {
     $lang    = $lang !== null ? idml_normalize_lang($lang) : idml_get_current_language();
     $default = idml_get_default_language();
-    $rows    = (array) intelindev_get_footer_setting('rows', []);
+    $rows    = (array) pswpt_get_footer_setting('rows', []);
     $grid    = [];
 
     foreach (array_values($rows) as $index => $row) {
@@ -162,7 +162,7 @@ function intelindev_get_footer_grid($lang = null): array {
         for ($col = 1; $col <= $columns; $col++) {
             $sidebar = null;
             foreach (array_unique([$lang, $default]) as $candidate_lang) {
-                $candidate = intelindev_footer_sidebar_id($index + 1, $col, $candidate_lang);
+                $candidate = pswpt_footer_sidebar_id($index + 1, $col, $candidate_lang);
                 if (is_active_sidebar($candidate)) {
                     $sidebar = $candidate;
                     break;
@@ -177,7 +177,7 @@ function intelindev_get_footer_grid($lang = null): array {
         if ($filled) {
             $grid[] = [
                 'cells'    => $cells,
-                'template' => intelindev_footer_grid_template($columns, $layout),
+                'template' => pswpt_footer_grid_template($columns, $layout),
             ];
         }
     }
@@ -190,25 +190,25 @@ function intelindev_get_footer_grid($lang = null): array {
  * cae al default del theme (clave footer.copyright, editable en Apariencia →
  * Traducciones) y admite {year} y {site}.
  */
-function intelindev_get_footer_bar($lang = null): ?array {
-    if (empty(intelindev_get_footer_setting('bar_enabled', 1))) {
+function pswpt_get_footer_bar($lang = null): ?array {
+    if (empty(pswpt_get_footer_setting('bar_enabled', 1))) {
         return null;
     }
 
-    $text = intelindev_resolve_lang_text(intelindev_get_footer_setting('bar_text', []), $lang);
+    $text = pswpt_resolve_lang_text(pswpt_get_footer_setting('bar_text', []), $lang);
     if ($text === '') {
         $text = idml_t('footer.copyright', $lang);
     }
     $text = strtr($text, ['{year}' => date_i18n('Y'), '{site}' => get_bloginfo('name')]);
 
-    $align = (string) intelindev_get_footer_setting('bar_align', 'space-between');
-    if (!array_key_exists($align, intelindev_footer_bar_aligns())) {
+    $align = (string) pswpt_get_footer_setting('bar_align', 'space-between');
+    if (!array_key_exists($align, pswpt_footer_bar_aligns())) {
         $align = 'space-between';
     }
 
     return [
         'text'  => $text,
-        'menu'  => !empty(intelindev_get_footer_setting('bar_menu', 1)) && has_nav_menu('footer'),
+        'menu'  => !empty(pswpt_get_footer_setting('bar_menu', 1)) && has_nav_menu('footer'),
         'align' => $align,
     ];
 }
@@ -217,10 +217,10 @@ function intelindev_get_footer_bar($lang = null): ?array {
  * Personalizador abierto directo en un área de widgets (con vista previa del
  * sitio) y botón "volver" al panel del footer.
  */
-function intelindev_footer_customize_url(string $sidebar_id): string {
+function pswpt_footer_customize_url(string $sidebar_id): string {
     return add_query_arg([
         'autofocus[section]' => 'sidebar-widgets-' . $sidebar_id,
-        'return'             => rawurlencode(admin_url('themes.php?page=intelindev-footer-settings#content-structure')),
+        'return'             => rawurlencode(admin_url('themes.php?page=pswpt-footer-settings#content-structure')),
     ], admin_url('customize.php'));
 }
 
@@ -228,23 +228,23 @@ function intelindev_footer_customize_url(string $sidebar_id): string {
 /* Áreas de widgets                                                     */
 /* ------------------------------------------------------------------ */
 
-add_action('widgets_init', 'intelindev_footer_register_sidebars');
+add_action('widgets_init', 'pswpt_footer_register_sidebars');
 
-function intelindev_footer_register_sidebars(): void {
-    $rows    = (array) intelindev_get_footer_setting('rows', []);
+function pswpt_footer_register_sidebars(): void {
+    $rows    = (array) pswpt_get_footer_setting('rows', []);
     $langs   = idml_get_languages();
     $default = idml_get_default_language();
 
     foreach (array_values($rows) as $index => $row) {
-        $columns = min(INTELINDEV_FOOTER_MAX_COLS, max(1, (int) ($row['columns'] ?? 1)));
+        $columns = min(pswpt_FOOTER_MAX_COLS, max(1, (int) ($row['columns'] ?? 1)));
         for ($col = 1; $col <= $columns; $col++) {
             foreach ($langs as $lang) {
                 register_sidebar([
-                    'id'            => intelindev_footer_sidebar_id($index + 1, $col, $lang),
-                    'name'          => sprintf(__('Footer · Fila %1$d · Columna %2$d (%3$s)', 'intelindev'), $index + 1, $col, strtoupper($lang)),
+                    'id'            => pswpt_footer_sidebar_id($index + 1, $col, $lang),
+                    'name'          => sprintf(__('Footer · Row %1$d · Column %2$d (%3$s)', 'pswpt'), $index + 1, $col, strtoupper($lang)),
                     'description'   => $lang === $default
-                        ? __('Idioma por defecto: se muestra también en los idiomas cuya área esté vacía.', 'intelindev')
-                        : sprintf(__('Contenido en %s. Vacío = se muestra el del idioma por defecto.', 'intelindev'), strtoupper($lang)),
+                        ? __('Default language: also shown for languages whose area is empty.', 'pswpt')
+                        : sprintf(__('Content in %s. Empty = the default language\'s content is shown.', 'pswpt'), strtoupper($lang)),
                     'before_widget' => '<div id="%1$s" class="widget footer-widget %2$s">',
                     'after_widget'  => '</div>',
                     'before_title'  => '<h3 class="widget-title footer-widget__title">',
@@ -259,20 +259,20 @@ function intelindev_footer_register_sidebars(): void {
 /* CSS overrides                                                        */
 /* ------------------------------------------------------------------ */
 
-add_action('wp_head', 'intelindev_print_footer_style_overrides', 20);
+add_action('wp_head', 'pswpt_print_footer_style_overrides', 20);
 
-function intelindev_print_footer_style_overrides(): void {
+function pswpt_print_footer_style_overrides(): void {
     $declarations = '';
 
-    foreach (intelindev_footer_color_map() as $key => [$label, $var]) {
-        $value = intelindev_sanitize_css_color((string) intelindev_get_footer_setting($key, ''));
+    foreach (pswpt_footer_color_map() as $key => [$label, $var]) {
+        $value = pswpt_sanitize_css_color((string) pswpt_get_footer_setting($key, ''));
         if ($value !== '') {
             $declarations .= $var . ':' . $value . ';';
         }
     }
 
-    foreach (intelindev_footer_size_map() as $key => [$label, $var, $min, $max]) {
-        $value = intelindev_get_footer_setting($key, null);
+    foreach (pswpt_footer_size_map() as $key => [$label, $var, $min, $max]) {
+        $value = pswpt_get_footer_setting($key, null);
         if ($value === null || $value === '') {
             continue;
         }
@@ -282,16 +282,16 @@ function intelindev_print_footer_style_overrides(): void {
 
     if ($declarations === '') return;
 
-    echo '<style id="intelindev-footer-style-overrides">:root{' . $declarations . '}</style>' . "\n";
+    echo '<style id="pswpt-footer-style-overrides">:root{' . $declarations . '}</style>' . "\n";
 }
 
 /* ------------------------------------------------------------------ */
 /* Sanitize                                                             */
 /* ------------------------------------------------------------------ */
 
-function intelindev_footer_settings_sanitize($input) {
+function pswpt_footer_settings_sanitize($input) {
     $input    = is_array($input) ? $input : [];
-    $existing = get_option(INTELINDEV_FOOTER_OPTION, []);
+    $existing = get_option(pswpt_FOOTER_OPTION, []);
     $out      = is_array($existing) ? $existing : [];
 
     // --- Estructura ---
@@ -301,10 +301,10 @@ function intelindev_footer_settings_sanitize($input) {
             if (!is_array($row)) continue;
             $layout = sanitize_key((string) ($row['layout'] ?? 'equal'));
             $rows[] = [
-                'columns' => min(INTELINDEV_FOOTER_MAX_COLS, max(1, (int) ($row['columns'] ?? 1))),
-                'layout'  => array_key_exists($layout, intelindev_footer_layouts()) ? $layout : 'equal',
+                'columns' => min(pswpt_FOOTER_MAX_COLS, max(1, (int) ($row['columns'] ?? 1))),
+                'layout'  => array_key_exists($layout, pswpt_footer_layouts()) ? $layout : 'equal',
             ];
-            if (count($rows) >= INTELINDEV_FOOTER_MAX_ROWS) break;
+            if (count($rows) >= pswpt_FOOTER_MAX_ROWS) break;
         }
     }
     $out['rows'] = $rows;
@@ -313,9 +313,9 @@ function intelindev_footer_settings_sanitize($input) {
     $out['bar_enabled'] = !empty($input['bar_enabled']) ? 1 : 0;
     $out['bar_menu']    = !empty($input['bar_menu']) ? 1 : 0;
     $align = sanitize_key((string) ($input['bar_align'] ?? 'space-between'));
-    $out['bar_align'] = array_key_exists($align, intelindev_footer_bar_aligns()) ? $align : 'space-between';
+    $out['bar_align'] = array_key_exists($align, pswpt_footer_bar_aligns()) ? $align : 'space-between';
 
-    $texts = intelindev_sanitize_lang_text($input['bar_text'] ?? []);
+    $texts = pswpt_sanitize_lang_text($input['bar_text'] ?? []);
     if ($texts) {
         $out['bar_text'] = $texts;
     } else {
@@ -323,8 +323,8 @@ function intelindev_footer_settings_sanitize($input) {
     }
 
     // --- Estilos ---
-    foreach (array_keys(intelindev_footer_color_map()) as $key) {
-        $clean = intelindev_sanitize_css_color((string) ($input[$key] ?? ''));
+    foreach (array_keys(pswpt_footer_color_map()) as $key) {
+        $clean = pswpt_sanitize_css_color((string) ($input[$key] ?? ''));
         if ($clean !== '') {
             $out[$key] = $clean;
         } else {
@@ -332,7 +332,7 @@ function intelindev_footer_settings_sanitize($input) {
         }
     }
 
-    foreach (intelindev_footer_size_map() as $key => [$label, $var, $min, $max]) {
+    foreach (pswpt_footer_size_map() as $key => [$label, $var, $min, $max]) {
         $raw = $input[$key] ?? '';
         if ($raw === '' || $raw === null || !is_numeric($raw)) {
             unset($out[$key]);
@@ -348,34 +348,34 @@ function intelindev_footer_settings_sanitize($input) {
 /* Page HTML                                                            */
 /* ------------------------------------------------------------------ */
 
-function intelindev_footer_settings_page_html(): void {
+function pswpt_footer_settings_page_html(): void {
     if (!current_user_can('manage_options')) return;
 
-    $option  = INTELINDEV_FOOTER_OPTION;
-    $opts    = intelindev_get_footer_settings();
+    $option  = pswpt_FOOTER_OPTION;
+    $opts    = pswpt_get_footer_settings();
     $rows    = array_values((array) ($opts['rows'] ?? []));
     $bar_if  = $option . '[bar_enabled]';
-    $layouts = intelindev_footer_layouts();
+    $layouts = pswpt_footer_layouts();
 
     $tabs = [
-        'structure' => ['🧱', __('Estructura', 'intelindev')],
-        'copyright' => ['©', __('Copyright', 'intelindev')],
-        'styles'    => ['🎨', __('Estilos', 'intelindev')],
+        'structure' => ['🧱', __('Structure', 'pswpt')],
+        'copyright' => ['©', __('Copyright', 'pswpt')],
+        'styles'    => ['🎨', __('Styles', 'pswpt')],
     ];
 
     if (isset($_GET['settings-updated'])) {
-        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Configuración del footer guardada. Las áreas de cada columna ya están disponibles en Apariencia → Widgets.', 'intelindev') . '</p></div>';
+        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Footer settings saved. Each column\'s areas are now available in Appearance → Widgets.', 'pswpt') . '</p></div>';
     }
 
     $row_markup = function (int $index, array $row) use ($option, $layouts): void {
         $columns = (int) ($row['columns'] ?? 4);
         $layout  = (string) ($row['layout'] ?? 'equal');
         ?>
-        <tr class="intelindev-footer-row">
-            <td class="intelindev-footer-row__index"><?php echo $index === -1 ? '' : (int) ($index + 1); ?></td>
+        <tr class="pswpt-footer-row">
+            <td class="pswpt-footer-row__index"><?php echo $index === -1 ? '' : (int) ($index + 1); ?></td>
             <td>
                 <select name="<?php echo esc_attr($option); ?>[rows][<?php echo $index === -1 ? '__i__' : (int) $index; ?>][columns]">
-                    <?php for ($n = 1; $n <= INTELINDEV_FOOTER_MAX_COLS; $n++) : ?>
+                    <?php for ($n = 1; $n <= pswpt_FOOTER_MAX_COLS; $n++) : ?>
                         <option value="<?php echo $n; ?>"<?php selected($columns, $n); ?>><?php echo $n; ?></option>
                     <?php endfor; ?>
                 </select>
@@ -387,38 +387,38 @@ function intelindev_footer_settings_page_html(): void {
                     <?php endforeach; ?>
                 </select>
             </td>
-            <td><button type="button" class="button-link-delete intelindev-footer-row-remove"><?php esc_html_e('Quitar', 'intelindev'); ?></button></td>
+            <td><button type="button" class="button-link-delete pswpt-footer-row-remove"><?php esc_html_e('Remove', 'pswpt'); ?></button></td>
         </tr>
         <?php
     };
     ?>
     <div class="wrap">
-        <h1><?php esc_html_e('Intelindev Footer', 'intelindev'); ?></h1>
-        <p><?php esc_html_e('Estructura de filas y columnas, barra de copyright y estilos del footer.', 'intelindev'); ?></p>
+        <h1><?php esc_html_e('pswpt Footer', 'pswpt'); ?></h1>
+        <p><?php esc_html_e('Footer row and column structure, copyright bar and styles.', 'pswpt'); ?></p>
 
-        <form action="options.php" method="post" class="intelindev-settings-form intelindev-panel-form">
-            <?php settings_fields('intelindev_footer_settings_group'); ?>
-            <?php intelindev_admin_tabs_nav($tabs); ?>
+        <form action="options.php" method="post" class="pswpt-settings-form pswpt-panel-form">
+            <?php settings_fields('pswpt_footer_settings_group'); ?>
+            <?php pswpt_admin_tabs_nav($tabs); ?>
 
-            <div class="tab-content intelindev-tabs-container">
+            <div class="tab-content pswpt-tabs-container">
 
                 <!-- ===================== ESTRUCTURA ===================== -->
                 <div class="tab-pane fade show active" id="content-structure" role="tabpanel">
-                    <h2><?php esc_html_e('Filas y columnas', 'intelindev'); ?></h2>
+                    <h2><?php esc_html_e('Rows and columns', 'pswpt'); ?></h2>
                     <p class="description">
                         <?php
                         printf(
-                            esc_html__('Cada columna es un área de widgets: el contenido (textos, imágenes, menús, botones, HTML…) se carga con bloques en %s. Hay un área por idioma; si la de un idioma está vacía se muestra la del idioma por defecto. Guardá los cambios de estructura para que las áreas nuevas aparezcan ahí.', 'intelindev'),
-                            '<a href="' . esc_url(admin_url('widgets.php')) . '">' . esc_html__('Apariencia → Widgets', 'intelindev') . '</a>'
+                            esc_html__('Each column is a widget area: content (text, images, menus, buttons, HTML…) is added with blocks in %s. There is one area per language; if a language\'s area is empty, the default language\'s area is shown. Save structure changes so the new areas show up there.', 'pswpt'),
+                            '<a href="' . esc_url(admin_url('widgets.php')) . '">' . esc_html__('Appearance → Widgets', 'pswpt') . '</a>'
                         );
                         ?>
                     </p>
-                    <table class="widefat intelindev-footer-rows" id="intelindev-footer-rows" data-max-rows="<?php echo (int) INTELINDEV_FOOTER_MAX_ROWS; ?>">
+                    <table class="widefat pswpt-footer-rows" id="pswpt-footer-rows" data-max-rows="<?php echo (int) pswpt_FOOTER_MAX_ROWS; ?>">
                         <thead>
                             <tr>
-                                <th><?php esc_html_e('Fila', 'intelindev'); ?></th>
-                                <th><?php esc_html_e('Columnas', 'intelindev'); ?></th>
-                                <th><?php esc_html_e('Distribución', 'intelindev'); ?></th>
+                                <th><?php esc_html_e('Row', 'pswpt'); ?></th>
+                                <th><?php esc_html_e('Columns', 'pswpt'); ?></th>
+                                <th><?php esc_html_e('Layout', 'pswpt'); ?></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -427,35 +427,35 @@ function intelindev_footer_settings_page_html(): void {
                         </tbody>
                     </table>
                     <p>
-                        <button type="button" class="button" id="intelindev-footer-row-add"><?php esc_html_e('+ Agregar fila', 'intelindev'); ?></button>
-                        <span class="description"><?php printf(esc_html__('Hasta %d filas. Sin filas, el footer muestra solo la barra de copyright.', 'intelindev'), (int) INTELINDEV_FOOTER_MAX_ROWS); ?></span>
+                        <button type="button" class="button" id="pswpt-footer-row-add"><?php esc_html_e('+ Add row', 'pswpt'); ?></button>
+                        <span class="description"><?php printf(esc_html__('Up to %d rows. With no rows, the footer only shows the copyright bar.', 'pswpt'), (int) pswpt_FOOTER_MAX_ROWS); ?></span>
                     </p>
-                    <template id="intelindev-footer-row-template"><?php $row_markup(-1, ['columns' => 4, 'layout' => 'equal']); ?></template>
+                    <template id="pswpt-footer-row-template"><?php $row_markup(-1, ['columns' => 4, 'layout' => 'equal']); ?></template>
 
                     <?php if ($rows) : ?>
-                    <h2><?php esc_html_e('Grilla del footer', 'intelindev'); ?></h2>
-                    <p class="description"><?php esc_html_e('Así queda la estructura guardada. Elegí el idioma de una celda para cargar sus bloques en el Personalizador, viendo el footer real al lado. Si cambiaste filas o columnas arriba, guardá primero para actualizar la grilla.', 'intelindev'); ?></p>
-                    <div class="intelindev-footer-grid">
+                    <h2><?php esc_html_e('Footer grid', 'pswpt'); ?></h2>
+                    <p class="description"><?php esc_html_e('This is the saved structure. Pick a cell\'s language to load its blocks in the Customizer, with the live footer alongside. If you changed rows or columns above, save first to refresh the grid.', 'pswpt'); ?></p>
+                    <div class="pswpt-footer-grid">
                         <?php
                         $langs   = idml_get_languages();
                         $default = idml_get_default_language();
                         $widgets = wp_get_sidebars_widgets();
                         foreach ($rows as $index => $row) :
-                            $columns = min(INTELINDEV_FOOTER_MAX_COLS, max(1, (int) ($row['columns'] ?? 1)));
+                            $columns = min(pswpt_FOOTER_MAX_COLS, max(1, (int) ($row['columns'] ?? 1)));
                         ?>
-                        <div class="intelindev-footer-grid__row" style="grid-template-columns: <?php echo esc_attr(intelindev_footer_grid_template($columns, (string) ($row['layout'] ?? 'equal'))); ?>">
+                        <div class="pswpt-footer-grid__row" style="grid-template-columns: <?php echo esc_attr(pswpt_footer_grid_template($columns, (string) ($row['layout'] ?? 'equal'))); ?>">
                             <?php for ($col = 1; $col <= $columns; $col++) : ?>
-                            <div class="intelindev-footer-grid__cell">
-                                <span class="intelindev-footer-grid__name"><?php printf(esc_html__('Fila %1$d · Col %2$d', 'intelindev'), $index + 1, $col); ?></span>
-                                <span class="intelindev-footer-grid__langs">
+                            <div class="pswpt-footer-grid__cell">
+                                <span class="pswpt-footer-grid__name"><?php printf(esc_html__('Row %1$d · Col %2$d', 'pswpt'), $index + 1, $col); ?></span>
+                                <span class="pswpt-footer-grid__langs">
                                     <?php foreach ($langs as $lang) :
-                                        $sidebar_id = intelindev_footer_sidebar_id($index + 1, $col, $lang);
+                                        $sidebar_id = pswpt_footer_sidebar_id($index + 1, $col, $lang);
                                         $count      = isset($widgets[$sidebar_id]) && is_array($widgets[$sidebar_id]) ? count($widgets[$sidebar_id]) : 0;
                                         $title      = $count > 0
-                                            ? sprintf(_n('%d bloque', '%d bloques', $count, 'intelindev'), $count)
-                                            : ($lang === $default ? __('Vacía', 'intelindev') : __('Vacía: se muestra la del idioma por defecto', 'intelindev'));
+                                            ? sprintf(_n('%d block', '%d blocks', $count, 'pswpt'), $count)
+                                            : ($lang === $default ? __('Empty', 'pswpt') : __('Empty: the default language\'s is shown', 'pswpt'));
                                     ?>
-                                    <a class="button button-small<?php echo $count > 0 ? ' intelindev-footer-grid__lang--filled' : ''; ?>" href="<?php echo esc_url(intelindev_footer_customize_url($sidebar_id)); ?>" title="<?php echo esc_attr($title); ?>"><?php echo esc_html(strtoupper($lang)); ?><?php if ($count > 0) : ?> <span class="intelindev-footer-grid__count"><?php echo (int) $count; ?></span><?php endif; ?></a>
+                                    <a class="button button-small<?php echo $count > 0 ? ' pswpt-footer-grid__lang--filled' : ''; ?>" href="<?php echo esc_url(pswpt_footer_customize_url($sidebar_id)); ?>" title="<?php echo esc_attr($title); ?>"><?php echo esc_html(strtoupper($lang)); ?><?php if ($count > 0) : ?> <span class="pswpt-footer-grid__count"><?php echo (int) $count; ?></span><?php endif; ?></a>
                                     <?php endforeach; ?>
                                 </span>
                             </div>
@@ -468,14 +468,14 @@ function intelindev_footer_settings_page_html(): void {
 
                 <!-- ===================== COPYRIGHT ===================== -->
                 <div class="tab-pane fade" id="content-copyright" role="tabpanel">
-                    <h2><?php esc_html_e('Barra de copyright', 'intelindev'); ?></h2>
+                    <h2><?php esc_html_e('Copyright bar', 'pswpt'); ?></h2>
                     <table class="form-table" role="presentation">
                         <tr>
-                            <th scope="row"><?php esc_html_e('Mostrar barra', 'intelindev'); ?></th>
+                            <th scope="row"><?php esc_html_e('Show bar', 'pswpt'); ?></th>
                             <td>
                                 <label>
                                     <input type="checkbox" name="<?php echo esc_attr($option); ?>[bar_enabled]" value="1"<?php checked(!empty($opts['bar_enabled'])); ?> />
-                                    <?php esc_html_e('Barra al pie con el copyright y, opcionalmente, el menú del footer', 'intelindev'); ?>
+                                    <?php esc_html_e('Bottom bar with the copyright and, optionally, the footer menu', 'pswpt'); ?>
                                 </label>
                             </td>
                         </tr>
@@ -484,30 +484,30 @@ function intelindev_footer_settings_page_html(): void {
                         foreach (idml_get_languages() as $lang) {
                             $placeholders[$lang] = idml_t('footer.copyright', $lang);
                         }
-                        intelindev_admin_lang_text_fields($option, 'bar_text', __('Texto (%s)', 'intelindev'), $opts, __('Admite {year} (año actual) y {site} (nombre del sitio). Vacío = el default del theme, editable en Apariencia → Traducciones (clave footer.copyright).', 'intelindev'), $bar_if, $placeholders);
+                        pswpt_admin_lang_text_fields($option, 'bar_text', __('Text (%s)', 'pswpt'), $opts, __('Supports {year} (current year) and {site} (site name). Empty = the theme default, editable in Appearance → Translations (key footer.copyright).', 'pswpt'), $bar_if, $placeholders);
                         ?>
                         <tr data-show-if="<?php echo esc_attr($bar_if); ?>">
-                            <th scope="row"><?php esc_html_e('Menú del footer', 'intelindev'); ?></th>
+                            <th scope="row"><?php esc_html_e('Footer menu', 'pswpt'); ?></th>
                             <td>
                                 <label>
                                     <input type="checkbox" name="<?php echo esc_attr($option); ?>[bar_menu]" value="1"<?php checked(!empty($opts['bar_menu'])); ?> />
-                                    <?php esc_html_e('Mostrar el menú asignado a la ubicación "Menú del footer"', 'intelindev'); ?>
+                                    <?php esc_html_e('Show the menu assigned to the "Footer menu" location', 'pswpt'); ?>
                                 </label>
                                 <p class="description">
                                     <?php
                                     printf(
-                                        esc_html__('Ideal para Privacidad / Términos. Se asigna en %s; sus ítems se traducen como los del menú principal.', 'intelindev'),
-                                        '<a href="' . esc_url(admin_url('nav-menus.php?action=locations')) . '">' . esc_html__('Apariencia → Menús → Ubicaciones', 'intelindev') . '</a>'
+                                        esc_html__('Ideal for Privacy / Terms. Assigned in %s; its items are translated like the main menu\'s.', 'pswpt'),
+                                        '<a href="' . esc_url(admin_url('nav-menus.php?action=locations')) . '">' . esc_html__('Appearance → Menus → Locations', 'pswpt') . '</a>'
                                     );
                                     ?>
                                 </p>
                             </td>
                         </tr>
                         <tr data-show-if="<?php echo esc_attr($bar_if); ?>">
-                            <th scope="row"><label for="<?php echo esc_attr($option); ?>_bar_align"><?php esc_html_e('Alineación', 'intelindev'); ?></label></th>
+                            <th scope="row"><label for="<?php echo esc_attr($option); ?>_bar_align"><?php esc_html_e('Alignment', 'pswpt'); ?></label></th>
                             <td>
                                 <select id="<?php echo esc_attr($option); ?>_bar_align" name="<?php echo esc_attr($option); ?>[bar_align]">
-                                    <?php foreach (intelindev_footer_bar_aligns() as $value => $label) : ?>
+                                    <?php foreach (pswpt_footer_bar_aligns() as $value => $label) : ?>
                                         <option value="<?php echo esc_attr($value); ?>"<?php selected((string) ($opts['bar_align'] ?? ''), $value); ?>><?php echo esc_html($label); ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -518,20 +518,20 @@ function intelindev_footer_settings_page_html(): void {
 
                 <!-- ===================== ESTILOS ===================== -->
                 <div class="tab-pane fade" id="content-styles" role="tabpanel">
-                    <h2><?php esc_html_e('Colores', 'intelindev'); ?></h2>
-                    <?php intelindev_admin_color_table($option, array_map(fn($def) => $def[0], intelindev_footer_color_map()), $opts, [['prefix' => '', 'label' => __('Color', 'intelindev')]]); ?>
+                    <h2><?php esc_html_e('Colors', 'pswpt'); ?></h2>
+                    <?php pswpt_admin_color_table($option, array_map(fn($def) => $def[0], pswpt_footer_color_map()), $opts, [['prefix' => '', 'label' => __('Color', 'pswpt')]]); ?>
 
-                    <h2><?php esc_html_e('Medidas', 'intelindev'); ?></h2>
+                    <h2><?php esc_html_e('Sizing', 'pswpt'); ?></h2>
                     <table class="form-table" role="presentation">
-                        <?php foreach (intelindev_footer_size_map() as $key => [$label, $var, $min, $max, $description]) : ?>
-                            <?php intelindev_admin_number_field($option, $key, $label, $opts, $min, $max, 'px', $description); ?>
+                        <?php foreach (pswpt_footer_size_map() as $key => [$label, $var, $min, $max, $description]) : ?>
+                            <?php pswpt_admin_number_field($option, $key, $label, $opts, $min, $max, 'px', $description); ?>
                         <?php endforeach; ?>
                     </table>
                 </div>
 
             </div>
 
-            <?php submit_button(__('Guardar', 'intelindev')); ?>
+            <?php submit_button(__('Save', 'pswpt')); ?>
         </form>
     </div>
     <?php

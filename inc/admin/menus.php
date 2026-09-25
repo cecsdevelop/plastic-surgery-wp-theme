@@ -12,7 +12,7 @@
  * taxonomía (categorías) no se tocan todavía: el módulo de categorías aún no
  * traduce nombre/URL en frontend.
  *
- * @package intelindev
+ * @package pswpt
  */
 
 if (!defined('ABSPATH')) exit;
@@ -124,12 +124,12 @@ add_filter('wp_nav_menu_objects', function($items, $args) {
     foreach ($items as $item) {
         // Archivo de un CPT (ítem "Servicios"/"Portafolio" de tipo post_type_archive):
         // URL /{lang}/{base}/ y nombre plural del idioma, salvo título personalizado.
-        if ($item->type === 'post_type_archive' && function_exists('intelindev_get_post_type_archive_url')) {
-            $url = intelindev_get_post_type_archive_url((string) $item->object, $current_lang);
+        if ($item->type === 'post_type_archive' && function_exists('pswpt_get_post_type_archive_url')) {
+            $url = pswpt_get_post_type_archive_url((string) $item->object, $current_lang);
             if ($url !== '') {
                 $item->url = $url;
             }
-            $labels  = apply_filters('intelindev_post_type_lang_labels', []);
+            $labels  = apply_filters('pswpt_post_type_lang_labels', []);
             $default = (string) ($labels[$item->object][idml_get_default_language()] ?? '');
             $label   = (string) ($labels[$item->object][$current_lang] ?? '');
             if ($label !== '' && ($item->post_title === '' || $item->post_title === $default)) {
@@ -244,15 +244,15 @@ if (!function_exists('id_get_translated_current_url')) {
         $fallback = idml_get_language_home_url($target_lang);
 
         // Archivo de un CPT público: /{lang}/{base-en-ese-idioma}/.
-        if (is_post_type_archive() && function_exists('intelindev_get_post_type_archive_url')) {
+        if (is_post_type_archive() && function_exists('pswpt_get_post_type_archive_url')) {
             $type = get_query_var('post_type');
             $type = is_array($type) ? (string) reset($type) : (string) $type;
-            $url  = $type !== '' ? intelindev_get_post_type_archive_url($type, $target_lang) : '';
+            $url  = $type !== '' ? pswpt_get_post_type_archive_url($type, $target_lang) : '';
 
             return $url !== '' ? $url : $fallback;
         }
 
-        $translatable = function_exists('intelindev_translatable_post_types') ? intelindev_translatable_post_types() : ['post', 'page'];
+        $translatable = function_exists('pswpt_translatable_post_types') ? pswpt_translatable_post_types() : ['post', 'page'];
         $posts_page   = (int) get_option('page_for_posts');
 
         if (is_home() && !is_front_page() && $posts_page > 0) {
@@ -320,7 +320,7 @@ if (!class_exists('IDML_Walker_Nav_Menu')) {
             // Insertar botón SVG solo si tiene hijos
             if ($has_children) {
                 $output .= '<button class="idml-submenu-toggle" tabindex="0" aria-label="' . esc_attr(idml_t('nav.submenu_toggle_label')) . '" type="button">'
-                    . '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>'
+                    . '<svg width="15" height="12" viewBox="0 0 24 24" fill="none" stroke="#302d26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>'
                     . '</button>';
             }
         }

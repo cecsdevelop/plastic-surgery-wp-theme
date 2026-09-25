@@ -10,9 +10,9 @@
 - DM Sans 500 · 18px · lh 27px · center × 5 — ej. Home
 - DM Sans 400 · 14.399999618530273px · lh 22px · center × 4 — ej. Nuestros servicios
 - DM Sans 600 · 14.399999618530273px · lh 22px × 4 — ej. Nosotros
-- DM Sans 300 · 30px · lh 29px × 3 — ej. La experiencia Intelindev Experiencias reales trab
+- DM Sans 300 · 30px · lh 29px × 3 — ej. La experiencia pswpt Experiencias reales trab
 - DM Serif Text 400 · 50px · lh 48px · center × 2 — ej. Soluciones tecnológicas Diseñadas para escalar
-- DM Sans 400 · 20px · lh 26px × 2 — ej. Trabajar con Intelindev fue una experiencia increí
+- DM Sans 400 · 20px · lh 26px × 2 — ej. Trabajar con pswpt fue una experiencia increí
 - DM Serif Text 400 · 50px · lh 48px × 2 — ej. Stack Tecnológico para proyectos de alto impacto
 - DM Sans 400 · 14.399999618530273px · lh 22px × 2 — ej. Software Development & SEO Services
 - DM Sans 600 · 68.66000366210938px · lh 69px · title · center × 1 — ej. Servicios

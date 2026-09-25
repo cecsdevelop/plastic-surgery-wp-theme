@@ -55,17 +55,17 @@ add_filter('document_title_parts', function($parts) {
         return $parts;
     }
 
-    $translatable = function_exists('intelindev_translatable_post_types') ? intelindev_translatable_post_types() : ['post', 'page'];
+    $translatable = function_exists('pswpt_translatable_post_types') ? pswpt_translatable_post_types() : ['post', 'page'];
     if (!is_singular($translatable) || is_front_page() || $lang === idml_get_default_language()) {
         return $parts;
     }
 
     $post = get_queried_object();
-    if (!($post instanceof WP_Post) || !function_exists('intelindev_get_post_translated_title')) {
+    if (!($post instanceof WP_Post) || !function_exists('pswpt_get_post_translated_title')) {
         return $parts;
     }
 
-    $translated_title = intelindev_get_post_translated_title($post, $lang);
+    $translated_title = pswpt_get_post_translated_title($post, $lang);
     if ($translated_title !== '') {
         $parts['title'] = $translated_title;
     }
@@ -121,7 +121,7 @@ add_action('init', function() {
         );
 
         // CPTs públicos: /{lang}/{base-del-tipo}/{slug}/. La base se resuelve en
-        // el filtro 'request' contra intelindev_post_type_by_lang_slug(), así un
+        // el filtro 'request' contra pswpt_post_type_by_lang_slug(), así un
         // cambio de base no exige flush; el archivo /{lang}/{base}/ cae en la
         // regla de 2 segmentos de arriba y se distingue ahí.
         add_rewrite_rule(
@@ -139,7 +139,7 @@ add_action('init', function() {
  * tocar reglas o registrar un CPT nuevo). Prioridad 99: después de los CPT
  * (init 5) y de las reglas.
  */
-const IDML_REWRITE_VERSION = 4;
+const IDML_REWRITE_VERSION = 6; // +1: nuevo CPT público patient_gallery (PatientGalleryController)
 add_action('init', function() {
     if ((int) get_option('idml_rewrite_version', 0) !== IDML_REWRITE_VERSION) {
         flush_rewrite_rules(false);
@@ -179,8 +179,8 @@ if (!function_exists('idml_resolve_translated_slug')) {
         }
 
         $resolved_id = 0;
-        if (function_exists('intelindev_get_post_id_by_translated_slug')) {
-            $resolved_id = intelindev_get_post_id_by_translated_slug($slug, $lang, $post_types);
+        if (function_exists('pswpt_get_post_id_by_translated_slug')) {
+            $resolved_id = pswpt_get_post_id_by_translated_slug($slug, $lang, $post_types);
         }
 
         if (!$resolved_id) {
@@ -225,7 +225,7 @@ add_filter('request', function($query_vars) {
 
     // /{lang}/{base}/{slug}/ → single de un CPT público; base desconocida → 404.
     if (!empty($query_vars['idml_cpt_base'])) {
-        $type = function_exists('intelindev_post_type_by_lang_slug') ? intelindev_post_type_by_lang_slug((string) $query_vars['idml_cpt_base'], $lang) : '';
+        $type = function_exists('pswpt_post_type_by_lang_slug') ? pswpt_post_type_by_lang_slug((string) $query_vars['idml_cpt_base'], $lang) : '';
         if ($type === '') {
             return $not_found_query;
         }
@@ -235,7 +235,7 @@ add_filter('request', function($query_vars) {
     }
 
     // /{lang}/{base}/ → archivo del CPT cuya base en ese idioma es {base}.
-    $archive_type = function_exists('intelindev_post_type_by_lang_slug') ? intelindev_post_type_by_lang_slug($slug, $lang) : '';
+    $archive_type = function_exists('pswpt_post_type_by_lang_slug') ? pswpt_post_type_by_lang_slug($slug, $lang) : '';
     if ($archive_type !== '') {
         return $with_paged(['post_type' => $archive_type]);
     }

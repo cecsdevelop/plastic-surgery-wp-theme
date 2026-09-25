@@ -1,25 +1,25 @@
 <?php
 /**
- * Envíos (CPT intelindev_entry): registro de cada envío de formulario,
+ * Envíos (CPT pswpt_entry): registro de cada envío de formulario,
  * solo lectura, bajo el menú Formularios. Guarda los datos limpios por campo
  * y el contexto (idioma, página, IP, resultado del correo y del webhook).
  *
- * @package Intelindev
+ * @package pswpt
  */
 
-namespace IntelindevInit\Forms;
+namespace pswptInit\Forms;
 
-use IntelindevInit\General\BaseController;
+use pswptInit\General\BaseController;
 use WP_Post;
 use WP_Query;
 
 class SubmissionsController extends BaseController
 {
-    public const POST_TYPE    = 'intelindev_entry'; // máx. 20 caracteres para un post type
-    public const META_FORM    = '_intelindev_submission_form';
-    public const META_DATA    = '_intelindev_submission_data';
-    public const META_CONTEXT = '_intelindev_submission_context';
-    public const EXPORT_ACTION = 'intelindev_export_entries';
+    public const POST_TYPE    = 'pswpt_entry'; // máx. 20 caracteres para un post type
+    public const META_FORM    = '_pswpt_submission_form';
+    public const META_DATA    = '_pswpt_submission_data';
+    public const META_CONTEXT = '_pswpt_submission_context';
+    public const EXPORT_ACTION = 'pswpt_export_entries';
 
     public function register(): void
     {
@@ -37,13 +37,13 @@ class SubmissionsController extends BaseController
     {
         register_post_type(self::POST_TYPE, [
             'labels' => [
-                'name'          => __('Envíos', 'intelindev'),
-                'singular_name' => __('Envío', 'intelindev'),
-                'menu_name'     => __('Envíos', 'intelindev'),
-                'all_items'     => __('Envíos', 'intelindev'),
-                'edit_item'     => __('Ver envío', 'intelindev'),
-                'search_items'  => __('Buscar envíos', 'intelindev'),
-                'not_found'     => __('Todavía no hay envíos.', 'intelindev'),
+                'name'          => __('Submissions', 'pswpt'),
+                'singular_name' => __('Submission', 'pswpt'),
+                'menu_name'     => __('Submissions', 'pswpt'),
+                'all_items'     => __('Submissions', 'pswpt'),
+                'edit_item'     => __('View submission', 'pswpt'),
+                'search_items'  => __('Search submissions', 'pswpt'),
+                'not_found'     => __('No submissions yet.', 'pswpt'),
             ],
             'public'              => false,
             'show_ui'             => true,
@@ -104,13 +104,13 @@ class SubmissionsController extends BaseController
     {
         $screen = get_current_screen();
         if ($which !== 'top' || !$screen || $screen->post_type !== self::POST_TYPE || !current_user_can('manage_options')) return;
-        $form_id = (int) ($_GET['intelindev_form'] ?? 0);
-        echo '<div class="alignleft actions"><a class="button" href="' . esc_url(self::export_url($form_id)) . '">' . esc_html__('Exportar CSV', 'intelindev') . '</a></div>';
+        $form_id = (int) ($_GET['pswpt_form'] ?? 0);
+        echo '<div class="alignleft actions"><a class="button" href="' . esc_url(self::export_url($form_id)) . '">' . esc_html__('Export CSV', 'pswpt') . '</a></div>';
     }
 
     public function handle_export(): void
     {
-        if (!current_user_can('manage_options')) wp_die(__('Sin permisos.', 'intelindev'), 403);
+        if (!current_user_can('manage_options')) wp_die(__('Insufficient permissions.', 'pswpt'), 403);
         check_admin_referer(self::EXPORT_ACTION);
 
         $form_id = (int) ($_GET['form'] ?? 0);
@@ -152,7 +152,7 @@ class SubmissionsController extends BaseController
         foreach ($form_ids as $fid) {
             foreach (FormsController::get_fields($fid) as $field) {
                 if (!isset($columns[$field['name']])) {
-                    $label = intelindev_resolve_lang_text($field['label'] ?? [], $lang);
+                    $label = pswpt_resolve_lang_text($field['label'] ?? [], $lang);
                     $columns[$field['name']] = $label !== '' ? wp_strip_all_tags($label) : $field['name'];
                 }
             }
@@ -163,7 +163,7 @@ class SubmissionsController extends BaseController
             }
         }
 
-        $fixed = ['ID', __('Fecha', 'intelindev'), __('Formulario', 'intelindev'), __('Idioma', 'intelindev'), __('Página', 'intelindev'), 'IP', __('Correo enviado', 'intelindev'), __('Webhook', 'intelindev')];
+        $fixed = ['ID', __('Date', 'pswpt'), __('Form', 'pswpt'), __('Language', 'pswpt'), __('Page', 'pswpt'), 'IP', __('Email sent', 'pswpt'), __('Webhook', 'pswpt')];
 
         $out = fopen('php://temp', 'r+');
         fwrite($out, "\xEF\xBB\xBF"); // BOM: Excel abre UTF-8 con acentos correctos
@@ -180,7 +180,7 @@ class SubmissionsController extends BaseController
                 strtoupper((string) ($context['lang'] ?? '')),
                 (string) ($context['page'] ?? ''),
                 (string) ($context['ip'] ?? ''),
-                isset($context['mail']['sent']) ? ($context['mail']['sent'] ? __('sí', 'intelindev') : __('no', 'intelindev')) : '',
+                isset($context['mail']['sent']) ? ($context['mail']['sent'] ? __('yes', 'pswpt') : __('no', 'pswpt')) : '',
                 isset($context['webhook']['status']) ? (string) $context['webhook']['status'] : '',
             ];
             foreach (array_keys($columns) as $name) {
@@ -207,7 +207,7 @@ class SubmissionsController extends BaseController
     public function add_meta_boxes(): void
     {
         remove_meta_box('slugdiv', self::POST_TYPE, 'normal');
-        add_meta_box('intelindev_submission_data', __('Datos del envío', 'intelindev'), [$this, 'render_meta_box'], self::POST_TYPE, 'normal', 'high');
+        add_meta_box('pswpt_submission_data', __('Submission details', 'pswpt'), [$this, 'render_meta_box'], self::POST_TYPE, 'normal', 'high');
     }
 
     public function render_meta_box(WP_Post $post): void
@@ -225,9 +225,9 @@ class SubmissionsController extends BaseController
                     $label = $name;
                     foreach ($fields as $field) {
                         if ($field['name'] === $name) {
-                            $l = intelindev_resolve_lang_text($field['label'] ?? [], $lang);
+                            $l = pswpt_resolve_lang_text($field['label'] ?? [], $lang);
                             if ($l !== '') $label = $l;
-                            if ($field['type'] === 'checkbox') $value = $value === '1' ? __('Sí', 'intelindev') : __('No', 'intelindev');
+                            if ($field['type'] === 'checkbox') $value = $value === '1' ? __('Yes', 'pswpt') : __('No', 'pswpt');
                             break;
                         }
                     }
@@ -236,15 +236,15 @@ class SubmissionsController extends BaseController
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <h3><?php esc_html_e('Contexto', 'intelindev'); ?></h3>
+        <h3><?php esc_html_e('Context', 'pswpt'); ?></h3>
         <table class="widefat striped">
             <tbody>
-                <tr><th scope="row" style="width:220px"><?php esc_html_e('Formulario', 'intelindev'); ?></th><td><?php echo $form instanceof WP_Post ? '<a href="' . esc_url(get_edit_post_link($form)) . '">' . esc_html($form->post_title) . '</a>' : '—'; ?></td></tr>
-                <tr><th scope="row"><?php esc_html_e('Idioma', 'intelindev'); ?></th><td><?php echo esc_html(strtoupper((string) ($context['lang'] ?? ''))); ?></td></tr>
-                <tr><th scope="row"><?php esc_html_e('Página', 'intelindev'); ?></th><td><?php echo !empty($context['page']) ? '<a href="' . esc_url($context['page']) . '">' . esc_html($context['page']) . '</a>' : '—'; ?></td></tr>
-                <tr><th scope="row"><?php esc_html_e('IP', 'intelindev'); ?></th><td><?php echo esc_html((string) ($context['ip'] ?? '')); ?></td></tr>
-                <tr><th scope="row"><?php esc_html_e('Correo', 'intelindev'); ?></th><td><?php echo isset($context['mail']['sent']) ? esc_html(($context['mail']['sent'] ? __('enviado a', 'intelindev') : __('FALLÓ hacia', 'intelindev')) . ' ' . $context['mail']['to']) : '—'; ?></td></tr>
-                <tr><th scope="row"><?php esc_html_e('Webhook', 'intelindev'); ?></th><td><?php echo isset($context['webhook']['status']) ? esc_html('HTTP ' . $context['webhook']['status'] . ($context['webhook']['error'] !== '' ? ' — ' . $context['webhook']['error'] : '')) : '—'; ?></td></tr>
+                <tr><th scope="row" style="width:220px"><?php esc_html_e('Form', 'pswpt'); ?></th><td><?php echo $form instanceof WP_Post ? '<a href="' . esc_url(get_edit_post_link($form)) . '">' . esc_html($form->post_title) . '</a>' : '—'; ?></td></tr>
+                <tr><th scope="row"><?php esc_html_e('Language', 'pswpt'); ?></th><td><?php echo esc_html(strtoupper((string) ($context['lang'] ?? ''))); ?></td></tr>
+                <tr><th scope="row"><?php esc_html_e('Page', 'pswpt'); ?></th><td><?php echo !empty($context['page']) ? '<a href="' . esc_url($context['page']) . '">' . esc_html($context['page']) . '</a>' : '—'; ?></td></tr>
+                <tr><th scope="row"><?php esc_html_e('IP', 'pswpt'); ?></th><td><?php echo esc_html((string) ($context['ip'] ?? '')); ?></td></tr>
+                <tr><th scope="row"><?php esc_html_e('Email', 'pswpt'); ?></th><td><?php echo isset($context['mail']['sent']) ? esc_html(($context['mail']['sent'] ? __('sent to', 'pswpt') : __('FAILED to', 'pswpt')) . ' ' . $context['mail']['to']) : '—'; ?></td></tr>
+                <tr><th scope="row"><?php esc_html_e('Webhook', 'pswpt'); ?></th><td><?php echo isset($context['webhook']['status']) ? esc_html('HTTP ' . $context['webhook']['status'] . ($context['webhook']['error'] !== '' ? ' — ' . $context['webhook']['error'] : '')) : '—'; ?></td></tr>
             </tbody>
         </table>
         <?php
@@ -256,8 +256,8 @@ class SubmissionsController extends BaseController
         foreach ($columns as $key => $label) {
             $out[$key] = $label;
             if ($key === 'title') {
-                $out['intelindev_form'] = __('Formulario', 'intelindev');
-                $out['intelindev_status'] = __('Correo / Webhook', 'intelindev');
+                $out['pswpt_form'] = __('Form', 'pswpt');
+                $out['pswpt_status'] = __('Email / Webhook', 'pswpt');
             }
         }
         return $out;
@@ -265,11 +265,11 @@ class SubmissionsController extends BaseController
 
     public function render_column($column, $post_id): void
     {
-        if ($column === 'intelindev_form') {
+        if ($column === 'pswpt_form') {
             $form = get_post((int) get_post_meta($post_id, self::META_FORM, true));
             echo $form instanceof WP_Post ? esc_html($form->post_title) : '—';
         }
-        if ($column === 'intelindev_status') {
+        if ($column === 'pswpt_status') {
             $context = (array) get_post_meta($post_id, self::META_CONTEXT, true);
             $mail = isset($context['mail']['sent']) ? ($context['mail']['sent'] ? '✓' : '✗') : '—';
             $hook = isset($context['webhook']['status']) ? 'HTTP ' . (int) $context['webhook']['status'] : '—';
@@ -280,9 +280,9 @@ class SubmissionsController extends BaseController
     public function filter_dropdown(string $post_type): void
     {
         if ($post_type !== self::POST_TYPE) return;
-        $current = (int) ($_GET['intelindev_form'] ?? 0);
+        $current = (int) ($_GET['pswpt_form'] ?? 0);
         $forms   = get_posts(['post_type' => FormsController::POST_TYPE, 'posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC']);
-        echo '<select name="intelindev_form"><option value="0">' . esc_html__('Todos los formularios', 'intelindev') . '</option>';
+        echo '<select name="pswpt_form"><option value="0">' . esc_html__('All forms', 'pswpt') . '</option>';
         foreach ($forms as $form) {
             printf('<option value="%d"%s>%s</option>', (int) $form->ID, selected($current, (int) $form->ID, false), esc_html($form->post_title));
         }
@@ -292,7 +292,7 @@ class SubmissionsController extends BaseController
     public function apply_filter(WP_Query $query): void
     {
         if (!is_admin() || !$query->is_main_query() || $query->get('post_type') !== self::POST_TYPE) return;
-        $form_id = (int) ($_GET['intelindev_form'] ?? 0);
+        $form_id = (int) ($_GET['pswpt_form'] ?? 0);
         if ($form_id > 0) {
             $query->set('meta_key', self::META_FORM);
             $query->set('meta_value', $form_id);

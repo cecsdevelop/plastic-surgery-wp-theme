@@ -8,12 +8,12 @@
  */
 if (!defined('ABSPATH')) exit;
 get_header();
-$blog = new \IntelindevInit\Blog\BlogController();
+$blog = new \pswptInit\Blog\BlogController();
 ?>
 <main class="site-main">
   <?php while (have_posts()) : the_post(); ?>
     <article <?php post_class('entry post-single'); ?>>
-      <?php if (!intelindev_content_starts_with_hero()) intelindev_render_interior_hero(get_the_title()); ?>
+      <?php if (!pswpt_content_starts_with_hero()) pswpt_render_interior_hero(get_the_title()); ?>
       <div class="post-single__inner wrap">
         <div class="post-single__main">
           <?php echo $blog->time_html(get_post(), 'date.long', 'post-single__date'); ?>
@@ -22,11 +22,11 @@ $blog = new \IntelindevInit\Blog\BlogController();
           <?php if (comments_open() || get_comments_number()) comments_template(); ?>
         </div>
         <aside class="post-single__aside">
-          <?php echo $blog->taxonomies_html(); $blog->render_area(\IntelindevInit\Blog\BlogController::AREA_SIDEBAR, 'post-single__widgets'); ?>
+          <?php echo $blog->taxonomies_html(); $blog->render_area(\pswptInit\Blog\BlogController::AREA_SIDEBAR, 'post-single__widgets'); ?>
         </aside>
       </div>
     </article>
-    <?php $blog->render_area(\IntelindevInit\Blog\BlogController::AREA_AFTER, 'post-after'); ?>
+    <?php $blog->render_area(\pswptInit\Blog\BlogController::AREA_AFTER, 'post-after'); ?>
   <?php endwhile; ?>
 </main>
 <?php

@@ -12,15 +12,15 @@
  * default del theme: acá se muestra como placeholder y un campo vacío vuelve
  * a él. Solo se guardan valores no vacíos.
  *
- * @package intelindev
+ * @package pswpt
  */
 
 if (!defined('ABSPATH')) exit;
 
 add_action('admin_menu', function() {
     add_theme_page(
-        __('Traducciones UI', 'intelindev'),
-        __('Traducciones', 'intelindev'),
+        __('UI Translations', 'pswpt'),
+        __('Translations', 'pswpt'),
         'manage_options',
         'idml-translations',
         'idml_translations_admin_page'
@@ -93,14 +93,14 @@ function idml_translations_handle_save() {
  */
 function idml_translation_group_labels(): array {
     return apply_filters('idml_translation_group_labels', [
-        'menu'     => __('Menú', 'intelindev'),
-        'nav'      => __('Navegación', 'intelindev'),
-        'title'    => __('Títulos del navegador', 'intelindev'),
-        'archive'  => __('Listados', 'intelindev'),
-        'footer'   => __('Footer', 'intelindev'),
-        'cta'      => __('CTA', 'intelindev'),
-        'language' => __('Idiomas', 'intelindev'),
-        'general'  => __('General', 'intelindev'),
+        'menu'     => __('Menu', 'pswpt'),
+        'nav'      => __('Navigation', 'pswpt'),
+        'title'    => __('Browser titles', 'pswpt'),
+        'archive'  => __('Listings', 'pswpt'),
+        'footer'   => __('Footer', 'pswpt'),
+        'cta'      => __('CTA', 'pswpt'),
+        'language' => __('Languages', 'pswpt'),
+        'general'  => __('General', 'pswpt'),
     ]);
 }
 
@@ -136,17 +136,17 @@ function idml_translations_admin_page() {
     });
 
     if (isset($_GET['updated'])) {
-        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Traducciones guardadas.', 'intelindev') . '</p></div>';
+        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Translations saved.', 'pswpt') . '</p></div>';
     }
 
     $origin_badge = function (string $key) use ($defaults, $overrides): string {
         if (!isset($defaults[$key])) {
-            return '<span class="idml-badge idml-badge--own">' . esc_html__('propia', 'intelindev') . '</span>';
+            return '<span class="idml-badge idml-badge--own">' . esc_html__('custom', 'pswpt') . '</span>';
         }
         if (!empty($overrides[$key])) {
-            return '<span class="idml-badge idml-badge--edited">' . esc_html__('editada', 'intelindev') . '</span>';
+            return '<span class="idml-badge idml-badge--edited">' . esc_html__('edited', 'pswpt') . '</span>';
         }
-        return '<span class="idml-badge idml-badge--default">' . esc_html__('default', 'intelindev') . '</span>';
+        return '<span class="idml-badge idml-badge--default">' . esc_html__('default', 'pswpt') . '</span>';
     };
     ?>
     <style>
@@ -168,17 +168,17 @@ function idml_translations_admin_page() {
         .idml-translations tr.idml-hidden, .idml-translations details.idml-hidden { display: none; }
     </style>
     <div class="wrap idml-translations">
-        <h1><?php esc_html_e('Traducciones UI', 'intelindev'); ?></h1>
+        <h1><?php esc_html_e('UI Translations', 'pswpt'); ?></h1>
         <p class="description">
-            <?php esc_html_e('Textos fijos del sitio, agrupados por el prefijo de la clave (menu.*, footer.*…). El texto en gris es el default del theme: escribí para reemplazarlo, vaciá el campo para volver a él. Las claves que trae el theme no se pueden eliminar, solo sobrescribir; las que agregues vos se eliminan borrando la clave y guardando. Una clave nueva cae en su grupo al guardar (ej. menu.blog → Menú); un prefijo nuevo crea su propio grupo.', 'intelindev'); ?>
+            <?php esc_html_e('Fixed site texts, grouped by key prefix (menu.*, footer.*…). Gray text is the theme default: type to override it, clear the field to go back to it. Keys shipped with the theme cannot be deleted, only overridden; keys you add are deleted by clearing the key and saving. A new key lands in its group on save (e.g. menu.blog → Menu); a new prefix creates its own group.', 'pswpt'); ?>
         </p>
         <form method="post">
             <?php wp_nonce_field('idml_translations_save', 'idml_translations_nonce'); ?>
 
             <div class="idml-toolbar">
-                <input type="search" id="idml-search" placeholder="<?php esc_attr_e('Buscar por clave o texto…', 'intelindev'); ?>" />
-                <button type="button" class="button" id="idml-expand"><?php esc_html_e('Expandir todo', 'intelindev'); ?></button>
-                <button type="button" class="button" id="idml-collapse"><?php esc_html_e('Contraer todo', 'intelindev'); ?></button>
+                <input type="search" id="idml-search" placeholder="<?php esc_attr_e('Search by key or text…', 'pswpt'); ?>" />
+                <button type="button" class="button" id="idml-expand"><?php esc_html_e('Expand all', 'pswpt'); ?></button>
+                <button type="button" class="button" id="idml-collapse"><?php esc_html_e('Collapse all', 'pswpt'); ?></button>
             </div>
 
             <?php $i = 0; foreach ($groups as $prefix => $group_keys) :
@@ -189,13 +189,13 @@ function idml_translations_admin_page() {
                 <summary>
                     <span><?php echo esc_html($label); ?></span>
                     <code><?php echo esc_html($prefix === 'general' ? '' : $prefix . '.*'); ?></code>
-                    <span class="idml-count"><?php printf(esc_html__('%1$d claves · %2$d editadas', 'intelindev'), count($group_keys), $edited); ?></span>
+                    <span class="idml-count"><?php printf(esc_html__('%1$d keys · %2$d edited', 'pswpt'), count($group_keys), $edited); ?></span>
                 </summary>
                 <table class="widefat fixed striped">
                     <thead>
                         <tr>
-                            <th class="idml-col-key"><?php esc_html_e('Clave', 'intelindev'); ?></th>
-                            <th class="idml-col-origin"><?php esc_html_e('Origen', 'intelindev'); ?></th>
+                            <th class="idml-col-key"><?php esc_html_e('Key', 'pswpt'); ?></th>
+                            <th class="idml-col-origin"><?php esc_html_e('Source', 'pswpt'); ?></th>
                             <?php foreach ($langs as $lang): ?><th><?php echo esc_html(strtoupper($lang)); ?></th><?php endforeach; ?>
                         </tr>
                     </thead>
@@ -221,18 +221,18 @@ function idml_translations_admin_page() {
             <?php endforeach; ?>
 
             <details class="idml-group idml-group--new" open>
-                <summary><span><?php esc_html_e('Nuevas claves', 'intelindev'); ?></span><span class="idml-count"><?php esc_html_e('se ubican en su grupo al guardar', 'intelindev'); ?></span></summary>
+                <summary><span><?php esc_html_e('New keys', 'pswpt'); ?></span><span class="idml-count"><?php esc_html_e('are placed in their group on save', 'pswpt'); ?></span></summary>
                 <table class="widefat fixed striped" id="idml-translations-table">
                     <thead>
                         <tr>
-                            <th class="idml-col-key"><?php esc_html_e('Clave', 'intelindev'); ?></th>
+                            <th class="idml-col-key"><?php esc_html_e('Key', 'pswpt'); ?></th>
                             <th class="idml-col-origin"></th>
                             <?php foreach ($langs as $lang): ?><th><?php echo esc_html(strtoupper($lang)); ?></th><?php endforeach; ?>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="idml-new-row">
-                            <td><input type="text" name="idml_keys[<?php echo (int) $i; ?>]" value="" class="regular-text" placeholder="<?php esc_attr_e('grupo.clave', 'intelindev'); ?>" /></td>
+                            <td><input type="text" name="idml_keys[<?php echo (int) $i; ?>]" value="" class="regular-text" placeholder="<?php esc_attr_e('group.key', 'pswpt'); ?>" /></td>
                             <td></td>
                             <?php foreach ($langs as $lang): ?>
                             <td><input type="text" name="idml_val[<?php echo esc_attr($lang); ?>][<?php echo (int) $i; ?>]" value="" class="regular-text" /></td>
@@ -240,10 +240,10 @@ function idml_translations_admin_page() {
                         </tr>
                     </tbody>
                 </table>
-                <p style="padding: 0 14px 12px"><button type="button" class="button" id="idml-add-row"><?php esc_html_e('+ Agregar fila', 'intelindev'); ?></button></p>
+                <p style="padding: 0 14px 12px"><button type="button" class="button" id="idml-add-row"><?php esc_html_e('+ Add row', 'pswpt'); ?></button></p>
             </details>
 
-            <p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e('Guardar cambios', 'intelindev'); ?>" /></p>
+            <p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e('Save changes', 'pswpt'); ?>" /></p>
         </form>
     </div>
     <script>

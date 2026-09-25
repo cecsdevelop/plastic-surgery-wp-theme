@@ -1,0 +1,34 @@
+/**
+ * Metabox "Case details" (repeater de fotos antes/después) del CPT
+ * patient_gallery. Solo se enqueda en su pantalla de edición — ver
+ * PatientGalleryController::enqueue_admin_assets().
+ */
+
+.pswpt-pg-pair {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.pswpt-pg-pair__image img.pswpt-pg-pair__preview {
+  display: block;
+  max-width: 100%;
+  height: 140px;
+  object-fit: cover;
+  margin-bottom: 8px;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  background: #f0f0f1;
+}
+
+.pswpt-pg-pair__remove {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+}
